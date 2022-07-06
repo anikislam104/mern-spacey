@@ -1,5 +1,6 @@
 const router = require('express').Router();
 let User = require('../models/user');
+const bcrypt = require("bcryptjs");
 
 router.route('/').get((req, res) => {
   User.find()
@@ -31,13 +32,15 @@ router.route('/add').post(async (req, res) => {
     res.send('invalid');
     return;
   }
-
+  const saltRounds = 10;
+  let hashed_password = await bcrypt.hash(password, saltRounds);
+  
   console.log("User added");
   const newUser = new User({
     firstName,
     lastName,
     email,
-    password,
+    password : hashed_password,
     nidNumber,
     phoneNumber,
     dateOfBirth,
@@ -57,8 +60,9 @@ router.route('/login').post(async (req, res) => {
   const allUsers=await User.find();
   let check=false;
 
+  // let hashed_password = await bcrypt.hash(password, 10);
   for(let i=0;i<allUsers.length;i++){
-    if(allUsers[i].email===email && allUsers[i].password===password){
+    if(allUsers[i].email===email && bcrypt.compare(password, allUsers[i].password)){
       check=true;
     }
   }
