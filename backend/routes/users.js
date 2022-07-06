@@ -38,7 +38,7 @@ router.route('/add').post(async (req, res) => {
 
   console.log(allUsers.length);
   for(let i=0;i<allUsers.length;i++){
-    if(allUsers[i].email===email || allUsers[i].nidNumber===nidNumber || allUsers[i].phoneNumber===phoneNumber){
+    if(allUsers[i].email===email || allUsers[i].nidNumber===nidNumber || allUsers[i].phoneNumber===phoneNumber || nidNumber<1000000000 || nidNumber>9999999999){
       check=true;
     }
   }
