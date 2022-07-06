@@ -1,9 +1,84 @@
+import axios from 'axios';
 import React, { Component } from 'react';
 
 export default class OTP extends Component {
-    render() {
-        return (
-            <p>Hello world</p>
+    
+    constructor(props) {
+        super(props);
+    
+        
+        this.onChangeOTP = this.onChangeOTP.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+    
+        this.state = {
+          
+          otp: '',
+          
+          
+        }
+      }
+
+
+      onChangeOTP(e) {
+        this.setState({
+            otp: e.target.value
+            })
+        }
+
+
+        async onSubmit(e) {
+            e.preventDefault();
+
+        
+            const otp = {
+              
+              otp: this.state.otp,
+              
+            }
+        
+            console.log(otp);
+        
+            axios.post('http://localhost:5000/users/otp', otp)
+              .then(res => {console.log(res.data);
+                if(res.data === 'invalid'){
+                  window.location = '/login';
+                }
+                else{
+                  window.location = '/';
+                }
+              });
+        
+              }
+
+
+    render(){
+        return(
+            <div class="p-3 mb-2 bg-dark text-white">
+            <h3>Enter your OTP:</h3>
+            <form onSubmit={this.onSubmit}>
+
+
+            <div className="form-group"> 
+              <label>OTP: </label>
+              <input  type="text"
+                  required
+                  className="form-control"
+                  value={this.state.email}
+                  onChange={this.onChangeOTP}
+                  />
+            </div>
+
+
+
+            <br/>
+            <div className="form-group">
+              <input type="submit" value="Log In" className="btn btn-primary" />
+            </div>
+
+            </form>
+
+            </div>
+
         )
     }
 }

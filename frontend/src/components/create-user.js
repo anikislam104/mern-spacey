@@ -187,6 +187,7 @@ export default class CreateUser extends Component {
                 selected={this.state.dateOfBirth}
                 onChange={this.onChangeDate}
                 showTimeSelect
+                showYearDropdown
                 placeholderText={this.state.dateOfBirth}
               />
             </div>
