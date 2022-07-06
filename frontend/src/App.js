@@ -5,6 +5,7 @@ import { BrowserRouter,Route,Routes} from "react-router-dom";
 import Navbar from "./components/navbar"
 import CreateUser from "./components/create-user";
 import Login from "./components/login";
+import OTP from "./components/otp";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path="user" element={<CreateUser />} />
         <Route path="login" element={<Login />} />
+        <Route path="otp" element={<OTP />} />
       </Routes>
 
       </div>

@@ -33,6 +33,7 @@ export default class Login extends Component {
 
         async onSubmit(e) {
             e.preventDefault();
+
         
             const user = {
               
@@ -49,7 +50,7 @@ export default class Login extends Component {
                   window.location = '/login';
                 }
                 else{
-                  window.location = '/';
+                  window.location = '/otp';
                 }
               });
         
