@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios';
+import './create-user.css';
 // import { useHistory } from 'react-router-dom'
 // import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 
@@ -106,6 +107,8 @@ export default class CreateUser extends Component {
         }
     render() {
         return(
+          
+
           <div class="p-3 mb-2 bg-dark text-white">
           <h3>Create New Account</h3>
           <form onSubmit={this.onSubmit}>
@@ -195,6 +198,8 @@ export default class CreateUser extends Component {
             </div>
           </form>
         </div>
+
+          
         )
     }
 }
