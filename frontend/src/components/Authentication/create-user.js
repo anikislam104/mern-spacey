@@ -94,7 +94,7 @@ export default class CreateUser extends Component {
           axios.post('http://localhost:5000/users/add', user)
             .then(res => {console.log(res.data);
               if(res.data === 'invalid'){
-                window.location = '/user';
+                window.location = '/invalidAuth';
               }
               else{
                 window.location = '/signup_otp';

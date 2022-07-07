@@ -2,14 +2,15 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter,Route,Routes} from "react-router-dom";
 
-import Navbar from "./components/navbar"
-import CreateUser from "./components/create-user";
-import Login from "./components/login";
-import SignUpOTP from "./components/signup_otp";
-import LogInOTP from "./components/login_otp";
-import SignUpConfirmation from "./components/signUp_conf";
+import Navbar from "./components/Authentication/navbar"
+import CreateUser from "./components/Authentication/create-user";
+import Login from "./components/Authentication/login";
+import SignUpOTP from "./components/Authentication/signup_otp";
+import LogInOTP from "./components/Authentication/login_otp";
+import SignUpConfirmation from "./components/Authentication/signUp_conf";
 import Homepage from "./components/homepage";
-import OpeningPage from "./components/opening_page";
+import OpeningPage from "./components/Authentication/opening_page";
+import InvalidAuth from "./components/Authentication/invalidAuth";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="login_otp" element={<LogInOTP />} />
         <Route path="signupconf" element={<SignUpConfirmation />} />
         <Route path="homepage" element={<Homepage />} />
+        <Route path="invalidAuth" element={<InvalidAuth />} />
       </Routes>
 
       </div>

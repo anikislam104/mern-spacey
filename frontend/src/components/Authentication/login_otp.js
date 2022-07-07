@@ -41,7 +41,7 @@ export default class LogInOTP extends Component {
             axios.post('http://localhost:5000/users/login_otp', otp)
               .then(res => {console.log(res.data);
                 if(res.data === 'invalid'){
-                  window.location = '/login';
+                  window.location = '/invalidAuth';
                 }
                 else{
                   window.location = '/homepage';

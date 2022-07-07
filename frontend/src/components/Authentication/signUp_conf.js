@@ -3,6 +3,11 @@ import confirm from "./confirm.svg";
 
 export default class SignUpConfirmation extends Component {
 
+    onSubmit(e) {
+        e.preventDefault();
+        window.location = '/login';
+    }
+
     render() {
         const myStyle= {
             buttonSection:{
