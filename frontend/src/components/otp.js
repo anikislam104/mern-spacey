@@ -75,7 +75,7 @@ export default class OTP extends Component {
 
             <br/>
             <div className="form-group">
-              <input type="submit" value="Log In" className="btn btn-primary" />
+              <input type="submit" value="Done!" className="btn btn-primary" />
             </div>
 
             </form>
