@@ -43,8 +43,11 @@ export default class OTP extends Component {
                 if(res.data === 'invalid'){
                   window.location = '/login';
                 }
+                else if(res.data === 'login'){
+                  window.location = '/homepage';
+                }
                 else{
-                  window.location = '/';
+                  window.location = '/signupconf';
                 }
               });
         

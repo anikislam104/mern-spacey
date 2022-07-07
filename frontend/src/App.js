@@ -6,6 +6,8 @@ import Navbar from "./components/navbar"
 import CreateUser from "./components/create-user";
 import Login from "./components/login";
 import OTP from "./components/otp";
+import SignUpConfirmation from "./components/signUp_conf";
+import Homepage from "./components/homepage";
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
         <Route path="user" element={<CreateUser />} />
         <Route path="login" element={<Login />} />
         <Route path="otp" element={<OTP />} />
+        <Route path="signupconf" element={<SignUpConfirmation />} />
+        <Route path="homepage" element={<Homepage />} />
       </Routes>
 
       </div>

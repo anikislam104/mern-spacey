@@ -1,6 +1,7 @@
 const router = require('express').Router();
 let User = require('../models/user');
-const bcrypt = require("bcryptjs");
+const Cryptr = require('cryptr');
+const cryptr = new Cryptr('ReallySecretKey');
 const { Auth,LoginCredentials } = require("two-step-auth");
 
 router.route('/').get((req, res) => {
@@ -32,8 +33,7 @@ router.route('/add').post(async (req, res) => {
   const nidNumber = Number(req.body.nidNumber);
   const phoneNumber = Number(req.body.phoneNumber);
   const dateOfBirth = Date.parse(req.body.dateOfBirth);
-  const saltRounds = 10;
-  let hashed_password = await bcrypt.hash(password, saltRounds);
+  const encryptedPassword = cryptr.encrypt(password);
   const allUsers=await User.find();
   let check=false;
 
@@ -50,8 +50,8 @@ router.route('/add').post(async (req, res) => {
     return;
   }
   else{
-    res.send('ok');
     var otp_sent = sendOTP(email);
+    res.send('ok');
     router.route('/otp').post(async (req, res) => {
       const otp = req.body.otp;
       otp_sent.then((otp_s) => {
@@ -66,7 +66,7 @@ router.route('/add').post(async (req, res) => {
             firstName,
             lastName,
             email,
-            password : password,
+            password : encryptedPassword,
             nidNumber,
             phoneNumber,
             dateOfBirth,
@@ -74,7 +74,7 @@ router.route('/add').post(async (req, res) => {
 
           
           newUser.save()
-          .then(() => res.send('ok' ))
+          .then(() => res.send('signup'))
           .catch(err => res.status(400).json('Error: ' + err));
           return;
           
@@ -96,27 +96,31 @@ router.route('/login').post(async (req, res) => {
 
   const allUsers=await User.find();
   let check=false;
-
   // let hashed_password = await bcrypt.hash(password, 10);
   for(let i=0;i<allUsers.length;i++){
-    if(allUsers[i].email===email && allUsers[i].password===password){
+    if(allUsers[i].email===email && cryptr.decrypt(allUsers[i].password)===password){
       check=true;
+      break;
     }
-      
+     
   }
+  
   
   console.log("check :"+check);
   if(check===true){
+    const otp_sent = sendOTP(email);
+    otp_sent.then((otp_s) => {
+      console.log("otp_s "+otp_s);
+    })
     res.send('ok');
-    var otp_sent = sendOTP(email);
     router.route('/otp').post(async (req, res) => {
       const otp = req.body.otp;
       console.log(otp);
       otp_sent.then((otp_s) => {
-        console.log(otp_s);
+        console.log("otp_s "+otp_s);
         if(otp_s===otp){
           console.log("OTP verified");
-          res.send('ok');
+          res.send('login');
         }
         else{
           console.log("OTP not verified");
