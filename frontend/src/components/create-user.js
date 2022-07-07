@@ -97,7 +97,7 @@ export default class CreateUser extends Component {
                 window.location = '/user';
               }
               else{
-                window.location = '/otp';
+                window.location = '/signup_otp';
               }
             });
       

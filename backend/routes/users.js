@@ -3,6 +3,7 @@ let User = require('../models/user');
 const Cryptr = require('cryptr');
 const cryptr = new Cryptr('ReallySecretKey');
 const { Auth,LoginCredentials } = require("two-step-auth");
+var global_otp = "";
 
 router.route('/').get((req, res) => {
   User.find()
@@ -51,11 +52,15 @@ router.route('/add').post(async (req, res) => {
   }
   else{
     var otp_sent = sendOTP(email);
+    otp_sent.then((otp_s)=>{
+      global_otp=otp_s;
+      console.log(global_otp);
+    })
     res.send('ok');
-    router.route('/otp').post(async (req, res) => {
+    router.route('/signup_otp').post(async (req, res) => {
       const otp = req.body.otp;
       otp_sent.then((otp_s) => {
-        if(otp_s===otp){
+        if(global_otp===otp){
           console.log("OTP verified");
 
           
@@ -111,14 +116,15 @@ router.route('/login').post(async (req, res) => {
     let otp_sent = sendOTP(email);
     otp_sent.then((otp_s) => {
       console.log("otp_s "+otp_s);
+      global_otp=otp_s;
     })
     res.send('ok');
-    router.route('/otp').post(async (req, res) => {
+    router.route('/login_otp').post(async (req, res) => {
       const otp = req.body.otp;
       console.log(otp);
       otp_sent.then((otp_s) => {
-        console.log("otp_s "+otp_s);
-        if(otp_s===otp){
+        console.log("global_otp "+global_otp);
+        if(global_otp===otp){
           console.log("OTP verified");
           res.send('login');
         }

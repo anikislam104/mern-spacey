@@ -5,7 +5,8 @@ import { BrowserRouter,Route,Routes} from "react-router-dom";
 import Navbar from "./components/navbar"
 import CreateUser from "./components/create-user";
 import Login from "./components/login";
-import OTP from "./components/otp";
+import SignUpOTP from "./components/signup_otp";
+import LogInOTP from "./components/login_otp";
 import SignUpConfirmation from "./components/signUp_conf";
 import Homepage from "./components/homepage";
 
@@ -18,7 +19,8 @@ function App() {
       <Routes>
         <Route path="user" element={<CreateUser />} />
         <Route path="login" element={<Login />} />
-        <Route path="otp" element={<OTP />} />
+        <Route path="signup_otp" element={<SignUpOTP />} />
+        <Route path="login_otp" element={<LogInOTP />} />
         <Route path="signupconf" element={<SignUpConfirmation />} />
         <Route path="homepage" element={<Homepage />} />
       </Routes>

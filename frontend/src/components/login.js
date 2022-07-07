@@ -50,7 +50,7 @@ export default class Login extends Component {
                   window.location = '/login';
                 }
                 else{
-                  window.location = '/otp';
+                  window.location = '/login_otp';
                 }
               });
         

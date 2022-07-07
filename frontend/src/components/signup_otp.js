@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 
-export default class OTP extends Component {
+export default class SignUpOTP extends Component {
     
     constructor(props) {
         super(props);
@@ -38,13 +38,10 @@ export default class OTP extends Component {
         
             console.log(otp);
         
-            axios.post('http://localhost:5000/users/otp', otp)
+            axios.post('http://localhost:5000/users/signup_otp', otp)
               .then(res => {console.log(res.data);
                 if(res.data === 'invalid'){
-                  window.location = '/login';
-                }
-                else if(res.data === 'login'){
-                  window.location = '/homepage';
+                  window.location = '/user';
                 }
                 else{
                   window.location = '/signupconf';
