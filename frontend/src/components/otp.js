@@ -55,7 +55,9 @@ export default class OTP extends Component {
 
 
     render(){
+
         return(
+          /*
             <div class="p-3 mb-2 bg-dark text-white">
             <h3>Enter your OTP:</h3>
             <form onSubmit={this.onSubmit}>
@@ -81,6 +83,49 @@ export default class OTP extends Component {
             </form>
 
             </div>
+           */
+
+          
+            <div className="maincontainer">
+            <div class="container-fluid">
+                <div class="row no-gutter">
+                   
+                    
+                    <div class="col-md-12 bg-light">
+                        <div class="login d-flex align-items-center py-5">
+                            <div class="col-lg-4">
+
+                            </div>
+                            <div class="container">
+                                <div class="row align-items-center col-lg-5">
+                                <h3>Enter your OTP:</h3>
+                                <form onSubmit={this.onSubmit}>
+
+
+                            <div className="form-group"> 
+                                <label>OTP: </label>
+                                <input  type="text"
+                                required
+                                className="form-control"
+                                value={this.state.email}
+                                onChange={this.onChangeOTP}
+                                />
+                            </div>
+
+                            <br/>
+                            <div className="form-group">
+                               <input type="submit" value="Done!" className="btn btn-primary" />
+                            </div>
+
+                            </form>
+  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
 
         )
     }

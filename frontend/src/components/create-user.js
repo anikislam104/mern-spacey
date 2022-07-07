@@ -106,9 +106,25 @@ export default class CreateUser extends Component {
           
         }
     render() {
+
+      const myStyle= {
+        buttonSection:{
+         padding: "10px 40px",
+         fontSize: "20px",
+         borderRadius: "10px",
+         backgroundColor: "BlueViolet",
+         color: "white",
+        },
+ 
+        inputSection:{
+          padding : "10px 10px",
+        }
+ 
+      }
+
         return(
           
-
+/*
           <div class="p-3 mb-2 bg-dark text-white">
           <h3>Create New Account</h3>
           <form onSubmit={this.onSubmit}>
@@ -199,7 +215,95 @@ export default class CreateUser extends Component {
             </div>
           </form>
         </div>
+*/
+<div className="maincontainer">
+<div class="container-fluid">
+    <div class="row no-gutter">
+       
+        
+        <div class="col-md-12 bg-light">
+            <div class="login d-flex align-items-start py-5">
+               
+                <div class="container">
+                    <div class="row align-items-start">
+                      
+                      <div class="col-lg-1">
 
+                      </div>
+
+                      <div class="col-lg-5">
+                        <form onSubmit={this.onSubmit}>
+                                <div class="form-group sm-2">
+                                    <label>First Name: </label>
+                                    <input id="inputFirstName" type="firstname" required="" autofocus="" value={this.state.firstName} onChange={this.onChangeFirstName} class="form-control rounded-pill border-0 shadow-sm px-4" />
+                                </div>
+                                <br/>
+                                <div class="form-group sm-2">
+                                    <label>Last Name: </label>
+                                    <input id="inputLastName" type="lastname" required="" autofocus="" value={this.state.lastName} onChange={this.onChangeLastName} class="form-control rounded-pill border-0 shadow-sm px-4" />
+                                </div>
+                                <br/>
+                                <div class="form-group sm-2">
+                                    <label>Email: </label>
+                                    <input id="inputEmail" type="email"  required="" autofocus="" value={this.state.email} onChange={this.onChangeEmail} class="form-control rounded-pill border-0 shadow-sm px-4" />
+                                </div>
+                                <br/>
+                                <div class="form-group sm-2">
+                                    <label>Password: </label>
+                                    <input id="inputPassword" type="password" required="" value={this.state.password} onChange={this.onChangePassword} class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" />
+                                </div>
+                                <br/>
+                                <div class="form-group sm-2">
+                                    <label>NID Number: </label>
+                                    <input id="inputNID" type="nid" required="" autofocus="" value={this.state.nidNumber} onChange={this.onChangeNIDNumber} class="form-control rounded-pill border-0 shadow-sm px-4" />
+                                </div>
+                                <br/>
+                                <div class="form-group sm-2">
+                                    <label>Phone Number: </label>
+                                    <input id="inputPhone" type="phone"  required="" autofocus="" value={this.state.phoneNumber} onChange={this.onChangePhoneNumber} class="form-control rounded-pill border-0 shadow-sm px-4" />
+                                </div>
+                                <br/>
+                                <div class="form-group sm-2">
+                                    <label>Date Of Birth: </label>
+                                    <div>
+                                        <br/>
+                                        <DatePicker class="form-control rounded-pill border-0 shadow-sm px-4"
+                                        selected={this.state.dateOfBirth}
+                                        onChange={this.onChangeDate}
+                                        showTimeSelect   
+                                        showYearDropdown
+                                        placeholderText={this.state.dateOfBirth}
+                                        />
+                                    </div>
+                                </div>
+                                <br/>
+                                <br/>
+                                <div className="form-group">
+                                     <input type="submit" value="Sign Up" className="btn btn-primary" style={myStyle.buttonSection} />
+                                </div>
+                      
+                         </form>
+                      </div>
+                      
+                      <div class="col-lg-1">
+
+                      </div>
+
+                      <div class="col-lg-5">
+                            <br/><br/><br/><br/><br/>
+                            <h3 class="display-4">Let's share & rent together!</h3>
+                            <br/>
+                            <p class="text-muted mb-4">Create your Spacey account!</p>
+                            <br/>
+                      </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
           
         )
     }

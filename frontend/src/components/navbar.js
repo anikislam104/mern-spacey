@@ -1,12 +1,27 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import spacey from "./spacey.svg";
 
 export default class Navbar extends Component {
 
   render() {
+    const myStyle= {
+      navSection:{
+       backgroundColor: "#C2C6CC",
+       color: "white",
+      },
+      
+      optionSection:{
+        color: "#0E2A53",
+       },
+
+    }
     return (
-      <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
-        <Link to={"/"} className="navbar-brand">Spacey</Link>
+      <nav className="navbar navbar navbar-expand-lg" style={myStyle.navSection}>
+         <div class="logo-image">
+            <img src={spacey} class="img-responsive" alt=" " />
+        </div>
+        <Link to={"/"} className="navbar-brand" style={myStyle.optionSection} >Spacey</Link>
         <div className="collpase navbar-collapse">
         <ul className="navbar-nav mr-auto">
           <li className="navbar-item">
@@ -19,6 +34,8 @@ export default class Navbar extends Component {
         </ul>
         </div>
       </nav>
-    );
+       
+    )
+
   }
 }
