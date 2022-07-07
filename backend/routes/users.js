@@ -108,7 +108,7 @@ router.route('/login').post(async (req, res) => {
   
   console.log("check :"+check);
   if(check===true){
-    const otp_sent = sendOTP(email);
+    let otp_sent = sendOTP(email);
     otp_sent.then((otp_s) => {
       console.log("otp_s "+otp_s);
     })
