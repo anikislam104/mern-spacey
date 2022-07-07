@@ -9,6 +9,7 @@ import SignUpOTP from "./components/signup_otp";
 import LogInOTP from "./components/login_otp";
 import SignUpConfirmation from "./components/signUp_conf";
 import Homepage from "./components/homepage";
+import OpeningPage from "./components/opening_page";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Navbar />
       <br/>
       <Routes>
+        <Route path="/" element={<OpeningPage />} />
         <Route path="user" element={<CreateUser />} />
         <Route path="login" element={<Login />} />
         <Route path="signup_otp" element={<SignUpOTP />} />
