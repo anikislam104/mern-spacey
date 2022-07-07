@@ -32,7 +32,8 @@ router.route('/add').post(async (req, res) => {
   const nidNumber = Number(req.body.nidNumber);
   const phoneNumber = Number(req.body.phoneNumber);
   const dateOfBirth = Date.parse(req.body.dateOfBirth);
-
+  const saltRounds = 10;
+  let hashed_password = await bcrypt.hash(password, saltRounds);
   const allUsers=await User.find();
   let check=false;
 
@@ -48,24 +49,44 @@ router.route('/add').post(async (req, res) => {
     res.send('invalid');
     return;
   }
-  const saltRounds = 10;
-  let hashed_password = await bcrypt.hash(password, saltRounds);
-  
-  console.log("User added");
-  const newUser = new User({
-    firstName,
-    lastName,
-    email,
-    password : hashed_password,
-    nidNumber,
-    phoneNumber,
-    dateOfBirth,
-  });
+  else{
+    res.send('ok');
+    var otp_sent = sendOTP(email);
+    router.route('/otp').post(async (req, res) => {
+      const otp = req.body.otp;
+      otp_sent.then((otp_s) => {
+        if(otp_s===otp){
+          console.log("OTP verified");
 
+          
+          
+          
+          console.log("User added");
+          const newUser = new User({
+            firstName,
+            lastName,
+            email,
+            password : password,
+            nidNumber,
+            phoneNumber,
+            dateOfBirth,
+          });
+
+          
+          newUser.save()
+          .then(() => res.send('ok' ))
+          .catch(err => res.status(400).json('Error: ' + err));
+          return;
+          
+        }
+        else{
+          console.log("OTP not verified");
+          res.send('invalid');
+        }
+      })
+    });
+  }
   
-  newUser.save()
-  .then(() => res.send('ok' ))
-  .catch(err => res.status(400).json('Error: ' + err));
 });
 
 
@@ -75,22 +96,24 @@ router.route('/login').post(async (req, res) => {
 
   const allUsers=await User.find();
   let check=false;
-  var phoneNumber;
 
   // let hashed_password = await bcrypt.hash(password, 10);
   for(let i=0;i<allUsers.length;i++){
-    if(allUsers[i].email===email && bcrypt.compare(password, allUsers[i].password)){
+    if(allUsers[i].email===email && allUsers[i].password===password){
       check=true;
-      phoneNumber=allUsers[i].phoneNumber;
     }
+      
   }
-
+  
+  console.log("check :"+check);
   if(check===true){
     res.send('ok');
-    const otp_sent = sendOTP(email);
+    var otp_sent = sendOTP(email);
     router.route('/otp').post(async (req, res) => {
       const otp = req.body.otp;
+      console.log(otp);
       otp_sent.then((otp_s) => {
+        console.log(otp_s);
         if(otp_s===otp){
           console.log("OTP verified");
           res.send('ok');
@@ -102,31 +125,6 @@ router.route('/login').post(async (req, res) => {
       })
       
     })
-    // async function sendOTP(emailId) {
-    //   try {
-    //     const res = await Auth(emailId);
-    //     console.log(res);
-    //     console.log(res.mail);
-    //     console.log(res.OTP);
-    //     console.log(res.success);
-    //     return String(res.OTP);
-    //   } catch (error) {
-    //     return error;
-    //   }
-    // }
-    // const otp=sendOTP("anikislampantha104@gmail.com"); 
-    // console.log("hello");
-    // console.log(String(otp));
-    // const input_otp=res.get("otp");
-    // console.log(input_otp);
-    // if(input_otp===otp){
-    //   console.log("OTP matched");
-    //   res.send('otp_matched');
-    // }
-    // else{
-    //   console.log("OTP not matched");
-    //   res.send('invalid');
-    // }
     return;
   
   }
