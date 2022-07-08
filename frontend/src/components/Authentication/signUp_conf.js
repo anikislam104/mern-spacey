@@ -36,9 +36,10 @@ export default class SignUpConfirmation extends Component {
                                 <div>
                                      <img src={confirm} class="img-responsive" alt="" />
                                 </div>
-                                <h3>Sign Up Confirmed!</h3>   
+                                <br/><br/>
+                                <label>Your account has been created. Press “Finish” <br/> to continue!</label>   
                                    <form onSubmit={this.onSubmit}>
-                                   <br/>
+                                   <br/><br/>
                                    <div className="form-group">
                                         <input type="submit" value="Finish" className="btn btn-primary" style={myStyle.buttonSection} />
                                    </div>
@@ -48,7 +49,7 @@ export default class SignUpConfirmation extends Component {
                                 </div>
 
                                 <div class="col-lg-5">
-                                <br/><br/><br/><br/><br/>
+                                <br/><br/><br/>
                                 <h3 class="display-4">Let's share & rent together!</h3>
                                 <br/>
                                 <p class="text-muted mb-4">Create your Spacey account!</p>
