@@ -107,6 +107,8 @@ router.route('/login').post(async (req, res) => {
     if(allUsers[i].email===email && cryptr.decrypt(allUsers[i].password)===password){
       check=true;
       userIndex=i;
+      console.log("user index "+userIndex);
+      current_user_id=allUsers[i]._id;
       break;
     }
      
@@ -128,7 +130,8 @@ router.route('/login').post(async (req, res) => {
         console.log("global_otp "+global_otp);
         if(global_otp===otp){
           console.log("OTP verified");
-          current_user_id=allUsers[userIndex]._id;
+          // current_user_id=allUsers[userIndex]._id;
+          // console.log("current_user_id login"+current_user_id);
           res.send('login');
         }
         else{
