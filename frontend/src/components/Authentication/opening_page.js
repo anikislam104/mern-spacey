@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import spacey from "./spacey.svg";
 import opening from "./opening.svg";
+import Navbar from './navbar';
 
 export default class OpeningPage extends Component {
     render() {
@@ -30,6 +31,8 @@ export default class OpeningPage extends Component {
         return (
        
             <div className="maincontainer">
+                <Navbar />
+                <br />
              <div class="container-fluid">
                  <div class="row no-gutter">
                              

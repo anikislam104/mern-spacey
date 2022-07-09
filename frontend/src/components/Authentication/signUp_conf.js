@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import confirm from "./confirm.svg";
+import Navbar from './navbar';
 
 export default class SignUpConfirmation extends Component {
 
@@ -21,6 +22,8 @@ export default class SignUpConfirmation extends Component {
 
         return(
             <div className="maincontainer">
+                <Navbar />
+                <br />
             <div class="container-fluid">
                 <div class="row no-gutter">
                      

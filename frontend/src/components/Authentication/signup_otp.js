@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react';
+import Navbar from './navbar';
 
 export default class SignUpOTP extends Component {
     
@@ -84,6 +85,8 @@ export default class SignUpOTP extends Component {
 
           
             <div className="maincontainer">
+            <Navbar/>
+            <br />
             <div class="container-fluid">
                 <div class="row no-gutter">
                    

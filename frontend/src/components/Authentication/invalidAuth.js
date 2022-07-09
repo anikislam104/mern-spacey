@@ -1,5 +1,6 @@
 import React,{ Component } from "react";
 import unconfirm from "./unconfirm.svg";
+import Navbar from "./navbar";
 
 
 
@@ -21,6 +22,8 @@ export default class InvalidAuth extends Component {
 
         return(
             <div className="maincontainer">
+                <Navbar />
+                <br />
             <div class="container-fluid">
                 <div class="row no-gutter">
                      

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react';
-
+import Navbar from "./navbar"
 export default class LogInOTP extends Component {
     
     constructor(props) {
@@ -84,6 +84,8 @@ export default class LogInOTP extends Component {
 
           
             <div className="maincontainer">
+              <Navbar />
+              <br />
             <div class="container-fluid">
                 <div class="row no-gutter">
                    

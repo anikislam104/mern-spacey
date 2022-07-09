@@ -2,7 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter,Route,Routes} from "react-router-dom";
 
-import Navbar from "./components/Authentication/navbar"
+// import Navbar from "./components/Authentication/navbar"
 import CreateUser from "./components/Authentication/create-user";
 import Login from "./components/Authentication/login";
 import SignUpOTP from "./components/Authentication/signup_otp";
@@ -16,8 +16,8 @@ function App() {
   return (
     <BrowserRouter>
       <div className="container">
-      <Navbar />
-      <br/>
+      {/* <Navbar /> */}
+      {/* <br/> */}
       <Routes>
         <Route path="/" element={<OpeningPage />} />
         <Route path="create-user" element={<CreateUser />} />
@@ -30,7 +30,10 @@ function App() {
       </Routes>
 
       </div>
+      
     </BrowserRouter>
+    
+    
   );
 }
 

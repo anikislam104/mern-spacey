@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Navbar from "./navbar"
 
 export default class Login extends Component {
     constructor(props) {
@@ -115,8 +116,10 @@ export default class Login extends Component {
 
      }
       return (
-       
+        
          <div className="maincontainer">
+          <Navbar />
+          <br />
           <div class="container-fluid">
               <div class="row no-gutter">
                  
