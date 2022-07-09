@@ -22,8 +22,12 @@ export default class Navbar extends Component {
             <img src={spacey} class="img-responsive" alt=" " />
         </div>
         <Link to={"/"} className="navbar-brand" style={myStyle.optionSection} >Spacey</Link>
-        <div className="collpase navbar-collapse">
-        <ul className="navbar-nav mr-auto">
+        <div class="col-lg-9">
+   
+        </div>
+        <div class="col-lg-3">
+         <div className="collpase navbar-collapse">
+         <ul className="navbar-nav mr-auto">
           <li className="navbar-item">
           <Link to={'/create-user'} className="nav-link">Sign Up</Link>
           </li>
@@ -31,7 +35,8 @@ export default class Navbar extends Component {
           <li className="navbar-item">
           <Link to={'/login'} className="nav-link">Log In</Link>
           </li>
-        </ul>
+         </ul>
+         </div>
         </div>
       </nav>
        
