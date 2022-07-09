@@ -1,7 +1,13 @@
 import React,{ Component } from "react";
 import unconfirm from "./unconfirm.svg";
 
+
+
 export default class InvalidAuth extends Component {
+    onSubmit = (e) => {
+        e.preventDefault();
+        window.location = "/";
+    }
     render() {
         const myStyle= {
             buttonSection:{

@@ -20,7 +20,7 @@ function App() {
       <br/>
       <Routes>
         <Route path="/" element={<OpeningPage />} />
-        <Route path="user" element={<CreateUser />} />
+        <Route path="create-user" element={<CreateUser />} />
         <Route path="login" element={<Login />} />
         <Route path="signup_otp" element={<SignUpOTP />} />
         <Route path="login_otp" element={<LogInOTP />} />
