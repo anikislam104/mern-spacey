@@ -4,6 +4,7 @@ const Cryptr = require('cryptr');
 const cryptr = new Cryptr('ReallySecretKey');
 const { Auth,LoginCredentials } = require("two-step-auth");
 var global_otp = "";
+var current_user_id = 0;
 
 router.route('/').get((req, res) => {
   User.find()
@@ -98,13 +99,14 @@ router.route('/add').post(async (req, res) => {
 router.route('/login').post(async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
-
+  var userIndex=-1;
   const allUsers=await User.find();
   let check=false;
   // let hashed_password = await bcrypt.hash(password, 10);
   for(let i=0;i<allUsers.length;i++){
     if(allUsers[i].email===email && cryptr.decrypt(allUsers[i].password)===password){
       check=true;
+      userIndex=i;
       break;
     }
      
@@ -126,6 +128,7 @@ router.route('/login').post(async (req, res) => {
         console.log("global_otp "+global_otp);
         if(global_otp===otp){
           console.log("OTP verified");
+          current_user_id=allUsers[userIndex]._id;
           res.send('login');
         }
         else{
@@ -145,6 +148,10 @@ router.route('/login').post(async (req, res) => {
 });
 
 
+router.route('/user_id').get((req, res) => {
+  console.log("current_user_id "+current_user_id);
+  res.send({user_id:current_user_id});
+});
 
 router.route('/:id').get((req, res) => {
     User.findById(req.params.id)
