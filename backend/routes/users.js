@@ -2,7 +2,7 @@ const router = require('express').Router();
 let User = require('../models/user');
 const Cryptr = require('cryptr');
 const cryptr = new Cryptr('ReallySecretKey');
-const { Auth,LoginCredentials } = require("two-step-auth");
+const { Auth } = require("two-step-auth");
 var global_otp = "";
 var current_user_id = 0;
 
@@ -41,7 +41,7 @@ router.route('/add').post(async (req, res) => {
 
   console.log(allUsers.length);
   for(let i=0;i<allUsers.length;i++){
-    if(allUsers[i].email===email || allUsers[i].nidNumber===nidNumber || allUsers[i].phoneNumber===phoneNumber || nidNumber<1000000000 || nidNumber>9999999999){
+    if(allUsers[i].email===email || allUsers[i].nidNumber===nidNumber || allUsers[i].phoneNumber===phoneNumber){
       check=true;
     }
   }
@@ -60,7 +60,6 @@ router.route('/add').post(async (req, res) => {
     res.send('ok');
     router.route('/signup_otp').post(async (req, res) => {
       const otp = req.body.otp;
-      otp_sent.then((otp_s) => {
         if(global_otp===otp){
           console.log("OTP verified");
 
@@ -89,7 +88,6 @@ router.route('/add').post(async (req, res) => {
           console.log("OTP not verified");
           res.send('invalid');
         }
-      })
     });
   }
   
@@ -126,7 +124,6 @@ router.route('/login').post(async (req, res) => {
     router.route('/login_otp').post(async (req, res) => {
       const otp = req.body.otp;
       console.log(otp);
-      otp_sent.then((otp_s) => {
         console.log("global_otp "+global_otp);
         if(global_otp===otp){
           console.log("OTP verified");
@@ -138,7 +135,7 @@ router.route('/login').post(async (req, res) => {
           console.log("OTP not verified");
           res.send('invalid');
         }
-      })
+      
       
     })
     return;
