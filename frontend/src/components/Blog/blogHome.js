@@ -30,6 +30,7 @@ export default class BlogHome extends Component {
             <div>
                 <NavbarHomepage />
                 {this.state.user_id}
+                
             </div>
         )
     }
