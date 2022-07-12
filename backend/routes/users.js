@@ -14,7 +14,6 @@ router.route('/').get((req, res) => {
 
 
 async function sendOTP(emailId) {
-  try {
     const res = await Auth(emailId);
     console.log(res);
     console.log(res.mail);
