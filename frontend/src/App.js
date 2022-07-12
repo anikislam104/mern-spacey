@@ -11,6 +11,7 @@ import SignUpConfirmation from "./components/Authentication/signUp_conf";
 import Homepage from "./components/homepage";
 import OpeningPage from "./components/Authentication/opening_page";
 import InvalidAuth from "./components/Authentication/invalidAuth";
+import BlogHome from "./components/Blog/blogHome";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="signupconf" element={<SignUpConfirmation />} />
         <Route path="homepage" element={<Homepage />} />
         <Route path="invalidAuth" element={<InvalidAuth />} />
+        <Route path="blog" element={<BlogHome />} />
       </Routes>
 
       </div>

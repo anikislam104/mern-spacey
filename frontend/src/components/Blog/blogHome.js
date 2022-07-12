@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 // import axios from 'axios';
-import NavbarHomepage from './navbar_homepage';
+import NavbarHomepage from '../navbar_homepage';
 
 
-export default class Homepage extends Component {
+export default class BlogHome extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -22,11 +22,15 @@ export default class Homepage extends Component {
             })
     }
 
+    
     render() {
-        const { user_id } = this.state;
+        
         return(
             
-            <div><NavbarHomepage />{user_id}</div>
+            <div>
+                <NavbarHomepage />
+                {this.state.user_id}
+            </div>
         )
     }
 }

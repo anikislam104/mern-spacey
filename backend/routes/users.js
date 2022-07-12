@@ -153,36 +153,10 @@ router.route('/user_id').get((req, res) => {
   res.send({user_id:current_user_id});
 });
 
-router.route('/:id').get((req, res) => {
-    User.findById(req.params.id)
-      .then(User => res.json(users))
-      .catch(err => res.status(400).json('Error: ' + err));
-  });
+// router.route('/:id').get((req, res) => {
+//     User.findById(req.params.id)
+//       .then(User => res.json(users))
+//       .catch(err => res.status(400).json('Error: ' + err));
+//   });
   
-  router.route('/:id').delete((req, res) => {
-    User.findByIdAndDelete(req.params.id)
-      .then(() => res.json('User deleted.'))
-      .catch(err => res.status(400).json('Error: ' + err));
-  });
-  
-  router.route('/update/:id').post((req, res) => {
-    User.findById(req.params.id)
-      .then(user => {
-        user.firstName = req.body.firstName;
-        user.lastName = req.body.lastName;
-        user.email = req.body.email;
-        user.password = req.body.password;
-        user.nidNumber = Number(req.body.nidNumber);
-        user.phoneNumber = Number(req.body.phoneNumber);
-        user.dateOfBirth = Date.parse(req.body.dateOfBirth);
-
-
-  
-        user.save()
-          .then(() => res.json('User updated!'))
-          .catch(err => res.status(400).json('Error: ' + err));
-      })
-      .catch(err => res.status(400).json('Error: ' + err));
-  });
-
-module.exports = router;
+  module.exports = router;
