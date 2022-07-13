@@ -64,6 +64,7 @@ export default class AddProperty extends Component {
     
 
     const property = {
+      host_id: this.state.host_id,
       location: this.state.location,
       description: this.state.description,
       size: this.state.size,
