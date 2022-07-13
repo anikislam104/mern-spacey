@@ -1,6 +1,7 @@
 const router = require('express').Router();
 let User = require('../models/user');
 let Blog = require('../models/blog');
+const multer = require('multer');
 
 router.route('/writeBlog').post((req, res) => {
     console.log("writeBlog");
@@ -9,7 +10,12 @@ router.route('/writeBlog').post((req, res) => {
     const title = req.body.title;
     const time_created = req.body.time_created;
     const like_count = req.body.like_count;
-    const image = req.body.image;
+    // const image = req.body.image;
+
+    
+    
+
+    // var img=String(image);
     console.log("user_id: " + user_id+" content: " + content+" title: " + title+" time_created: " + time_created+" like_count: " + like_count+" image: " + image);
 
     const blog = new Blog({
@@ -18,7 +24,7 @@ router.route('/writeBlog').post((req, res) => {
         title: title,
         time_created: time_created,
         like_count: like_count,
-        image: image,
+        
     });
     blog.save();
     res.send('ok');

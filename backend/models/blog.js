@@ -11,7 +11,6 @@ const blogSchema = new Schema({
   title: { type: String, required: true },
   time_created: { type: Date, required: true },
   like_count: { type: Number, required: true },
-  image: { data: Buffer, contentType: String },
 }, {
   timestamps: true,
 });

@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import NavbarHomepage from '../navbar_homepage';
+// import FileBase64 from 'react-file-base64';
+
 
 export default class WriteBlog extends Component {
     constructor(props) {
@@ -8,7 +10,7 @@ export default class WriteBlog extends Component {
 
         this.onChangeContent = this.onChangeContent.bind(this);
         this.onChangeTitle = this.onChangeTitle.bind(this);
-        this.onChangeImage = this.onChangeImage.bind(this);
+        // this.onChangeImage = this.onChangeImage.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
@@ -17,7 +19,7 @@ export default class WriteBlog extends Component {
             title: "",
             time_created: 0,
             like_count: 0,
-            image: null,
+            
         }
         
     }
@@ -44,11 +46,11 @@ export default class WriteBlog extends Component {
         });
     }
 
-    onChangeImage(e) {
-        this.setState({
-            image: e.target.files[0],
-        });
-    }
+    // onChangeImage(e) {
+    //     this.setState({
+    //         image: e.target.files[0],
+    //     });
+    // }
 
     onSubmit(e) {
         e.preventDefault();
@@ -119,11 +121,12 @@ export default class WriteBlog extends Component {
                                                    <label>Experience: </label>
                                                    <textarea id="inputContent" type="text" placeholder="" required="" value={this.state.content} onChange={this.onChangeContent} class="form-control  border-0 shadow-sm px-4 text-primary" style={myStyle.experienceSection} />
                                                </div>
-                                               <br/>
+                                               {/* <br/>
                                                <div class="form-group sm-3">
                                                    <label>Picture: </label>
                                                    <input id="inputPicture" type="file" placeholder="" required="" onChange={this.onChangeImage} class="form-control  border-0 shadow-sm px-4 " />
-                                               </div>
+                                                    <FileBase64 className="form-control  border-0 shadow-sm px-4 " multiple={true} onDone={this.onChangeImage} /> 
+                                               </div> */}
                                                <br/>
                                                <div className="form-group">
         

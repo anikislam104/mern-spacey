@@ -1,6 +1,5 @@
 const router = require('express').Router();
 require('dotenv').config();
-const client=require('twilio')(process.env.TWILIO_ACCOUNT_SID,process.env.TWILIO_AUTH_TOKEN);
 let User = require('../models/user');
 const Cryptr = require('cryptr');
 const cryptr = new Cryptr('ReallySecretKey');
