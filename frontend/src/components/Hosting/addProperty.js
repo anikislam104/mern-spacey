@@ -17,12 +17,23 @@ export default class AddProperty extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
+      host_id: 0,
       location: '',
       description: '',
       size: 0,
       pricePerDay: 0,
     }
   }
+
+  componentDidMount() {
+    fetch('http://localhost:5000/users/user_id')
+        .then((res) => res.json())
+        .then((json) => {
+            this.setState({
+                host_id: json.user_id,
+            });
+        })
+}
 
   onChangeLocation(e) {
     this.setState({

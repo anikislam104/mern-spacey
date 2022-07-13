@@ -11,7 +11,7 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
-  const hostId = current_user_id;
+  const hostId = req.body.hostId;
   const insuranceId = 1;
   const location = req.body.location;
   const description = req.body.description;
