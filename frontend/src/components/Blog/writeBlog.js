@@ -61,7 +61,7 @@ export default class WriteBlog extends Component {
             title: this.state.title,
             time_created: new Date(),
             like_count: 0,
-            image: this.state.image,
+            
         }
 
         axios.post('http://localhost:5000/blogs/writeBlog', blog)

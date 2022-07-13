@@ -11,13 +11,15 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
-  const hostId = req.body.hostId;
+  const hostId = req.body.host_id;
   const insuranceId = 1;
   const location = req.body.location;
   const description = req.body.description;
   const size = req.body.size;
   const status = 'Unoccupied';
   const pricePerDay = req.body.pricePerDay;
+
+  console.log("hostId: " + hostId+" insuranceId: " + insuranceId+" location: " + location+" description: " + description+" size: " + size+" status: " + status+" pricePerDay: " + pricePerDay);
 
   const newProperty = new Property({
     hostId,

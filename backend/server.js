@@ -23,7 +23,6 @@ const blogRouter = require('./routes/blogs');
 const propertyRouter = require('./routes/property')
 
 app.use('/users', usersRouter);
-app.use('/blog', blogRouter);
 app.use('/property', propertyRouter);
 app.use('/blogs', blogRouter);
 
