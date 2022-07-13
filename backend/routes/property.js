@@ -19,8 +19,13 @@ router.route('/add').post((req, res) => {
   const status = 'Unoccupied';
   const pricePerDay = req.body.pricePerDay;
 
+<<<<<<< HEAD
   console.log("hostId: " + hostId+" insuranceId: " + insuranceId+" location: " + location+" description: " + description+" size: " + size+" status: " + status+" pricePerDay: " + pricePerDay);
 
+=======
+  console.log(hostId);
+  
+>>>>>>> 91c2e4a83fdd00855311b0d0a086929271e7b3f9
   const newProperty = new Property({
     hostId,
     insuranceId,
