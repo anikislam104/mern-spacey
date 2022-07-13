@@ -122,7 +122,7 @@ export default class WriteBlog extends Component {
                                                <br/>
                                                <div class="form-group sm-3">
                                                    <label>Picture: </label>
-                                                   <input id="inputPicture" type="file" placeholder="" required="" value={this.state.image} onChange={this.onChangeImage} class="form-control  border-0 shadow-sm px-4 " />
+                                                   <input id="inputPicture" type="file" placeholder="" required="" onChange={this.onChangeImage} class="form-control  border-0 shadow-sm px-4 " />
                                                </div>
                                                <br/>
                                                <div className="form-group">

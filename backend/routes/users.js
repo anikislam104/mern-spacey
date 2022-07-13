@@ -17,16 +17,7 @@ router.route('/').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-async function sendSMS(phoneNumber) {
-  var otp = Math.floor(100000 + Math.random() * 900000);
-  client.messages.create({
-    body: 'Your OTP is ' + otp,
-    from: '+16073036390',
-    to: '+8801784805803'
-  }).then(message => console.log(message.sid));
-  console.log("sms otp " +otp);
-  
-}
+
 async function sendOTP(emailId) {
   try {
     const res = await Auth(emailId);
@@ -78,10 +69,8 @@ router.route('/add').post(async (req, res) => {
     res.send('ok');
     router.route('/signup_otp').post(async (req, res) => {
       const otp = req.body.otp;
-        if(1===1){
+        if(global_otp===otp){
           console.log("OTP verified");
-
-          
           
           
           console.log("User added");
@@ -130,7 +119,7 @@ router.route('/login').post(async (req, res) => {
     }
      
   }
-  sendSMS(allUsers[userIndex].phoneNumber);
+  // sendSMS(allUsers[userIndex].phoneNumber);
   
   console.log("check :"+check);
   if(check===true){
@@ -144,7 +133,7 @@ router.route('/login').post(async (req, res) => {
       const otp = req.body.otp;
       console.log(otp);
         console.log("global_otp "+global_otp);
-        if(1===1){
+        if(global_otp===otp){
           console.log("OTP verified");
           // current_user_id=allUsers[userIndex]._id;
           // console.log("current_user_id login"+current_user_id);
