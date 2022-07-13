@@ -8,6 +8,7 @@ const blogSchema = new Schema({
     type: Schema.Types.ObjectId,ref: 'User'
   }],
   content: { type: String, required: true },
+  title: { type: String, required: true },
   time_created: { type: Date, required: true },
   like_count: { type: Number, required: true },
 }, {

@@ -22,7 +22,7 @@ const usersRouter = require('./routes/users');
 const blogRouter = require('./routes/blogs');
 
 app.use('/users', usersRouter);
-app.use('/blog', blogRouter);
+app.use('/blogs', blogRouter);
 
 
 app.listen(port, () => {

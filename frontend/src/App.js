@@ -12,6 +12,8 @@ import Homepage from "./components/homepage";
 import OpeningPage from "./components/Authentication/opening_page";
 import InvalidAuth from "./components/Authentication/invalidAuth";
 import BlogHome from "./components/Blog/blogHome";
+import WriteBlog from "./components/Blog/writeBlog";
+import ReadBlogs from "./components/Blog/readBlogs";
 
 function App() {
   return (
@@ -29,6 +31,8 @@ function App() {
         <Route path="homepage" element={<Homepage />} />
         <Route path="invalidAuth" element={<InvalidAuth />} />
         <Route path="blog" element={<BlogHome />} />
+        <Route path="writeBlog" element={<WriteBlog />} />
+        <Route path="readBlogs" element={<ReadBlogs />} />
       </Routes>
 
       </div>
