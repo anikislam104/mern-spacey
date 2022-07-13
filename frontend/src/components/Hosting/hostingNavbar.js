@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import spacey from "../components/Authentication/spacey.svg";
+import spacey from "../Authentication/spacey.svg";
 
-export default class NavbarHomepage extends Component {
-
+export default class Navbar extends Component {
+   
   render() {
     const myStyle= {
       navSection:{
@@ -26,19 +26,10 @@ export default class NavbarHomepage extends Component {
    
         </div>
         <div class="col-lg-3">
-         <div className="collpase navbar-collapse">
-         <ul className="navbar-nav mr-auto">
-          <li className="navbar-item">
-          <Link to={'/blog'} className="nav-link">Blog</Link>
-          </li>
-
-          <li className="navbar-item">
-          <Link to={'/hosting'} className="nav-link">Become A Host</Link>
-          </li>
-         </ul>
-         </div>
+         <h3>Perosonal Room</h3>
         </div>
       </nav>
+       
     )
 
   }

@@ -6,6 +6,7 @@ const { Auth } = require("two-step-auth");
 var global_otp = "";
 var current_user_id = 0;
 
+
 router.route('/').get((req, res) => {
   User.find()
     .then(users => res.json(users))
@@ -160,3 +161,4 @@ router.route('/user_id').get((req, res) => {
 //   });
   
   module.exports = router;
+  module.exports.current_user_id = current_user_id;
