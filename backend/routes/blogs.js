@@ -9,7 +9,8 @@ router.route('/writeBlog').post((req, res) => {
     const title = req.body.title;
     const time_created = req.body.time_created;
     const like_count = req.body.like_count;
-    console.log("user_id: " + user_id+" content: " + content+" title: " + title+" time_created: " + time_created+" like_count: " + like_count);
+    const image = req.body.image;
+    console.log("user_id: " + user_id+" content: " + content+" title: " + title+" time_created: " + time_created+" like_count: " + like_count+" image: " + image);
 
     const blog = new Blog({
         user_id: user_id,
@@ -17,6 +18,7 @@ router.route('/writeBlog').post((req, res) => {
         title: title,
         time_created: time_created,
         like_count: like_count,
+        image: image,
     });
     blog.save();
     res.send('ok');

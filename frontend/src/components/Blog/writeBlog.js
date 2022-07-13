@@ -8,6 +8,7 @@ export default class WriteBlog extends Component {
 
         this.onChangeContent = this.onChangeContent.bind(this);
         this.onChangeTitle = this.onChangeTitle.bind(this);
+        this.onChangeImage = this.onChangeImage.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
@@ -16,6 +17,7 @@ export default class WriteBlog extends Component {
             title: "",
             time_created: 0,
             like_count: 0,
+            image: null,
         }
         
     }
@@ -42,6 +44,12 @@ export default class WriteBlog extends Component {
         });
     }
 
+    onChangeImage(e) {
+        this.setState({
+            image: e.target.files[0],
+        });
+    }
+
     onSubmit(e) {
         e.preventDefault();
         
@@ -51,6 +59,7 @@ export default class WriteBlog extends Component {
             title: this.state.title,
             time_created: new Date(),
             like_count: 0,
+            image: this.state.image,
         }
 
         axios.post('http://localhost:5000/blogs/writeBlog', blog)
@@ -82,6 +91,14 @@ export default class WriteBlog extends Component {
                         className="form-control"
                         value={this.state.content}
                         onChange={this.onChangeContent}
+                        />
+                </div>
+
+                <div className="form-group"> 
+                    <label>Picture: </label>
+                    <input  type="file"
+                        className="form-control"
+                        onChange={this.onChangeImage}
                         />
                 </div>
                 <br/>
