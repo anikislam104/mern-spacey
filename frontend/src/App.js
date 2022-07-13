@@ -14,6 +14,8 @@ import InvalidAuth from "./components/Authentication/invalidAuth";
 import BlogHome from "./components/Blog/blogHome";
 import WriteBlog from "./components/Blog/writeBlog";
 import ReadBlogs from "./components/Blog/readBlogs";
+import MyBlogs from "./components/Blog/myBlogs";
+import AllBlogs from "./components/Blog/allBlogs";
 
 function App() {
   return (
@@ -33,6 +35,8 @@ function App() {
         <Route path="blog" element={<BlogHome />} />
         <Route path="writeBlog" element={<WriteBlog />} />
         <Route path="readBlogs" element={<ReadBlogs />} />
+        <Route path="readBlogs/myBlogs" element={<MyBlogs />} />
+        <Route path="readBlogs/allBlogs" element={<AllBlogs />} />
       </Routes>
 
       </div>
