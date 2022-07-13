@@ -69,44 +69,82 @@ export default class WriteBlog extends Component {
     }
 
     render(){
-        return(
-            <div>
-                <NavbarHomepage /><br/>
-                <form onSubmit={this.onSubmit}>
+        const myStyle= {
+            buttonSection:{
+             padding: "10px 40px",
+             fontSize: "20px",
+             borderRadius: "10px",
+             backgroundColor: "BlueViolet",
+             color: "white",
+             position:"center",
+            },
+     
+            inputSection:{
+              padding : "10px 10px",
+            },
 
-                <div className="form-group"> 
-                    <label>Title: </label>
-                    <input  type="text"
-                        required
-                        className="form-control"
-                        value={this.state.title}
-                        onChange={this.onChangeTitle}
-                        />
-                </div>
+            experienceSection:{
+               width: "720px",
+               height: "400px",
+            },
+     
+          }
+           return (
+              
+              <div className="maincontainer">
+                <NavbarHomepage />
+               <div class="container-fluid">
+                   <div class="row no-gutter">
+                      
+                       
+                       <div class="col-md-12 bg-light">
+                           <div class="login d-flex align-items-center py-5">
+                              
+                               <div class="container">
+                                   <div class="row align-items-center">
+                                     
+                                     <div class="col-lg-3">
+     
+                                     </div>
+     
+                                     <div class="col-lg-7">
 
-                <div className="form-group"> 
-                    <label>Content: </label>
-                    <input  type="text"
-                        required
-                        className="form-control"
-                        value={this.state.content}
-                        onChange={this.onChangeContent}
-                        />
-                </div>
-
-                <div className="form-group"> 
-                    <label>Picture: </label>
-                    <input  type="file"
-                        className="form-control"
-                        onChange={this.onChangeImage}
-                        />
-                </div>
-                <br/>
-                <div className="form-group">
-                    <input type="submit" value="Post" className="btn btn-primary" />
-                </div>
-                </form>
-            </div>
-        )
+                                       <form onSubmit={this.onSubmit}>
+                                               <div class="form-group sm-3">
+                                               <label>Title: </label>
+                                                   <input id="inputTitle" type="text" placeholder=""  required="" autofocus="" value={this.state.title} onChange={this.onChangeTitle} class="form-control border-0 shadow-sm px-4" />
+                                               </div>
+                                               <br/>
+                                               <div class="form-group sm-3">
+                                                   <label>Experience: </label>
+                                                   <textarea id="inputContent" type="text" placeholder="" required="" value={this.state.content} onChange={this.onChangeContent} class="form-control  border-0 shadow-sm px-4 text-primary" style={myStyle.experienceSection} />
+                                               </div>
+                                               <br/>
+                                               <div class="form-group sm-3">
+                                                   <label>Picture: </label>
+                                                   <input id="inputPicture" type="file" placeholder="" required="" value={this.state.image} onChange={this.onChangeImage} class="form-control  border-0 shadow-sm px-4 " />
+                                               </div>
+                                               <br/>
+                                               <div className="form-group">
+        
+                                                    <input type="submit" value="Post" className="btn btn-primary" style={myStyle.buttonSection} />
+                                               </div>
+                                     
+                                        </form>
+                                     </div>
+                                     
+                                     <div class="col-lg-2">
+     
+                                     </div>
+     
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+             </div>
+             
+       )
         }
     }
