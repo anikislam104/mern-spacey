@@ -63,8 +63,6 @@ export default class Login extends Component {
             <div class="p-3 mb-2 bg-dark text-white">
             <h3>Log Into Your Account</h3>
             <form onSubmit={this.onSubmit}>
-
-
             <div className="form-group"> 
               <label>Email: </label>
               <input  type="text"
@@ -74,8 +72,6 @@ export default class Login extends Component {
                   onChange={this.onChangeEmail}
                   />
             </div>
-
-
             <div className="form-group"> 
               <label>Password: </label>
               <input  type="text"
@@ -85,16 +81,12 @@ export default class Login extends Component {
                   onChange={this.onChangePassword}
                   />
             </div>
-
             <br/>
             <div className="form-group">
               <input type="submit" value="Log In" className="btn btn-primary" />
             </div>
-
             </form>
-
             </div>
-
         )
     }
   */  

@@ -1,8 +1,12 @@
 const router = require('express').Router();
+require('dotenv').config();
 let User = require('../models/user');
 const Cryptr = require('cryptr');
 const cryptr = new Cryptr('ReallySecretKey');
+// @ts-ignore
 const { Auth } = require("two-step-auth");
+const nodemailer = require('nodemailer');
+const { text } = require('express');
 var global_otp = "";
 var current_user_id = 0;
 
@@ -21,8 +25,12 @@ async function sendOTP(emailId) {
     console.log(res.mail);
     console.log(res.OTP);
     console.log(res.success);
+    // if(res.success == false){
+    //   return sendOTP(emailId);
+    // }
     return String(res.OTP);
   } catch (error) {
+    console.log(error);
     return error;
   }
 }
@@ -61,10 +69,8 @@ router.route('/add').post(async (req, res) => {
     res.send('ok');
     router.route('/signup_otp').post(async (req, res) => {
       const otp = req.body.otp;
-        if(1===1){
+        if(global_otp===otp){
           console.log("OTP verified");
-
-          
           
           
           console.log("User added");
@@ -102,6 +108,7 @@ router.route('/login').post(async (req, res) => {
   const allUsers=await User.find();
   let check=false;
   // let hashed_password = await bcrypt.hash(password, 10);
+
   for(let i=0;i<allUsers.length;i++){
     if(allUsers[i].email===email && cryptr.decrypt(allUsers[i].password)===password){
       check=true;
@@ -112,7 +119,7 @@ router.route('/login').post(async (req, res) => {
     }
      
   }
-  
+  // sendSMS(allUsers[userIndex].phoneNumber);
   
   console.log("check :"+check);
   if(check===true){
@@ -126,7 +133,7 @@ router.route('/login').post(async (req, res) => {
       const otp = req.body.otp;
       console.log(otp);
         console.log("global_otp "+global_otp);
-        if(1===1){
+        if(global_otp===otp){
           console.log("OTP verified");
           // current_user_id=allUsers[userIndex]._id;
           // console.log("current_user_id login"+current_user_id);
@@ -154,11 +161,11 @@ router.route('/user_id').get((req, res) => {
   res.send({user_id:current_user_id});
 });
 
-// router.route('/:id').get((req, res) => {
-//     User.findById(req.params.id)
-//       .then(User => res.json(users))
-//       .catch(err => res.status(400).json('Error: ' + err));
-//   });
+router.route('/:id').get((req, res) => {
+    User.findById(req.params.id)
+      .then(User => res.json(users))
+      .catch(err => res.status(400).json('Error: ' + err));
+  });
   
   module.exports = router;
   module.exports.current_user_id = current_user_id;

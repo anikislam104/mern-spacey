@@ -9,10 +9,20 @@ export default class NavbarHomepage extends Component {
       navSection:{
        backgroundColor: "#C2C6CC",
        color: "white",
+       width:"1300px",
+       height:"60px",
       },
       
       optionSection:{
         color: "#0E2A53",
+       },
+
+       textSection:{
+        backgroundColor:"#484848",
+        color:"white",
+        width:"150px",
+        height:"40px",
+        textAlign:"center",
        },
 
     }
@@ -21,19 +31,27 @@ export default class NavbarHomepage extends Component {
          <div class="logo-image">
             <img src={spacey} class="img-responsive" alt=" " />
         </div>
-        <Link to={"/"} className="navbar-brand" style={myStyle.optionSection} >Spacey</Link>
-        <div class="col-lg-9">
+        <Link to={"/"} className="navbar-brand" style={myStyle.optionSection} ><h2>Spacey</h2></Link>
+        <div class="col-lg-5">
    
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-7">
          <div className="collpase navbar-collapse">
          <ul className="navbar-nav mr-auto">
           <li className="navbar-item">
-          <Link to={'/blog'} className="nav-link">Blog</Link>
+          <Link to={'/blog'} className="nav-link"><h5>Blog</h5></Link>
           </li>
-
+          &nbsp; &nbsp; 
           <li className="navbar-item">
-          <Link to={'/hosting'} className="nav-link">Become A Host</Link>
+          <Link to={'/hosting'} className="nav-link rounded-pill" style={myStyle.textSection}><h6>Become A Host</h6></Link>
+          </li>
+          &nbsp; &nbsp;
+          <li className="navbar-item">
+          <Link to={'/renting'} className="nav-link rounded-pill" style={myStyle.textSection}><h6>Rent Storage</h6></Link>
+          </li>
+          &nbsp; &nbsp; 
+          <li className="navbar-item">
+          <Link to={'/logout'} className="nav-link"><h5>Log out</h5></Link>
           </li>
          </ul>
          </div>
