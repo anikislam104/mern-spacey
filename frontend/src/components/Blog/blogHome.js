@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import NavbarHomepage from '../navbar_homepage';
+import BlogHome1 from "./blog_home_1.svg";
+import BlogHome2 from "./blog_home_2.svg";
 
 
 export default class BlogHome extends Component {
@@ -29,6 +31,11 @@ export default class BlogHome extends Component {
              backgroundColor: "#395cf9",
              color: "white",
             },
+            openingPicSection:{
+                width:"300px",
+                height:"300px",
+                
+            },
      
           }
         return(
@@ -36,7 +43,7 @@ export default class BlogHome extends Component {
             <div>
                 <NavbarHomepage />
                 <br/>
-                <div class="container-fluid">
+            <div class="container-fluid">
               <div class="row no-gutter">
                  
                   
@@ -46,28 +53,22 @@ export default class BlogHome extends Component {
                           <div class="container">
                               <div class="row align-items-center">
                                 
-                                <div class="col-lg-2">
+                                <div class="col-lg-3">
 
                                 </div>
+
+                                <div class="col-lg-5">
+                                      
+                                      <div class="card-body">
+                                           <h1 class="card-title">Welcome to Spacey blog!</h1>
+                                           <br/>
+                                           <h5 class="card-subtitle text-muted">&emsp;&emsp;&emsp;&emsp;Share & Explore Experiences!</h5>
+                                      </div>
+                                    
+                                </div>     
 
                                 <div class="col-lg-4">
-                                  <div className="container">
-                                    &nbsp; &nbsp; &nbsp;
-                                      <button onClick={this.writeBlog} style={myStyle.buttonSection}> Write Blog</button>
-                                      <br/>
-                                      <br/>
-                                      &nbsp; &nbsp; &nbsp;
-                                      <button onClick={this.readBlogs} style={myStyle.buttonSection}> Read Blogs</button>
-                                      </div>
-                                </div>
                                 
-
-                                <div class="col-lg-6">
-                                    <br/><br/><br/>
-                                      <h3 class="display-4">Welcome to <p> Spacey blog!</p></h3>
-                                      <br/>
-                                      <p class="text-muted mb-4">Share & Explore Experiences!</p>
-                                      <br/>
                                   </div>
 
                               </div>
@@ -75,6 +76,40 @@ export default class BlogHome extends Component {
                       </div>
                   </div>
               </div>
+              
+    <div class="row no-gutter">
+        <div class="col-lg-1">
+                                
+        </div>
+        <div class="col-lg-5">
+          <div class="image">
+                <img src={BlogHome1} class="img-responsive" alt=" "  style={myStyle.openingPicSection}/>
+          </div> 
+          <label><h5>Share your hosting experience</h5></label><br/>
+          <div className="container">
+                <br/>
+                &emsp;&emsp;
+                <button onClick={this.writeBlog} style={myStyle.buttonSection}> Write Blog</button>
+          </div>
+        </div>
+
+        <div class="col-lg-1">
+                                
+        </div>
+        <div class="col-lg-5">
+              <div class="image">
+                  <img src={BlogHome2} class="img-responsive" alt=" "  style={myStyle.openingPicSection}/>
+              </div> 
+              <label><h5>&emsp;Explore your & others blogs </h5></label><br/>
+              <div className="container">
+                <br/>
+                &emsp;&emsp;
+                <button onClick={this.readBlogs} style={myStyle.buttonSection}> Read Blogs</button>
+
+             </div> 
+        </div>             
+    </div>
+
           </div>
             </div>
         )
