@@ -1,6 +1,9 @@
 const router = require('express').Router();
 require('dotenv').config();
 let User = require('../models/user');
+const multer = require('multer');
+const { v4: uuidv4 } = require('uuid');
+let path = require('path');
 const Cryptr = require('cryptr');
 const cryptr = new Cryptr('ReallySecretKey');
 // @ts-ignore
@@ -9,7 +12,18 @@ const nodemailer = require('nodemailer');
 const { text } = require('express');
 var global_otp = "";
 var current_user_id = 0;
+var current_user_image = Buffer.from('').toString('base64');
 
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './images/');
+  }
+  , filename: function (req, file, cb) {
+    cb(null, file.originalname)
+  }
+})
+
+const upload = multer({ storage: storage });
 
 router.route('/').get((req, res) => {
   User.find()
@@ -36,7 +50,7 @@ async function sendOTP(emailId) {
 }
 
 
-router.route('/add').post(async (req, res) => {
+router.route('/add').post(upload.single("image"),async (req, res) => {
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
   const email = req.body.email;
@@ -44,9 +58,14 @@ router.route('/add').post(async (req, res) => {
   const nidNumber = Number(req.body.nidNumber);
   const phoneNumber = Number(req.body.phoneNumber);
   const dateOfBirth = Date.parse(req.body.dateOfBirth);
+  //convert object to buffer
+  const image = req.file.originalname;
+  // const image = Buffer.from(req.body.image);
   const encryptedPassword = cryptr.encrypt(password);
   const allUsers=await User.find();
   let check=false;
+
+  console.log(image);
 
   console.log(allUsers.length);
   for(let i=0;i<allUsers.length;i++){
@@ -82,6 +101,7 @@ router.route('/add').post(async (req, res) => {
             nidNumber,
             phoneNumber,
             dateOfBirth,
+            image,
           });
 
           
@@ -115,6 +135,7 @@ router.route('/login').post(async (req, res) => {
       userIndex=i;
       console.log("user index "+userIndex);
       current_user_id=allUsers[i]._id;
+      current_user_image=allUsers[i].image;
       break;
     }
      
@@ -158,7 +179,7 @@ router.route('/login').post(async (req, res) => {
 
 router.route('/user_id').get((req, res) => {
   console.log("current_user_id "+current_user_id);
-  res.send({user_id:current_user_id});
+  res.send({user_id:current_user_id,user_image:current_user_image});
 });
 
 router.route('/:id').get((req, res) => {

@@ -19,6 +19,7 @@ export default class CreateUser extends Component {
         this.onChangeNIDNumber = this.onChangeNIDNumber.bind(this);
         this.onChangePhoneNumber = this.onChangePhoneNumber.bind(this);
         this.onChangeDate = this.onChangeDate.bind(this);
+        this.onChangeImage = this.onChangeImage.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     
         this.state = {
@@ -30,7 +31,7 @@ export default class CreateUser extends Component {
           phoneNumber: 0,
           dateOfBirth: new Date(),
           users: [],
-          validity:'',
+          image: null,
         }
       }
 
@@ -75,24 +76,41 @@ export default class CreateUser extends Component {
             dateOfBirth: date
             })
         }
-
+        
+        onChangeImage(e) {
+            console.log(e.target.files[0]);
+            this.setState({
+                image: e.target.files[0]
+                })
+            }
 
         async onSubmit(e) {
           e.preventDefault();
           
-          const user = {
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            email: this.state.email,
-            password: this.state.password,
-            nidNumber: this.state.nidNumber,
-            phoneNumber: this.state.phoneNumber,
-            dateOfBirth: this.state.dateOfBirth
-          }
+          // const user = {
+          //   firstName: this.state.firstName,
+          //   lastName: this.state.lastName,
+          //   email: this.state.email,
+          //   password: this.state.password,
+          //   nidNumber: this.state.nidNumber,
+          //   phoneNumber: this.state.phoneNumber,
+          //   dateOfBirth: this.state.dateOfBirth,
+          //   image: this.state.image
+          // }
+
+          const formData = new FormData();
+          formData.append('firstName', this.state.firstName);
+          formData.append('lastName', this.state.lastName);
+          formData.append('email', this.state.email);
+          formData.append('password', this.state.password);
+          formData.append('nidNumber', this.state.nidNumber);
+          formData.append('phoneNumber', this.state.phoneNumber);
+          formData.append('dateOfBirth', this.state.dateOfBirth);
+          formData.append('image', this.state.image);
       
-          console.log(user);
+          // console.log(user);
       
-          axios.post('http://localhost:5000/users/add', user)
+          axios.post('http://localhost:5000/users/add', formData)
             .then(res => {console.log(res.data);
               if(res.data === 'invalid'){
                 window.location = '/invalidAuth';
@@ -235,7 +253,7 @@ export default class CreateUser extends Component {
                       </div>
 
                       <div class="col-lg-5">
-                        <form onSubmit={this.onSubmit}>
+                        <form onSubmit={this.onSubmit} encType="multipart/form-data">
                                 <div class="form-group sm-2">
                                     <label>First Name: </label>
                                     <input id="inputFirstName" type="firstname" required="" autofocus="" value={this.state.firstName} onChange={this.onChangeFirstName} class="form-control rounded-pill border-0 shadow-sm px-4" />
@@ -284,7 +302,7 @@ export default class CreateUser extends Component {
                                 <label>Pictures: </label>
                                 <br/><br/>
                                                   <div class="custom-file sm-3">
-                                                    <input type="file" class="custom-file-input form-control  border-0 shadow-sm px-4" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" onChange={this.onChangeImage} />
+                                                    <input type="file" filename="image" class="custom-file-input form-control  border-0 shadow-sm px-4" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" onChange={this.onChangeImage} />
                                                   </div>
                                                </div>
 

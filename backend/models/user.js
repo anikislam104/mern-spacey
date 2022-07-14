@@ -10,6 +10,7 @@ const userSchema = new Schema({
   nidNumber: { type: Number, required: true },
   phoneNumber: { type: Number, required: true },
   dateOfBirth: { type: Date, required: true },
+  image: { type: String, required: true },
 }, {
   timestamps: true,
 });

@@ -8,6 +8,7 @@ export default class Homepage extends Component {
         super(props);
         this.state = {
             user_id: 0,
+            image:'',
         }
         
     }
@@ -18,6 +19,7 @@ export default class Homepage extends Component {
             .then((json) => {
                 this.setState({
                     user_id: json.user_id,
+                    image: json.user_image,
                 });
             })
     }
@@ -26,7 +28,10 @@ export default class Homepage extends Component {
         const { user_id } = this.state;
         return(
             
-            <div><NavbarHomepage />{user_id}</div>
+            <div><NavbarHomepage />{user_id}
+            <br />
+            <img src={this.state.image} alt="user_image" />
+            </div>
         )
     }
 }
