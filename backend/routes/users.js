@@ -12,11 +12,11 @@ const nodemailer = require('nodemailer');
 const { text } = require('express');
 var global_otp = "";
 var current_user_id = 0;
-var current_user_image = Buffer.from('').toString('base64');
+var current_user_image = '';
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './images/');
+    cb(null, '../frontend/src/components/Images/');
   }
   , filename: function (req, file, cb) {
     cb(null, file.originalname)
