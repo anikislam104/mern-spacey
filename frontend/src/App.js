@@ -18,6 +18,7 @@ import WriteBlog from "./components/Blog/writeBlog";
 import ReadBlogs from "./components/Blog/readBlogs";
 import MyBlogs from "./components/Blog/myBlogs";
 import AllBlogs from "./components/Blog/allBlogs";
+import ShowBlog from "./components/Blog/showBlog";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
         <Route path="readBlogs" element={<ReadBlogs />} />
         <Route path="readBlogs/myBlogs" element={<MyBlogs />} />
         <Route path="readBlogs/allBlogs" element={<AllBlogs />} />
+        <Route path="readBlogs/showBlog" element={<ShowBlog />} />
       </Routes>
 
       </div>

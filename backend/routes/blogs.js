@@ -30,4 +30,13 @@ router.route('/writeBlog').post((req, res) => {
     res.send('ok');
 })
 
+router.route('/all_blogs').get((req, res) => {
+    Blog.find()
+        .then(blogs => {
+            console.log(blogs[0].content);
+            res.json(blogs);
+        })
+        .catch(err => res.status(400).json('Error: ' + err));
+})
+
 module.exports = router;
