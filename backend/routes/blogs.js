@@ -39,4 +39,14 @@ router.route('/all_blogs').get((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 })
 
+router.route('/showBlog').post((req, res) => {
+    console.log("showBlog");
+    const blog_id = req.body.blog_id;
+    console.log("blog_id: " + blog_id);
+    Blog.findById(blog_id)
+        .then(blog => {
+            console.log(blog.content);
+            res.json(blog.content);
+        })
+})
 module.exports = router;

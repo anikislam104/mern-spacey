@@ -128,6 +128,12 @@ export default class WriteBlog extends Component {
                                                     <FileBase64 className="form-control  border-0 shadow-sm px-4 " multiple={true} onDone={this.onChangeImage} /> 
                                                </div> */}
                                                <br/>
+                                               <div class="form-group sm-3">
+                                                  <div class="custom-file sm-3">
+                                                    <input type="file" class="custom-file-input form-control  border-0 shadow-sm px-4" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" onChange={this.onChangeImage} />
+                                                  </div>
+                                               </div>
+                                               <br/>
                                                <div className="form-group">
         
                                                     <input type="submit" value="Post" className="btn btn-primary" style={myStyle.buttonSection} />
