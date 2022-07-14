@@ -1,53 +1,55 @@
+import axios from 'axios';
 import React, { Component } from 'react';
+// import { Link } from 'react-router-dom';
 
 
 
 export default class AllBlogs extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.getAllBlogs = this.getAllBlogs.bind(this);
-    //     this.state = {
-    //         blogs: [],
-    //     }
-    // }
+    constructor(props) {
+        super(props);
+        this.getAllBlogs = this.getAllBlogs.bind(this);
+        this.sendContent = this.sendContent.bind(this);
+        this.state = {
+            blogs: [],
+        }
+    }
 
-    // componentDidMount() {
-    //     fetch('http://localhost:5000/blogs/all_blogs')
-    //         .then((res) => res.json())
-    //         .then((json) => {
-    //             console.log(JSON.stringify(json));
-    //             this.setState({
-    //                 blogs: this.state.blogs.concat(json),
-    //             });
-    //         })
-    // }
+    componentDidMount() {
+        fetch('http://localhost:5000/blogs/all_blogs')
+            .then((res) => res.json())
+            .then((json) => {
+                console.log(JSON.stringify(json));
+                this.setState({
+                    blogs: this.state.blogs.concat(json),
+                });
+            })
+    }
 
-    // getAllBlogs(){
-    //     return this.state.blogs.map(blog => {
-    //         return (
-    //             <div>
-    //                 <li>{blog.title}</li>
-    //                 <a href='/readBlogs/showBlog'><h1>{blog.content}</h1></a>
-    //             </div>
-    //         )
-    //     }
-    //     )
-    // }
+    sendContent(id) {
+        axios.post('http://localhost:5000/blogs/showBlog',id)
+        .then(res => console.log(res.data));
+    }
 
-    // render() {
-    //     return(
-    //         <div>
-    //             {/* {allBlogs} */}
-    //             {this.getAllBlogs()}
-    //         </div>
-    //     )
-    // }
-    render()
-    {
+    getAllBlogs(){
+        return this.state.blogs.map(blog => {
+            return (
+                <div>
+                    <button>{blog.title}</button>
+                    <br />
+                    <br />
+                </div>
+            )
+        }
+        )
+    }
+
+    render() {
         return(
             <div>
-                <h1>All Blogs</h1>
+                {/* {allBlogs} */}
+                {this.getAllBlogs()}
             </div>
         )
     }
+    
 }
