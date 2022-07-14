@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Navbar from "./hostingNavbar"
+import Navbar from "./hostingNavbar";
 
 // import { useHistory } from 'react-router-dom'
 // import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";

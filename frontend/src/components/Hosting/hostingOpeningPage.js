@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import spacey from "../Authentication/spacey.svg";
-import Navbar from '../Authentication/navbar';
 import { Link } from 'react-router-dom';
+import NavbarHomepage from '../navbar_homepage';
 
 export default class HostingOpeningPage extends Component {
     render() {
@@ -31,7 +31,7 @@ export default class HostingOpeningPage extends Component {
         return (
        
             <div className="maincontainer">
-                <Navbar />
+                <NavbarHomepage />
                 <br />
              <div class="container-fluid">
                  <div class="row no-gutter">

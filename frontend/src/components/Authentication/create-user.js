@@ -280,6 +280,15 @@ export default class CreateUser extends Component {
                                     </div>
                                 </div>
                                 <br/>
+                                <div class="form-group sm-3">
+                                <label>Pictures: </label>
+                                <br/><br/>
+                                                  <div class="custom-file sm-3">
+                                                    <input type="file" class="custom-file-input form-control  border-0 shadow-sm px-4" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" onChange={this.onChangeImage} />
+                                                  </div>
+                                               </div>
+
+                                <br/>
                                 <br/>
                                 <div className="form-group">
                                      <input type="submit" value="Sign Up" className="btn btn-primary" style={myStyle.buttonSection} />
