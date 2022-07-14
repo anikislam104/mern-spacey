@@ -1,6 +1,10 @@
 const router = require('express').Router();
+require('dotenv').config();
 let Property = require('../models/property');
-const current_user_id = require('./users').current_user_id;
+let Room = require('../models/room');
+let Facility = require('../models/facility');
+var current_property_id = 0;
+
 
 
 
@@ -10,7 +14,7 @@ router.route('/').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/add').post((req, res) => {
+router.route('/add').post(async (req, res) => {
   const hostId = req.body.host_id;
   const insuranceId = 1;
   const location = req.body.location;
@@ -18,10 +22,14 @@ router.route('/add').post((req, res) => {
   const size = req.body.size;
   const status = 'Unoccupied';
   const pricePerDay = req.body.pricePerDay;
+  const rooms = req.body.rooms;
+  const facilities = req.body.facilities;
+  const allProperties =await Property.find();
 
-  console.log("hostId: " + hostId+" insuranceId: " + insuranceId+" location: " + location+" description: " + description+" size: " + size+" status: " + status+" pricePerDay: " + pricePerDay);
 
-  console.log(hostId);
+  console.log(rooms);
+
+
   
   const newProperty = new Property({
     hostId,
@@ -33,10 +41,55 @@ router.route('/add').post((req, res) => {
     pricePerDay,
   });
 
-  newProperty.save()
-  .then(() => res.send('property added'))
-  .catch(err => res.status(400).json('Error: ' + err));
+  console.log(newProperty);
+
+  await newProperty.save();
+  //.then(() => res.send('property added'))
+  //.catch(err => res.status(400).json('Error: ' + err));
+  
+  for(let i=0;i<allProperties.length;i++){
+    current_property_id = allProperties[i]._id;
+  }
+  
+  console.log(current_property_id);
+
+
+  for(let i = 0; i < rooms.length; i++) {
+    
+    const propertyId = current_property_id;
+    const roomType = rooms[i][0];
+    const roomNo = rooms[i][1];
+    const newRoom = new Room({
+      propertyId,
+      roomType,
+      roomNo,
+    });
+
+    
+    await newRoom.save();
+    //.then(() => res.send('room added'))
+    //.catch(err => res.status(400).json('Error: ' + err));
+  }
+
+  for(let i = 0; i < facilities.length; i++) {
+    const propertyId = current_property_id;
+    const facilityType = facilities[i];
+    const newFacility = new Facility({
+      propertyId,
+      facilityType,
+    });
+    await newFacility.save();
+    //.then(() => res.send('facility added'))
+    //.catch(err => res.status(400).json('Error: ' + err));
+  }
+
+
   return;
 });
+
+
+
+
+
 
 module.exports = router;

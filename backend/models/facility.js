@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const facilitySchema = new Schema({
-  facilityId: { type: Number, required: true },
-  propertyId: { type: Number, required: true },
+  propertyId: { type: String, required: true },
+  facilityType: { type: String, required: true },
 }, {
   timestamps: true,
 });

@@ -14,7 +14,12 @@ export default class AddProperty extends Component {
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangeSize = this.onChangeSize.bind(this);
     this.onChangePricePerDay = this.onChangePricePerDay.bind(this);
+    this.onChangeRoomType = this.onChangeRoomType.bind(this);
+    this.onChangeRoomNo = this.onChangeRoomNo.bind(this);
+    this.onChangeFacility = this.onChangeFacility.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.handleClick1 = this.handleClick1.bind(this);
+    this.handleClick2 = this.handleClick2.bind(this);
 
     this.state = {
       host_id: 0,
@@ -22,18 +27,24 @@ export default class AddProperty extends Component {
       description: '',
       size: 0,
       pricePerDay: 0,
+      roomType: '',
+      roomNo: 0,
+      rooms: [],
+      facility: '',
+      facilities: []
     }
   }
 
   componentDidMount() {
     fetch('http://localhost:5000/users/user_id')
-        .then((res) => res.json())
-        .then((json) => {
-            this.setState({
-                host_id: json.user_id,
-            });
-        })
-}
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({
+          host_id: json.user_id,
+        });
+      })
+  }
+
 
   onChangeLocation(e) {
     this.setState({
@@ -59,17 +70,65 @@ export default class AddProperty extends Component {
     })
   }
 
+  onChangeRoomType(e) {
+
+    this.setState({
+      roomType: e.target.value
+    })
+  }
+
+  onChangeRoomNo(e) {
+    this.setState({
+      roomNo: e.target.value
+    })
+  }
+
+  onChangeFacility(e) {
+    this.setState({
+      facility: e.target.value
+    })
+  }
+
+
+
+  handleClick1(e) {
+    console.log('here handleClick1');
+    this.setState(prevState => ({
+      rooms: [...prevState.rooms, [this.state.roomType, this.state.roomNo]]
+    }))
+    this.setState({
+      roomType: ''
+    })
+    this.setState({
+      roomNo: 0
+    })
+    console.log('here handleClick1');
+  }
+
+  handleClick2(e) {
+    this.setState(prevState => ({
+      facilities: [...prevState.facilities, this.state.facility]
+    }))
+    this.setState({
+      facility: ''
+    })
+  }
+
   async onSubmit(e) {
     e.preventDefault();
-    
 
+    
     const property = {
       host_id: this.state.host_id,
       location: this.state.location,
       description: this.state.description,
       size: this.state.size,
       pricePerDay: this.state.pricePerDay,
+      rooms: this.state.rooms,
+      facilities: this.state.facilities
     }
+
+
 
     console.log(property);
 
@@ -83,8 +142,13 @@ export default class AddProperty extends Component {
           window.location = '/signup_otp';
         }
       });
+    console.log("here");
   }
   render() {
+
+
+
+
 
     const myStyle = {
       buttonSection: {
@@ -100,6 +164,9 @@ export default class AddProperty extends Component {
       }
 
     }
+
+
+
     return (
 
       <div className="maincontainer">
@@ -140,6 +207,41 @@ export default class AddProperty extends Component {
                           <label>Price Per Day: </label>
                           <input id="inputPricePerDay" type="pricePerDay" required="" value={this.state.pricePerDay} onChange={this.onChangePricePerDay} class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" />
                         </div>
+                        <div class="form-group sm-2">
+                          <label>Room Type </label>
+                          <input id="inputRoomType" type="roomType" required="" value={this.state.roomType} onChange={this.onChangeRoomType} class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" />
+                          <label>Room No </label>
+                          <input id="inputRoomNo" type="roomNo" required="" value={this.state.roomNo} onChange={this.onChangeRoomNo} class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" />
+                          <div>
+                            <button type="button" onClick={this.handleClick1}>Add Room</button>
+                          </div>
+                          <div>
+                          <ul>
+                            {this.state.rooms.map(item => {
+                              return <li>{item[0]} {item[1]}</li>;
+                            })}
+                          </ul>
+                          </div>
+                        </div>
+
+                        <div class="form-group sm-2">
+                          <label>Facility </label>
+                          <input id="inputFacility" type="facility" required="" value={this.state.facility} onChange={this.onChangeFacility} class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" />
+
+                          <div>
+                            <button type="button" onClick={this.handleClick2}>Add Facility</button>
+                          </div>
+                          <div>
+                          <ul>
+                            {this.state.facilities.map(item => {
+                              return <li>{item}</li>;
+                            })}
+                          </ul>
+                          </div>
+                          
+                        </div>
+
+
                         <br />
                         <br />
                         <div className="form-group">
