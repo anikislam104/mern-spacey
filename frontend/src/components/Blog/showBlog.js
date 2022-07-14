@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// var blog_id =Request.QueryString["blog_id"];
+// const blog_id=Request.QueryString["data"];
 export default class ShowBlog extends Component {
     render() {
         return(
