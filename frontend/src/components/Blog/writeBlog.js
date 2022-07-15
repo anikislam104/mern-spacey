@@ -10,7 +10,7 @@ export default class WriteBlog extends Component {
 
         this.onChangeContent = this.onChangeContent.bind(this);
         this.onChangeTitle = this.onChangeTitle.bind(this);
-        // this.onChangeImage = this.onChangeImage.bind(this);
+        this.onChangeImage = this.onChangeImage.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
@@ -19,7 +19,7 @@ export default class WriteBlog extends Component {
             title: "",
             time_created: 0,
             like_count: 0,
-            
+            image: null,
         }
         
     }
@@ -46,25 +46,26 @@ export default class WriteBlog extends Component {
         });
     }
 
-    // onChangeImage(e) {
-    //     this.setState({
-    //         image: e.target.files[0],
-    //     });
-    // }
+    onChangeImage(e) {
+        this.setState({
+            image: e.target.files[0],
+        });
+    }
 
     onSubmit(e) {
         e.preventDefault();
         
-        const blog = {
-            user_id: this.state.user_id,
-            content: this.state.content,
-            title: this.state.title,
-            time_created: new Date(),
-            like_count: 0,
-            
-        }
+        const formData = new FormData();
+        formData.append('user_id', this.state.user_id);
+        formData.append('content', this.state.content);
+        formData.append('title', this.state.title);
+        formData.append('time_created', this.state.time_created);
+        formData.append('like_count', this.state.like_count);
+        formData.append('image', this.state.image);
 
-        axios.post('http://localhost:5000/blogs/writeBlog', blog)
+        console.log(formData);
+
+        axios.post('http://localhost:5000/blogs/writeBlog', formData)
             .then(res => console.log(res.data));
 
         window.location = '/blog';
@@ -111,7 +112,7 @@ export default class WriteBlog extends Component {
      
                                      <div class="col-lg-7">
 
-                                       <form onSubmit={this.onSubmit}>
+                                       <form onSubmit={this.onSubmit} encType="multipart/form-data">
                                                <div class="form-group sm-3">
                                                <label>Title: </label>
                                                    <input id="inputTitle" type="text" placeholder=""  required="" autofocus="" value={this.state.title} onChange={this.onChangeTitle} class="form-control border-0 shadow-sm px-4" />
@@ -130,7 +131,7 @@ export default class WriteBlog extends Component {
                                                <br/>
                                                <div class="form-group sm-3">
                                                   <div class="custom-file sm-3">
-                                                    <input type="file" class="custom-file-input form-control  border-0 shadow-sm px-4" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" onChange={this.onChangeImage} />
+                                                    <input type="file" filename="image" class="custom-file-input form-control  border-0 shadow-sm px-4" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" onChange={this.onChangeImage} />
                                                   </div>
                                                </div>
                                                <br/>
@@ -138,7 +139,8 @@ export default class WriteBlog extends Component {
         
                                                     <input type="submit" value="Post" className="btn btn-primary" style={myStyle.buttonSection} />
                                                </div>
-                                     
+                                               
+
                                         </form>
                                      </div>
                                      

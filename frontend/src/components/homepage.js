@@ -46,9 +46,6 @@ export default class Homepage extends Component {
             <br />
             {this.state.path}
             <br />
-            <view>
-                <img src={require('./Images/1705104.jpg')} alt="profile" />
-            </view>
             
             </div>
         )

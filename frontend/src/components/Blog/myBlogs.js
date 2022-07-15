@@ -10,14 +10,31 @@ export default class MyBlogs extends Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:5000/users/user_id')
+        fetch('http://localhost:5000/blogs/all_blogs')
             .then((res) => res.json())
             .then((json) => {
+                console.log(JSON.stringify(json));
                 this.setState({
-                    user_id: json.user_id,
+                    blogs: this.state.blogs.concat(json),
                 });
             })
     }
+
+    getMyBlogs(){
+        return this.state.blogs.map(blog => {
+            return (
+                <div>
+                    <h3>{blog.title}</h3>
+                    <p>{blog.content}</p>
+                    <br />
+                    <br />
+                </div>
+            )
+        }
+        )
+    }
+
+
     render() {
         return(
             <div>

@@ -2,7 +2,7 @@ const router = require('express').Router();
 require('dotenv').config();
 let User = require('../models/user');
 const multer = require('multer');
-const { v4: uuidv4 } = require('uuid');
+// const { v4: uuidv4 } = require('uuid');
 let path = require('path');
 const Cryptr = require('cryptr');
 const cryptr = new Cryptr('ReallySecretKey');
@@ -16,7 +16,7 @@ var current_user_image = '';
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, '../frontend/src/components/Images/');
+    cb(null, './images');
   }
   , filename: function (req, file, cb) {
     cb(null, file.originalname)

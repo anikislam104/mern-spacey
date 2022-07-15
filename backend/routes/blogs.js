@@ -2,15 +2,28 @@ const router = require('express').Router();
 let User = require('../models/user');
 let Blog = require('../models/blog');
 const multer = require('multer');
+// const { v4: uuidv4 } = require('uuid');
+let path = require('path');
 
-router.route('/writeBlog').post((req, res) => {
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './images');
+    }
+    , filename: function (req, file, cb) {
+      cb(null, file.originalname)
+    }
+  })
+  
+  const upload = multer({ storage: storage });
+
+router.route('/writeBlog').post(upload.single("image"),(req, res) => {
     console.log("writeBlog");
     const user_id = req.body.user_id;
     const content = req.body.content;
     const title = req.body.title;
     const time_created = req.body.time_created;
     const like_count = req.body.like_count;
-    // const image = req.body.image;
+    const image = req.file.originalname;
 
     
     
@@ -24,7 +37,7 @@ router.route('/writeBlog').post((req, res) => {
         title: title,
         time_created: time_created,
         like_count: like_count,
-        
+        image: image,
     });
     blog.save();
     res.send('ok');
