@@ -44,7 +44,6 @@ export default class Homepage extends Component {
             <br />
             {this.state.image}
             <br />
-            {this.state.path}
             <br />
             
             </div>
