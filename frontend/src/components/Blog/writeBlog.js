@@ -14,7 +14,7 @@ export default class WriteBlog extends Component {
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
-            user_id: 0,
+            user_id: '',
             content: "",
             title: "",
             time_created: 0,

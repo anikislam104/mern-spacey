@@ -3,10 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const blogSchema = new Schema({
-  user_id:
-  [{
-    type: Schema.Types.ObjectId,ref: 'User'
-  }],
+  user_id: { type: String, required: true },
   content: { type: String, required: true },
   title: { type: String, required: true },
   time_created: { type: Date, required: true },
