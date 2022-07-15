@@ -13,6 +13,13 @@ const { text } = require('express');
 var global_otp = "";
 var current_user_id = 0;
 var current_user_image = '';
+var current_firstname = '';
+var current_lastname = '';
+var current_email = '';
+var current_password = '';
+var current_nid = 0;
+var current_phone = 0;
+var current_date_of_birth = new Date();
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -51,7 +58,6 @@ async function sendOTP(emailId) {
 
 
 router.route('/add').post(upload.single("image"),async (req, res) => {
-  console.log("current_user_id: " + current_user_id);
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
   const email = req.body.email;
@@ -59,10 +65,20 @@ router.route('/add').post(upload.single("image"),async (req, res) => {
   const nidNumber = Number(req.body.nidNumber);
   const phoneNumber = Number(req.body.phoneNumber);
   const dateOfBirth = Date.parse(req.body.dateOfBirth);
-  //convert object to buffer
   const image = req.file.originalname;
   // const image = Buffer.from(req.body.image);
   const encryptedPassword = cryptr.encrypt(password);
+
+  //backup
+  current_firstname = firstName;
+  current_lastname = lastName;
+  current_email = email;
+  current_password = cryptr.encrypt(password);
+  current_nid = nidNumber;
+  current_phone = phoneNumber;
+  current_date_of_birth = dateOfBirth;
+  current_user_image = image;
+
   const allUsers=await User.find();
   let check=false;
 
@@ -87,22 +103,23 @@ router.route('/add').post(upload.single("image"),async (req, res) => {
       console.log(global_otp);
     })
     res.send('ok');
-    router.route('/signup_otp').post(async (req, res) => {
+    router.route('/signup_otp').post((req, res) => {
       const otp = req.body.otp;
-        if(global_otp===otp){
+        if(global_otp===otp && current_user_id===0){
           console.log("OTP verified");
-          
+          console.log("encrypted password: "+cryptr.decrypt(encryptedPassword));
+          console.log("current_password: "+cryptr.decrypt(current_password));
           
           console.log("User added");
           const newUser = new User({
-            firstName,
-            lastName,
-            email,
-            password : encryptedPassword,
-            nidNumber,
-            phoneNumber,
-            dateOfBirth,
-            image,
+            firstName: current_firstname,
+            lastName: current_lastname,
+            email: current_email,
+            password : current_password,
+            nidNumber: current_nid,
+            phoneNumber : current_phone,
+            dateOfBirth : current_date_of_birth,
+            image : current_user_image,
           });
 
           
