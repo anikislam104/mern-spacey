@@ -35,6 +35,7 @@ export default class AllBlogs extends Component {
         return this.state.blogs.map(blog => {
             
             return (
+                
                 <div>
                     
                     <div>
@@ -45,6 +46,8 @@ export default class AllBlogs extends Component {
                         <br />
                     </div>
                 </div>
+                
+                
             )
         }
         )

@@ -51,6 +51,7 @@ async function sendOTP(emailId) {
 
 
 router.route('/add').post(upload.single("image"),async (req, res) => {
+  console.log("current_user_id: " + current_user_id);
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
   const email = req.body.email;
@@ -105,15 +106,12 @@ router.route('/add').post(upload.single("image"),async (req, res) => {
           });
 
           
-          if(current_user_id==0){
+          
             newUser.save()
             .then(() => res.send('signup'))
             .catch(err => res.status(400).json('Error: ' + err));
             return;
-          }
-          else{
-            res.send('invalid');
-          }
+          
           
         }
         else{
