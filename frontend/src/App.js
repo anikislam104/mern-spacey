@@ -19,6 +19,7 @@ import ReadBlogs from "./components/Blog/readBlogs";
 import MyBlogs from "./components/Blog/myBlogs";
 import AllBlogs from "./components/Blog/allBlogs";
 import ShowBlog from "./components/Blog/showBlog";
+import Logout from "./components/logout";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
         <Route path="readBlogs/myBlogs" element={<MyBlogs />} />
         <Route path="readBlogs/allBlogs" element={<AllBlogs />} />
         <Route path="readBlogs/showBlog" element={<ShowBlog />} />
+        <Route path="logout" element={<Logout />} />
       </Routes>
 
       </div>
