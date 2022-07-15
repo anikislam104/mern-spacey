@@ -105,10 +105,15 @@ router.route('/add').post(upload.single("image"),async (req, res) => {
           });
 
           
-          newUser.save()
-          .then(() => res.send('signup'))
-          .catch(err => res.status(400).json('Error: ' + err));
-          return;
+          if(current_user_id==0){
+            newUser.save()
+            .then(() => res.send('signup'))
+            .catch(err => res.status(400).json('Error: ' + err));
+            return;
+          }
+          else{
+            res.send('invalid');
+          }
           
         }
         else{
@@ -130,7 +135,7 @@ router.route('/login').post(async (req, res) => {
   // let hashed_password = await bcrypt.hash(password, 10);
 
   for(let i=0;i<allUsers.length;i++){
-    if(allUsers[i].email===email && cryptr.decrypt(allUsers[i].password)===password){
+    if(allUsers[i].email===email && cryptr.decrypt(allUsers[i].password)===password && current_user_id==0){
       check=true;
       userIndex=i;
       console.log("user index "+userIndex);
