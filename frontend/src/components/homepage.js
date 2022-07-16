@@ -36,13 +36,13 @@ export default class Homepage extends Component {
 
     
     render() {
-        const { user_id } = this.state;
+        
         
         return(
             
-            <div><NavbarHomepage />{user_id}
+            <div><NavbarHomepage />
             <br />
-            {this.state.image}
+            <h1 align="center">Welcome to Spacey</h1>
             <br />
             <br />
             
