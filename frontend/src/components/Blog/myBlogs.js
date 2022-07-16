@@ -46,23 +46,30 @@ export default class MyBlogs extends Component {
     }
 
     getMyBlogs(){
-        return this.state.blogs.map(blog => {
-            return (
-                <div>
-                    <h3>{blog.title}</h3>
-                    <p>{blog.content}</p>
-                    <br />
-                    <br />
-                </div>
-            )
+        const myStyle={
+            itemSection:{
+                fontWeight: "bold",
+            },
         }
-        )
+
+        var separateElements = [];
+        var multiElements = this.state.blogs;
+
+        for(var i = 0; i < multiElements.length; i+=3) {
+           var oneRow = [];
+           oneRow.push(multiElements.slice(i, i+3).map(item => {
+           return <div class="col-lg-4" style={{display: 'inline-block'}}> <label style={myStyle.itemSection}>{item.title}</label> <br/>{item.content}</div>
+           }))
+           
+           separateElements.push(oneRow.map(itm => {return <div><br/><div>{itm}</div><br/><br/></div>}))
+        }
+        return separateElements;
     }
 
 
     render() {
         return(
-            <div>
+            <div class="col-lg-12 bg-light">
                 <NavbarHomepage />
                 <br />
                 {this.getMyBlogs()}
