@@ -142,99 +142,7 @@ export default class CreateUser extends Component {
       }
 
         return(
-          
-/*
-          <div class="p-3 mb-2 bg-dark text-white">
-          <h3>Create New Account</h3>
-          <form onSubmit={this.onSubmit}>
-          
-            
-            <div className="form-group" > 
-              <label>First Name: </label>
-              <input  type="text"
-                  required
-                  className="form-control"
-                  value={this.state.firstName}
-                  onChange={this.onChangeFirstName}
-                  />
-            </div>
-            
 
-            <div className="form-group"> 
-              <label>Last Name: </label>
-              <input  type="text"
-                  required
-                  className="form-control"
-                  value={this.state.lastName}
-                  onChange={this.onChangeLastName}
-                  />
-            </div>
-
-
-            <div className="form-group"> 
-              <label>Email: </label>
-              <input  type="text"
-                  required
-                  className="form-control"
-                  value={this.state.email}
-                  onChange={this.onChangeEmail}
-                  />
-            </div>
-
-
-            <div className="form-group"> 
-              <label>Password: </label>
-              <input  type="text"
-                  required
-                  className="form-control"
-                  value={this.state.password}
-                  onChange={this.onChangePassword}
-                  />
-            </div>
-
-
-            <div className="form-group"> 
-              <label>NID Number: </label>
-              <input  type="text"
-                  required
-                  className="form-control"
-                  value={this.state.nidNumber}
-                  onChange={this.onChangeNIDNumber}
-                  />
-            </div>
-
-            <div className="form-group"> 
-              <label>Phone Number: </label>
-              <input  type="text"
-                  required
-                  className="form-control"
-                  value={this.state.phoneNumber}
-                  onChange={this.onChangePhoneNumber}
-                  />
-            </div>
-
-
-            
-            <div className="form-group">
-            <label>Date Of Birth: </label>
-            <div>
-              <DatePicker
-                selected={this.state.dateOfBirth}
-                onChange={this.onChangeDate}
-                showTimeSelect
-                showYearDropdown
-                placeholderText={this.state.dateOfBirth}
-              />
-            </div>
-          </div>
-            <br />
-    
-            <div className="form-group">
-              <input type="submit" value="Sign Up" className="btn btn-primary" />
-            </div>
-          </form>
-        </div>
-*/
 <div className="maincontainer">
 <Navbar />
 <br />
@@ -309,6 +217,7 @@ export default class CreateUser extends Component {
                                 <br/>
                                 <br/>
                                 <div className="form-group">
+                                     &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                                      <input type="submit" value="Sign Up" className="btn btn-primary" style={myStyle.buttonSection} />
                                 </div>
                       
@@ -320,7 +229,7 @@ export default class CreateUser extends Component {
                       </div>
 
                       <div class="col-lg-5">
-                            <br/><br/><br/><br/><br/>
+                            <br/><br/><br/><br/><br/><br/>
                             <h3 class="display-4">Let's share & rent together!</h3>
                             <br/>
                             <p class="text-muted mb-4">Create your Spacey account!</p>

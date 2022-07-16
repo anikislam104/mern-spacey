@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Navbar from "./hostingNavbar";
+import NavbarHomepage from '../navbar_homepage';
 
 // import { useHistory } from 'react-router-dom'
 // import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
@@ -152,7 +152,7 @@ export default class AddProperty extends Component {
 
     const myStyle = {
       buttonSection: {
-        padding: "10px 40px",
+        padding: "10px 50px",
         fontSize: "20px",
         borderRadius: "10px",
         backgroundColor: "BlueViolet",
@@ -161,7 +161,14 @@ export default class AddProperty extends Component {
 
       inputSection: {
         padding: "10px 10px",
-      }
+      },
+
+      buttonSection2:{
+        backgroundColor:"Sea Serpent",
+        padding: "7px 10px",
+        fontSize: "15px",
+        color:"black",
+      },
 
     }
 
@@ -170,7 +177,7 @@ export default class AddProperty extends Component {
     return (
 
       <div className="maincontainer">
-        <Navbar />
+        <NavbarHomepage />
         <br />
         <div class="container-fluid">
           <div class="row no-gutter">
@@ -213,7 +220,8 @@ export default class AddProperty extends Component {
                           <label>Room No </label>
                           <input id="inputRoomNo" type="roomNo" required="" value={this.state.roomNo} onChange={this.onChangeRoomNo} class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" />
                           <div>
-                            <button type="button" onClick={this.handleClick1}>Add Room</button>
+                            <br/>
+                            <button type="button" onClick={this.handleClick1} style={myStyle.buttonSection2}>Add Room</button>
                           </div>
                           <div>
                           <ul>
@@ -227,11 +235,12 @@ export default class AddProperty extends Component {
                         <div class="form-group sm-2">
                           <label>Facility </label>
                           <input id="inputFacility" type="facility" required="" value={this.state.facility} onChange={this.onChangeFacility} class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" />
-
+                          <br/>
                           <div>
-                            <button type="button" onClick={this.handleClick2}>Add Facility</button>
+                            <button type="button" onClick={this.handleClick2} style={myStyle.buttonSection2}>Add Facility</button>
                           </div>
                           <div>
+                          
                           <ul>
                             {this.state.facilities.map(item => {
                               return <li>{item}</li>;
@@ -243,8 +252,8 @@ export default class AddProperty extends Component {
 
 
                         <br />
-                        <br />
                         <div className="form-group">
+                          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                           <input type="submit" value="Post" className="btn btn-primary" style={myStyle.buttonSection} />
                         </div>
 
@@ -256,10 +265,10 @@ export default class AddProperty extends Component {
                     </div>
 
                     <div class="col-lg-5">
-                      <br /><br /><br /><br /><br />
-                      <h3 class="display-4">Let's share & rent together!</h3>
+                      <br /><br /><br /><br /><br /><br/>
+                      <h3 class="display-4">Let's host your <p>free space!</p></h3>
                       <br />
-                      <p class="text-muted mb-4">Create your Spacey account!</p>
+                      <p class="text-muted mb-4">Spacey makes hosting easier and safer!</p>
                       <br />
                     </div>
 

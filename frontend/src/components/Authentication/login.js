@@ -148,6 +148,7 @@ export default class Login extends Component {
                                           <br/>
                                           <br/>
                                           <div className="form-group">
+                                               &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                                                <input type="submit" value="Log in" className="btn btn-primary" style={myStyle.buttonSection} />
                                           </div>
                                 
