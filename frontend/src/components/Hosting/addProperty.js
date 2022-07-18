@@ -135,12 +135,7 @@ export default class AddProperty extends Component {
     axios.post('http://localhost:5000/property/add', property)
       .then(res => {
         console.log(res.data);
-        if (res.data === 'invalid') {
-          window.location = '/invalidAuth';
-        }
-        else {
-          window.location = '/signup_otp';
-        }
+        window.location = '/hosting';
       });
     console.log("here");
   }

@@ -83,7 +83,7 @@ router.route('/add').post(async (req, res) => {
     //.catch(err => res.status(400).json('Error: ' + err));
   }
 
-
+  res.send('property added');
   return;
 });
 
