@@ -22,13 +22,13 @@ export default class AddProperty extends Component {
     this.handleClick2 = this.handleClick2.bind(this);
 
     this.state = {
-      host_id: '',
+      host_id: 0,
       location: '',
       description: '',
-      size: '',
-      pricePerDay: '',
+      size: 0,
+      pricePerDay: 0,
       roomType: '',
-      roomNo: '',
+      roomNo: 0,
       rooms: [],
       facility: '',
       facilities: []
@@ -135,7 +135,12 @@ export default class AddProperty extends Component {
     axios.post('http://localhost:5000/property/add', property)
       .then(res => {
         console.log(res.data);
-        window.location = '/hosting';
+        if (res.data === 'invalid') {
+          window.location = '/invalidAuth';
+        }
+        else {
+          window.location = '/signup_otp';
+        }
       });
     console.log("here");
   }
@@ -164,6 +169,10 @@ export default class AddProperty extends Component {
         fontSize: "15px",
         color:"black",
       },
+      descriptionSection:{
+        width: "500px",
+        height: "400px",
+     },
 
     }
 
@@ -197,7 +206,7 @@ export default class AddProperty extends Component {
                         <br />
                         <div class="form-group sm-2">
                           <label>Description: </label>
-                          <input id="inputDescription" type="description" required="" autofocus="" value={this.state.description} onChange={this.onChangeDescription} class="form-control rounded-pill border-0 shadow-sm px-4" />
+                          <textarea id="inputContent" type="text" placeholder="" required="" value={this.state.description} onChange={this.onChangeDescription} class="form-control  border-0 shadow-sm px-4 text-primary" style={myStyle.descriptionSection} />
                         </div>
                         <br />
                         <div class="form-group sm-2">
