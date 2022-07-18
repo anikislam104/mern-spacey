@@ -7,7 +7,7 @@ let path = require('path');
 // const { current_user_id } = require('./users');
 
 
-
+//image upload
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, './images');
