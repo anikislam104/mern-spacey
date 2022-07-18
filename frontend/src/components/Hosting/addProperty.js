@@ -22,13 +22,13 @@ export default class AddProperty extends Component {
     this.handleClick2 = this.handleClick2.bind(this);
 
     this.state = {
-      host_id: 0,
+      host_id: '',
       location: '',
       description: '',
-      size: 0,
-      pricePerDay: 0,
+      size: '',
+      pricePerDay: '',
       roomType: '',
-      roomNo: 0,
+      roomNo: '',
       rooms: [],
       facility: '',
       facilities: []
