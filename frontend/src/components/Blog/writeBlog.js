@@ -131,6 +131,7 @@ export default class WriteBlog extends Component {
                                                <br/>
                                                <div class="form-group sm-3">
                                                   <div class="custom-file sm-3">
+                                                    <label>Add Picture: </label>
                                                     <input type="file" filename="image" class="custom-file-input form-control  border-0 shadow-sm px-4" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" onChange={this.onChangeImage} />
                                                   </div>
                                                </div>
