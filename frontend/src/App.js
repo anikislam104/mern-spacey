@@ -20,6 +20,8 @@ import MyBlogs from "./components/Blog/myBlogs";
 import AllBlogs from "./components/Blog/allBlogs";
 import ShowBlog from "./components/Blog/showBlog";
 import Logout from "./components/logout";
+import MobileBanking from "./components/Payment/mobileBanking";
+import CashPayment from "./components/Payment/cashPayment";
 
 function App() {
   return (
@@ -28,6 +30,7 @@ function App() {
       {/* <Navbar /> */}
       {/* <br/> */}
       <Routes>
+        {/* Authentication */}
         <Route path="/" element={<OpeningPage />} />
         <Route path="create-user" element={<CreateUser />} />
         <Route path="login" element={<Login />} />
@@ -36,15 +39,27 @@ function App() {
         <Route path="signupconf" element={<SignUpConfirmation />} />
         <Route path="homepage" element={<Homepage />} />
         <Route path="invalidAuth" element={<InvalidAuth />} />
-        <Route path="blog" element={<BlogHome />} />
+        
+
+        {/* Hosting */}
         <Route path="hosting" element={<HostingOpeningPage />}/>
         <Route path="add-property" element={<AddProperty />}/>
+
+
+        {/* Blog */}
+        <Route path="blog" element={<BlogHome />} />
         <Route path="writeBlog" element={<WriteBlog />} />
         <Route path="readBlogs" element={<ReadBlogs />} />
         <Route path="readBlogs/myBlogs" element={<MyBlogs />} />
         <Route path="readBlogs/allBlogs" element={<AllBlogs />} />
         <Route path="readBlogs/showBlog" element={<ShowBlog />} />
         <Route path="logout" element={<Logout />} />
+
+
+        {/* Payment */}
+        <Route path="payment/mobile_banking" element={<MobileBanking />} />
+        <Route path="payment/cash_payment" element={<CashPayment />} />
+
       </Routes>
 
       </div>
