@@ -22,6 +22,7 @@ import ShowBlog from "./components/Blog/showBlog";
 import Logout from "./components/logout";
 import MobileBanking from "./components/Payment/mobileBanking";
 import CashPayment from "./components/Payment/cashPayment";
+import RentingHome from "./components/Renting/rentingHome";
 
 function App() {
   return (
@@ -54,6 +55,10 @@ function App() {
         <Route path="readBlogs/allBlogs" element={<AllBlogs />} />
         <Route path="readBlogs/showBlog" element={<ShowBlog />} />
         <Route path="logout" element={<Logout />} />
+
+
+        {/* Renting  */}
+        <Route path="renting" element={<RentingHome />} />
 
 
         {/* Payment */}
