@@ -21,10 +21,12 @@ connection.once('open', () => {
 const usersRouter = require('./routes/users');
 const blogRouter = require('./routes/blogs');
 const propertyRouter = require('./routes/property')
+const chatRouter = require('./routes/chat');
 
 app.use('/users', usersRouter);
 app.use('/property', propertyRouter);
 app.use('/blogs', blogRouter);
+app.use('/chat', chatRouter);
 
 
 app.listen(port, () => {
