@@ -197,6 +197,16 @@ router.route('/login').post(async (req, res) => {
 });
 
 
+//get user name
+router.route('/get_user_name').post(async (req, res) => {
+  const user_id = req.body.host_id;
+  User.find()
+    .then(users => {
+        users=users.filter(user=>user._id==user_id);
+        res.json(users[0].firstName+" "+users[0].lastName);
+    })
+})
+
 router.route('/user_id').get((req, res) => {
   console.log("current_user_id "+current_user_id);
   res.send({user_id:current_user_id,user_image:current_user_image});
