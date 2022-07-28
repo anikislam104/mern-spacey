@@ -88,7 +88,15 @@ router.route('/add').post(async (req, res) => {
 
 
 
-
+//get all properties
+router.route('/all_properties').get((req, res) => {
+  Property.find()
+    .then(properties => {
+      console.log(properties[0].location);
+      res.json(properties);
+    }
+    )
+    })
 
 
 module.exports = router;

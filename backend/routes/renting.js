@@ -3,6 +3,19 @@ let User = require('../models/user');
 let Booking = require('../models/booking');
 let RentRequest = require('../models/rentRequest');
 
+router.route('/selected_property').post((req, res) => {
+    console.log("selected_property");
+    const property_id = req.body.property_id;
+    const host_id = req.body.host_id;
+    const location = req.body.location;
+    const description = req.body.description;
+    const size = req.body.size;
+    // const status = req.body.status;
+    const pricePerDay = req.body.price;
+    console.log("property_id:" + property_id + "host_id:" + host_id + "location:" + location + "description:" + description + "size:" + size + "pricePerDay:" + pricePerDay);
+    res.send('ok');
+})
+
 router.route('/rentRequest').post(async (req, res) =>
 {
     const host_id = req.body.host_id;
@@ -62,3 +75,5 @@ router.route('/bookings').post(async (req, res) =>
     await newBooking.save();
 }
 )
+
+module.exports = router;
