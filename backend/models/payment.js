@@ -7,7 +7,7 @@ const paymentSchema = new Schema({
   renter_id: { type: String, required: true },
   //status: { type: String, required: true },
   amount: { type: Number, required: true },
-  //date: { type: Date, required: true },
+  date: { type: Date, required: true },
 }, {
   timestamps: true,
 });
