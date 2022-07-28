@@ -22,6 +22,7 @@ import ShowBlog from "./components/Blog/showBlog";
 import Logout from "./components/logout";
 import MobileBanking from "./components/Payment/mobileBanking";
 import CashPayment from "./components/Payment/cashPayment";
+import PaymentSuccess from "./components/Payment/paymentSuccess";
 import RentingHome from "./components/Renting/rentingHome";
 
 function App() {
@@ -64,6 +65,7 @@ function App() {
         {/* Payment */}
         <Route path="payment/mobile_banking" element={<MobileBanking />} />
         <Route path="payment/cash_payment" element={<CashPayment />} />
+        <Route path="payment/payment_success" element={<PaymentSuccess />} />
 
       </Routes>
 

@@ -22,12 +22,13 @@ const usersRouter = require('./routes/users');
 const blogRouter = require('./routes/blogs');
 const propertyRouter = require('./routes/property')
 const chatRouter = require('./routes/chat');
+const paymentRouter=require('./routes/payments');
 
 app.use('/users', usersRouter);
 app.use('/property', propertyRouter);
 app.use('/blogs', blogRouter);
 app.use('/chat', chatRouter);
-
+app.use('/payments',paymentRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
