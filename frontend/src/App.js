@@ -24,6 +24,7 @@ import MobileBanking from "./components/Payment/mobileBanking";
 import CashPayment from "./components/Payment/cashPayment";
 import PaymentSuccess from "./components/Payment/paymentSuccess";
 import RentingHome from "./components/Renting/rentingHome";
+import SelectedProperty from "./components/Renting/selectedProperty";
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
 
         {/* Renting  */}
         <Route path="renting" element={<RentingHome />} />
+        <Route path="renting/selected_property" element={<SelectedProperty />} />
 
 
         {/* Payment */}

@@ -68,6 +68,9 @@ export default class RentingHome extends Component {
         }
         // console.log("id "+id.property);
         axios.post('http://localhost:5000/renting/selected_property',selected_property)
+            .then(res => {
+                window.location = '/renting/selected_property';
+            });
 
         
     }
