@@ -13,6 +13,7 @@ import OpeningPage from "./components/Authentication/opening_page";
 import InvalidAuth from "./components/Authentication/invalidAuth";
 import BlogHome from "./components/Blog/blogHome";
 import AddProperty from "./components/Hosting/addProperty";
+import AddBusinessStorage  from "./components/Hosting/addBusinessStorage";
 import HostingOpeningPage from "./components/Hosting/hostingOpeningPage";
 import WriteBlog from "./components/Blog/writeBlog";
 import ReadBlogs from "./components/Blog/readBlogs";
@@ -27,6 +28,7 @@ import PaymentFailure from "./components/Payment/paymentFailure";
 import RentingHome from "./components/Renting/rentingHome";
 import SelectedProperty from "./components/Renting/selectedProperty";
 import Notification from "./components/Renting/notification";
+import AddInsurance from "./components/Insurance/addInsurance";
 
 function App() {
   return (
@@ -49,7 +51,10 @@ function App() {
         {/* Hosting */}
         <Route path="hosting" element={<HostingOpeningPage />}/>
         <Route path="add-property" element={<AddProperty />}/>
+        <Route path="add-business-storage" element={<AddBusinessStorage />}/>
 
+        {/* Insurance */}
+        <Route path="add-insurance" element={<AddInsurance />}/>
 
         {/* Blog */}
         <Route path="blog" element={<BlogHome />} />

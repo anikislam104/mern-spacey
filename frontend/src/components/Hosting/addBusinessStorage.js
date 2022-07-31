@@ -9,7 +9,7 @@ import NavbarHomepage from '../navbar_homepage';
 // import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 
 
-export default class AddProperty extends Component {
+export default class AddBusinessStorage extends Component {
   constructor(props) {
     super(props);
 
@@ -18,11 +18,9 @@ export default class AddProperty extends Component {
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangeSize = this.onChangeSize.bind(this);
     this.onChangePricePerDay = this.onChangePricePerDay.bind(this);
-    this.onChangeRoomType = this.onChangeRoomType.bind(this);
-    this.onChangeRoomNo = this.onChangeRoomNo.bind(this);
     this.onChangeFacility = this.onChangeFacility.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    this.handleClick1 = this.handleClick1.bind(this);
+    ///this.handleClick1 = this.handleClick1.bind(this);
     this.handleClick2 = this.handleClick2.bind(this);
 
 
@@ -81,18 +79,6 @@ export default class AddProperty extends Component {
     })
   }
 
-  onChangeRoomType(e) {
-
-    this.setState({
-      roomType: e.target.value
-    })
-  }
-
-  onChangeRoomNo(e) {
-    this.setState({
-      roomNo: e.target.value
-    })
-  }
 
   onChangeFacility(e) {
     this.setState({
@@ -100,19 +86,6 @@ export default class AddProperty extends Component {
     })
   }
 
-
-
-  handleClick1(e) {
-    this.setState(prevState => ({
-      rooms: [...prevState.rooms, [this.state.roomType, this.state.roomNo]]
-    }))
-    this.setState({
-      roomType: ''
-    })
-    this.setState({
-      roomNo: 0
-    })
-  }
 
   handleClick2(e) {
     this.setState(prevState => ({
@@ -126,7 +99,7 @@ export default class AddProperty extends Component {
   async onSubmit(e) {
     e.preventDefault();
 
-
+    
     const property = {
       host_id: this.state.host_id,
       title: this.state.title,
@@ -147,12 +120,14 @@ export default class AddProperty extends Component {
         console.log(res.data);
         window.location = '/hosting';
       });
+    
+
   }
   render() {
 
 
 
-
+    
 
     const myStyle = {
       buttonSection: {
@@ -167,16 +142,16 @@ export default class AddProperty extends Component {
         padding: "10px 10px",
       },
 
-      buttonSection2: {
-        backgroundColor: "Sea Serpent",
+      buttonSection2:{
+        backgroundColor:"Sea Serpent",
         padding: "7px 10px",
         fontSize: "15px",
-        color: "black",
+        color:"black",
       },
-      descriptionSection: {
+      descriptionSection:{
         width: "500px",
         height: "400px",
-      },
+     },
 
     }
 
@@ -203,7 +178,7 @@ export default class AddProperty extends Component {
 
                     <div class="col-lg-5">
                       <form onSubmit={this.onSubmit}>
-                        <div class="form-group sm-2">
+                      <div class="form-group sm-2">
                           <label>Title: </label>
                           <input id="inputTitle" type="title" required="" autofocus="" value={this.state.title} onChange={this.onChangeTitle} class="form-control rounded-pill border-0 shadow-sm px-4" />
                         </div>
@@ -226,43 +201,25 @@ export default class AddProperty extends Component {
                           <label>Price Per Day: </label>
                           <input id="inputPricePerDay" type="pricePerDay" required="" value={this.state.pricePerDay} onChange={this.onChangePricePerDay} class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" />
                         </div>
-                        <div class="form-group sm-2">
-                          <label>Room Type </label>
-                          <input id="inputRoomType" type="roomType" required="" value={this.state.roomType} onChange={this.onChangeRoomType} class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" />
-                          <label>Room No </label>
-                          <input id="inputRoomNo" type="roomNo" required="" value={this.state.roomNo} onChange={this.onChangeRoomNo} class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" />
-                          <div>
-                            <br />
-                            <button type="button" onClick={this.handleClick1} style={myStyle.buttonSection2}>Add Room</button>
-                          </div>
-                          <div>
-                            <ul>
-                              {this.state.rooms.map(item => {
-                                return <li>{item[0]} {item[1]}</li>;
-                              })}
-                            </ul>
-                          </div>
-                        </div>
+                        
 
                         <div class="form-group sm-2">
                           <label>Facility </label>
                           <input id="inputFacility" type="facility" required="" value={this.state.facility} onChange={this.onChangeFacility} class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" />
-                          <br />
+                          <br/>
                           <div>
                             <button type="button" onClick={this.handleClick2} style={myStyle.buttonSection2}>Add Facility</button>
                           </div>
                           <div>
-
-                            <ul>
-                              {this.state.facilities.map(item => {
-                                return <li>{item}</li>;
-                              })}
-                            </ul>
+                          
+                          <ul>
+                            {this.state.facilities.map(item => {
+                              return <li>{item}</li>;
+                            })}
+                          </ul>
                           </div>
-
+                          
                         </div>
-
-
                         <br />
                         <div className="form-group">
                           &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
@@ -277,7 +234,7 @@ export default class AddProperty extends Component {
                     </div>
 
                     <div class="col-lg-5">
-                      <br /><br /><br /><br /><br /><br />
+                      <br /><br /><br /><br /><br /><br/>
                       <h3 class="display-4">Let's host your <p>free space!</p></h3>
                       <br />
                       <p class="text-muted mb-4">Spacey makes hosting easier and safer!</p>

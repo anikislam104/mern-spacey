@@ -86,6 +86,7 @@ router.route('/add').post(upload.single("image"),async (req, res) => {
 
   console.log(allUsers.length);
   for(let i=0;i<allUsers.length;i++){
+    console.log(allUsers[i].email);
     if(allUsers[i].email===email || allUsers[i].nidNumber===nidNumber || allUsers[i].phoneNumber===phoneNumber){
       check=true;
     }
