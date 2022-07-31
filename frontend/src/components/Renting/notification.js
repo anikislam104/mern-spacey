@@ -64,7 +64,7 @@ export default class Notification extends Component {
                 return (
                     <div>
                         
-                        <h1>{request.property_id}</h1>
+                        <h1>{request.property_title}</h1>
                         <h1>{request.renter_name}</h1>
                         <h1>{request.date}</h1>
                         <button onClick={

@@ -70,6 +70,7 @@ export default class SelectedProperty extends Component {
                     renter_id: renter_id,
                     renter_name: this.state.renter_name,
                     property_id: property_id,
+                    property_title: property.title,
                     date: date
                 }
                 console.log(rent_request);
@@ -77,7 +78,8 @@ export default class SelectedProperty extends Component {
                     .then(res => {
                         console.log(res.data);
                         if(res.data === 'ok'){
-                            window.location.href = '/renting';
+                            window.location.href = '/homepage';
+                            alert('Rental request sent');
                         }
                         else{
                             alert('You cannot book your own property');
@@ -93,6 +95,7 @@ export default class SelectedProperty extends Component {
             return this.state.property.map((property) => {
                 return (
                     <div>
+                        <h1>{property.title}</h1>
                         <h1>Location: {property.location}</h1>
                         <h1>Size: {property.size}</h1>
                         <h1>Price: {property.pricePerDay}</h1>

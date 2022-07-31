@@ -63,6 +63,7 @@ router.route('/send_rental_request').post(async (req, res) =>
     const property_id = req.body.property_id;
     const date = req.body.date;
     const renter_name = req.body.renter_name;
+    const property_title = req.body.property_title;
     const host_id = req.body.host_id;
 
     console.log("renter_id:" + renter_id + " property_id:" + property_id + " date:" + date + " host_id:" + host_id);
@@ -76,10 +77,11 @@ router.route('/send_rental_request').post(async (req, res) =>
             renter_id,
             renter_name,
             property_id,
+            property_title,
             date,
         });
         newRentRequest.save();
-        var message="You have a new rental request from " + renter_name + " for your property " + selected_property_location + " on " + date;
+        var message="You have a new rental request from " + renter_name + " for your property " + property_title + " on " + date;
         const newNotification =new Notification( {
             user_id:host_id,
             message,
@@ -108,7 +110,7 @@ router.route('/accept_rent_request').post(async (req, res) =>
     await newBooking.save();
     await RentRequest.deleteOne({ _id: rent_request_id });
 
-    var message="Your rental request for " + selected_property_location + " on " + rent_request.date + " has been accepted";
+    var message="Your rental request for " + rent_request.property_title + " on " + rent_request.date + " has been accepted";
 
     const newNotification =new Notification( {
         user_id: rent_request.renter_id,
@@ -123,11 +125,11 @@ router.route('/reject_rent_request').post(async (req, res) =>
 {
     const rent_request_id = req.body.id;
     //console.log("rent_request_id:" + rent_request_id);
-    await RentRequest.deleteOne({ _id: rent_request_id });
     const rent_request = await RentRequest.findById(rent_request_id);
-    var message="Your rental request for " + selected_property_location + " on " + rent_request.date + " has been rejected";
+    var message="Your rental request for " + rent_request.property_title + " on " + rent_request.date + " has been rejected";
+    await RentRequest.deleteOne({ _id: rent_request_id });
     newNotification =new Notification( {
-        user_id: rent_request.renter_id,
+        user_id: rent_request_id,
         message,
     });
     newNotification.save();
