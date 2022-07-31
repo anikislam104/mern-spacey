@@ -56,6 +56,26 @@ router.route('/rentRequest').post(async (req, res) =>
 }
 )
 
+router.route('/send_rental_request').post(async (req, res) =>
+{
+    const renter_id = req.body.renter_id;
+    const property_id = req.body.property_id;
+    const date = req.body.date;
+    const host_id = req.body.host_id;
+
+    console.log("renter_id:" + renter_id + " property_id:" + property_id + " date:" + date + " host_id:" + host_id);
+
+    const newRentRequest = new RentRequest({
+        host_id,
+        renter_id,
+        property_id,
+        date,
+    });
+    newRentRequest.save();
+    res.send('ok');
+
+})
+
 router.route('/all_rentRequests').get(async (req, res) =>
 {
     RentRequest.find()
