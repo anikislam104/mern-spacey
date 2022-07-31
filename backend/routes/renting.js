@@ -66,16 +66,47 @@ router.route('/send_rental_request').post(async (req, res) =>
 
     console.log("renter_id:" + renter_id + " property_id:" + property_id + " date:" + date + " host_id:" + host_id);
 
-    const newRentRequest = new RentRequest({
-        host_id,
-        renter_id,
-        renter_name,
-        property_id,
-        date,
-    });
-    newRentRequest.save();
-    res.send('ok');
+    if(host_id===renter_id){
+        res.send("You can't rent your own property");
+    }
+    else{
+        const newRentRequest = new RentRequest({
+            host_id,
+            renter_id,
+            renter_name,
+            property_id,
+            date,
+        });
+        newRentRequest.save();
+        res.send('ok');
+    }
 
+})
+
+
+router.route('/accept_rent_request').post(async (req, res) =>
+{
+    const rent_request_id = req.body.id;
+    console.log("rent_request_id:" + rent_request_id);
+    const rent_request = await RentRequest.findById(rent_request_id);
+    console.log("rent_request:" + rent_request);
+    const newBooking = new Booking({
+        host_id: rent_request.host_id,
+        renter_id: rent_request.renter_id,
+        property_id: rent_request.property_id,
+        date: rent_request.date,
+    });
+    await newBooking.save();
+    await RentRequest.deleteOne({ _id: rent_request_id });
+    res.send('ok');
+})
+
+router.route('/reject_rent_request').post(async (req, res) =>
+{
+    const rent_request_id = req.body.id;
+    //console.log("rent_request_id:" + rent_request_id);
+    await RentRequest.deleteOne({ _id: rent_request_id });
+    res.send('ok');
 })
 
 router.route('/all_rentRequests').get(async (req, res) =>

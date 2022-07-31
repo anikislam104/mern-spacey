@@ -1,10 +1,12 @@
 import axios from "axios";
 import React,{ Component } from "react";
-var incr=1;
+
 
 export default class Notification extends Component {
     constructor(props) {
         super(props);
+        this.acceptRequest = this.acceptRequest.bind(this);
+        this.rejectRequest = this.rejectRequest.bind(this);
         this.state = {
             rent_request: [],
             host_id: '',
@@ -32,15 +34,52 @@ export default class Notification extends Component {
             })
     }
 
+    acceptRequest(id){
+        const acceptRequest ={
+            id: id,
+        }
+        axios.post('http://localhost:5000/renting/accept_rent_request', acceptRequest)
+            .then(res => {
+                console.log(res.data);
+            })
+        window.location.href='/homepage';
+        alert("Request Accepted");
+    }
+
+    rejectRequest(id){
+        const rejectRequest ={
+            id: id,
+        }
+        axios.post('http://localhost:5000/renting/reject_rent_request', rejectRequest)
+            .then(res => {
+                console.log(res.data);
+            })
+        window.location.href='/homepage';
+        alert("Request Rejected");
+    }
+
     render() {
         
             return this.state.rent_request.map((request) => {
                 return (
                     <div>
-                        <h1>{incr++}</h1>
+                        
                         <h1>{request.property_id}</h1>
                         <h1>{request.renter_name}</h1>
                         <h1>{request.date}</h1>
+                        <button onClick={
+                            () => {
+                                this.acceptRequest(request._id);
+                            }
+                        }>Accept</button>
+                        <p>         </p>
+                        <button onClick={
+                            () => {
+                                this.rejectRequest(request._id);
+                            }
+                        }>Reject</button>
+                        <br />
+                        <br />
                     </div>
                 )
             })

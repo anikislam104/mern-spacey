@@ -20,6 +20,8 @@ var current_password = '';
 var current_nid = 0;
 var current_phone = 0;
 var current_date_of_birth = new Date();
+var fpEmail='';
+var fpPassword='';
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -208,16 +210,64 @@ router.route('/get_user_name').post(async (req, res) => {
     })
 })
 
+
+//forget password
+router.route('/forget_password_otp_send').post(async (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+
+  fpEmail=email;
+  fpPassword=password;
+
+  let otp_sent = sendOTP(email);
+    otp_sent.then((otp_s) => {
+      console.log("otp_s "+otp_s);
+      global_otp=otp_s;
+  })
+  res.send('ok');
+
+})
+
+
+
+
+router.route('/forget_password').post(async (req, res) => {
+  const otp = req.body.otp;
+  const encryptedPassword = cryptr.encrypt(fpPassword);
+  console.log(fpPassword);
+  const allUsers=await User.find();
+  let otp_check=false;
+  if(otp===global_otp){
+    otp_check=true;
+  }
+  if(otp_check===false){
+    res.send('invalid');
+  }
+  else{
+    let email_check=false;
+    for(let i=0;i<allUsers.length;i++){
+      if(allUsers[i].email===fpEmail){
+        email_check=true;
+        allUsers[i].password=encryptedPassword;
+        allUsers[i].save();
+        break;
+      }
+    }
+    if(email_check===true){
+      res.send('ok');
+    }
+    else{
+      res.send('invalid');
+    }
+}
+})
+
 router.route('/user_id').get((req, res) => {
   console.log("current_user_id "+current_user_id);
   res.send({user_id:current_user_id,user_image:current_user_image});
 });
 
-router.route('/:id').get((req, res) => {
-    User.findById(req.params.id)
-      .then(User => res.json(users))
-      .catch(err => res.status(400).json('Error: ' + err));
-  });
+
   
   router.route('/logout').post((req, res) => {
     const id=req.body.user_id;
