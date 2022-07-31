@@ -3,6 +3,7 @@ let User = require('../models/user');
 let Booking = require('../models/booking');
 let RentRequest = require('../models/rentRequest');
 const Property = require('../models/property');
+const Notification = require('../models/notification');
 var selected_property_id = 0;
 var selected_property_location = "";
 var selected_property_size = 0;
@@ -78,6 +79,14 @@ router.route('/send_rental_request').post(async (req, res) =>
             date,
         });
         newRentRequest.save();
+        var message="You have a new rental request from " + renter_name + " for your property " + selected_property_location + " on " + date;
+        const newNotification =new Notification( {
+            user_id:host_id,
+            message,
+        });
+
+        newNotification.save();
+
         res.send('ok');
     }
 
@@ -98,6 +107,15 @@ router.route('/accept_rent_request').post(async (req, res) =>
     });
     await newBooking.save();
     await RentRequest.deleteOne({ _id: rent_request_id });
+
+    var message="Your rental request for " + selected_property_location + " on " + rent_request.date + " has been accepted";
+
+    const newNotification =new Notification( {
+        user_id: rent_request.renter_id,
+        message,
+    });
+    newNotification.save();
+
     res.send('ok');
 })
 
@@ -106,6 +124,13 @@ router.route('/reject_rent_request').post(async (req, res) =>
     const rent_request_id = req.body.id;
     //console.log("rent_request_id:" + rent_request_id);
     await RentRequest.deleteOne({ _id: rent_request_id });
+    const rent_request = await RentRequest.findById(rent_request_id);
+    var message="Your rental request for " + selected_property_location + " on " + rent_request.date + " has been rejected";
+    newNotification =new Notification( {
+        user_id: rent_request.renter_id,
+        message,
+    });
+    newNotification.save();
     res.send('ok');
 })
 

@@ -273,7 +273,7 @@ router.route('/user_id').get((req, res) => {
     const id=req.body.user_id;
     current_user_id=0;
     res.send('logout');
-  })
+  });
 
   module.exports = router;
   module.exports.current_user_id = current_user_id;
