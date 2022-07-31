@@ -79,6 +79,9 @@ export default class SelectedProperty extends Component {
                         if(res.data === 'ok'){
                             window.location.href = '/renting';
                         }
+                        else{
+                            alert('You cannot book your own property');
+                        }
                     })
             })
         

@@ -66,15 +66,20 @@ router.route('/send_rental_request').post(async (req, res) =>
 
     console.log("renter_id:" + renter_id + " property_id:" + property_id + " date:" + date + " host_id:" + host_id);
 
-    const newRentRequest = new RentRequest({
-        host_id,
-        renter_id,
-        renter_name,
-        property_id,
-        date,
-    });
-    newRentRequest.save();
-    res.send('ok');
+    if(host_id===renter_id){
+        res.send("You can't rent your own property");
+    }
+    else{
+        const newRentRequest = new RentRequest({
+            host_id,
+            renter_id,
+            renter_name,
+            property_id,
+            date,
+        });
+        newRentRequest.save();
+        res.send('ok');
+    }
 
 })
 

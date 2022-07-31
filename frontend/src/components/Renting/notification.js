@@ -1,10 +1,11 @@
 import axios from "axios";
 import React,{ Component } from "react";
-var incr=1;
+
 
 export default class Notification extends Component {
     constructor(props) {
         super(props);
+        this.acceptRequest = this.acceptRequest.bind(this);
         this.state = {
             rent_request: [],
             host_id: '',
@@ -32,15 +33,26 @@ export default class Notification extends Component {
             })
     }
 
+    acceptRequest(property_id, host_id, renter_id){
+        window.location.href='/homepage';
+    }
+
     render() {
         
             return this.state.rent_request.map((request) => {
                 return (
                     <div>
-                        <h1>{incr++}</h1>
+                        
                         <h1>{request.property_id}</h1>
                         <h1>{request.renter_name}</h1>
                         <h1>{request.date}</h1>
+                        <button onClick={
+                            () => {
+                                this.acceptRequest(request.property_id, request.host_id, request.renter_id);
+                            }
+                        }>Accept</button>
+                        <br />
+                        <br />
                     </div>
                 )
             })
