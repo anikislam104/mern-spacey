@@ -26,6 +26,7 @@ import PaymentSuccess from "./components/Payment/paymentSuccess";
 import PaymentFailure from "./components/Payment/paymentFailure";
 import RentingHome from "./components/Renting/rentingHome";
 import SelectedProperty from "./components/Renting/selectedProperty";
+import Notification from "./components/Renting/notification";
 
 function App() {
   return (
@@ -63,6 +64,7 @@ function App() {
         {/* Renting  */}
         <Route path="renting" element={<RentingHome />} />
         <Route path="renting/selected_property" element={<SelectedProperty />} />
+        <Route path="rent_request_notifications" element={<Notification />} />
 
 
         {/* Payment */}

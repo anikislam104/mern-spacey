@@ -8,7 +8,8 @@ export default class SelectedProperty extends Component {
         this.sendRentalRequest = this.sendRentalRequest.bind(this);
         this.state = {
             property:[],
-            host_name:''
+            host_name:'',
+            renter_name:''
         }
     }
     componentDidMount() {
@@ -19,12 +20,31 @@ export default class SelectedProperty extends Component {
                 this.setState({
                     property: this.state.property.concat(json),
                 });
+                fetch('http://localhost:5000/users/user_id')
+                    .then((res2) => res2.json())
+                    .then((json2) => {
+                        var id=json2.user_id;
+                        const renter_id={
+                            user_id: id,
+                        }
+                        axios.post('http://localhost:5000/users/get_user_name',renter_id)
+                            .then(res3 => {
+                                console.log(res3.data);
+                                this.setState({
+                                    renter_name: res3.data,
+                                });
+                            })
+                    })
+
             })
         
         }
     //get username of host
     getUsername(host_id){
-        axios.post('http://localhost:5000/users/get_user_name',{host_id:host_id})
+        const id={
+            user_id: host_id,
+        }
+        axios.post('http://localhost:5000/users/get_user_name',id)
             .then(res => {
                 console.log(res.data);
                 this.setState({
@@ -48,6 +68,7 @@ export default class SelectedProperty extends Component {
                 const rent_request = {
                     host_id: host_id,
                     renter_id: renter_id,
+                    renter_name: this.state.renter_name,
                     property_id: property_id,
                     date: date
                 }
@@ -55,11 +76,12 @@ export default class SelectedProperty extends Component {
                 axios.post('http://localhost:5000/renting/send_rental_request', rent_request)
                     .then(res => {
                         console.log(res.data);
+                        if(res.data === 'ok'){
+                            window.location.href = '/renting';
+                        }
                     })
             })
         
-        
-
     }
 
 

@@ -199,7 +199,7 @@ router.route('/login').post(async (req, res) => {
 
 //get user name
 router.route('/get_user_name').post(async (req, res) => {
-  const user_id = req.body.host_id;
+  const user_id = req.body.user_id;
   User.find()
     .then(users => {
         users=users.filter(user=>user._id==user_id);

@@ -61,6 +61,7 @@ router.route('/send_rental_request').post(async (req, res) =>
     const renter_id = req.body.renter_id;
     const property_id = req.body.property_id;
     const date = req.body.date;
+    const renter_name = req.body.renter_name;
     const host_id = req.body.host_id;
 
     console.log("renter_id:" + renter_id + " property_id:" + property_id + " date:" + date + " host_id:" + host_id);
@@ -68,6 +69,7 @@ router.route('/send_rental_request').post(async (req, res) =>
     const newRentRequest = new RentRequest({
         host_id,
         renter_id,
+        renter_name,
         property_id,
         date,
     });
@@ -89,10 +91,10 @@ router.route('/all_rentRequests').get(async (req, res) =>
 
 router.route('/my_rentRequests').post(async (req, res) =>
 {
-    const renter_id = req.body.renter_id;
-    RentRequest.find({renter_id})
+    const host_id = req.body.host_id;
+    RentRequest.find()
         .then(rentRequests => {
-            //console.log(blogs[0].content);
+            rentRequests = rentRequests.filter(rentRequest => rentRequest.host_id == host_id);
             res.json(rentRequests);
         }).catch(err => res.status(400).json('Error: ' + err));
 }
