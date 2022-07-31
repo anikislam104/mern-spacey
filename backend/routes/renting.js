@@ -100,6 +100,15 @@ router.route('/accept_rent_request').post(async (req, res) =>
     await RentRequest.deleteOne({ _id: rent_request_id });
     res.send('ok');
 })
+
+router.route('/reject_rent_request').post(async (req, res) =>
+{
+    const rent_request_id = req.body.id;
+    //console.log("rent_request_id:" + rent_request_id);
+    await RentRequest.deleteOne({ _id: rent_request_id });
+    res.send('ok');
+})
+
 router.route('/all_rentRequests').get(async (req, res) =>
 {
     RentRequest.find()

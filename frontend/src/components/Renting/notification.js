@@ -43,10 +43,19 @@ export default class Notification extends Component {
                 console.log(res.data);
             })
         window.location.href='/homepage';
+        alert("Request Accepted");
     }
 
     rejectRequest(id){
+        const rejectRequest ={
+            id: id,
+        }
+        axios.post('http://localhost:5000/renting/reject_rent_request', rejectRequest)
+            .then(res => {
+                console.log(res.data);
+            })
         window.location.href='/homepage';
+        alert("Request Rejected");
     }
 
     render() {
