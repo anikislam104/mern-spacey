@@ -266,11 +266,7 @@ router.route('/user_id').get((req, res) => {
   res.send({user_id:current_user_id,user_image:current_user_image});
 });
 
-router.route('/:id').get((req, res) => {
-    User.findById(req.params.id)
-      .then(User => res.json(users))
-      .catch(err => res.status(400).json('Error: ' + err));
-  });
+
   
   router.route('/logout').post((req, res) => {
     const id=req.body.user_id;

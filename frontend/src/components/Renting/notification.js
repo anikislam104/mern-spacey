@@ -34,12 +34,18 @@ export default class Notification extends Component {
             })
     }
 
-    acceptRequest(property_id, host_id, renter_id){
-
+    acceptRequest(id){
+        const acceptRequest ={
+            id: id,
+        }
+        axios.post('http://localhost:5000/renting/accept_rent_request', acceptRequest)
+            .then(res => {
+                console.log(res.data);
+            })
         window.location.href='/homepage';
     }
 
-    rejectRequest(property_id, host_id, renter_id){
+    rejectRequest(id){
         window.location.href='/homepage';
     }
 
@@ -54,13 +60,13 @@ export default class Notification extends Component {
                         <h1>{request.date}</h1>
                         <button onClick={
                             () => {
-                                this.acceptRequest(request.property_id, request.host_id, request.renter_id);
+                                this.acceptRequest(request._id);
                             }
                         }>Accept</button>
                         <p>         </p>
                         <button onClick={
                             () => {
-                                this.rejectRequest(request.property_id, request.host_id, request.renter_id);
+                                this.rejectRequest(request._id);
                             }
                         }>Reject</button>
                         <br />
