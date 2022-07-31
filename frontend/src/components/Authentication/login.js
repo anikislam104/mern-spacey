@@ -32,6 +32,8 @@ export default class Login extends Component {
             })
         }
 
+        
+
         async onSubmit(e) {
             e.preventDefault();
 
@@ -153,6 +155,11 @@ export default class Login extends Component {
                                           </div>
                                 
                                    </form>
+                                   <button onClick={
+                                    () => {
+                                      window.location = '/forget_password';
+                                    }
+                                   }>Forget Password</button>
                                 </div>
                                 
                                 <div class="col-lg-1">

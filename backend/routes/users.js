@@ -207,6 +207,30 @@ router.route('/get_user_name').post(async (req, res) => {
     })
 })
 
+
+//forget password
+router.route('/forget_password').post(async (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+  const encryptedPassword = cryptr.encrypt(password);
+  const allUsers=await User.find();
+  let check=false;
+  for(let i=0;i<allUsers.length;i++){
+    if(allUsers[i].email===email){
+      check=true;
+      allUsers[i].password=encryptedPassword;
+      allUsers[i].save();
+      break;
+    }
+  }
+  if(check===true){
+    res.send('ok');
+  }
+  else{
+    res.send('invalid');
+  }
+})
+
 router.route('/user_id').get((req, res) => {
   console.log("current_user_id "+current_user_id);
   res.send({user_id:current_user_id,user_image:current_user_image});

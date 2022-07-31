@@ -27,6 +27,8 @@ import PaymentFailure from "./components/Payment/paymentFailure";
 import RentingHome from "./components/Renting/rentingHome";
 import SelectedProperty from "./components/Renting/selectedProperty";
 import Notification from "./components/Renting/notification";
+import ForgetPassword from "./components/Authentication/forget_password";
+
 
 function App() {
   return (
@@ -44,6 +46,8 @@ function App() {
         <Route path="signupconf" element={<SignUpConfirmation />} />
         <Route path="homepage" element={<Homepage />} />
         <Route path="invalidAuth" element={<InvalidAuth />} />
+        <Route path="forget_password" element={<ForgetPassword />} />
+        
         
 
         {/* Hosting */}
