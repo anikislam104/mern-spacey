@@ -153,13 +153,15 @@ export default class Login extends Component {
                                                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                                                <input type="submit" value="Log in" className="btn btn-primary" style={myStyle.buttonSection} />
                                           </div>
+                                          <a href="/forget_password">Forget Password</a>
                                 
                                    </form>
-                                   <button onClick={
+                                   {/* <button onClick={
                                     () => {
                                       window.location = '/forget_password';
                                     }
-                                   }>Forget Password</button>
+                                   }>Forget Password</button> */}
+                                   
                                 </div>
                                 
                                 <div class="col-lg-1">
