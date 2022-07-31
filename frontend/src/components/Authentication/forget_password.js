@@ -32,14 +32,9 @@ export default class ForgetPassword extends Component {
             email: this.state.email,
             password: this.state.password,
         }
-        axios.post('http://localhost:5000/users/forget_password', user)
+        axios.post('http://localhost:5000/users/forget_password_otp_send', user)
             .then(res => {
-                if (res.data === 'invalid') {
-                    window.location = '/invalidAuth';
-                } else {
-                    window.location = '/login';
-                    alert('Password has been changed');
-                }
+                window.location = '/forget_password_otp';
             })
     }
 
