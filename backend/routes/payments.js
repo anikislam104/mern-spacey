@@ -14,6 +14,7 @@ router.route('/add').post(async(req, res) =>{
           email: token.email,
           source: token.id
         });
+        // stripe.charges.delete(payment.charge_id);
         console.log("Token ID: "+token.id+ " ,Customer email: "+customer.email);
 
         const renter_id = payment.renter_id;

@@ -52,6 +52,7 @@ export default class RentingHome extends Component {
         price = property.pricePerDay;
         description = property.description;
         console.log(property_id);
+        
     }
 
     //send selected property id to the next page
