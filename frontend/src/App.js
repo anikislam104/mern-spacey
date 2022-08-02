@@ -33,6 +33,7 @@ import ForgetPassword from "./components/Authentication/forget_password";
 import ForgetPasswordOTP from "./components/Authentication/forget_password_otp";
 
 
+
 function App() {
   return (
     <BrowserRouter>
@@ -68,7 +69,7 @@ function App() {
         <Route path="readBlogs" element={<ReadBlogs />} />
         <Route path="readBlogs/myBlogs" element={<MyBlogs />} />
         <Route path="readBlogs/allBlogs" element={<AllBlogs />} />
-        <Route path="readBlogs/showBlog" element={<ShowBlog />} />
+        <Route path="blog/showBlog" element={<ShowBlog />} />
         <Route path="logout" element={<Logout />} />
 
 

@@ -8,6 +8,8 @@ const blogSchema = new Schema({
   title: { type: String, required: true },
   time_created: { type: Date, required: true },
   like_count: { type: Number, required: true },
+  dislike_count: { type: Number },
+  comments: { type: Array },
   image: { type: String, required: true },
 }, {
   timestamps: true,

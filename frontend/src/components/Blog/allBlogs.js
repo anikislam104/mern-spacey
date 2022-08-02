@@ -1,4 +1,5 @@
 // import axios from 'axios';
+import axios from 'axios';
 import React, { Component } from 'react';
 import NavbarHomepage from '../navbar_homepage';
 // import { Link } from 'react-router-dom';
@@ -9,6 +10,7 @@ export default class AllBlogs extends Component {
     constructor(props) {
         super(props);
         this.getAllBlogs = this.getAllBlogs.bind(this);
+        this.sendSelectedBlog = this.sendSelectedBlog.bind(this);
         // this.sendContent = this.sendContent.bind(this);
         this.state = {
             blogs: [],
@@ -30,66 +32,47 @@ export default class AllBlogs extends Component {
     //     axios.post('http://localhost:5000/blogs/showBlog',id)
     //     .then(res => console.log(res.data));
     // }
+    sendSelectedBlog(blog_id) {
+        const id={
+            blog_id:blog_id,
+        }
 
+        axios.post('http://localhost:5000/blogs/showBlog',id)
+            .then(res => 
+                {
+                    console.log(res.data);
+                    window.location.href = '/blog/showBlog';
+                    // this.props.history.push('/blog/'+res.data._id);
+                });
+    }
     GetRandomNumber (min_num, max_num){
         return Math.floor(Math.random()* (max_num - min_num) + min_num);
     }
 
     getAllBlogs(){
-        const myStyle={
-            itemSection:{
-                fontWeight: "bold",
-            },
-            buttonSection1:{
-                width:"400px",
-                height:"250px",
-                fontSize: "20px",
-                textAlign: "center",
-                borderRadius: "10px",
-                backgroundColor: "#008080",
-                color: "white",
-            },
-            buttonSection2:{
-                width:"400px",
-                height:"250px",
-                fontSize: "20px",
-                textAlign: "center",
-                borderRadius: "10px",
-                backgroundColor: "Green",
-                color: "white",
-            },
-            buttonSection3:{
-                width:"400px",
-                height:"250px",
-                fontSize: "20px",
-                textAlign: "center",
-                borderRadius: "10px",
-                backgroundColor: "#004EFF",
-                color: "white",
-            },
-        }
+        return this.state.blogs.map((blog) => {
+            return(
+                <div className="col-md-4">
+                    <div className="card mb-4 box-shadow">
+                        <div className="card-body">
+                        <p className="card-text">{blog.title}</p>
+                            {/* <p className="card-text">{property.location}</p> */}
+                            <div className="d-flex justify-content-between align-items-center">
+                                <div className="btn-group">
+                                    <button type="button" className="btn btn-sm btn-outline-secondary" onClick={
+                                        () => {
+                                            this.sendSelectedBlog(blog._id);
+                                        }
+                                    }>View</button>
 
-        var separateElements = [];
-        var multiElements = this.state.blogs;
-        var j=0;
-        for(var i = 0; i < multiElements.length; i+=3) {
-           var oneRow = [];
-
-           if(this.GetRandomNumber(1,3)===1 && j!==1) { oneRow.push(multiElements.slice(i, i+3).map(item => {
-           return <div style={{display: "inline-block"}}>&emsp;<button style={myStyle.buttonSection1}><label style={myStyle.itemSection}>{item.title}</label> <br/>{item.content}</button></div>
-           })); j=1; }
-
-           else if(this.GetRandomNumber(1,3)===2 && j!==2) { oneRow.push(multiElements.slice(i, i+3).map(item => {
-            return <div style={{display: "inline-block"}}>&emsp;<button style={myStyle.buttonSection2}><label style={myStyle.itemSection}>{item.title}</label> <br/>{item.content}</button></div>
-           }));j=2; }
-
-            else{ oneRow.push(multiElements.slice(i, i+3).map(item => {
-                return <div style={{display: "inline-block"}}>&emsp;<button style={myStyle.buttonSection3}><label style={myStyle.itemSection}>{item.title}</label> <br/>{item.content}</button></div>
-            }));j=3;}
-  
-           separateElements.push(oneRow.map(itm => {return <div><br/><div>{itm}</div><br/><br/></div>}))
-        }
-        return separateElements;
+                                </div>
+                                {/* <small className="text-muted">{property.size} square ft</small> */}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        })
     }
 
     render() {
