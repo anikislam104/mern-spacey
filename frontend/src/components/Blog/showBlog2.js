@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 // const blog_id=Request.QueryString["data"];
 var comments=[];
 var like=0;
 var dislike=0;
-export default class ShowBlog extends Component {
+export default class ShowBlog2 extends Component {
     constructor(props) {
         super(props);
         this.showComments = this.showComments.bind(this);
@@ -118,7 +118,7 @@ export default class ShowBlog extends Component {
 <br />
 <br />
                 <input type='text' onChange={this.comment} value={this.state.Comment} ></input>
-                <Link to='../blog/showBlog2'><button type='submit' onClick={
+                <button  type='submit'  onClick={
                     (e) => {
                         const comment = {
                             blog_id: blog._id,
@@ -146,7 +146,7 @@ export default class ShowBlog extends Component {
                         
                         
                     }
-                } >Comment</button></Link>
+                } >Comment</button>
                 
                {blog.comments.map((comment) => {
                     return(

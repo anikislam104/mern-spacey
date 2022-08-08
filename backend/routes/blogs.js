@@ -45,6 +45,7 @@ router.route('/writeBlog').post(upload.single("image"),(req, res) => {
         dislike_count: dislike_count,
         image: image,
     });
+    console.log(blog);
     blog.save();
     res.send('ok');
 })
@@ -77,6 +78,7 @@ router.route('/my_blogs').post((req, res) => {
                     my_blogs.push(blogs[i]);
                 }
             }
+            
             blogs = blogs.filter(blog => blog.user_id == current_user_id);
             res.json(blogs);
         })
@@ -100,7 +102,7 @@ router.route('/get_selected_blog').get((req, res) => {
     Blog.find()
         .then(blog => {
             blog=blog.filter(blog => blog._id == selected_blog_id);
-            console.log(blog[0].content);
+            // console.log(blog[0].content);
             res.json(blog);
         })
 })
@@ -146,7 +148,15 @@ router.route('/comment').post((req, res) =>{
                 comment: comment,
             });
             blog.save();
-            res.json(blog);
+            res.json(blog.comments);
+        }).catch(err => res.status(400).json('Error: ' + err));
+})
+
+router.route('/get_comments/:blog_id').post((req, res) => {
+    const blog_id = req.params.blog_id;
+    Blog.findById(blog_id)
+        .then(blog => {
+            res.json(blog.comments);
         }).catch(err => res.status(400).json('Error: ' + err));
 })
 

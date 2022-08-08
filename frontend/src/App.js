@@ -31,6 +31,7 @@ import Notification from "./components/Renting/notification";
 import AddInsurance from "./components/Insurance/addInsurance";
 import ForgetPassword from "./components/Authentication/forget_password";
 import ForgetPasswordOTP from "./components/Authentication/forget_password_otp";
+import ShowBlog2 from "./components/Blog/showBlog2";
 
 
 
@@ -70,6 +71,7 @@ function App() {
         <Route path="readBlogs/myBlogs" element={<MyBlogs />} />
         <Route path="readBlogs/allBlogs" element={<AllBlogs />} />
         <Route path="blog/showBlog" element={<ShowBlog />} />
+        <Route path="blog/showBlog2" element={<ShowBlog2 />} />
         <Route path="logout" element={<Logout />} />
 
 

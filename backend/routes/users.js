@@ -275,5 +275,41 @@ router.route('/user_id').get((req, res) => {
     res.send('logout');
   });
 
+  router.route('/session_signup').post((req, res) => {
+    const name = req.body.name;
+    const email = req.body.email;
+    const password = req.body.password;
+    const nidNumber = req.body.nidNumber;
+    const phoneNumber = req.body.phoneNumber;
+    const dateOfBirth = req.body.dateOfBirth;
+    const image = req.body.image;
+
+    const newUser = new User({
+      firstName: name,
+      email: email,
+      password : password,
+      nidNumber: nidNumber,
+      phoneNumber : phoneNumber,
+      dateOfBirth : dateOfBirth,
+      image : image,
+    });
+
+    newUser.save();
+    
+    //save in local storage
+
+    localStorage.setItem('email', email);
+    localStorage.setItem('password', password);
+    localStorage.setItem('nidNumber', nidNumber);
+    localStorage.setItem('phoneNumber', phoneNumber);
+    localStorage.setItem('dateOfBirth', dateOfBirth);
+    localStorage.setItem('image', image);
+    localStorage.setItem('name', name);
+    localStorage.setItem('user_id', newUser._id);
+    localStorage.setItem('user_image', newUser.image);
+
+    
+  })
+
   module.exports = router;
   module.exports.current_user_id = current_user_id;
