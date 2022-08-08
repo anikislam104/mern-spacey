@@ -1,5 +1,6 @@
 import axios from "axios";
-import React,{ Component } from "react";
+import React,{ Component } from "react"; 
+
 
 
 export default class Notification extends Component {
@@ -14,12 +15,13 @@ export default class Notification extends Component {
     }
 
     componentDidMount() {
+        // window.location.reload();
         fetch('http://localhost:5000/users/user_id')
             .then((res) => res.json())
             .then((json) => {
                 console.log(JSON.stringify(json));
                 this.setState({
-                    host_id: json.user_id,
+                    host_id: localStorage.getItem('user_id'),
                 });
                 const host_id ={
                     host_id: this.state.host_id,

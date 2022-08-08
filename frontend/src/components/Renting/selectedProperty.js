@@ -64,7 +64,7 @@ export default class SelectedProperty extends Component {
             .then((res) => res.json())
             .then((json) => {
                 console.log(JSON.stringify(json));
-                renter_id = json.user_id;
+                renter_id = localStorage.getItem('user_id');
                 const rent_request = {
                     host_id: host_id,
                     renter_id: renter_id,

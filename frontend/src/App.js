@@ -31,6 +31,7 @@ import Notification from "./components/Renting/notification";
 import AddInsurance from "./components/Insurance/addInsurance";
 import ForgetPassword from "./components/Authentication/forget_password";
 import ForgetPasswordOTP from "./components/Authentication/forget_password_otp";
+import AdminHomepage from "./components/adminHomepage";
 
 
 
@@ -53,6 +54,7 @@ function App() {
         <Route path="invalidAuth" element={<InvalidAuth />} />
         <Route path="forget_password" element={<ForgetPassword />} />
         <Route path="forget_password_otp" element={<ForgetPasswordOTP />} />
+        <Route path="adminHomepage" element={<AdminHomepage />} />
         
         
 

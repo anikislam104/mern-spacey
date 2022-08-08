@@ -50,7 +50,13 @@ export default class LogInOTP extends Component {
                   localStorage.setItem('email', res.data.email);
                   localStorage.setItem('user_type', res.data.user_type);
                   localStorage.setItem('isLoggedIn', true);
-                  window.location = '/homepage';
+
+                  if(res.data.user_type === 'Admin'){
+                    window.location = '/adminHomepage';
+                  }
+                  else{
+                    window.location = '/homepage';
+                  }
                 }
               });
         
