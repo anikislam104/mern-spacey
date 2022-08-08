@@ -9,16 +9,23 @@ export default class Login extends Component {
         
         this.onChangeEmail = this.onChangeEmail.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
+        this.onChangeUserType = this.onChangeUserType.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     
         this.state = {
           
           email: '',
           password: '',
+          user_type: '',
           
         }
       }
-
+      onChangeUserType(e) {
+        this.setState({
+            user_type: e.target.value
+            })
+            console.log(e.target.value);
+        }
 
       onChangeEmail(e) {
         this.setState({
@@ -42,6 +49,7 @@ export default class Login extends Component {
               
               email: this.state.email,
               password: this.state.password,
+              user_type: this.state.user_type,
               
             }
         
@@ -141,6 +149,15 @@ export default class Login extends Component {
                                           <div class="form-group sm-3">
                                               <input id="inputPassword" type="password" placeholder="Password" required="" value={this.state.password} onChange={this.onChangePassword} class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" />
                                           </div>
+                                          <div class="form-group sm-2">
+                                            <label>User type: </label>
+                                            <select id="inputUserType" class="form-control rounded-pill border-0 shadow-sm px-4"   onChange={this.onChangeUserType} placeholder="user type">
+                                                <option value="">Select</option>
+                                                <option value="User" >User</option>
+                                                <option value="Admin" >Admin</option>
+                                                
+                                            </select>
+                                        </div>
                                           <br/>
                                           <br/>
                                           <div class="custom-control custom-checkbox mb-3">

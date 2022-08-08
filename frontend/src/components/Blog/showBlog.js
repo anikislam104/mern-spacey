@@ -31,7 +31,7 @@ export default class ShowBlog extends Component {
                     .then((json) => {
                         //console.log(JSON.stringify(json));
                         this.setState({
-                            user_id: json.user_id,
+                            user_id: localStorage.getItem('user_id'),
                         });
                     })
             })
@@ -86,6 +86,7 @@ export default class ShowBlog extends Component {
                         
                         //disable button after upvote
                         like=like+1;
+                        window.location.reload();
                         e.currentTarget.disabled = true;
                     }
                 } >Upvote</button>{blog.like_count}
@@ -106,7 +107,7 @@ export default class ShowBlog extends Component {
                             }
                         )
                         dislike=dislike+1;
-                        this.disabled=true;
+                        window.location.reload();
                         e.currentTarget.disabled = true;
                         
                         
@@ -118,7 +119,7 @@ export default class ShowBlog extends Component {
 <br />
 <br />
                 <input type='text' onChange={this.comment} value={this.state.Comment} ></input>
-                <Link to='../blog/showBlog2'><button type='submit' onClick={
+                <Link to='../blog/showBlog'><button type='submit' onClick={
                     (e) => {
                         const comment = {
                             blog_id: blog._id,
@@ -141,6 +142,7 @@ export default class ShowBlog extends Component {
                                 console.log(err);
                             }
                         )
+                        window.location.reload();
                         e.currentTarget.disabled = true;
                         
                         

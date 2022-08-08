@@ -20,6 +20,7 @@ var current_password = '';
 var current_nid = 0;
 var current_phone = 0;
 var current_date_of_birth = new Date();
+var current_user_type = '';
 var fpEmail='';
 var fpPassword='';
 
@@ -67,6 +68,7 @@ router.route('/add').post(upload.single("image"),async (req, res) => {
   const nidNumber = Number(req.body.nidNumber);
   const phoneNumber = Number(req.body.phoneNumber);
   const dateOfBirth = Date.parse(req.body.dateOfBirth);
+  const user_type = req.body.user_type;
   const image = req.file.originalname;
   // const image = Buffer.from(req.body.image);
   const encryptedPassword = cryptr.encrypt(password);
@@ -80,6 +82,7 @@ router.route('/add').post(upload.single("image"),async (req, res) => {
   current_phone = phoneNumber;
   current_date_of_birth = dateOfBirth;
   current_user_image = image;
+  current_user_type = user_type;
 
   const allUsers=await User.find();
   let check=false;
@@ -119,6 +122,7 @@ router.route('/add').post(upload.single("image"),async (req, res) => {
             lastName: current_lastname,
             email: current_email,
             password : current_password,
+            user_type: current_user_type,
             nidNumber: current_nid,
             phoneNumber : current_phone,
             dateOfBirth : current_date_of_birth,
@@ -127,10 +131,12 @@ router.route('/add').post(upload.single("image"),async (req, res) => {
 
           
           
-            newUser.save()
-            .then(() => res.send('signup'))
-            .catch(err => res.status(400).json('Error: ' + err));
-            return;
+          
+            newUser.save();
+            //make json of new user
+            res.send(newUser); 
+
+            
           
           
         }
@@ -147,13 +153,15 @@ router.route('/add').post(upload.single("image"),async (req, res) => {
 router.route('/login').post(async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
+  const user_type = req.body.user_type;
   var userIndex=-1;
   const allUsers=await User.find();
   let check=false;
+  console.log("user_type: "+user_type);
   // let hashed_password = await bcrypt.hash(password, 10);
 
   for(let i=0;i<allUsers.length;i++){
-    if(allUsers[i].email===email && cryptr.decrypt(allUsers[i].password)===password && current_user_id==0){
+    if(allUsers[i].email===email && cryptr.decrypt(allUsers[i].password)===password && allUsers[i].user_type===user_type){
       check=true;
       userIndex=i;
       console.log("user index "+userIndex);
@@ -181,7 +189,8 @@ router.route('/login').post(async (req, res) => {
           console.log("OTP verified");
           // current_user_id=allUsers[userIndex]._id;
           // console.log("current_user_id login"+current_user_id);
-          res.send('login');
+          const user=await User.findById(current_user_id);
+          res.send(user);
         }
         else{
           console.log("OTP not verified");

@@ -28,7 +28,7 @@ export default class MyBlogs extends Component {
                 //console.log(JSON.stringify(json));
                 console.log(json.user_id);
                 this.setState({
-                    user_id: json.user_id,
+                    user_id: localStorage.getItem('user_id'),
                 });
                 console.log(this.state.user_id);
                 const id={

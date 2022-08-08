@@ -20,6 +20,7 @@ export default class CreateUser extends Component {
         this.onChangePhoneNumber = this.onChangePhoneNumber.bind(this);
         this.onChangeDate = this.onChangeDate.bind(this);
         this.onChangeImage = this.onChangeImage.bind(this);
+        this.onChangeUserType = this.onChangeUserType.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     
         this.state = {
@@ -31,10 +32,18 @@ export default class CreateUser extends Component {
           phoneNumber: '',
           dateOfBirth: new Date(),
           users: [],
+          user_type: '',
           image: null,
         }
       }
 
+      onChangeUserType(e) {
+        this.setState({
+          user_type: e.target.value
+        })
+        console.log(e.target.value);
+      }
+      
       onChangeFirstName(e) {
         this.setState({
           firstName: e.target.value
@@ -63,6 +72,7 @@ export default class CreateUser extends Component {
         this.setState({
             nidNumber: e.target.value
             })
+          console.log(e.target.value);
         }
 
         onChangePhoneNumber(e) {
@@ -103,6 +113,7 @@ export default class CreateUser extends Component {
           formData.append('lastName', this.state.lastName);
           formData.append('email', this.state.email);
           formData.append('password', this.state.password);
+          formData.append('user_type', this.state.user_type);
           formData.append('nidNumber', this.state.nidNumber);
           formData.append('phoneNumber', this.state.phoneNumber);
           formData.append('dateOfBirth', this.state.dateOfBirth);
@@ -182,6 +193,15 @@ export default class CreateUser extends Component {
                                     <input id="inputPassword" type="password" required="" value={this.state.password} onChange={this.onChangePassword} class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" />
                                 </div>
                                 <br/>
+                                {/* //user type */}
+                                <div class="form-group sm-2">
+                                    <label>User type: </label>
+                                    <select id="inputUserType" class="form-control rounded-pill border-0 shadow-sm px-4"  onChange={this.onChangeUserType} >
+                                      <option value="">Select</option>
+                                        <option value="Admin" >Admin</option>
+                                        <option value="User" >User</option>
+                                    </select>
+                                </div>
                                 <div class="form-group sm-2">
                                     <label>NID Number: </label>
                                     <input id="inputNID" type="nid" required="" autofocus="" value={this.state.nidNumber} onChange={this.onChangeNIDNumber} class="form-control rounded-pill border-0 shadow-sm px-4" />

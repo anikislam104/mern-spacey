@@ -29,8 +29,9 @@ export default class WriteBlog extends Component {
             .then((res) => res.json())
             .then((json) => {
                 this.setState({
-                    user_id: json.user_id,
+                    user_id: localStorage.getItem('user_id'),
                 });
+                console.log(this.state.user_id);
             })
     }
 
@@ -38,18 +39,21 @@ export default class WriteBlog extends Component {
         this.setState({
             content: e.target.value,
         });
+        console.log(e.target.value);
     }
 
     onChangeTitle(e) {
         this.setState({
             title: e.target.value,
         });
+        console.log(e.target.value);
     }
 
     onChangeImage(e) {
         this.setState({
             image: e.target.files[0],
         });
+        
     }
 
     onSubmit(e) {

@@ -44,6 +44,12 @@ export default class LogInOTP extends Component {
                   window.location = '/invalidAuth';
                 }
                 else{
+                  localStorage.setItem('user_id', res.data._id);
+                  localStorage.setItem('firstName', res.data.firstName);
+                  localStorage.setItem('lastName', res.data.lastName);
+                  localStorage.setItem('email', res.data.email);
+                  localStorage.setItem('user_type', res.data.user_type);
+                  localStorage.setItem('isLoggedIn', true);
                   window.location = '/homepage';
                 }
               });
