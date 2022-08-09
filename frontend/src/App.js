@@ -72,7 +72,7 @@ function App() {
         <Route path="payment/cash_payment" element={<CashPayment />} />
         <Route path="payment/payment_success" element={<PaymentSuccess />} />
         <Route path="payment/payment_failure" element={<PaymentFailure />} />
-
+        
       </Routes>
 
       </div>
