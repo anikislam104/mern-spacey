@@ -4,6 +4,7 @@ let Blog = require('../models/blog');
 const multer = require('multer');
 // const { v4: uuidv4 } = require('uuid');
 let path = require('path');
+let selected_blog_id = "";  
 // const { current_user_id } = require('./users');
 
 
@@ -26,6 +27,7 @@ router.route('/writeBlog').post(upload.single("image"),(req, res) => {
     const title = req.body.title;
     const time_created = req.body.time_created;
     const like_count = req.body.like_count;
+    const dislike_count=0;
     const image = req.file.originalname;
 
     
@@ -40,8 +42,10 @@ router.route('/writeBlog').post(upload.single("image"),(req, res) => {
         title: title,
         time_created: time_created,
         like_count: like_count,
+        dislike_count: dislike_count,
         image: image,
     });
+    console.log(blog);
     blog.save();
     res.send('ok');
 })
@@ -74,6 +78,7 @@ router.route('/my_blogs').post((req, res) => {
                     my_blogs.push(blogs[i]);
                 }
             }
+            
             blogs = blogs.filter(blog => blog.user_id == current_user_id);
             res.json(blogs);
         })
@@ -82,11 +87,77 @@ router.route('/my_blogs').post((req, res) => {
 router.route('/showBlog').post((req, res) => {
     console.log("showBlog");
     const blog_id = req.body.blog_id;
+    selected_blog_id=blog_id;
     console.log("blog_id: " + blog_id);
     Blog.findById(blog_id)
         .then(blog => {
             console.log(blog.content);
-            res.json(blog.content);
+            res.json(blog);
         })
 })
+
+
+router.route('/get_selected_blog').get((req, res) => {
+    console.log("get_selected_blog");
+    Blog.find()
+        .then(blog => {
+            blog=blog.filter(blog => blog._id == selected_blog_id);
+            // console.log(blog[0].content);
+            res.json(blog);
+        })
+})
+
+
+router.route('/upvote').post((req, res) => {
+    console.log("upvote");
+    const blog_id = req.body.blog_id;
+    const user_id = req.body.user_id;
+    console.log("blog_id: " + blog_id+" user_id: " + user_id);
+    Blog.findById(blog_id)
+        .then(blog => {
+            console.log(blog.like_count);
+            blog.like_count = blog.like_count + 1;
+            blog.save();
+            res.json(blog);
+        }).catch(err => res.status(400).json('Error: ' + err));
+})
+
+
+router.route('/downvote').post((req, res) => {
+    console.log("downvote");
+    const blog_id = req.body.blog_id;
+    const user_id = req.body.user_id;
+    console.log("blog_id: " + blog_id+" user_id: " + user_id);
+    Blog.findById(blog_id)
+        .then(blog => {
+            console.log(blog.like_count);
+            blog.dislike_count = blog.dislike_count + 1;
+            blog.save();
+            res.json(blog);
+        }).catch(err => res.status(400).json('Error: ' + err));
+})
+router.route('/comment').post((req, res) =>{
+    const blog_id = req.body.blog_id;
+    const user_id = req.body.user_id;
+    const comment = req.body.comment;
+
+    Blog.findById(blog_id)
+        .then(blog => {
+            blog.comments.push({
+                user_id: user_id,
+                comment: comment,
+            });
+            blog.save();
+            res.json(blog.comments);
+        }).catch(err => res.status(400).json('Error: ' + err));
+})
+
+router.route('/get_comments/:blog_id').post((req, res) => {
+    const blog_id = req.params.blog_id;
+    Blog.findById(blog_id)
+        .then(blog => {
+            res.json(blog.comments);
+        }).catch(err => res.status(400).json('Error: ' + err));
+})
+
 module.exports = router;

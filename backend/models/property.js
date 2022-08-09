@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const propertySchema = new Schema({
   hostId: { type: String, required: true },
-  insuranceId: {type: Number, required: true },
+  title: {type: String, required: true},
   location: { type: String, required: true },
   description: { type: String, required: true },
   size: { type: Number, required: true },

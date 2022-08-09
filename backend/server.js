@@ -21,6 +21,7 @@ connection.once('open', () => {
 const usersRouter = require('./routes/users');
 const blogRouter = require('./routes/blogs');
 const propertyRouter = require('./routes/property')
+const insuranceRouter = require('./routes/insurance')
 const chatRouter = require('./routes/chat');
 const paymentRouter=require('./routes/payments');
 const rentingRouter=require('./routes/renting');
@@ -31,6 +32,7 @@ app.use('/blogs', blogRouter);
 app.use('/chat', chatRouter);
 app.use('/payments',paymentRouter);
 app.use('/renting',rentingRouter);
+app.use('/insurance',insuranceRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);

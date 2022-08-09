@@ -16,7 +16,7 @@ router.route('/').get((req, res) => {
 
 router.route('/add').post(async (req, res) => {
   const hostId = req.body.host_id;
-  const insuranceId = 1;
+  const title = req.body.title;
   const location = req.body.location;
   const description = req.body.description;
   const size = req.body.size;
@@ -24,16 +24,16 @@ router.route('/add').post(async (req, res) => {
   const pricePerDay = req.body.pricePerDay;
   const rooms = req.body.rooms;
   const facilities = req.body.facilities;
-  const allProperties =await Property.find();
+  const allProperties = await Property.find();
 
 
   console.log(rooms);
 
 
-  
+
   const newProperty = new Property({
     hostId,
-    insuranceId,
+    title,
     location,
     description,
     size,
@@ -46,15 +46,15 @@ router.route('/add').post(async (req, res) => {
   await newProperty.save();
   //.then(() => res.send('property added'))
   //.catch(err => res.status(400).json('Error: ' + err));
-  
-  for(let i=0;i<allProperties.length;i++){
+
+  for (let i = 0; i < allProperties.length; i++) {
     current_property_id = allProperties[i]._id;
   }
-  
+
   console.log(current_property_id);
 
 
-  for(let i = 0; i < rooms.length; i++) {
+  for (let i = 0; i < rooms.length; i++) {
     const propertyId = current_property_id;
     const roomType = rooms[i][0];
     const roomNo = rooms[i][1];
@@ -64,13 +64,13 @@ router.route('/add').post(async (req, res) => {
       roomNo,
     });
 
-    
+
     await newRoom.save();
     //.then(() => res.send('room added'))
     //.catch(err => res.status(400).json('Error: ' + err));
   }
 
-  for(let i = 0; i < facilities.length; i++) {
+  for (let i = 0; i < facilities.length; i++) {
     const propertyId = current_property_id;
     const facilityType = facilities[i];
     const newFacility = new Facility({
@@ -96,7 +96,7 @@ router.route('/all_properties').get((req, res) => {
       res.json(properties);
     }
     )
-    })
+})
 
 
 module.exports = router;

@@ -39,7 +39,8 @@ export default class NavbarHomepage extends Component {
          <div className="collpase navbar-collapse">
          <ul className="navbar-nav mr-auto">
           <li className="navbar-item">
-          <Link to={'/rent_request_notifications'} className="nav-link"><h5>Notifications</h5></Link>
+            
+          <Link to={'/rent_request_notifications'} className="nav-link"><h5>Rent Requests</h5></Link>
           </li>
           &nbsp; &nbsp; 
           <li className="navbar-item">

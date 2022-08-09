@@ -6,7 +6,7 @@ export default class SignUpConfirmation extends Component {
 
     onSubmit(e) {
         e.preventDefault();
-        window.location = '/login';
+        window.location = '/homepage';
     }
 
     render() {

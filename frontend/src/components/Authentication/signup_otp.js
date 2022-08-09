@@ -40,11 +40,20 @@ export default class SignUpOTP extends Component {
             console.log(otp);
         
             axios.post('http://localhost:5000/users/signup_otp', otp)
-              .then(res => {console.log(res.data);
+              .then(res => {
+                console.log(res.data);
                 if(res.data === 'invalid'){
                   window.location = '/invalidAuth';
                 }
                 else{
+                  localStorage.setItem('user_id', res.data._id);
+                  localStorage.setItem('firstName', res.data.firstName);
+                  localStorage.setItem('lastName', res.data.lastName);
+                  localStorage.setItem('email', res.data.email);
+                  localStorage.setItem('phoneNumber', res.data.phoneNumber);
+                  localStorage.setItem('userType', res.data.user_type);
+                  localStorage.setItem('isLoggedIn', true);
+                  
                   window.location = '/signupconf';
                 }
               });

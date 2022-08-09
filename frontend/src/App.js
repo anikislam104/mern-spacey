@@ -13,6 +13,7 @@ import OpeningPage from "./components/Authentication/opening_page";
 import InvalidAuth from "./components/Authentication/invalidAuth";
 import BlogHome from "./components/Blog/blogHome";
 import AddProperty from "./components/Hosting/addProperty";
+import AddBusinessStorage  from "./components/Hosting/addBusinessStorage";
 import HostingOpeningPage from "./components/Hosting/hostingOpeningPage";
 import WriteBlog from "./components/Blog/writeBlog";
 import ReadBlogs from "./components/Blog/readBlogs";
@@ -27,6 +28,13 @@ import PaymentFailure from "./components/Payment/paymentFailure";
 import RentingHome from "./components/Renting/rentingHome";
 import SelectedProperty from "./components/Renting/selectedProperty";
 import Notification from "./components/Renting/notification";
+import AddInsurance from "./components/Insurance/addInsurance";
+import ForgetPassword from "./components/Authentication/forget_password";
+import ForgetPasswordOTP from "./components/Authentication/forget_password_otp";
+import AdminHomepage from "./components/adminHomepage";
+
+
+
 
 function App() {
   return (
@@ -44,12 +52,19 @@ function App() {
         <Route path="signupconf" element={<SignUpConfirmation />} />
         <Route path="homepage" element={<Homepage />} />
         <Route path="invalidAuth" element={<InvalidAuth />} />
+        <Route path="forget_password" element={<ForgetPassword />} />
+        <Route path="forget_password_otp" element={<ForgetPasswordOTP />} />
+        <Route path="adminHomepage" element={<AdminHomepage />} />
+        
         
 
         {/* Hosting */}
         <Route path="hosting" element={<HostingOpeningPage />}/>
         <Route path="add-property" element={<AddProperty />}/>
+        <Route path="add-business-storage" element={<AddBusinessStorage />}/>
 
+        {/* Insurance */}
+        <Route path="add-insurance" element={<AddInsurance />}/>
 
         {/* Blog */}
         <Route path="blog" element={<BlogHome />} />
@@ -57,7 +72,7 @@ function App() {
         <Route path="readBlogs" element={<ReadBlogs />} />
         <Route path="readBlogs/myBlogs" element={<MyBlogs />} />
         <Route path="readBlogs/allBlogs" element={<AllBlogs />} />
-        <Route path="readBlogs/showBlog" element={<ShowBlog />} />
+        <Route path="blog/showBlog" element={<ShowBlog />} />
         <Route path="logout" element={<Logout />} />
 
 

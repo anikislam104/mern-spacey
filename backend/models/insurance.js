@@ -3,8 +3,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const insuranceSchema = new Schema({
-  insuranceId: { type: Number, required: true },
-  policyId: { type: Number, required: true },
+  adderId: { type: String, required: true },
+  policy: { type: String, required: true },
+  status: { type: String, required: true },
 }, {
   timestamps: true,
 });

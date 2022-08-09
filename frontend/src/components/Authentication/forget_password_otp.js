@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import Navbar from "./navbar"
-export default class LogInOTP extends Component {
+export default class ForgetPasswordOTP extends Component {
     
     constructor(props) {
         super(props);
@@ -38,25 +38,14 @@ export default class LogInOTP extends Component {
         
             console.log(otp);
         
-            axios.post('http://localhost:5000/users/login_otp', otp)
+            axios.post('http://localhost:5000/users/forget_password', otp)
               .then(res => {console.log(res.data);
                 if(res.data === 'invalid'){
                   window.location = '/invalidAuth';
                 }
                 else{
-                  localStorage.setItem('user_id', res.data._id);
-                  localStorage.setItem('firstName', res.data.firstName);
-                  localStorage.setItem('lastName', res.data.lastName);
-                  localStorage.setItem('email', res.data.email);
-                  localStorage.setItem('user_type', res.data.user_type);
-                  localStorage.setItem('isLoggedIn', true);
-
-                  if(res.data.user_type === 'Admin'){
-                    window.location = '/adminHomepage';
-                  }
-                  else{
-                    window.location = '/homepage';
-                  }
+                  window.location = '/login';
+                  alert("Password changed successfully");
                 }
               });
         

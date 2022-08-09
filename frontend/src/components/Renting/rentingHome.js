@@ -52,6 +52,7 @@ export default class RentingHome extends Component {
         price = property.pricePerDay;
         description = property.description;
         console.log(property_id);
+        
     }
 
     //send selected property id to the next page
@@ -83,6 +84,7 @@ export default class RentingHome extends Component {
                 <div className="col-md-4">
                     <div className="card mb-4 box-shadow">
                         <div className="card-body">
+                        <p className="card-text">{property.title}</p>
                             <p className="card-text">{property.location}</p>
                             <div className="d-flex justify-content-between align-items-center">
                                 <div className="btn-group">

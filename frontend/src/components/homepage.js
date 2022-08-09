@@ -23,7 +23,7 @@ export default class Homepage extends Component {
             .then((res) => res.json())
             .then((json) => {
                 this.setState({
-                    user_id: json.user_id,
+                    user_id: localStorage.getItem('user_id'),
                     image: json.user_image,
                     path: './Images/' + json.user_image,
                 });
