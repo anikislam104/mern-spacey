@@ -1,6 +1,7 @@
 const router = require('express').Router();
 let User = require('../models/user');
 let Blog = require('../models/blog');
+let BlogReaction = require('../models/blogReaction');
 const multer = require('multer');
 // const { v4: uuidv4 } = require('uuid');
 let path = require('path');
@@ -87,6 +88,28 @@ router.route('/my_blogs').post((req, res) => {
 router.route('/showBlog').post((req, res) => {
     console.log("showBlog");
     const blog_id = req.body.blog_id;
+    const user_id = req.body.user_id;
+    
+    //check if already blogReaction exists
+    BlogReaction.findOne({blog_id: blog_id, user_id: user_id})
+        .then(blogReaction => {
+            if(blogReaction){
+                console.log("blogReaction exists");
+            }
+            else{
+                console.log("blogReaction does not exist");
+                const blogReaction = new BlogReaction({
+                    blog_id: blog_id,
+                    user_id: user_id,
+                    hasUserLiked: false,
+                    hasUserDisliked: false,
+                });
+                blogReaction.save();
+            }
+        });
+
+
+
     selected_blog_id=blog_id;
     console.log("blog_id: " + blog_id);
     Blog.findById(blog_id)
@@ -113,13 +136,47 @@ router.route('/upvote').post((req, res) => {
     const blog_id = req.body.blog_id;
     const user_id = req.body.user_id;
     console.log("blog_id: " + blog_id+" user_id: " + user_id);
-    Blog.findById(blog_id)
-        .then(blog => {
-            console.log(blog.like_count);
-            blog.like_count = blog.like_count + 1;
-            blog.save();
-            res.json(blog);
-        }).catch(err => res.status(400).json('Error: ' + err));
+    BlogReaction.findOne({blog_id: blog_id, user_id: user_id})
+        .then(blogReaction => {
+            if(blogReaction.hasUserLiked === true && blogReaction.hasUserDisliked === false){
+                console.log("user has already liked this blog");
+                blogReaction.hasUserLiked = false;
+                blogReaction.save();
+                Blog.findById(blog_id)
+                    .then(blog => {
+                        blog.like_count--;
+                        blog.save();
+                    })
+                res.json("preliked");
+            }
+            else if(blogReaction.hasUserLiked === false && blogReaction.hasUserDisliked === true){
+                console.log("user has already disliked this blog");
+                blogReaction.hasUserLiked = true;
+                blogReaction.hasUserDisliked = false;
+                blogReaction.save();
+                Blog.findById(blog_id)
+                    .then(blog => {
+                        blog.like_count++;
+                        blog.dislike_count--;
+                        blog.save();
+                    }).catch(err => res.status(400).json('Error: ' + err));
+                res.json("predisliked");
+            }
+            else{
+                console.log("user has not liked this blog");
+                blogReaction.hasUserLiked = true;
+                blogReaction.hasUserDisliked = false;
+                blogReaction.save();
+                Blog.findById(blog_id)
+                .then(blog => {
+                    console.log(blog.like_count);
+                    blog.like_count = blog.like_count + 1;
+                    blog.save();
+                    res.json('liked');
+                }).catch(err => res.status(400).json('Error: ' + err));
+                    }
+        });
+    
 })
 
 
@@ -128,13 +185,47 @@ router.route('/downvote').post((req, res) => {
     const blog_id = req.body.blog_id;
     const user_id = req.body.user_id;
     console.log("blog_id: " + blog_id+" user_id: " + user_id);
-    Blog.findById(blog_id)
-        .then(blog => {
-            console.log(blog.like_count);
-            blog.dislike_count = blog.dislike_count + 1;
-            blog.save();
-            res.json(blog);
-        }).catch(err => res.status(400).json('Error: ' + err));
+    BlogReaction.findOne({blog_id: blog_id, user_id: user_id})
+        .then(blogReaction => {
+            if(blogReaction.hasUserDisliked === true && blogReaction.hasUserLiked === false){
+                console.log("user has already disliked this blog");
+                blogReaction.hasUserDisliked = false;
+                blogReaction.save();
+                Blog.findById(blog_id)
+                    .then(blog => {
+                        blog.dislike_count--;
+                        blog.save();
+                    });
+                res.json("predisliked");
+            }
+            else if(blogReaction.hasUserDisliked === false && blogReaction.hasUserLiked === true){
+                console.log("user has already liked this blog");
+                blogReaction.hasUserDisliked = true;
+                blogReaction.hasUserLiked = false;
+                blogReaction.save();
+                Blog.findById(blog_id)
+                    .then(blog => {
+                        blog.like_count--;
+                        blog.dislike_count++;
+                        blog.save();
+                    });
+                res.json("preliked");
+            }
+            else{
+                console.log("user has not disliked this blog");
+                blogReaction.hasUserLiked = false;
+                blogReaction.hasUserDisliked = true;
+                blogReaction.save();
+                Blog.findById(blog_id)
+                .then(blog => {
+                    console.log(blog.like_count);
+                    blog.dislike_count = blog.dislike_count + 1;
+                    blog.save();
+                    res.json("disliked");
+                }).catch(err => res.status(400).json('Error: ' + err));
+                    }
+        });
+    
 })
 router.route('/comment').post((req, res) =>{
     const blog_id = req.body.blog_id;

@@ -35,6 +35,7 @@ export default class AllBlogs extends Component {
     sendSelectedBlog(blog_id) {
         const id={
             blog_id:blog_id,
+            user_id:localStorage.getItem('user_id'),
         }
 
         axios.post('http://localhost:5000/blogs/showBlog',id)
