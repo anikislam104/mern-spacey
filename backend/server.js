@@ -11,7 +11,6 @@ app.use(cors());
 app.use(express.json());
 
 const uri = process.env.ATLAS_URI;
-// console.log(uri);
 mongoose.connect(uri);
 const connection = mongoose.connection;
 connection.once('open', () => {
@@ -22,18 +21,16 @@ const usersRouter = require('./routes/users');
 const blogRouter = require('./routes/blogs');
 const propertyRouter = require('./routes/property')
 const insuranceRouter = require('./routes/insurance')
-const chatRouter = require('./routes/chat');
 const paymentRouter=require('./routes/payments');
 const rentingRouter=require('./routes/renting');
 
 app.use('/users', usersRouter);
 app.use('/property', propertyRouter);
 app.use('/blogs', blogRouter);
-app.use('/chat', chatRouter);
 app.use('/payments',paymentRouter);
 app.use('/renting',rentingRouter);
 app.use('/insurance',insuranceRouter);
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
 });

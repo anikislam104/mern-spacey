@@ -35,11 +35,11 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-router.route('/').get((req, res) => {
+/*router.route('/').get(async(req, res) => {
   User.find()
     .then(users => res.json(users))
     .catch(err => res.status(400).json('Error: ' + err));
-});
+});*/
 
 
 async function sendOTP(emailId) {
@@ -319,6 +319,22 @@ router.route('/user_id').get((req, res) => {
 
     
   })
+
+  
+router.route('/').get(async(req, res) => {
+
+  // finding all users which matches search 
+  const keyword = req.query.search ? {
+    $or: [
+      { name : { $regex: req.query.search, $options: 'i' } }, // search name that have same pattern as req.query.search
+      { email : { $regex: req.query.search, $options: 'i' } }, // search email that have same pattern as req.query.search
+    ]
+  }:{};
+
+  const users = await User.find(keyword)
+  res.send(users);
+});
+
 
   module.exports = router;
   module.exports.current_user_id = current_user_id;
