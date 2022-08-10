@@ -44,7 +44,7 @@ export default class MyBlogs extends Component {
                 {
                     console.log(res.data);
                     localStorage.setItem('blog_id', res.data._id);
-                    window.location.href = '/blog/showBlog';
+                    window.location.href = '/blog/showMyBlog';
                     // this.props.history.push('/blog/'+res.data._id);
                 });
     }

@@ -37,6 +37,7 @@ import ViewProfile from "./components/Profile/viewProfile";
 import Notifications from "./components/notifications";
 import PaymentApproval from "./components/Payment/paymentApproval";
 import PaymentReject from "./components/Payment/paymentReject";
+import ShowMyBlog from "./components/Blog/showMyBlog";
 
 
 
@@ -59,6 +60,7 @@ function App() {
         <Route path="forget_password" element={<ForgetPassword />} />
         <Route path="forget_password_otp" element={<ForgetPasswordOTP />} />
         <Route path="adminHomepage" element={<AdminHomepage />} />
+        <Route path="logout" element={<Logout />} />
 
 
         {/* Profile */}
@@ -82,7 +84,8 @@ function App() {
         <Route path="readBlogs/myBlogs" element={<MyBlogs />} />
         <Route path="readBlogs/allBlogs" element={<AllBlogs />} />
         <Route path="blog/showBlog" element={<ShowBlog />} />
-        <Route path="logout" element={<Logout />} />
+        <Route path="blog/showMyBlog" element={<ShowMyBlog />} />
+        
 
 
         {/* Renting  */}

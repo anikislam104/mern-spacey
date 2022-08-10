@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 var comments=[];
 var like=0;
 var dislike=0;
-export default class ShowBlog extends Component {
+export default class ShowMyBlog extends Component {
     constructor(props) {
         super(props);
         this.showComments = this.showComments.bind(this);
@@ -183,6 +183,35 @@ export default class ShowBlog extends Component {
 <br />
 
                 
+                <button onClick={
+                    (e) => {
+                        window.location='/blog/editBlog';
+                    }
+                }>Edit Blog</button>
+                <br />
+                <br />
+                <button onClick={
+                    (e) => {
+                        
+                        if(window.confirm("Are you sure you want to delete this blog?")){
+                            console.log("yes");
+                            const deleteBlog = {
+                                blog_id: blog._id,
+                                user_id: localStorage.getItem('user_id'),
+                            }
+                            axios.post('http://localhost:5000/blogs/delete_blog', deleteBlog)
+                                .then(res => {
+                                    console.log(res.data);
+                                });
+                            window.location.href='../readBlogs/myBlogs';
+                        }
+                        else{
+                            console.log("no");
+                            window.location.reload();
+                        }
+                        
+                    }
+                }>Delete Blog</button>
                 </div>
 
                 

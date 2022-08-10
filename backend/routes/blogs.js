@@ -253,4 +253,12 @@ router.route('/get_comments/:blog_id').post((req, res) => {
         }).catch(err => res.status(400).json('Error: ' + err));
 })
 
+//delete blog
+router.route('/delete_blog').post((req, res) => {
+    const blog_id = req.body.blog_id;
+    Blog.findByIdAndDelete(blog_id)
+        .then(() => res.json('Blog deleted.'))
+        .catch(err => res.status(400).json('Error: ' + err));
+})
+
 module.exports = router;
