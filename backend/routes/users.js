@@ -425,7 +425,37 @@ router.route('/user_id').get((req, res) => {
        
   }));
 
-  
+  //edit profile
+  router.route('/editProfile').post(asyncHandler(async(req, res) => {
+    const user_id = req.body.user_id;
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+    const email = req.body.email;
+    const password = req.body.password;
+    const phoneNumber = req.body.phoneNumber;
+
+    console.log("user id "+user_id+" firstName: "+firstName+" lastName: "+lastName+" email: "+email+" password: "+password+" phoneNumber: "+phoneNumber);
+
+    const user=await User.findOne({_id:user_id});
+
+    if(firstName){
+      user.firstName=firstName;
+    }
+    if(lastName){
+      user.lastName=lastName;
+    }
+    if(email){
+      user.email=email;
+    }
+    if(password){
+      user.password=password;
+    }
+    if(phoneNumber){
+      user.phoneNumber=phoneNumber;
+    }
+    user.save();
+    res.send(user);
+  }));
   
   module.exports = router;
   module.exports.current_user_id = current_user_id;
