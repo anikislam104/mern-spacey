@@ -121,12 +121,15 @@ export default class CreateUser extends Component {
       
           // console.log(user);
       
-          axios.post('http://localhost:5000/users/add', formData)
+          await axios.post('http://localhost:5000/users/jwtsignup', formData)
             .then(res => {console.log(res.data);
               if(res.data === 'invalid'){
                 window.location = '/invalidAuth';
               }
               else{
+                localStorage.setItem('su_token', res.data.token);
+                localStorage.setItem('su_user_id', res.data.user_id);
+                localStorage.setItem('su_email', res.data.email);
                 window.location = '/signup_otp';
               }
             });
