@@ -84,7 +84,7 @@ const EditProfile = () => {
         console.log(user);
         axios.post('http://localhost:5000/users/editprofile', user)
             .then(res => {
-                window.location = '/homepage';
+                window.location = '/viewprofile';
             });
 
     }

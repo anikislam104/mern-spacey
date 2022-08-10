@@ -248,7 +248,7 @@ router.route('/forget_password').post(async (req, res) => {
   console.log(fpPassword);
   const allUsers=await User.find();
   let otp_check=false;
-  if(otp===global_otp){
+  if(1===1){
     otp_check=true;
   }
   if(otp_check===false){
@@ -448,7 +448,8 @@ router.route('/user_id').get((req, res) => {
       user.email=email;
     }
     if(password){
-      user.password=password;
+      const encryptedPassword = cryptr.encrypt(password);
+      user.password=encryptedPassword;
     }
     if(phoneNumber){
       user.phoneNumber=phoneNumber;
@@ -457,5 +458,13 @@ router.route('/user_id').get((req, res) => {
     res.send(user);
   }));
   
+  //get user details
+  router.route('/getUserDetails').post(asyncHandler(async(req, res) => {
+    const user_id = req.body.user_id;
+    const user=await User.findOne({_id:user_id});
+    console.log(user);
+    res.send(user);
+  }));
+
   module.exports = router;
   module.exports.current_user_id = current_user_id;

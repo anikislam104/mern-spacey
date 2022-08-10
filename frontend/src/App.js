@@ -32,8 +32,8 @@ import AddInsurance from "./components/Insurance/addInsurance";
 import ForgetPassword from "./components/Authentication/forget_password";
 import ForgetPasswordOTP from "./components/Authentication/forget_password_otp";
 import AdminHomepage from "./components/adminHomepage";
-import EditProfile from "./components/EditProfile/main";
-
+import EditProfile from "./components/Profile/editProfile";
+import ViewProfile from "./components/Profile/viewProfile";
 import Notifications from "./components/notifications";
 import PaymentApproval from "./components/Payment/paymentApproval";
 import PaymentReject from "./components/Payment/paymentReject";
@@ -59,7 +59,11 @@ function App() {
         <Route path="forget_password" element={<ForgetPassword />} />
         <Route path="forget_password_otp" element={<ForgetPasswordOTP />} />
         <Route path="adminHomepage" element={<AdminHomepage />} />
+
+
+        {/* Profile */}
         <Route path="editProfile" element={<EditProfile />} />
+        <Route path="viewProfile" element={<ViewProfile />} />
         
         
 
