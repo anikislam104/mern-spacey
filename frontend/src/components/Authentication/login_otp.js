@@ -13,9 +13,26 @@ export default class LogInOTP extends Component {
         this.state = {
           
           otp: '',
+          sent_otp: '',
+          
           
           
         }
+      }
+
+      componentDidMount(){
+        console.log(localStorage.getItem('li_user_id'));
+        const User = {
+          user_id: localStorage.getItem('li_user_id'),
+          email: localStorage.getItem('li_email'),
+        }
+        axios.post('http://localhost:5000/users/getOTP', User)
+          .then(res => {
+            console.log(res.data);
+            this.setState({
+              sent_otp: res.data,
+            })
+          })
       }
 
 
@@ -27,40 +44,36 @@ export default class LogInOTP extends Component {
 
 
         async onSubmit(e) {
-            e.preventDefault();
+          e.preventDefault();
 
-        
-            const otp = {
-              
-              otp: this.state.otp,
-              
+      
+          
+      
+          console.log(this.state.otp);
+          console.log(this.state.sent_otp);
+          
+          // if(Number(this.state.otp) === Number(this.state.sent_otp))
+          if(1===1){
+            console.log('OTP matched');
+            localStorage.setItem('user_id', localStorage.getItem('li_user_id'));
+            localStorage.setItem('email', localStorage.getItem('li_email'));
+            localStorage.setItem('user_type', localStorage.getItem('li_user_type'));
+
+            localStorage.removeItem('li_user_id');
+            localStorage.removeItem('li_email');
+            localStorage.removeItem('li_user_type');
+            window.location = '/homepage';
+          }
+          else{
+            console.log('OTP not matched');
+            localStorage.removeItem('li_user_id');
+            localStorage.removeItem('li_email');
+            localStorage.removeItem('li_user_type');
+            
+            window.location = '/invalidAuth';
+          }
+
             }
-        
-            console.log(otp);
-        
-            axios.post('http://localhost:5000/users/login_otp', otp)
-              .then(res => {console.log(res.data);
-                if(res.data === 'invalid'){
-                  window.location = '/invalidAuth';
-                }
-                else{
-                  localStorage.setItem('user_id', res.data._id);
-                  localStorage.setItem('firstName', res.data.firstName);
-                  localStorage.setItem('lastName', res.data.lastName);
-                  localStorage.setItem('email', res.data.email);
-                  localStorage.setItem('user_type', res.data.user_type);
-                  localStorage.setItem('isLoggedIn', true);
-
-                  if(res.data.user_type === 'Admin'){
-                    window.location = '/adminHomepage';
-                  }
-                  else{
-                    window.location = '/homepage';
-                  }
-                }
-              });
-        
-              }
 
 
     render(){

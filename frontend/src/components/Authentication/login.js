@@ -55,12 +55,15 @@ export default class Login extends Component {
         
             console.log(user);
         
-            axios.post('http://localhost:5000/users/login', user)
+            axios.post('http://localhost:5000/users/jwtlogin', user)
               .then(res => {console.log(res.data);
                 if(res.data === 'invalid'){
                   window.location = '/invalidAuth';
                 }
                 else{
+                  localStorage.setItem('li_user_id', res.data.user_id);
+                  localStorage.setItem('li_email', res.data.email);
+                  localStorage.setItem('li_user_type', res.data.user_type);
                   window.location = '/login_otp';
                 }
               });

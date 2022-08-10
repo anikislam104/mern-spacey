@@ -2,13 +2,16 @@ const router = require('express').Router();
 require('dotenv').config();
 let User = require('../models/user');
 const multer = require('multer');
-// const { v4: uuidv4 } = require('uuid');
+const jwt = require('jsonwebtoken');
+const asyncHandler = require('express-async-handler');
 let path = require('path');
 const Cryptr = require('cryptr');
 const cryptr = new Cryptr('ReallySecretKey');
+const generateToken=require('../config/generateToken');
+const OTP = require('../models/otp');
 // @ts-ignore
 const { Auth } = require("two-step-auth");
-const nodemailer = require('nodemailer');
+
 const { text } = require('express');
 var global_otp = "";
 var current_user_id = 0;
@@ -60,153 +63,153 @@ async function sendOTP(emailId) {
 }
 
 
-router.route('/add').post(upload.single("image"),async (req, res) => {
-  const firstName = req.body.firstName;
-  const lastName = req.body.lastName;
-  const email = req.body.email;
-  const password = req.body.password;
-  const nidNumber = Number(req.body.nidNumber);
-  const phoneNumber = Number(req.body.phoneNumber);
-  const dateOfBirth = Date.parse(req.body.dateOfBirth);
-  const user_type = req.body.user_type;
-  const image = req.file.originalname;
-  // const image = Buffer.from(req.body.image);
-  const encryptedPassword = cryptr.encrypt(password);
+// router.route('/add').post(upload.single("image"),async (req, res) => {
+//   const firstName = req.body.firstName;
+//   const lastName = req.body.lastName;
+//   const email = req.body.email;
+//   const password = req.body.password;
+//   const nidNumber = Number(req.body.nidNumber);
+//   const phoneNumber = Number(req.body.phoneNumber);
+//   const dateOfBirth = Date.parse(req.body.dateOfBirth);
+//   const user_type = req.body.user_type;
+//   const image = req.file.originalname;
+//   // const image = Buffer.from(req.body.image);
+//   const encryptedPassword = cryptr.encrypt(password);
 
-  //backup
-  current_firstname = firstName;
-  current_lastname = lastName;
-  current_email = email;
-  current_password = cryptr.encrypt(password);
-  current_nid = nidNumber;
-  current_phone = phoneNumber;
-  current_date_of_birth = dateOfBirth;
-  current_user_image = image;
-  current_user_type = user_type;
+//   //backup
+//   current_firstname = firstName;
+//   current_lastname = lastName;
+//   current_email = email;
+//   current_password = cryptr.encrypt(password);
+//   current_nid = nidNumber;
+//   current_phone = phoneNumber;
+//   current_date_of_birth = dateOfBirth;
+//   current_user_image = image;
+//   current_user_type = user_type;
 
-  const allUsers=await User.find();
-  let check=false;
+//   const allUsers=await User.find();
+//   let check=false;
 
-  console.log(image);
+//   console.log(image);
 
-  console.log(allUsers.length);
-  for(let i=0;i<allUsers.length;i++){
-    console.log(allUsers[i].email);
-    if(allUsers[i].email===email || allUsers[i].nidNumber===nidNumber || allUsers[i].phoneNumber===phoneNumber){
-      check=true;
-    }
-  }
-  console.log(check);
+//   console.log(allUsers.length);
+//   for(let i=0;i<allUsers.length;i++){
+//     console.log(allUsers[i].email);
+//     if(allUsers[i].email===email || allUsers[i].nidNumber===nidNumber || allUsers[i].phoneNumber===phoneNumber){
+//       check=true;
+//     }
+//   }
+//   console.log(check);
 
-  if(check===true){
-    res.send('invalid');
-    return;
-  }
-  else{
-    var otp_sent = sendOTP(email);
-    otp_sent.then((otp_s)=>{
-      global_otp=otp_s;
-      console.log(global_otp);
-    })
-    res.send('ok');
-    router.route('/signup_otp').post((req, res) => {
-      const otp = req.body.otp;
-        if(global_otp===otp && current_user_id===0){
-          console.log("OTP verified");
-          console.log("encrypted password: "+cryptr.decrypt(encryptedPassword));
-          console.log("current_password: "+cryptr.decrypt(current_password));
+//   if(check===true){
+//     res.send('invalid');
+//     return;
+//   }
+//   else{
+//     var otp_sent = sendOTP(email);
+//     otp_sent.then((otp_s)=>{
+//       global_otp=otp_s;
+//       console.log(global_otp);
+//     })
+//     res.send('ok');
+//     router.route('/signup_otp').post((req, res) => {
+//       const otp = req.body.otp;
+//         if(global_otp===otp && current_user_id===0){
+//           console.log("OTP verified");
+//           console.log("encrypted password: "+cryptr.decrypt(encryptedPassword));
+//           console.log("current_password: "+cryptr.decrypt(current_password));
           
-          console.log("User added");
-          const newUser = new User({
-            firstName: current_firstname,
-            lastName: current_lastname,
-            email: current_email,
-            password : current_password,
-            user_type: current_user_type,
-            nidNumber: current_nid,
-            phoneNumber : current_phone,
-            dateOfBirth : current_date_of_birth,
-            image : current_user_image,
-          });
+//           console.log("User added");
+//           const newUser = new User({
+//             firstName: current_firstname,
+//             lastName: current_lastname,
+//             email: current_email,
+//             password : current_password,
+//             user_type: current_user_type,
+//             nidNumber: current_nid,
+//             phoneNumber : current_phone,
+//             dateOfBirth : current_date_of_birth,
+//             image : current_user_image,
+//           });
 
           
           
           
-            newUser.save();
-            //make json of new user
-            res.send(newUser); 
+//             newUser.save();
+//             //make json of new user
+//             res.send(newUser); 
 
             
           
           
-        }
-        else{
-          console.log("OTP not verified");
-          res.send('invalid');
-        }
-    });
-  }
+//         }
+//         else{
+//           console.log("OTP not verified");
+//           res.send('invalid');
+//         }
+//     });
+//   }
   
-});
+// });
 
 
-router.route('/login').post(async (req, res) => {
-  const email = req.body.email;
-  const password = req.body.password;
-  const user_type = req.body.user_type;
-  var userIndex=-1;
-  const allUsers=await User.find();
-  let check=false;
-  console.log("user_type: "+user_type);
-  // let hashed_password = await bcrypt.hash(password, 10);
+// router.route('/login').post(async (req, res) => {
+//   const email = req.body.email;
+//   const password = req.body.password;
+//   const user_type = req.body.user_type;
+//   var userIndex=-1;
+//   const allUsers=await User.find();
+//   let check=false;
+//   console.log("user_type: "+user_type);
+//   // let hashed_password = await bcrypt.hash(password, 10);
 
-  for(let i=0;i<allUsers.length;i++){
-    if(allUsers[i].email===email && cryptr.decrypt(allUsers[i].password)===password && allUsers[i].user_type===user_type){
-      check=true;
-      userIndex=i;
-      console.log("user index "+userIndex);
-      current_user_id=allUsers[i]._id;
-      current_user_image=allUsers[i].image;
-      break;
-    }
+//   for(let i=0;i<allUsers.length;i++){
+//     if(allUsers[i].email===email && cryptr.decrypt(allUsers[i].password)===password && allUsers[i].user_type===user_type){
+//       check=true;
+//       userIndex=i;
+//       console.log("user index "+userIndex);
+//       current_user_id=allUsers[i]._id;
+//       current_user_image=allUsers[i].image;
+//       break;
+//     }
      
-  }
-  // sendSMS(allUsers[userIndex].phoneNumber);
+//   }
+//   // sendSMS(allUsers[userIndex].phoneNumber);
   
-  console.log("check :"+check);
-  if(check===true){
-    let otp_sent = sendOTP(email);
-    otp_sent.then((otp_s) => {
-      console.log("otp_s "+otp_s);
-      global_otp=otp_s;
-    })
-    res.send('ok');
-    router.route('/login_otp').post(async (req, res) => {
-      const otp = req.body.otp;
-      console.log(otp);
-        console.log("global_otp "+global_otp);
-        if(global_otp===otp){
-          console.log("OTP verified");
-          // current_user_id=allUsers[userIndex]._id;
-          // console.log("current_user_id login"+current_user_id);
-          const user=await User.findById(current_user_id);
-          res.send(user);
-        }
-        else{
-          console.log("OTP not verified");
-          res.send('invalid');
-        }
+//   console.log("check :"+check);
+//   if(check===true){
+//     let otp_sent = sendOTP(email);
+//     otp_sent.then((otp_s) => {
+//       console.log("otp_s "+otp_s);
+//       global_otp=otp_s;
+//     })
+//     res.send('ok');
+//     router.route('/login_otp').post(async (req, res) => {
+//       const otp = req.body.otp;
+//       console.log(otp);
+//         console.log("global_otp "+global_otp);
+//         if(global_otp===otp){
+//           console.log("OTP verified");
+//           // current_user_id=allUsers[userIndex]._id;
+//           // console.log("current_user_id login"+current_user_id);
+//           const user=await User.findById(current_user_id);
+//           res.send(user);
+//         }
+//         else{
+//           console.log("OTP not verified");
+//           res.send('invalid');
+//         }
       
       
-    })
-    return;
+//     })
+//     return;
   
-  }
-  else{
-    res.send('invalid');
-    return;
-  }
-});
+//   }
+//   else{
+//     res.send('invalid');
+//     return;
+//   }
+// });
 
 
 //get user name
@@ -283,41 +286,146 @@ router.route('/user_id').get((req, res) => {
     res.send('logout');
   });
 
-  router.route('/session_signup').post((req, res) => {
-    const name = req.body.name;
+  router.route('/jwtsignup').post(upload.single("image"),asyncHandler(async(req, res) => {
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
     const email = req.body.email;
     const password = req.body.password;
+    const user_type = req.body.user_type;
     const nidNumber = req.body.nidNumber;
     const phoneNumber = req.body.phoneNumber;
     const dateOfBirth = req.body.dateOfBirth;
-    const image = req.body.image;
+    const image = req.file.originalname;
 
-    const newUser = new User({
-      firstName: name,
-      email: email,
-      password : password,
-      nidNumber: nidNumber,
-      phoneNumber : phoneNumber,
-      dateOfBirth : dateOfBirth,
-      image : image,
+    console.log("firstName: "+firstName);
+    console.log("lastName: "+lastName);
+
+    if(!firstName || !lastName || !email || !password || !user_type || !nidNumber || !phoneNumber || !dateOfBirth){
+      res.send('invalid');
+    }
+    
+    
+    const user_exists = await User.findOne({email: email});
+
+    if(user_exists){
+      res.send('invalid');
+    }
+    else{
+      const encryptedPassword = cryptr.encrypt(password);
+
+      const newUser = new User({
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: encryptedPassword,
+        user_type: user_type,
+        nidNumber: nidNumber,
+        phoneNumber: phoneNumber,
+        dateOfBirth: dateOfBirth,
+        image: image
+      });
+      await newUser.save();
+      console.log(newUser._id);
+      res.send(
+        {
+          user_id: newUser._id,
+          user_type: newUser.user_type,
+          firstName: newUser.firstName,
+          lastName: newUser.lastName,
+          email: newUser.email,
+          nidNumber: newUser.nidNumber,
+          phoneNumber: newUser.phoneNumber,
+          dateOfBirth: newUser.dateOfBirth,
+          image: newUser.image,
+          token: generateToken(newUser._id)
+        }
+      )
+    }
+
+
+  }));
+  
+  router.route('/jwtlogin').post(asyncHandler(async(req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+    const user_type = req.body.user_type;
+
+    if(!email || !password || !user_type){
+      res.send('invalid');
+    }
+
+    const user = await User.findOne({email: email});
+    const decryptedPassword = cryptr.decrypt(user.password);
+    console.log(decryptedPassword+ " "+password);
+    console.log(user_type+ " "+user.user_type);
+    if(user){
+      if(user.user_type === user_type && decryptedPassword === password){
+        console.log("user_id "+user._id);
+        res.send(
+          {
+            user_id: user._id,
+            user_type: user.user_type,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            nidNumber: user.nidNumber,
+            phoneNumber: user.phoneNumber,
+            dateOfBirth: user.dateOfBirth,
+            image: user.image,
+            token: generateToken(user._id)
+          }
+        )
+      }
+        
+      }
+    }
+
+    
+  ));
+
+  router.route('/getOTP').post(async(req, res) => {
+    const user_id = req.body.user_id;
+    const email = req.body.email;
+    var otp=" ";
+    console.log(user_id + " " + email);
+    let otp_sent = sendOTP(email);
+    console.log("otp_sent "+otp_sent);
+    otp_sent.then(async (otp_s) => {
+      console.log("otp_s "+otp_s);
+      console.log("otp is "+otp);
+      otp=otp_s;
+      console.log("otp is "+otp);
+      
+      const user_exists=await OTP.findOne({user_id:user_id});
+      if(user_exists){
+        user_exists.otp=otp;
+        user_exists.save();
+        res.send(otp);
+      }
+      else{
+        const newOTP = new OTP({
+          user_id: user_id,
+          otp: otp
+        });
+        newOTP.save();
+        res.send(otp);
+      }
+
     });
-
-    newUser.save();
+    console.log("otp "+otp);
+    console.log("global_otp "+global_otp);
     
-    //save in local storage
+  });
+  
 
-    localStorage.setItem('email', email);
-    localStorage.setItem('password', password);
-    localStorage.setItem('nidNumber', nidNumber);
-    localStorage.setItem('phoneNumber', phoneNumber);
-    localStorage.setItem('dateOfBirth', dateOfBirth);
-    localStorage.setItem('image', image);
-    localStorage.setItem('name', name);
-    localStorage.setItem('user_id', newUser._id);
-    localStorage.setItem('user_image', newUser.image);
+  router.route('/deleteUser').post(asyncHandler(async(req, res) => {
+    const user_id = req.body.user_id;
+    User.find({_id: user_id}).deleteOne();
 
-    
-  })
+       
+  }));
 
+  
+  
   module.exports = router;
   module.exports.current_user_id = current_user_id;

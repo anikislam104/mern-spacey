@@ -14,11 +14,26 @@ export default class SignUpOTP extends Component {
         this.state = {
           
           otp: '',
+          sent_otp: '',
           
           
         }
       }
 
+      componentDidMount(){
+        console.log(localStorage.getItem('su_user_id'));
+        const User = {
+          user_id: localStorage.getItem('su_user_id'),
+          email: localStorage.getItem('su_email'),
+        }
+        axios.post('http://localhost:5000/users/getOTP', User)
+          .then(res => {
+            console.log(res.data);
+            this.setState({
+              sent_otp: res.data,
+            })
+          })
+      }
 
       onChangeOTP(e) {
         this.setState({
@@ -31,33 +46,32 @@ export default class SignUpOTP extends Component {
             e.preventDefault();
 
         
-            const otp = {
-              
-              otp: this.state.otp,
-              
+            
+        
+            console.log(this.state.otp);
+            console.log(this.state.sent_otp);
+        
+            if(Number(this.state.otp) === Number(this.state.sent_otp)){
+              console.log('OTP matched');
+              localStorage.removeItem('su_user_id');
+              localStorage.removeItem('su_email');
+              localStorage.removeItem('su_token');
+              window.location = '/login';
             }
-        
-            console.log(otp);
-        
-            axios.post('http://localhost:5000/users/signup_otp', otp)
-              .then(res => {
-                console.log(res.data);
-                if(res.data === 'invalid'){
+            else{
+              console.log('OTP not matched');
+              const User = {
+                user_id: localStorage.getItem('su_user_id'),
+                email: localStorage.getItem('su_email'),
+              }
+              axios.post('http://localhost:5000/users/deleteUser', User)
+                .then(res => {
+                  console.log(res.data);
                   window.location = '/invalidAuth';
-                }
-                else{
-                  localStorage.setItem('user_id', res.data._id);
-                  localStorage.setItem('firstName', res.data.firstName);
-                  localStorage.setItem('lastName', res.data.lastName);
-                  localStorage.setItem('email', res.data.email);
-                  localStorage.setItem('phoneNumber', res.data.phoneNumber);
-                  localStorage.setItem('userType', res.data.user_type);
-                  localStorage.setItem('isLoggedIn', true);
-                  
-                  window.location = '/signupconf';
-                }
-              });
-        
+                });
+              // window.location = '/invalidAuth';
+            }
+
               }
 
 
