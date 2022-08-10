@@ -32,10 +32,10 @@ export default class NavbarHomepage extends Component {
             <img src={spacey} class="img-responsive" alt=" " />
         </div>
         <Link to={"/homepage"} className="navbar-brand" style={myStyle.optionSection} ><h2>Spacey</h2></Link>
-        <div class="col-lg-5">
+        <div class="col-lg-3">
    
         </div>
-        <div class="col-lg-7">
+        <div class="col-lg-9">
          <div className="collpase navbar-collapse">
          <ul className="navbar-nav mr-auto">
           <li className="navbar-item">
@@ -58,6 +58,11 @@ export default class NavbarHomepage extends Component {
           <li className="navbar-item">
           <Link to={'/logout'} className="nav-link"><h5>Log out</h5></Link>
           </li>
+
+          <li>
+            <Link to={'/notifications'}><h5>Notifications</h5></Link>
+          </li>
+
          </ul>
          </div>
         </div>

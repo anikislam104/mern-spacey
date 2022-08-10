@@ -219,7 +219,6 @@ router.route('/get_user_name').post(async (req, res) => {
     })
 })
 
-
 //forget password
 router.route('/forget_password_otp_send').post(async (req, res) => {
   const email = req.body.email;

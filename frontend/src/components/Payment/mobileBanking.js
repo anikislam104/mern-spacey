@@ -15,6 +15,9 @@ export default class MobileBanking extends Component {
             renter_id:'',
             amount: '',
             date: new Date(),
+            property_id:'62f401bda293a70d376661dc',
+            host_id:'62d51ffeaa2f44071d1adf20',
+            status: 'pending',
         }
 
     }
@@ -41,19 +44,22 @@ export default class MobileBanking extends Component {
             renter_id: this.state.renter_id,
             amount: this.state.amount,
             date: this.state.date,
+            property_id: this.state.property_id,
+            host_id: this.state.host_id,
+            status: this.state.status,
         }
 
         console.log(payment);
 
         const response = await axios.post('http://localhost:5000/payments/add', {token,payment});
 
-         const status=response.data;
+         const res_status=response.data;
          console.log("Response:", response.data);
-         if (status === "success") {
-            console.log(status);
+         if (res_status === "success") {
+            console.log(res_status);
             window.location = '/payment/payment_success';
          } else {
-            console.log(status);
+            console.log(res_status);
             window.location = '/payment/payment_failure';
          }
     }
@@ -99,6 +105,8 @@ export default class MobileBanking extends Component {
                                      </div>
      
                                      <div class="col-lg-5">
+                                        <h5> Property ID is: {this.state.property_id}</h5><br/>
+                                        <h5> Host ID is: {this.state.host_id}</h5><br/>
                                         <form encType="multipart/form-data">
                                                <div class="form-group sm-3">
                                                <label><b>Amount: </b></label><br/><br/>

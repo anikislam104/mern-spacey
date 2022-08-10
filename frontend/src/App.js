@@ -25,6 +25,8 @@ import MobileBanking from "./components/Payment/mobileBanking";
 import CashPayment from "./components/Payment/cashPayment";
 import PaymentSuccess from "./components/Payment/paymentSuccess";
 import PaymentFailure from "./components/Payment/paymentFailure";
+import PaymentApproval from "./components/Payment/paymentApproval";
+import PaymentReject from "./components/Payment/paymentReject";
 import RentingHome from "./components/Renting/rentingHome";
 import SelectedProperty from "./components/Renting/selectedProperty";
 import Notification from "./components/Renting/notification";
@@ -32,7 +34,7 @@ import AddInsurance from "./components/Insurance/addInsurance";
 import ForgetPassword from "./components/Authentication/forget_password";
 import ForgetPasswordOTP from "./components/Authentication/forget_password_otp";
 import AdminHomepage from "./components/adminHomepage";
-
+import Notifications from "./components/notifications";
 
 
 
@@ -87,7 +89,12 @@ function App() {
         <Route path="payment/cash_payment" element={<CashPayment />} />
         <Route path="payment/payment_success" element={<PaymentSuccess />} />
         <Route path="payment/payment_failure" element={<PaymentFailure />} />
-        
+        <Route path="payment/payment_approval" element={<PaymentApproval />} />
+        <Route path="payment/payment_reject" element={<PaymentReject />} />
+
+        {/* Notifications */}
+        <Route path="notifications" element={<Notifications />} />
+
       </Routes>
 
       </div>
