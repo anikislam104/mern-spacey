@@ -42,6 +42,7 @@ export default class AllBlogs extends Component {
             .then(res => 
                 {
                     console.log(res.data);
+                    localStorage.setItem('blog_id',res.data._id);
                     window.location.href = '/blog/showBlog';
                     // this.props.history.push('/blog/'+res.data._id);
                 });

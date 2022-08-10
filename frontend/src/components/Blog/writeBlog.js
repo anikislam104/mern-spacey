@@ -25,14 +25,9 @@ export default class WriteBlog extends Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:5000/users/user_id')
-            .then((res) => res.json())
-            .then((json) => {
-                this.setState({
-                    user_id: localStorage.getItem('user_id'),
-                });
-                console.log(this.state.user_id);
-            })
+        this.setState({
+            user_id: localStorage.getItem('user_id'),
+        });
     }
 
     onChangeContent(e) {

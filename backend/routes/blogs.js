@@ -120,13 +120,15 @@ router.route('/showBlog').post((req, res) => {
 })
 
 
-router.route('/get_selected_blog').get((req, res) => {
+router.route('/get_selected_blog').post(async(req, res) => {
     console.log("get_selected_blog");
+    const blog_id = req.body.blog_id;
+    console.log("blog_id: " + blog_id);
     Blog.find()
         .then(blog => {
-            blog=blog.filter(blog => blog._id == selected_blog_id);
-            // console.log(blog[0].content);
-            res.json(blog);
+            blog=blog.filter(blog => blog._id == blog_id);
+            console.log(blog);
+            res.send(blog);
         })
 })
 

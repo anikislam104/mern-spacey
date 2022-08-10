@@ -19,22 +19,36 @@ export default class ShowBlog extends Component {
         }
     }
     componentDidMount() {
-        fetch('http://localhost:5000/blogs/get_selected_blog')
-            .then((res) => res.json())
-            .then((json) => {
-                console.log(JSON.stringify(json));
+        // fetch('http://localhost:5000/blogs/get_selected_blog')
+        //     .then((res) => res.json())
+        //     .then((json) => {
+        //         console.log(JSON.stringify(json));
+        //         this.setState({
+        //             blog: this.state.blog.concat(json),
+        //         });
+        //         fetch('http://localhost:5000/users/user_id')
+        //             .then((res) => res.json())
+        //             .then((json) => {
+        //                 //console.log(JSON.stringify(json));
+        //                 this.setState({
+        //                     user_id: localStorage.getItem('user_id'),
+        //                 });
+        //             })
+        //     })
+        const blog={
+            blog_id:localStorage.getItem('blog_id'),
+        }
+        axios.post('http://localhost:5000/blogs/get_selected_blog', blog)
+            .then(res => {
+                console.log(res.data);
                 this.setState({
-                    blog: this.state.blog.concat(json),
+                    blog: this.state.blog.concat(res.data),
                 });
-                fetch('http://localhost:5000/users/user_id')
-                    .then((res) => res.json())
-                    .then((json) => {
-                        //console.log(JSON.stringify(json));
-                        this.setState({
-                            user_id: localStorage.getItem('user_id'),
-                        });
-                    })
             })
+        console.log(this.state.blog);
+        this.setState({
+            user_id: localStorage.getItem('user_id'),
+        });
     }
 
     comment(e){
@@ -73,7 +87,7 @@ export default class ShowBlog extends Component {
                     (e) => {
                         const upvote = {
                             blog_id: blog._id,
-                            user_id: this.state.user_id,
+                            user_id: localStorage.getItem('user_id'),
                             upvote: 1,
                         }
                         axios.post('http://localhost:5000/blogs/upvote', upvote)
@@ -96,7 +110,7 @@ export default class ShowBlog extends Component {
                     (e) => {
                         const downvote = {
                             blog_id: blog._id,
-                            user_id: this.state.user_id,
+                            user_id: localStorage.getItem('user_id'),
                             
                         }
                         axios.post('http://localhost:5000/blogs/downvote', downvote)
@@ -124,7 +138,7 @@ export default class ShowBlog extends Component {
                     (e) => {
                         const comment = {
                             blog_id: blog._id,
-                            user_id: this.state.user_id,
+                            user_id: localStorage.getItem('user_id'),
                             comment: this.state.Comment,
                         }
                         axios.post('http://localhost:5000/blogs/comment', comment)
