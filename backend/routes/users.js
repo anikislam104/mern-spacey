@@ -218,7 +218,7 @@ router.route('/get_user_name').post(async (req, res) => {
   User.find()
     .then(users => {
         users=users.filter(user=>user._id==user_id);
-        res.json(users[0].firstName+" "+users[0].lastName);
+        res.send(users[0].firstName+" "+users[0].lastName);
     })
 })
 

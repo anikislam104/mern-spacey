@@ -4,13 +4,7 @@ let Booking = require('../models/booking');
 let RentRequest = require('../models/rentRequest');
 const Property = require('../models/property');
 const Notification = require('../models/notification');
-var selected_property_id = 0;
-var selected_property_location = "";
-var selected_property_size = 0;
-var selected_property_price = 0;
-var selected_property_status = "";
-var selected_property_description = "";
-var selected_property_host_id = "";
+
 
 router.route('/selected_property').post((req, res) => {
     console.log("selected_property");
@@ -22,23 +16,17 @@ router.route('/selected_property').post((req, res) => {
     // const status = req.body.status;
     const pricePerDay = req.body.price;
 
-    selected_property_id = property_id;
-    selected_property_location = location;
-    selected_property_size = size;
-    selected_property_price = pricePerDay;
-    selected_property_description = description;
-    selected_property_host_id = host_id;
+    
     console.log("property_id:" + property_id + " host_id:" + host_id + " location:" + location + " description:" + description + " size:" + size + " pricePerDay:" + pricePerDay);
     res.send('ok');
 })
 //send selected property to client
-router.route('/get_selected_property').get((req, res) => {
-    console.log("get_selected_property");
-    Property.find()
-        .then(properties => {
-            properties=properties.filter(property => property._id == selected_property_id);
-            res.json(properties);
-        })
+router.route('/get_selected_property').post(async(req, res) => {
+    const selected_property_id=req.body.property_id;
+    console.log("selected_property_id: " + selected_property_id);
+    const property = await Property.findById(selected_property_id);
+    console.log(property);
+    res.send(property);
 })
 
 router.route('/rentRequest').post(async (req, res) =>

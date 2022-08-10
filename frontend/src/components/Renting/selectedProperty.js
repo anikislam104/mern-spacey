@@ -13,30 +13,51 @@ export default class SelectedProperty extends Component {
         }
     }
     componentDidMount() {
-        fetch('http://localhost:5000/renting/get_selected_property')
-            .then((res) => res.json())
-            .then((json) => {
-                console.log(JSON.stringify(json));
-                this.setState({
-                    property: this.state.property.concat(json),
-                });
-                fetch('http://localhost:5000/users/user_id')
-                    .then((res2) => res2.json())
-                    .then((json2) => {
-                        var id=json2.user_id;
-                        const renter_id={
-                            user_id: id,
-                        }
-                        axios.post('http://localhost:5000/users/get_user_name',renter_id)
-                            .then(res3 => {
-                                console.log(res3.data);
-                                this.setState({
-                                    renter_name: res3.data,
-                                });
-                            })
-                    })
+        // fetch('http://localhost:5000/renting/get_selected_property')
+        //     .then((res) => res.json())
+        //     .then((json) => {
+        //         console.log(JSON.stringify(json));
+        //         this.setState({
+        //             property: this.state.property.concat(json),
+        //         });
+        //         fetch('http://localhost:5000/users/user_id')
+        //             .then((res2) => res2.json())
+        //             .then((json2) => {
+        //                 var id=json2.user_id;
+        //                 const renter_id={
+        //                     user_id: id,
+        //                 }
+        //                 axios.post('http://localhost:5000/users/get_user_name',renter_id)
+        //                     .then(res3 => {
+        //                         console.log(res3.data);
+        //                         this.setState({
+        //                             renter_name: res3.data,
+        //                         });
+        //                     })
+        //             })
 
+        //     })
+        const property = {
+            property_id: localStorage.getItem('selected_property_id'),
+        }
+        axios.post('http://localhost:5000/renting/get_selected_property', property)
+            .then(res => {
+                console.log(res.data);
+                this.setState({
+                    property: this.state.property.concat(res.data),
+                });
+                
             })
+            const renter_id={
+                           user_id: localStorage.getItem('user_id'),
+                }
+            axios.post('http://localhost:5000/users/get_user_name',renter_id)
+                     .then(res3 => {
+                            console.log(res3.data);
+                             this.setState({
+                            renter_name: res3.data,
+                                            });
+                                    })
         
         }
     //get username of host
@@ -44,6 +65,7 @@ export default class SelectedProperty extends Component {
         const id={
             user_id: host_id,
         }
+        console.log(host_id);
         axios.post('http://localhost:5000/users/get_user_name',id)
             .then(res => {
                 console.log(res.data);
@@ -60,10 +82,7 @@ export default class SelectedProperty extends Component {
         var date = new Date();
         var renter_id = '';
         //fetch user id
-        fetch('http://localhost:5000/users/user_id')
-            .then((res) => res.json())
-            .then((json) => {
-                console.log(JSON.stringify(json));
+        
                 renter_id = localStorage.getItem('user_id');
                 const rent_request = {
                     host_id: host_id,
@@ -85,7 +104,7 @@ export default class SelectedProperty extends Component {
                             alert('You cannot book your own property');
                         }
                     })
-            })
+            
         
     }
 

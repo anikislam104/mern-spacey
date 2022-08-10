@@ -16,15 +16,9 @@ export default class Notification extends Component {
 
     componentDidMount() {
         // window.location.reload();
-        fetch('http://localhost:5000/users/user_id')
-            .then((res) => res.json())
-            .then((json) => {
-                console.log(JSON.stringify(json));
-                this.setState({
-                    host_id: localStorage.getItem('user_id'),
-                });
+        
                 const host_id ={
-                    host_id: this.state.host_id,
+                    host_id: localStorage.getItem('user_id'),
                 }
                 axios.post('http://localhost:5000/renting/my_rentRequests', host_id)
                     .then(res2 => {
@@ -33,7 +27,7 @@ export default class Notification extends Component {
                             rent_request: res2.data,
                         });
                     })
-            })
+            
     }
 
     acceptRequest(id){

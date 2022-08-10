@@ -52,6 +52,7 @@ export default class RentingHome extends Component {
         price = property.pricePerDay;
         description = property.description;
         console.log(property_id);
+        localStorage.setItem('selected_property_id', property_id);
         
     }
 
