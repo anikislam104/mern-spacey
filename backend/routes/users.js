@@ -11,7 +11,7 @@ const generateToken=require('../config/generateToken');
 const OTP = require('../models/otp');
 // @ts-ignore
 const { Auth } = require("two-step-auth");
-const nodemailer = require('nodemailer');
+
 const { text } = require('express');
 var global_otp = "";
 var current_user_id = 0;
@@ -63,153 +63,153 @@ async function sendOTP(emailId) {
 }
 
 
-router.route('/add').post(upload.single("image"),async (req, res) => {
-  const firstName = req.body.firstName;
-  const lastName = req.body.lastName;
-  const email = req.body.email;
-  const password = req.body.password;
-  const nidNumber = Number(req.body.nidNumber);
-  const phoneNumber = Number(req.body.phoneNumber);
-  const dateOfBirth = Date.parse(req.body.dateOfBirth);
-  const user_type = req.body.user_type;
-  const image = req.file.originalname;
-  // const image = Buffer.from(req.body.image);
-  const encryptedPassword = cryptr.encrypt(password);
+// router.route('/add').post(upload.single("image"),async (req, res) => {
+//   const firstName = req.body.firstName;
+//   const lastName = req.body.lastName;
+//   const email = req.body.email;
+//   const password = req.body.password;
+//   const nidNumber = Number(req.body.nidNumber);
+//   const phoneNumber = Number(req.body.phoneNumber);
+//   const dateOfBirth = Date.parse(req.body.dateOfBirth);
+//   const user_type = req.body.user_type;
+//   const image = req.file.originalname;
+//   // const image = Buffer.from(req.body.image);
+//   const encryptedPassword = cryptr.encrypt(password);
 
-  //backup
-  current_firstname = firstName;
-  current_lastname = lastName;
-  current_email = email;
-  current_password = cryptr.encrypt(password);
-  current_nid = nidNumber;
-  current_phone = phoneNumber;
-  current_date_of_birth = dateOfBirth;
-  current_user_image = image;
-  current_user_type = user_type;
+//   //backup
+//   current_firstname = firstName;
+//   current_lastname = lastName;
+//   current_email = email;
+//   current_password = cryptr.encrypt(password);
+//   current_nid = nidNumber;
+//   current_phone = phoneNumber;
+//   current_date_of_birth = dateOfBirth;
+//   current_user_image = image;
+//   current_user_type = user_type;
 
-  const allUsers=await User.find();
-  let check=false;
+//   const allUsers=await User.find();
+//   let check=false;
 
-  console.log(image);
+//   console.log(image);
 
-  console.log(allUsers.length);
-  for(let i=0;i<allUsers.length;i++){
-    console.log(allUsers[i].email);
-    if(allUsers[i].email===email || allUsers[i].nidNumber===nidNumber || allUsers[i].phoneNumber===phoneNumber){
-      check=true;
-    }
-  }
-  console.log(check);
+//   console.log(allUsers.length);
+//   for(let i=0;i<allUsers.length;i++){
+//     console.log(allUsers[i].email);
+//     if(allUsers[i].email===email || allUsers[i].nidNumber===nidNumber || allUsers[i].phoneNumber===phoneNumber){
+//       check=true;
+//     }
+//   }
+//   console.log(check);
 
-  if(check===true){
-    res.send('invalid');
-    return;
-  }
-  else{
-    var otp_sent = sendOTP(email);
-    otp_sent.then((otp_s)=>{
-      global_otp=otp_s;
-      console.log(global_otp);
-    })
-    res.send('ok');
-    router.route('/signup_otp').post((req, res) => {
-      const otp = req.body.otp;
-        if(global_otp===otp && current_user_id===0){
-          console.log("OTP verified");
-          console.log("encrypted password: "+cryptr.decrypt(encryptedPassword));
-          console.log("current_password: "+cryptr.decrypt(current_password));
+//   if(check===true){
+//     res.send('invalid');
+//     return;
+//   }
+//   else{
+//     var otp_sent = sendOTP(email);
+//     otp_sent.then((otp_s)=>{
+//       global_otp=otp_s;
+//       console.log(global_otp);
+//     })
+//     res.send('ok');
+//     router.route('/signup_otp').post((req, res) => {
+//       const otp = req.body.otp;
+//         if(global_otp===otp && current_user_id===0){
+//           console.log("OTP verified");
+//           console.log("encrypted password: "+cryptr.decrypt(encryptedPassword));
+//           console.log("current_password: "+cryptr.decrypt(current_password));
           
-          console.log("User added");
-          const newUser = new User({
-            firstName: current_firstname,
-            lastName: current_lastname,
-            email: current_email,
-            password : current_password,
-            user_type: current_user_type,
-            nidNumber: current_nid,
-            phoneNumber : current_phone,
-            dateOfBirth : current_date_of_birth,
-            image : current_user_image,
-          });
+//           console.log("User added");
+//           const newUser = new User({
+//             firstName: current_firstname,
+//             lastName: current_lastname,
+//             email: current_email,
+//             password : current_password,
+//             user_type: current_user_type,
+//             nidNumber: current_nid,
+//             phoneNumber : current_phone,
+//             dateOfBirth : current_date_of_birth,
+//             image : current_user_image,
+//           });
 
           
           
           
-            newUser.save();
-            //make json of new user
-            res.send(newUser); 
+//             newUser.save();
+//             //make json of new user
+//             res.send(newUser); 
 
             
           
           
-        }
-        else{
-          console.log("OTP not verified");
-          res.send('invalid');
-        }
-    });
-  }
+//         }
+//         else{
+//           console.log("OTP not verified");
+//           res.send('invalid');
+//         }
+//     });
+//   }
   
-});
+// });
 
 
-router.route('/login').post(async (req, res) => {
-  const email = req.body.email;
-  const password = req.body.password;
-  const user_type = req.body.user_type;
-  var userIndex=-1;
-  const allUsers=await User.find();
-  let check=false;
-  console.log("user_type: "+user_type);
-  // let hashed_password = await bcrypt.hash(password, 10);
+// router.route('/login').post(async (req, res) => {
+//   const email = req.body.email;
+//   const password = req.body.password;
+//   const user_type = req.body.user_type;
+//   var userIndex=-1;
+//   const allUsers=await User.find();
+//   let check=false;
+//   console.log("user_type: "+user_type);
+//   // let hashed_password = await bcrypt.hash(password, 10);
 
-  for(let i=0;i<allUsers.length;i++){
-    if(allUsers[i].email===email && cryptr.decrypt(allUsers[i].password)===password && allUsers[i].user_type===user_type){
-      check=true;
-      userIndex=i;
-      console.log("user index "+userIndex);
-      current_user_id=allUsers[i]._id;
-      current_user_image=allUsers[i].image;
-      break;
-    }
+//   for(let i=0;i<allUsers.length;i++){
+//     if(allUsers[i].email===email && cryptr.decrypt(allUsers[i].password)===password && allUsers[i].user_type===user_type){
+//       check=true;
+//       userIndex=i;
+//       console.log("user index "+userIndex);
+//       current_user_id=allUsers[i]._id;
+//       current_user_image=allUsers[i].image;
+//       break;
+//     }
      
-  }
-  // sendSMS(allUsers[userIndex].phoneNumber);
+//   }
+//   // sendSMS(allUsers[userIndex].phoneNumber);
   
-  console.log("check :"+check);
-  if(check===true){
-    let otp_sent = sendOTP(email);
-    otp_sent.then((otp_s) => {
-      console.log("otp_s "+otp_s);
-      global_otp=otp_s;
-    })
-    res.send('ok');
-    router.route('/login_otp').post(async (req, res) => {
-      const otp = req.body.otp;
-      console.log(otp);
-        console.log("global_otp "+global_otp);
-        if(global_otp===otp){
-          console.log("OTP verified");
-          // current_user_id=allUsers[userIndex]._id;
-          // console.log("current_user_id login"+current_user_id);
-          const user=await User.findById(current_user_id);
-          res.send(user);
-        }
-        else{
-          console.log("OTP not verified");
-          res.send('invalid');
-        }
+//   console.log("check :"+check);
+//   if(check===true){
+//     let otp_sent = sendOTP(email);
+//     otp_sent.then((otp_s) => {
+//       console.log("otp_s "+otp_s);
+//       global_otp=otp_s;
+//     })
+//     res.send('ok');
+//     router.route('/login_otp').post(async (req, res) => {
+//       const otp = req.body.otp;
+//       console.log(otp);
+//         console.log("global_otp "+global_otp);
+//         if(global_otp===otp){
+//           console.log("OTP verified");
+//           // current_user_id=allUsers[userIndex]._id;
+//           // console.log("current_user_id login"+current_user_id);
+//           const user=await User.findById(current_user_id);
+//           res.send(user);
+//         }
+//         else{
+//           console.log("OTP not verified");
+//           res.send('invalid');
+//         }
       
       
-    })
-    return;
+//     })
+//     return;
   
-  }
-  else{
-    res.send('invalid');
-    return;
-  }
-});
+//   }
+//   else{
+//     res.send('invalid');
+//     return;
+//   }
+// });
 
 
 //get user name
