@@ -27,7 +27,7 @@ export default class Notifications extends Component{
             .then((res) => res.json())
             .then((json) => {
                 this.setState({
-                    user_id: json.user_id,
+                    user_id: localStorage.getItem('user_id'),
                 });
                 console.log('Checking....'+this.state.user_id);
                 const current_id={

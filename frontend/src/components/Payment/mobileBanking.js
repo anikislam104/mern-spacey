@@ -27,7 +27,7 @@ export default class MobileBanking extends Component {
             .then((res) => res.json())
             .then((json) => {
                 this.setState({
-                    renter_id: json.user_id,
+                    renter_id: localStorage.getItem('user_id'),
                 });
                 console.log('Checking....'+this.state.renter_id);
             })

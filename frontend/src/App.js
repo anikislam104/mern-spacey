@@ -32,7 +32,11 @@ import AddInsurance from "./components/Insurance/addInsurance";
 import ForgetPassword from "./components/Authentication/forget_password";
 import ForgetPasswordOTP from "./components/Authentication/forget_password_otp";
 import AdminHomepage from "./components/adminHomepage";
+import EditProfile from "./components/EditProfile/main";
 
+import Notifications from "./components/notifications";
+import PaymentApproval from "./components/Payment/paymentApproval";
+import PaymentReject from "./components/Payment/paymentReject";
 
 
 
@@ -88,7 +92,11 @@ function App() {
         <Route path="payment/cash_payment" element={<CashPayment />} />
         <Route path="payment/payment_success" element={<PaymentSuccess />} />
         <Route path="payment/payment_failure" element={<PaymentFailure />} />
-        
+        <Route path="payment/payment_approval" element={<PaymentApproval />} />
+        <Route path="payment/payment_reject" element={<PaymentReject />} />
+
+        {/* Notifications */}
+        <Route path="notifications" element={<Notifications />} />
       </Routes>
 
       </div>
