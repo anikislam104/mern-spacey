@@ -261,4 +261,18 @@ router.route('/delete_blog').post((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 })
 
+//edit blog
+router.route('/edit_blog').post((req, res) => {
+    const blog_id = req.body.blog_id;
+    const title = req.body.title;
+    const content = req.body.content;
+    Blog.findById(blog_id)
+        .then(blog => {
+            blog.title = title;
+            blog.content = content;
+            blog.save();
+            res.json('Blog updated!');
+        }).catch(err => res.status(400).json('Error: ' + err));
+});
+
 module.exports = router;

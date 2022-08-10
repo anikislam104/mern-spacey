@@ -38,6 +38,7 @@ import Notifications from "./components/notifications";
 import PaymentApproval from "./components/Payment/paymentApproval";
 import PaymentReject from "./components/Payment/paymentReject";
 import ShowMyBlog from "./components/Blog/showMyBlog";
+import EditBlog from "./components/Blog/editBlog";
 
 
 
@@ -85,6 +86,7 @@ function App() {
         <Route path="readBlogs/allBlogs" element={<AllBlogs />} />
         <Route path="blog/showBlog" element={<ShowBlog />} />
         <Route path="blog/showMyBlog" element={<ShowMyBlog />} />
+        <Route path="blog/editBlog" element={<EditBlog />} />
         
 
 
