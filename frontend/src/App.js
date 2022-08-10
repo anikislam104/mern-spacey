@@ -32,7 +32,8 @@ import AddInsurance from "./components/Insurance/addInsurance";
 import ForgetPassword from "./components/Authentication/forget_password";
 import ForgetPasswordOTP from "./components/Authentication/forget_password_otp";
 import AdminHomepage from "./components/adminHomepage";
-import ProfileEdit from "./components/Authentication/profile_edit";
+import EditProfile from "./components/EditProfile/main";
+
 
 
 
@@ -56,7 +57,7 @@ function App() {
         <Route path="forget_password" element={<ForgetPassword />} />
         <Route path="forget_password_otp" element={<ForgetPasswordOTP />} />
         <Route path="adminHomepage" element={<AdminHomepage />} />
-        <Route path="profile_edit" element={<ProfileEdit />} />
+        <Route path="editProfile" element={<EditProfile />} />
         
         
 
