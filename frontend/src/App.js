@@ -21,10 +21,15 @@ import MyBlogs from "./components/Blog/myBlogs";
 import AllBlogs from "./components/Blog/allBlogs";
 import ShowBlog from "./components/Blog/showBlog";
 import Logout from "./components/logout";
+
 import MobileBanking from "./components/Payment/mobileBanking";
 import CashPayment from "./components/Payment/cashPayment";
 import PaymentSuccess from "./components/Payment/paymentSuccess";
 import PaymentFailure from "./components/Payment/paymentFailure";
+import PaymentNotifications from "./components/paymentNotifications";
+import PaymentApproval from "./components/Payment/paymentApproval";
+import PaymentReject from "./components/Payment/paymentReject";
+
 import RentingHome from "./components/Renting/rentingHome";
 import SelectedProperty from "./components/Renting/selectedProperty";
 import Notification from "./components/Renting/notification";
@@ -34,9 +39,6 @@ import ForgetPasswordOTP from "./components/Authentication/forget_password_otp";
 import AdminHomepage from "./components/adminHomepage";
 import EditProfile from "./components/Profile/editProfile";
 import ViewProfile from "./components/Profile/viewProfile";
-import PaymentNotifications from "./components/paymentNotifications";
-import PaymentApproval from "./components/Payment/paymentApproval";
-import PaymentReject from "./components/Payment/paymentReject";
 import ShowMyBlog from "./components/Blog/showMyBlog";
 import EditBlog from "./components/Blog/editBlog";
 

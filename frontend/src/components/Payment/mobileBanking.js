@@ -15,9 +15,10 @@ export default class MobileBanking extends Component {
             renter_id:'',
             amount: '',
             date: new Date(),
-            property_id:'62f401bda293a70d376661dc',
-            host_id:'62d51ffeaa2f44071d1adf20',
+            property_id:'62f4a5daf6c0bc0c3e81d218',
+            host_id:'62f3d4aee9c3058362888a37',
             status: 'pending',
+            update_date:'',
         }
 
     }
@@ -47,11 +48,12 @@ export default class MobileBanking extends Component {
             property_id: this.state.property_id,
             host_id: this.state.host_id,
             status: this.state.status,
+            update_date: this.state.date,
         }
 
         console.log(payment);
 
-        const response = await axios.post('http://localhost:5000/payments/add', {token,payment});
+        const response = await axios.post('http://localhost:5000/payments/add_in_mobileBanking', {token,payment});
 
          const res_status=response.data;
          console.log("Response:", response.data);

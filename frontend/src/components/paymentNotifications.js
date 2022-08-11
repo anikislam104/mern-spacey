@@ -80,7 +80,7 @@ export default class Notifications extends Component{
                 <div className="col-md-4">
                     <div className="card mb-4 box-shadow">
                         <div className="card-body">
-                        <p className="card-text">Renter {payment.renter_id} is requested for the property {payment.property_id}</p>
+                        <p className="card-text">Renter {payment.renter_id} is requested for the property {payment.property_id} at {payment.update_date}</p>
                             {/* <p className="card-text">{property.location}</p> */}
                             <div className="d-flex justify-content-between align-items-center">
                                 <div className="btn-group">
@@ -113,7 +113,7 @@ export default class Notifications extends Component{
                 <div className="col-md-4">
                     <div className="card mb-4 box-shadow">
                         <div className="card-body">
-                        <p className="card-text">Host {payment.host_id} has {payment.status} your request for the property {payment.property_id}</p>
+                        <p className="card-text">Host {payment.host_id} has {payment.status} your request for the property {payment.property_id} at {payment.update_date}</p>
                         </div>
                     </div>
                 </div>

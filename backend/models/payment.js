@@ -9,6 +9,7 @@ const paymentSchema = new Schema({
   status: { type: String, required: true },
   amount: { type: Number, required: true },
   date: { type: Date, required: true },
+  update_date: { type: Date, required: true },
   token_id: { type: String, required: true },
   charge_id: { type: String, required: true },
   customer_id: { type: String, required: true },
