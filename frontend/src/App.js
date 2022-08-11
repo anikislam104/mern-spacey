@@ -29,6 +29,7 @@ import PaymentFailure from "./components/Payment/paymentFailure";
 import PaymentNotifications from "./components/paymentNotifications";
 import PaymentApproval from "./components/Payment/paymentApproval";
 import PaymentReject from "./components/Payment/paymentReject";
+import PaymentHistory from "./components/Payment/paymentHistory";
 
 import RentingHome from "./components/Renting/rentingHome";
 import SelectedProperty from "./components/Renting/selectedProperty";
@@ -105,6 +106,7 @@ function App() {
         <Route path="payment/payment_failure" element={<PaymentFailure />} />
         <Route path="payment/payment_approval" element={<PaymentApproval />} />
         <Route path="payment/payment_reject" element={<PaymentReject />} />
+        <Route path="payment/payment_history" element={<PaymentHistory />} />
 
         {/* Notifications */}
         <Route path="payment_notifications" element={<PaymentNotifications />} />

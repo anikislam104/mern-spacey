@@ -1,8 +1,32 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import spacey from "../components/Authentication/spacey.svg";
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 export default class NavbarHomepage extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+        user_name:'',
+    }
+
+  }
+
+  componentDidMount() {
+    fetch('http://localhost:5000/users/user_id')
+        .then((res) => res.json())
+        .then((json) => {
+            this.setState({
+                user_name: localStorage.getItem('firstName'),
+            });
+  
+        })
+  }
 
   render() {
     const myStyle= {
@@ -26,6 +50,7 @@ export default class NavbarHomepage extends Component {
        },
 
     }
+
     return (
       <nav className="navbar navbar navbar-expand-lg" style={myStyle.navSection}>
          <div class="logo-image">
@@ -55,13 +80,27 @@ export default class NavbarHomepage extends Component {
           <Link to={'/renting'} className="nav-link rounded-pill" style={myStyle.textSection}><h6>Rent Storage</h6></Link>
           </li>
           &nbsp; &nbsp; 
-          <li className="navbar-item">
-          <Link to={'/logout'} className="nav-link"><h5>Log out</h5></Link>
-          </li>
-
-          <li>
-          <Link to={'/payment_notifications'}><h5>Payment Notifications</h5></Link>
-          </li>
+          
+          
+          <Navbar>
+            <Container>
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
+              <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="me-auto">
+                  <NavDropdown title={this.state.user_name} id="basic-nav-dropdown">
+                    <NavDropdown.Item href={'/payment_notifications'}>Payment Notifications</NavDropdown.Item>
+                    <NavDropdown.Item href={'/payment/payment_history'}>
+                      Payment History
+                    </NavDropdown.Item>
+                    <NavDropdown.Item href={'/logout'}>
+                    Log out
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </Nav>
+              </Navbar.Collapse>
+            </Container>
+          </Navbar>
+  
 
          </ul>
          </div>
