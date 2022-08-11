@@ -74,8 +74,8 @@ export default class Notifications extends Component{
         return this.state.payments1.map((payment) => {
             if (payment.host_id===this.state.user_id && payment.status==='pending'){
                 return(
-                    <div className="col-md-4">
-                        <div className="card mb-4 box-shadow">
+                    <div className="col-md-12">
+                        <div className="card mb-8 box-shadow">
                             <div className="card-body">
                             <p className="card-text">Renter {payment.renter_id} is <b>requested</b> for the property <b>{payment.property_id}</b> at {payment.update_date}</p>
                                 <div className="d-flex justify-content-between align-items-center">
@@ -85,7 +85,7 @@ export default class Notifications extends Component{
                                                 this.approvePaymentRequest(payment._id);
                                             }
                                         }>Approve</button>
-                                        &emsp;&emsp;&emsp;
+                                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
     
                                         <button type="button" className="btn btn-sm btn-outline-secondary" onClick={
                                             () => {
@@ -102,8 +102,8 @@ export default class Notifications extends Component{
             } 
             else if(payment.renter_id===this.state.user_id && payment.status==='pending'){
                 return(
-                    <div className="col-md-4">
-                        <div className="card mb-4 box-shadow">
+                    <div className="col-md-12">
+                        <div className="card mb-8 box-shadow">
                             <div className="card-body">
                             <p className="card-text">Your request to Host {payment.host_id} for the property <b>{payment.property_id}</b> is <b>{payment.status}</b> at {payment.update_date}</p>
                             </div>
@@ -113,7 +113,7 @@ export default class Notifications extends Component{
             }
             else if(payment.renter_id===this.state.user_id){
                 return(
-                    <div className="col-md-4">
+                    <div className="col-md-12">
                         <div className="card mb-4 box-shadow">
                             <div className="card-body">
                             <p className="card-text">Host {payment.host_id} has <b>{payment.status}</b> your request for the property <b>{payment.property_id}</b> at {payment.update_date}</p>

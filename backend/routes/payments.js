@@ -219,6 +219,28 @@ router.route('/get_total_income').post(async (req, res) => {
         for(let i=0;i<payments.length;i++){
            income+=parseInt(payments[i].amount);
         }
+        //console.log(income);
+        res.json(income);
+    })
+})
+
+router.route('/get_income_between_days').post(async (req, res) => {
+  const user_id = req.body.user_id;
+  let date1=new Date(req.body.date1);
+  let date2=new Date(req.body.date2);
+  //console.log(date1+"   "+date2);
+  let income=0;
+  Payment.find()
+    .then(payments => {
+        payments=payments.filter(payment=>payment.host_id==user_id && payment.status=='approved'); 
+        for(let i=0;i<payments.length;i++){
+           let db_date=new Date(payments[i].date); 
+           //console.log(db_date+"   "+date1+"   "+date2);
+           //console.log(db_date.getTime()+"   "+date1.getTime()+"   "+date2.getTime());
+           if(db_date.getTime()>=date1.getTime() && db_date.getTime()<=date2.getTime()){
+              income+=parseInt(payments[i].amount);
+           }
+        }
         console.log(income);
         res.json(income);
     })

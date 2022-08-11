@@ -98,14 +98,14 @@ export default class PaymentHistory extends Component{
         const obj={
             date1:this.state.date1,
             date2:this.state.date2,
-
+            user_id:this.state.user_id,
         }
-        axios.post('http://localhost:5000/payments/get_total_income',obj)
+        axios.post('http://localhost:5000/payments/get_income_between_days',obj)
             .then(res => 
                 {
                     console.log(res.data);
                     this.setState({
-                        total_income: res.data,
+                        income_between_days: res.data,
                     });
                 });
     }
@@ -151,11 +151,11 @@ export default class PaymentHistory extends Component{
                 <div class="container">
                     <div class="row align-items-start">
 
-                    <div class="col-lg-4">
+                    <div class="col-lg-5">
 
                     </div>
 
-                <div class="col-lg-8">
+                <div class="col-lg-7">
                     <br/>
                 <form onSubmit={this.onSubmit} encType="multipart/form-data">
 
@@ -191,7 +191,7 @@ export default class PaymentHistory extends Component{
                       
                          </form>
                     <p><b><br/>
-                        Your Total Income between these dates:
+                        Your Total Income between these dates: {this.state.income_between_days}
                         </b>
                     </p>
                 </div>
