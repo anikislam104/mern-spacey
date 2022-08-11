@@ -13,23 +13,51 @@ export default class CashPayment extends Component {
         renter_id:'',
         amount: '',
         date: new Date(),
-        property_id:'62f4a5daf6c0bc0c3e81d218',
-        host_id:'62f3d4aee9c3058362888a37',
+        property_id:'62f5121a01422442835ac1be',
+        host_id:'62d51ffeaa2f44071d1adf20',
         status: 'pending',
         update_date:'',
+        host_email:'',
+        renter_email:'',
+        property_title:'',
     }
 
 }
 
 componentDidMount() {
-    fetch('http://localhost:5000/users/user_id')
-        .then((res) => res.json())
-        .then((json) => {
-            this.setState({
-                renter_id: localStorage.getItem('user_id'),
-            });
-            console.log('Checking....'+this.state.renter_id);
-        })
+  fetch('http://localhost:5000/users/user_id')
+      .then((res) => res.json())
+      .then((json) => {
+          this.setState({
+              renter_id: localStorage.getItem('user_id'),
+              renter_email:localStorage.getItem('email'),
+          });
+          //console.log('Checking....'+this.state.renter_id);
+      })
+      const id={
+          host_id:this.state.host_id,
+      }
+
+      axios.post('http://localhost:5000/payments/get_host_email',id)
+          .then(res => 
+              {
+                  console.log(res.data);
+                  this.setState({
+                      host_email: res.data,
+                  });
+              });
+              const id2={
+                  property_id:this.state.property_id,
+              }
+      
+              axios.post('http://localhost:5000/payments/get_property_title',id2)
+                  .then(res => 
+                      {
+                          console.log(res.data);
+                          this.setState({
+                              property_title: res.data,
+                          });
+                      });        
 }
 
 onChangeAmount(e) {
@@ -48,6 +76,9 @@ async onSubmit (e){
         host_id: this.state.host_id,
         status: this.state.status,
         update_date: this.state.date,
+        renter_email:this.state.renter_email,
+        host_email:this.state.host_email,
+        property_title:this.state.property_title,
     }
 
     console.log(payment);
@@ -136,8 +167,10 @@ async onSubmit (e){
                                      </div>
                                     
                                      <div class="col-lg-5">
-                                     <h5> Property ID is: {this.state.property_id}</h5><br/>
-                                        <h5> Host ID is: {this.state.host_id}</h5><br/>
+                                     <h5> Property ID: {this.state.property_id}</h5><br/>
+                                        <h5> Host ID: {this.state.host_id}</h5><br/>
+                                        <h5> Host: {this.state.host_email}</h5><br/>
+                                        <h5> Property Title: {this.state.property_title}</h5><br/>
 
                                        <form onSubmit={this.onSubmit} encType="multipart/form-data">
                                        <div class="form-group sm-3">

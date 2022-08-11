@@ -2,6 +2,7 @@ const router = require('express').Router();
 let Payment = require('../models/payment');
 const stripe = require("stripe")("sk_test_51LQUhSFrHNJyuz7GBJJOrNhKLYVgBkrJsv4nHTiyEE6CbsqrP5Ntg9kuGRoq8RJZSK1l5Ke0CWBUUChp2KE7mq9g00BdwXpg2D");
 let User = require('../models/user');
+let Property = require('../models/property');
 
 router.route('/add_in_mobileBanking').post(async(req, res) =>{
     console.log("Add Payment");
@@ -24,6 +25,9 @@ router.route('/add_in_mobileBanking').post(async(req, res) =>{
         const property_id=payment.property_id;
         const status=payment.status;
         const update_date=payment.update_date;
+        const host_email=payment.host_email;
+        const renter_email=payment.renter_email;
+        const property_title=payment.property_title;
 
         const charge=await stripe.charges.create({
           amount: amount*100,
@@ -40,6 +44,9 @@ router.route('/add_in_mobileBanking').post(async(req, res) =>{
             host_id,
             property_id,
             status,
+            host_email,
+            renter_email,
+            property_title,
             date: date,
             update_date: date,
             token_id: token.id,
@@ -80,6 +87,9 @@ router.route('/add_in_cash').post(async(req, res) =>{
       const property_id=payment.property_id;
       const status=payment.status;
       const update_date=payment.update_date;
+      const host_email=payment.host_email;
+      const renter_email=payment.renter_email;
+      const property_title=payment.property_title;
 
       res_status = "success";
 
@@ -89,6 +99,9 @@ router.route('/add_in_cash').post(async(req, res) =>{
           host_id,
           property_id,
           status,
+          host_email,
+          renter_email,
+          property_title,
           date: date,
           update_date: date,
           token_id: 'cash',
@@ -113,7 +126,47 @@ router.route('/add_in_cash').post(async(req, res) =>{
     }
 })
 
+router.route('/get_host_email').post((req,res)=>{
+  const host_id=req.body.host_id;
+  //console.log("Host ID: "+host_id);
+
+    User.findById(host_id)
+     .then(user=>{
+          //console.log(user.email);
+          res.json(user.email);
+     })
+})
+
+router.route('/get_property_title').post((req,res)=>{
+  const property_id=req.body.property_id;
+  //console.log("Property ID: "+property_id);
+
+    Property.findById(property_id)
+     .then(property=>{
+          //console.log(property.title);
+          res.json(property.title);
+     })
+})
+
 //get notificatoins
+router.route('/get_payment_notifications').post(async (req, res) => {
+  const user_id = req.body.user_id;
+
+  Payment.find()
+    .then(payments => {
+        payments=payments.filter(payment=>payment.host_id==user_id || payment.renter_id==user_id); 
+        payments.sort((a,b)=>{
+          let da = new Date(a.update_date),
+              db = new Date(b.update_date);
+          //console.log(db.getTime()+"   "+da.getTime());    
+          return db.getTime() - da.getTime();
+        });
+        //console.log(payments);
+        res.json(payments);
+    })
+})
+
+/*
 router.route('/get_payment_notifications_as_host').post(async (req, res) => {
   const user_id = req.body.user_id;
 
@@ -145,6 +198,7 @@ router.route('/get_payment_notifications_as_renter').post(async (req, res) => {
         res.json(payments);
     })
 })
+*/
 
 router.route('/approveRenterPayment').post((req,res)=>{
   const payment_id=req.body.payment_id;
@@ -172,6 +226,59 @@ router.route('/rejectRenterPayment').post((req,res)=>{
           console.log(payment);
           res.json('ok');
      })
+})
+
+router.route('/get_payment_history').post(async (req, res) => {
+  const user_id = req.body.user_id;
+
+  Payment.find()
+    .then(payments => {
+        payments=payments.filter(payment=>(payment.host_id==user_id || payment.renter_id==user_id) && payment.status=='approved'); 
+        payments.sort((a,b)=>{
+          let da = new Date(a.update_date),
+              db = new Date(b.update_date);
+          //console.log(db.getTime()+"   "+da.getTime());    
+          return db.getTime() - da.getTime();
+        });
+        //console.log(payments);
+        res.json(payments);
+    })
+})
+
+router.route('/get_total_income').post(async (req, res) => {
+  const user_id = req.body.user_id;
+  let income=0;
+  Payment.find()
+    .then(payments => {
+        payments=payments.filter(payment=>payment.host_id==user_id && payment.status=='approved'); 
+        for(let i=0;i<payments.length;i++){
+           income+=parseInt(payments[i].amount);
+        }
+        //console.log(income);
+        res.json(income);
+    })
+})
+
+router.route('/get_income_between_days').post(async (req, res) => {
+  const user_id = req.body.user_id;
+  let date1=new Date(req.body.date1);
+  let date2=new Date(req.body.date2);
+  //console.log(date1+"   "+date2);
+  let income=0;
+  Payment.find()
+    .then(payments => {
+        payments=payments.filter(payment=>payment.host_id==user_id && payment.status=='approved'); 
+        for(let i=0;i<payments.length;i++){
+           let db_date=new Date(payments[i].date); 
+           //console.log(db_date+"   "+date1+"   "+date2);
+           //console.log(db_date.getTime()+"   "+date1.getTime()+"   "+date2.getTime());
+           if(db_date.getTime()>=date1.getTime() && db_date.getTime()<=date2.getTime()){
+              income+=parseInt(payments[i].amount);
+           }
+        }
+        console.log(income);
+        res.json(income);
+    })
 })
 
 module.exports = router;
