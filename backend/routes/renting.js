@@ -83,7 +83,7 @@ router.route('/send_rental_request').post(async (req, res) =>
         var message="You have a new rental request from " + renter_name + " for your property " + property_title + " from " + start_date + " to " + end_date;
         const newNotification =new Notification( {
             user_id:host_id,
-            message,
+            message:message,
         });
 
         newNotification.save();
@@ -99,6 +99,7 @@ router.route('/accept_rent_request').post(async (req, res) =>
     const rent_request_id = req.body.id;
     console.log("rent_request_id:" + rent_request_id);
     const rent_request = await RentRequest.findById(rent_request_id);
+    const renter_id = rent_request.renter_id;
     console.log("rent_request:" + rent_request);
     const newBooking = new Booking({
         host_id: rent_request.host_id,
@@ -113,7 +114,7 @@ router.route('/accept_rent_request').post(async (req, res) =>
     var message="Your rental request for " + rent_request.property_title + " from " + rent_request.start_date + " to "+ rent_request.end_date + " has been accepted";
 
     const newNotification =new Notification( {
-        user_id: rent_request.renter_id,
+        user_id: renter_id,
         message,
     });
     newNotification.save();
@@ -126,10 +127,11 @@ router.route('/reject_rent_request').post(async (req, res) =>
     const rent_request_id = req.body.id;
     //console.log("rent_request_id:" + rent_request_id);
     const rent_request = await RentRequest.findById(rent_request_id);
+    const renter_id = rent_request.renter_id;
     var message="Your rental request for " + rent_request.property_title + " from " + rent_request.start_date + " to "+ rent_request.end_date + " has been rejected";
     await RentRequest.deleteOne({ _id: rent_request_id });
     newNotification =new Notification( {
-        user_id: rent_request_id,
+        user_id: renter_id,
         message,
     });
     newNotification.save();

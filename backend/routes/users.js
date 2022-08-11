@@ -9,6 +9,7 @@ const Cryptr = require('cryptr');
 const cryptr = new Cryptr('ReallySecretKey');
 const generateToken=require('../config/generateToken');
 const OTP = require('../models/otp');
+var Notification = require('../models/notification');
 // @ts-ignore
 const { Auth } = require("two-step-auth");
 
@@ -464,6 +465,19 @@ router.route('/user_id').get((req, res) => {
     const user=await User.findOne({_id:user_id});
     console.log(user);
     res.send(user);
+  }));
+
+  //get all notifications of a user
+
+  router.route('/get_notifications').post(asyncHandler(async(req, res) => {
+    const user_id = req.body.user_id;
+    const notifications=await Notification.find({user_id:user_id});
+    //arrange them in descending order
+    notifications.sort(function(a, b){
+      return b.date - a.date;
+    });
+    console.log(notifications);
+    res.send(notifications);
   }));
 
   module.exports = router;

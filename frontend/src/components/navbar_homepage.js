@@ -95,6 +95,9 @@ export default class NavbarHomepage extends Component {
                     <NavDropdown.Item href={'/viewProfile'}>
                     View Profile
                     </NavDropdown.Item>
+                    <NavDropdown.Item href={'/notification'}>
+                    Notification
+                    </NavDropdown.Item>
                     <NavDropdown.Item href={'/logout'}>
                     Log out
                     </NavDropdown.Item>
