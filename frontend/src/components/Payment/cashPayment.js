@@ -13,8 +13,8 @@ export default class CashPayment extends Component {
         renter_id:'',
         amount: '',
         date: new Date(),
-        property_id:'62f4a5daf6c0bc0c3e81d218',
-        host_id:'62f3d4aee9c3058362888a37',
+        property_id:'62f4a4cbf6c0bc0c3e81d209',
+        host_id:'62d51ffeaa2f44071d1adf20',
         status: 'pending',
         update_date:'',
     }

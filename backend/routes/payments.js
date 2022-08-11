@@ -114,6 +114,24 @@ router.route('/add_in_cash').post(async(req, res) =>{
 })
 
 //get notificatoins
+router.route('/get_payment_notifications').post(async (req, res) => {
+  const user_id = req.body.user_id;
+
+  Payment.find()
+    .then(payments => {
+        payments=payments.filter(payment=>payment.host_id==user_id || payment.renter_id==user_id); 
+        payments.sort((a,b)=>{
+          let da = new Date(a.update_date),
+              db = new Date(b.update_date);
+          //console.log(db.getTime()+"   "+da.getTime());    
+          return db.getTime() - da.getTime();
+        });
+        //console.log(payments);
+        res.json(payments);
+    })
+})
+
+/*
 router.route('/get_payment_notifications_as_host').post(async (req, res) => {
   const user_id = req.body.user_id;
 
@@ -145,6 +163,7 @@ router.route('/get_payment_notifications_as_renter').post(async (req, res) => {
         res.json(payments);
     })
 })
+*/
 
 router.route('/approveRenterPayment').post((req,res)=>{
   const payment_id=req.body.payment_id;

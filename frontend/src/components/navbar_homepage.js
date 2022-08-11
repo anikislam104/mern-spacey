@@ -22,7 +22,7 @@ export default class NavbarHomepage extends Component {
         .then((res) => res.json())
         .then((json) => {
             this.setState({
-                user_name: localStorage.getItem('firstName'),
+                user_name: localStorage.getItem('email'),
             });
   
         })
