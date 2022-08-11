@@ -78,7 +78,6 @@ export default class Notifications extends Component{
                         <div className="card mb-4 box-shadow">
                             <div className="card-body">
                             <p className="card-text">Renter {payment.renter_id} is <b>requested</b> for the property <b>{payment.property_id}</b> at {payment.update_date}</p>
-                                {/* <p className="card-text">{property.location}</p> */}
                                 <div className="d-flex justify-content-between align-items-center">
                                     <div className="btn-group">
                                         <button type="button" className="btn btn-sm btn-outline-secondary" onClick={

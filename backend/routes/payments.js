@@ -193,4 +193,35 @@ router.route('/rejectRenterPayment').post((req,res)=>{
      })
 })
 
+router.route('/get_payment_history').post(async (req, res) => {
+  const user_id = req.body.user_id;
+
+  Payment.find()
+    .then(payments => {
+        payments=payments.filter(payment=>(payment.host_id==user_id || payment.renter_id==user_id) && payment.status=='approved'); 
+        payments.sort((a,b)=>{
+          let da = new Date(a.update_date),
+              db = new Date(b.update_date);
+          //console.log(db.getTime()+"   "+da.getTime());    
+          return db.getTime() - da.getTime();
+        });
+        //console.log(payments);
+        res.json(payments);
+    })
+})
+
+router.route('/get_total_income').post(async (req, res) => {
+  const user_id = req.body.user_id;
+  let income=0;
+  Payment.find()
+    .then(payments => {
+        payments=payments.filter(payment=>payment.host_id==user_id && payment.status=='approved'); 
+        for(let i=0;i<payments.length;i++){
+           income+=parseInt(payments[i].amount);
+        }
+        console.log(income);
+        res.json(income);
+    })
+})
+
 module.exports = router;
