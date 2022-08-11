@@ -63,9 +63,9 @@ export default class PaymentHistory extends Component{
                             <Table striped>
                             <tbody>
                                 <tr>
-                                <td>{payment.host_id}</td>
-                                <td>{payment.renter_id}</td>
-                                <td>{payment.property_id}</td>
+                                <td>{payment.host_id}<br/>{payment.host_email}</td>
+                                <td>{payment.renter_id}<br/>{payment.renter_email}</td>
+                                <td>{payment.property_id}<br/>{payment.property_title}</td>
                                 <td>{payment.amount}</td>
                                 <td>{payment.date}</td>
                                 </tr>

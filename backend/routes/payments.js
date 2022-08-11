@@ -2,6 +2,7 @@ const router = require('express').Router();
 let Payment = require('../models/payment');
 const stripe = require("stripe")("sk_test_51LQUhSFrHNJyuz7GBJJOrNhKLYVgBkrJsv4nHTiyEE6CbsqrP5Ntg9kuGRoq8RJZSK1l5Ke0CWBUUChp2KE7mq9g00BdwXpg2D");
 let User = require('../models/user');
+let Property = require('../models/property');
 
 router.route('/add_in_mobileBanking').post(async(req, res) =>{
     console.log("Add Payment");
@@ -24,6 +25,9 @@ router.route('/add_in_mobileBanking').post(async(req, res) =>{
         const property_id=payment.property_id;
         const status=payment.status;
         const update_date=payment.update_date;
+        const host_email=payment.host_email;
+        const renter_email=payment.renter_email;
+        const property_title=payment.property_title;
 
         const charge=await stripe.charges.create({
           amount: amount*100,
@@ -40,6 +44,9 @@ router.route('/add_in_mobileBanking').post(async(req, res) =>{
             host_id,
             property_id,
             status,
+            host_email,
+            renter_email,
+            property_title,
             date: date,
             update_date: date,
             token_id: token.id,
@@ -80,6 +87,9 @@ router.route('/add_in_cash').post(async(req, res) =>{
       const property_id=payment.property_id;
       const status=payment.status;
       const update_date=payment.update_date;
+      const host_email=payment.host_email;
+      const renter_email=payment.renter_email;
+      const property_title=payment.property_title;
 
       res_status = "success";
 
@@ -89,6 +99,9 @@ router.route('/add_in_cash').post(async(req, res) =>{
           host_id,
           property_id,
           status,
+          host_email,
+          renter_email,
+          property_title,
           date: date,
           update_date: date,
           token_id: 'cash',
@@ -111,6 +124,28 @@ router.route('/add_in_cash').post(async(req, res) =>{
       res_status = "failure";
       res.send(res_status);
     }
+})
+
+router.route('/get_host_email').post((req,res)=>{
+  const host_id=req.body.host_id;
+  //console.log("Host ID: "+host_id);
+
+    User.findById(host_id)
+     .then(user=>{
+          //console.log(user.email);
+          res.json(user.email);
+     })
+})
+
+router.route('/get_property_title').post((req,res)=>{
+  const property_id=req.body.property_id;
+  //console.log("Property ID: "+property_id);
+
+    Property.findById(property_id)
+     .then(property=>{
+          //console.log(property.title);
+          res.json(property.title);
+     })
 })
 
 //get notificatoins

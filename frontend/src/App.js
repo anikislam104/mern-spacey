@@ -26,7 +26,7 @@ import MobileBanking from "./components/Payment/mobileBanking";
 import CashPayment from "./components/Payment/cashPayment";
 import PaymentSuccess from "./components/Payment/paymentSuccess";
 import PaymentFailure from "./components/Payment/paymentFailure";
-import PaymentNotifications from "./components/paymentNotifications";
+import PaymentNotifications from "./components/Payment/paymentNotifications";
 import PaymentApproval from "./components/Payment/paymentApproval";
 import PaymentReject from "./components/Payment/paymentReject";
 import PaymentHistory from "./components/Payment/paymentHistory";
@@ -107,9 +107,10 @@ function App() {
         <Route path="payment/payment_approval" element={<PaymentApproval />} />
         <Route path="payment/payment_reject" element={<PaymentReject />} />
         <Route path="payment/payment_history" element={<PaymentHistory />} />
-
+        <Route path="payment/payment_notifications" element={<PaymentNotifications />} />
+        
         {/* Notifications */}
-        <Route path="payment_notifications" element={<PaymentNotifications />} />
+        
       </Routes>
 
       </div>

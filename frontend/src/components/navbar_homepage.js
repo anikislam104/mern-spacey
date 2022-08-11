@@ -88,7 +88,7 @@ export default class NavbarHomepage extends Component {
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
                   <NavDropdown title={this.state.user_name} id="basic-nav-dropdown">
-                    <NavDropdown.Item href={'/payment_notifications'}>Payment Notifications</NavDropdown.Item>
+                    <NavDropdown.Item href={'/payment/payment_notifications'}>Payment Notifications</NavDropdown.Item>
                     <NavDropdown.Item href={'/payment/payment_history'}>
                       Payment History
                     </NavDropdown.Item>

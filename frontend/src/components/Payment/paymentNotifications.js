@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { Component } from 'react';
-import NavbarHomepage from './navbar_homepage';
+import NavbarHomepage from '../navbar_homepage';
 
 export default class Notifications extends Component{
 
@@ -75,9 +75,9 @@ export default class Notifications extends Component{
             if (payment.host_id===this.state.user_id && payment.status==='pending'){
                 return(
                     <div className="col-md-12">
-                        <div className="card mb-8 box-shadow">
+                        <div className="card mb-4 box-shadow">
                             <div className="card-body">
-                            <p className="card-text">Renter {payment.renter_id} is <b>requested</b> for the property <b>{payment.property_id}</b> at {payment.update_date}</p>
+                            <p className="card-text">Renter {payment.renter_email} is <b>requested</b> for the property <b>{payment.property_title}</b> at {payment.update_date}</p>
                                 <div className="d-flex justify-content-between align-items-center">
                                     <div className="btn-group">
                                         <button type="button" className="btn btn-sm btn-outline-secondary" onClick={
@@ -85,8 +85,9 @@ export default class Notifications extends Component{
                                                 this.approvePaymentRequest(payment._id);
                                             }
                                         }>Approve</button>
-                                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-    
+                                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                                         <button type="button" className="btn btn-sm btn-outline-secondary" onClick={
                                             () => {
                                                 this.rejectPaymentRequest(payment._id);
@@ -103,9 +104,9 @@ export default class Notifications extends Component{
             else if(payment.renter_id===this.state.user_id && payment.status==='pending'){
                 return(
                     <div className="col-md-12">
-                        <div className="card mb-8 box-shadow">
+                        <div className="card mb-4 box-shadow">
                             <div className="card-body">
-                            <p className="card-text">Your request to Host {payment.host_id} for the property <b>{payment.property_id}</b> is <b>{payment.status}</b> at {payment.update_date}</p>
+                            <p className="card-text">Your request to Host {payment.host_email} for the property <b>{payment.property_title}</b> is <b>{payment.status}</b> at {payment.update_date}</p>
                             </div>
                         </div>
                     </div>
@@ -116,7 +117,7 @@ export default class Notifications extends Component{
                     <div className="col-md-12">
                         <div className="card mb-4 box-shadow">
                             <div className="card-body">
-                            <p className="card-text">Host {payment.host_id} has <b>{payment.status}</b> your request for the property <b>{payment.property_id}</b> at {payment.update_date}</p>
+                            <p className="card-text">Host {payment.host_email} has <b>{payment.status}</b> your request for the property <b>{payment.property_title}</b> at {payment.update_date}</p>
                             </div>
                         </div>
                     </div>

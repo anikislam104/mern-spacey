@@ -19,6 +19,9 @@ export default class MobileBanking extends Component {
             host_id:'62f3d4aee9c3058362888a37',
             status: 'pending',
             update_date:'',
+            host_email:'',
+            renter_email:'',
+            property_title:'',
         }
 
     }
@@ -29,9 +32,34 @@ export default class MobileBanking extends Component {
             .then((json) => {
                 this.setState({
                     renter_id: localStorage.getItem('user_id'),
+                    renter_email:localStorage.getItem('email'),
                 });
-                console.log('Checking....'+this.state.renter_id);
+                //console.log('Checking....'+this.state.renter_id);
             })
+            const id={
+                host_id:this.state.host_id,
+            }
+    
+            axios.post('http://localhost:5000/payments/get_host_email',id)
+                .then(res => 
+                    {
+                        console.log(res.data);
+                        this.setState({
+                            host_email: res.data,
+                        });
+                    });
+                    const id2={
+                        property_id:this.state.property_id,
+                    }
+            
+                    axios.post('http://localhost:5000/payments/get_property_title',id2)
+                        .then(res => 
+                            {
+                                console.log(res.data);
+                                this.setState({
+                                    property_title: res.data,
+                                });
+                            });        
     }
 
     onChangeAmount(e) {
@@ -49,6 +77,9 @@ export default class MobileBanking extends Component {
             host_id: this.state.host_id,
             status: this.state.status,
             update_date: this.state.date,
+            renter_email:this.state.renter_email,
+            host_email:this.state.host_email,
+            property_title:this.state.property_title,
         }
 
         console.log(payment);
@@ -92,6 +123,7 @@ export default class MobileBanking extends Component {
               
               <div className="maincontainer">
                 <NavbarHomepage />
+               
                <div class="container-fluid">
                    <div class="row no-gutter">
                       
@@ -107,8 +139,12 @@ export default class MobileBanking extends Component {
                                      </div>
      
                                      <div class="col-lg-5">
-                                        <h5> Property ID is: {this.state.property_id}</h5><br/>
-                                        <h5> Host ID is: {this.state.host_id}</h5><br/>
+                                        
+                                     <h5> Property ID: {this.state.property_id}</h5><br/>
+                                        <h5> Host ID: {this.state.host_id}</h5><br/>
+                                        <h5> Host: {this.state.host_email}</h5><br/>
+                                        <h5> Property Title: {this.state.property_title}</h5><br/>
+
                                         <form encType="multipart/form-data">
                                                <div class="form-group sm-3">
                                                <label><b>Amount: </b></label><br/><br/>
@@ -117,6 +153,7 @@ export default class MobileBanking extends Component {
                                                <br/>
                                                <br/>
                                         </form>
+                                        
 
                                         &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                                             <StripeCheckout
