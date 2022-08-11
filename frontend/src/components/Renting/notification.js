@@ -3,7 +3,7 @@ import React,{ Component } from "react";
 
 
 
-export default class Notification extends Component {
+export default class RentRequestNotification extends Component {
     constructor(props) {
         super(props);
         this.acceptRequest = this.acceptRequest.bind(this);
@@ -62,7 +62,8 @@ export default class Notification extends Component {
                         
                         <h1>{request.property_title}</h1>
                         <h1>{request.renter_name}</h1>
-                        <h1>{request.date}</h1>
+                        <h1>{request.start_date}</h1>
+                        <h1>{request.end_date}</h1>
                         <button onClick={
                             () => {
                                 this.acceptRequest(request._id);

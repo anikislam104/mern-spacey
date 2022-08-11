@@ -50,12 +50,21 @@ router.route('/send_rental_request').post(async (req, res) =>
 {
     const renter_id = req.body.renter_id;
     const property_id = req.body.property_id;
-    const date = req.body.date;
     const renter_name = req.body.renter_name;
     const property_title = req.body.property_title;
     const host_id = req.body.host_id;
+    var start_date = req.body.start_date;
+    var end_date = req.body.end_date;
 
-    console.log("renter_id:" + renter_id + " property_id:" + property_id + " date:" + date + " host_id:" + host_id);
+    var start=new Date(start_date);
+    var end=new Date(end_date);
+    start.setHours(start.getHours() + 6);
+    end.setHours(end.getHours() + 6);
+    start_date=start.toUTCString();
+    end_date=end.toUTCString();
+
+    console.log("renter_id:" + renter_id + " property_id:" + property_id + " host_id:" + host_id);
+    console.log("start date: " + start_date + " end date: " + end_date);
 
     if(host_id===renter_id){
         res.send("You can't rent your own property");
@@ -67,10 +76,11 @@ router.route('/send_rental_request').post(async (req, res) =>
             renter_name,
             property_id,
             property_title,
-            date,
+            start_date: start_date,
+            end_date: end_date,
         });
         newRentRequest.save();
-        var message="You have a new rental request from " + renter_name + " for your property " + property_title + " on " + date;
+        var message="You have a new rental request from " + renter_name + " for your property " + property_title + " from " + start_date + " to " + end_date;
         const newNotification =new Notification( {
             user_id:host_id,
             message,
@@ -94,12 +104,13 @@ router.route('/accept_rent_request').post(async (req, res) =>
         host_id: rent_request.host_id,
         renter_id: rent_request.renter_id,
         property_id: rent_request.property_id,
-        date: rent_request.date,
+        start_time: rent_request.start_date,
+        end_time: rent_request.end_date,
     });
     await newBooking.save();
     await RentRequest.deleteOne({ _id: rent_request_id });
 
-    var message="Your rental request for " + rent_request.property_title + " on " + rent_request.date + " has been accepted";
+    var message="Your rental request for " + rent_request.property_title + " from " + rent_request.start_date + " to "+ rent_request.end_date + " has been accepted";
 
     const newNotification =new Notification( {
         user_id: rent_request.renter_id,
@@ -115,7 +126,7 @@ router.route('/reject_rent_request').post(async (req, res) =>
     const rent_request_id = req.body.id;
     //console.log("rent_request_id:" + rent_request_id);
     const rent_request = await RentRequest.findById(rent_request_id);
-    var message="Your rental request for " + rent_request.property_title + " on " + rent_request.date + " has been rejected";
+    var message="Your rental request for " + rent_request.property_title + " from " + rent_request.start_date + " to "+ rent_request.end_date + " has been rejected";
     await RentRequest.deleteOne({ _id: rent_request_id });
     newNotification =new Notification( {
         user_id: rent_request_id,
@@ -185,4 +196,35 @@ router.route('/get_facilities').post(async (req, res) =>{
     res.send(facilities);
 })
 
+//get host id of a property
+
+router.route('/get_host_id').post(async (req, res) =>{
+    const property_id = req.body.property_id;
+    const host_id = await Property.findById(property_id);
+    console.log(host_id.hostId);
+    res.send(host_id.hostId);
+});
+
+//get title of a property
+router.route('/get_title').post(async (req, res) =>{
+    const property_id = req.body.property_id;
+    const title = await Property.findById(property_id);
+    console.log(title.title);
+    res.send(title.title);
+})
+
+//get all booked start dates and end dates of a property
+router.route('/get_booked_dates').post(async (req, res) =>{
+    const property_id = req.body.property_id;
+    console.log("property id " +property_id);
+    const bookings = await Booking.find({property_id: property_id});
+    //array of tuples (start date, end date)
+    var booked_dates = [];
+    console.log(bookings.length);
+    for(var i=0; i<bookings.length; i++){
+        booked_dates.push([bookings[i].start_time, bookings[i].end_time]);
+    } 
+    console.log(booked_dates);
+    res.send(booked_dates);
+})
 module.exports = router;

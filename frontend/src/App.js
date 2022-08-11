@@ -33,7 +33,7 @@ import PaymentHistory from "./components/Payment/paymentHistory";
 
 import RentingHome from "./components/Renting/rentingHome";
 import SelectedProperty from "./components/Renting/selectedProperty";
-import Notification from "./components/Renting/notification";
+import RentRequestNotification from "./components/Renting/notification";
 import AddInsurance from "./components/Insurance/addInsurance";
 import ForgetPassword from "./components/Authentication/forget_password";
 import ForgetPasswordOTP from "./components/Authentication/forget_password_otp";
@@ -43,6 +43,7 @@ import ViewProfile from "./components/Profile/viewProfile";
 import ShowMyBlog from "./components/Blog/showMyBlog";
 import EditBlog from "./components/Blog/editBlog";
 import ChooseStayDuration from "./components/Renting/choose_facility";
+import Notification from "./components/notification";
 
 
 
@@ -71,6 +72,7 @@ function App() {
         {/* Profile */}
         <Route path="editProfile" element={<EditProfile />} />
         <Route path="viewProfile" element={<ViewProfile />} />
+        <Route path="notification" element={<Notification />} />
         
         
 
@@ -97,7 +99,7 @@ function App() {
         {/* Renting  */}
         <Route path="renting" element={<RentingHome />} />
         <Route path="renting/selected_property" element={<SelectedProperty />} />
-        <Route path="rent_request_notifications" element={<Notification />} />
+        <Route path="rent_request_notifications" element={<RentRequestNotification />} />
         <Route path="renting/choose_facility" element={<ChooseStayDuration />} />
 
 
