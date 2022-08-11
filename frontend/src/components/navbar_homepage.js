@@ -92,9 +92,13 @@ export default class NavbarHomepage extends Component {
                     <NavDropdown.Item href={'/payment/payment_history'}>
                       Payment History
                     </NavDropdown.Item>
+                    <NavDropdown.Item href={'/viewProfile'}>
+                    View Profile
+                    </NavDropdown.Item>
                     <NavDropdown.Item href={'/logout'}>
                     Log out
                     </NavDropdown.Item>
+                    
                   </NavDropdown>
                 </Nav>
               </Navbar.Collapse>

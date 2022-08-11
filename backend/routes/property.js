@@ -55,7 +55,7 @@ router.route('/add').post(async (req, res) => {
 
 
   for (let i = 0; i < rooms.length; i++) {
-    const propertyId = current_property_id;
+    const propertyId = newProperty._id;
     const roomType = rooms[i][0];
     const roomNo = rooms[i][1];
     const newRoom = new Room({
@@ -71,7 +71,7 @@ router.route('/add').post(async (req, res) => {
   }
 
   for (let i = 0; i < facilities.length; i++) {
-    const propertyId = current_property_id;
+    const propertyId = newProperty._id;
     const facilityType = facilities[i];
     const newFacility = new Facility({
       propertyId,

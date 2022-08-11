@@ -8,35 +8,14 @@ export default class SelectedProperty extends Component {
         this.sendRentalRequest = this.sendRentalRequest.bind(this);
         this.state = {
             property:[],
+            rooms:[],
+            facilities:[],
             host_name:'',
             renter_name:''
         }
     }
     componentDidMount() {
-        // fetch('http://localhost:5000/renting/get_selected_property')
-        //     .then((res) => res.json())
-        //     .then((json) => {
-        //         console.log(JSON.stringify(json));
-        //         this.setState({
-        //             property: this.state.property.concat(json),
-        //         });
-        //         fetch('http://localhost:5000/users/user_id')
-        //             .then((res2) => res2.json())
-        //             .then((json2) => {
-        //                 var id=json2.user_id;
-        //                 const renter_id={
-        //                     user_id: id,
-        //                 }
-        //                 axios.post('http://localhost:5000/users/get_user_name',renter_id)
-        //                     .then(res3 => {
-        //                         console.log(res3.data);
-        //                         this.setState({
-        //                             renter_name: res3.data,
-        //                         });
-        //                     })
-        //             })
-
-        //     })
+        
         const property = {
             property_id: localStorage.getItem('selected_property_id'),
         }
@@ -58,6 +37,22 @@ export default class SelectedProperty extends Component {
                             renter_name: res3.data,
                                             });
                                     })
+                                    
+            axios.post('http://localhost:5000/renting/get_rooms', property)
+            .then(res => {
+                console.log(res.data);
+                this.setState({
+                    rooms: this.state.rooms.concat(res.data),
+                });
+            })
+
+            axios.post('http://localhost:5000/renting/get_facilities', property)
+            .then(res => {
+                console.log(res.data);
+                this.setState({
+                    facilities: this.state.facilities.concat(res.data),
+                });
+            })
         
         }
     //get username of host
@@ -116,14 +111,41 @@ export default class SelectedProperty extends Component {
                     <div>
                         <h1>{property.title}</h1>
                         <h1>Location: {property.location}</h1>
-                        <h1>Size: {property.size}</h1>
-                        <h1>Price: {property.pricePerDay}</h1>
+                        <h1>Size: {property.size} square ft</h1>
+                        <h1>Price Per Day: {property.pricePerDay} tk</h1>
                         <h1>Description: {property.description}</h1>
                         {this.getUsername(property.hostId)}
                         <h1>Host: {this.state.host_name}</h1>
-                        <button onClick={
+                        <br></br>
+                        <br></br>
+                        <h1><strong>Rooms:</strong></h1>
+                        {this.state.rooms.map((room) => {
+                            return (
+                                <div>
+                                    <h1>{room.roomType} {room.roomNo}</h1>
+                                    </div>
+                            )
+                        }
+                        )}
+                        <br></br>
+                        <br></br>
+                        <h1><strong>Facilities:</strong></h1>
+                        {this.state.facilities.map((facility) => {
+                            return (
+                                <div>
+                                    <h1>{facility.facilityType}</h1>
+                                    </div>
+                            )
+                        }
+                        )}
+                        {/* //design button */}
+                        <br />
+                        <br />
+                        {/* <button className="btn btn-primary" onClick={() => this.sendRentalRequest(property)}>Book Now</button> */}
+                        <button className="btn btn-primary" onClick={
                             () => {
-                                this.sendRentalRequest(property);
+                                // this.sendRentalRequest(property);
+                                window.location.href = '/renting/choose_facility';
                             }
                         }>Book</button>
                     </div>

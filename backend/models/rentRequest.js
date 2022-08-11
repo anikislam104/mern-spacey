@@ -8,7 +8,8 @@ const rentRequestSchema = new Schema({
     renter_name: { type: String, required: true },
     property_id: { type: String, required: true },
     property_title: { type: String, required: true },
-    date: { type: Date, required: true },
+    start_date: { type: Date },
+    end_date: { type: Date },
 }, {
   timestamps: true,
 });

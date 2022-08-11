@@ -4,7 +4,8 @@ let Booking = require('../models/booking');
 let RentRequest = require('../models/rentRequest');
 const Property = require('../models/property');
 const Notification = require('../models/notification');
-
+let Facility = require('../models/facility');
+let Room = require('../models/room');
 
 router.route('/selected_property').post((req, res) => {
     console.log("selected_property");
@@ -167,5 +168,21 @@ router.route('/bookings').post(async (req, res) =>
     await newBooking.save();
 }
 )
+
+//get rooms of a property
+router.route('/get_rooms').post(async (req, res) =>{
+    const property_id = req.body.property_id;
+    const rooms = await Room.find({propertyId: property_id});
+    console.log(rooms.length);
+    res.send(rooms);
+})
+
+//get facilities of a property
+router.route('/get_facilities').post(async (req, res) =>{
+    const property_id = req.body.property_id;
+    const facilities = await Facility.find({propertyId: property_id});
+    console.log(facilities.length);
+    res.send(facilities);
+})
 
 module.exports = router;

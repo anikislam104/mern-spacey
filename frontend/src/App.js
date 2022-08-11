@@ -42,6 +42,7 @@ import EditProfile from "./components/Profile/editProfile";
 import ViewProfile from "./components/Profile/viewProfile";
 import ShowMyBlog from "./components/Blog/showMyBlog";
 import EditBlog from "./components/Blog/editBlog";
+import ChooseStayDuration from "./components/Renting/choose_facility";
 
 
 
@@ -97,6 +98,7 @@ function App() {
         <Route path="renting" element={<RentingHome />} />
         <Route path="renting/selected_property" element={<SelectedProperty />} />
         <Route path="rent_request_notifications" element={<Notification />} />
+        <Route path="renting/choose_facility" element={<ChooseStayDuration />} />
 
 
         {/* Payment */}
