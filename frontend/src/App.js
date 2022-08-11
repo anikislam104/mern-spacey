@@ -34,7 +34,7 @@ import ForgetPasswordOTP from "./components/Authentication/forget_password_otp";
 import AdminHomepage from "./components/adminHomepage";
 import EditProfile from "./components/Profile/editProfile";
 import ViewProfile from "./components/Profile/viewProfile";
-import Notifications from "./components/notifications";
+import PaymentNotifications from "./components/paymentNotifications";
 import PaymentApproval from "./components/Payment/paymentApproval";
 import PaymentReject from "./components/Payment/paymentReject";
 import ShowMyBlog from "./components/Blog/showMyBlog";
@@ -105,7 +105,7 @@ function App() {
         <Route path="payment/payment_reject" element={<PaymentReject />} />
 
         {/* Notifications */}
-        <Route path="notifications" element={<Notifications />} />
+        <Route path="payment_notifications" element={<PaymentNotifications />} />
       </Routes>
 
       </div>

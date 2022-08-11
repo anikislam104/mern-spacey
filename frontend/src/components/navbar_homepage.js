@@ -60,7 +60,7 @@ export default class NavbarHomepage extends Component {
           </li>
 
           <li>
-            <Link to={'/notifications'}><h5>Notifications</h5></Link>
+          <Link to={'/payment_notifications'}><h5>Payment Notifications</h5></Link>
           </li>
 
          </ul>
