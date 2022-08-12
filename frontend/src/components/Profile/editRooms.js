@@ -3,6 +3,7 @@ import NavbarHomepage from "../navbar_homepage";
 import axios from "axios";
 
 
+
 const EditRooms = () => {
     const [rooms, setRooms] = React.useState([]);
     //room object
@@ -34,8 +35,8 @@ const EditRooms = () => {
                 <div className="notification">
                     {rooms.map((room) => {
                         return (
-                            <div>
-                                <h1>{room.roomType}   {room.roomNo}</h1>
+                            <div className="menu">
+                                <h2>{room.roomType}   {room.roomNo}</h2>
                                 <br />
                                 <button className="btn btn-primary" onClick={
                                     () => {
@@ -69,6 +70,10 @@ const EditRooms = () => {
                     )}
                     </div>
                     <br />
+                    <br />
+                    <h1>Add New Room</h1>
+                    <br />
+                    <br />
                     <input type="text" placeholder="Room Type" onChange={(e) => setRoom({ ...room, room_type: e.target.value })} />
                     <br />
                     <br />
@@ -89,7 +94,7 @@ const EditRooms = () => {
                         axios.post("http://localhost:5000/property/add_room", rooms)
                             .then((res) => {
                                 console.log(res.data);
-                                // window.location.reload();
+                                window.location.reload();
                             })
                     }
                     }>Add Room</button>
@@ -98,7 +103,7 @@ const EditRooms = () => {
                     {roomArray.map((room) => {
                         return (
                             <div>
-                                <h1>{room.room_type}   {room.room_number}</h1>
+                                <h2>{room.room_type}   {room.room_number}</h2>
                                 <br />
                                 
                             </div>

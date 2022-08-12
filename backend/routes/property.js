@@ -155,11 +155,18 @@ router.route('/decrease_room').post((req, res) => {
     const room_id = req.body.room_id;
     Room.findById(room_id)
     .then(room => {
-      if(room.roomNo > 0){
+      if(room.roomNo > 1){
         room.roomNo = room.roomNo - 1;
+        room.save()
+        .then(() => res.send('room updated'))
       }
-      room.save()
-      .then(() => res.send('room updated'))
+      else
+      {
+        //delete room
+        Room.findByIdAndDelete(room_id)
+        .then(() => res.send('room deleted'))
+      }
+      
     })
 })
 
@@ -175,6 +182,25 @@ router.route('/add_room').post((req, res) => {
   });
   newRoom.save()
     .then(() => res.send('room added'))
+})
+
+//delete facilities
+router.route('/delete_facility').post((req, res) => {
+  const facility_id = req.body.facility_id;
+  Facility.findByIdAndDelete(facility_id)
+    .then(() => res.send('facility deleted'))
+})
+
+//add facilities
+router.route('/add_facility').post((req, res) => {
+  const property_id = req.body.property_id;
+  const facility_type = req.body.facility_type;
+  const newFacility = new Facility({
+    propertyId: property_id,
+    facilityType: facility_type,
+  });
+  newFacility.save()
+    .then(() => res.send('facility added'))
 })
 
 module.exports = router;
