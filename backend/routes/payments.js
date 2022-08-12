@@ -132,7 +132,7 @@ router.route('/get_host_email').post((req,res)=>{
 
     User.findById(host_id)
      .then(user=>{
-          //console.log(user.email);
+          console.log("Host point: "+user.point);
           res.json(user.email);
      })
 })
@@ -216,7 +216,7 @@ router.route('/approveRenterPayment').post((req,res)=>{
 
 router.route('/rejectRenterPayment').post((req,res)=>{
   const payment_id=req.body.payment_id;
-  console.log("Payment ID: "+payment_id);
+  //console.log("Payment ID: "+payment_id);
 
   Payment.findById(payment_id)
      .then(payment=>{
@@ -276,7 +276,7 @@ router.route('/get_income_between_days').post(async (req, res) => {
               income+=parseInt(payments[i].amount);
            }
         }
-        console.log(income);
+        //console.log(income);
         res.json(income);
     })
 })

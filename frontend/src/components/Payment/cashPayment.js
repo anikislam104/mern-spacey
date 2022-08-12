@@ -184,7 +184,7 @@ async onSubmit (e){
                                                <div className="form-group">
         
                                                     &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                                                    <input type="submit" value="Confirm" className="btn btn-primary" style={myStyle.buttonSection} />
+                                                    <input type="submit" value="Pay in Cash" className="btn btn-primary" style={myStyle.buttonSection} />
                                                </div>
                                                
 
