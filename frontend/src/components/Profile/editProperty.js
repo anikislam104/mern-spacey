@@ -94,6 +94,24 @@ const EditProperty = () => {
                             <input type="submit" value="Update Property" className="btn btn-primary" /> 
                         </div>
                     </form>
+                    <br />
+                    <br />
+                    <div>
+                        <button className="btn btn-primary" onClick={
+                            () => {
+                                window.location = "/editRooms";
+                            }
+                        }>Edit room info</button>
+                    </div>
+                    <br />
+                    <br />
+                    <div>
+                        <button className="btn btn-primary" onClick={
+                            () => {
+                                window.location = "/editFacilities";
+                            }
+                        }>Edit facilities</button>
+                    </div>
                 </div>
             </div>
         </div>

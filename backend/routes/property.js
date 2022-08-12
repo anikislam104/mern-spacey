@@ -139,4 +139,42 @@ router.route('/edit_property').post((req, res) => {
     })
 })
 
+//increase room no to one room
+router.route('/increase_room').post((req, res) => {
+    const room_id = req.body.room_id;
+    Room.findById(room_id)
+    .then(room => {
+      room.roomNo = room.roomNo + 1;
+      room.save()
+      .then(() => res.send('room updated'))
+    })
+})
+
+//decrease room no to one room
+router.route('/decrease_room').post((req, res) => {
+    const room_id = req.body.room_id;
+    Room.findById(room_id)
+    .then(room => {
+      if(room.roomNo > 0){
+        room.roomNo = room.roomNo - 1;
+      }
+      room.save()
+      .then(() => res.send('room updated'))
+    })
+})
+
+//add room
+router.route('/add_room').post((req, res) => {
+  const property_id = req.body.property_id;
+  const room_type = req.body.room_type;
+  const room_no = req.body.room_no;
+  const newRoom = new Room({
+    propertyId: property_id,
+    roomType: room_type,
+    roomNo: room_no,
+  });
+  newRoom.save()
+    .then(() => res.send('room added'))
+})
+
 module.exports = router;
