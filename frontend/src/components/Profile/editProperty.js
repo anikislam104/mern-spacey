@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import NavbarHomepage from "../navbar_homepage";
 
 const EditProperty = () => {
     const [property_title, setProperty_title] = React.useState("");
@@ -29,6 +30,7 @@ const EditProperty = () => {
 
     return (
         <div>
+            <NavbarHomepage />
             <h1>Edit Property</h1>
             <div className="container">
                 <div className="notification">

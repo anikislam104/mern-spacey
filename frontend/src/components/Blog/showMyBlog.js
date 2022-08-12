@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import NavbarHomepage from '../navbar_homepage';
 // const blog_id=Request.QueryString["data"];
 var comments=[];
 var like=0;
@@ -78,6 +79,7 @@ export default class ShowMyBlog extends Component {
             return(
                 
                 <div>
+                    <NavbarHomepage />
                     <h1>{blog.title}</h1>
                     <p>{blog.content}</p>
                     <br />
