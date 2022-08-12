@@ -148,6 +148,36 @@ router.route('/get_property_title').post((req,res)=>{
      })
 })
 
+router.route('/get_renter_point').post((req,res)=>{
+  const renter_id=req.body.renter_id;
+
+    User.findById(renter_id)
+     .then(user=>{
+        //console.log(user.point*0.05);
+        let point=parseInt(user.point);
+        //user.point=4;
+        //user.save();
+        res.json(point);
+     })
+})
+
+router.route('/get_renter_discount').post((req,res)=>{
+  const renter_id=req.body.renter_id;
+  const amount=req.body.amount;
+  //console.log("Amount: "+amount);
+  let discount=0;
+
+    User.findById(renter_id)
+     .then(user=>{
+        //console.log(user.point*0.05);
+        let point=parseInt(user.point);
+        if(point>=5){
+          discount=amount*0.05;
+        }
+        res.json(discount);
+     })
+})
+
 //get notificatoins
 router.route('/get_payment_notifications').post(async (req, res) => {
   const user_id = req.body.user_id;
@@ -202,12 +232,44 @@ router.route('/get_payment_notifications_as_renter').post(async (req, res) => {
 
 router.route('/approveRenterPayment').post((req,res)=>{
   const payment_id=req.body.payment_id;
-  console.log("Payment ID: "+payment_id);
+  //console.log("Payment ID: "+payment_id);
+  let amount=0;
+  //const renter_id='';
+
+ /* Payment.findById(payment_id)
+     .then(payment=>{
+        amount=parseInt(payment.amount);
+        renter_id=payment.renter_id;
+  })
+
+  User.findById(renter_id)
+     .then(user=>{
+        //console.log(user.point*0.05);
+        let point=parseInt(user.point);
+        console.log("Point: "+point+"    Amount: "+amount);
+        point+=(amount/100);
+        console.log("Point: "+point+"    Amount: "+amount);
+        user.point=point;
+        user.save();
+  })*/
 
   Payment.findById(payment_id)
      .then(payment=>{
           payment.status='approved';
           payment.update_date=new Date();
+          amount=parseInt(payment.amount);
+
+          User.findById(payment.renter_id)
+              .then(user=>{
+                  //console.log(user.point*0.05);
+                  let point=parseInt(user.point);
+                  console.log("Point: "+point+"    Amount: "+amount);
+                  point+=(amount/100);
+                  console.log("Point: "+point+"    Amount: "+amount);
+                  user.point=point;
+                  user.save();
+              })  
+
           payment.save();
           console.log(payment);
           res.json('ok');
@@ -216,7 +278,7 @@ router.route('/approveRenterPayment').post((req,res)=>{
 
 router.route('/rejectRenterPayment').post((req,res)=>{
   const payment_id=req.body.payment_id;
-  console.log("Payment ID: "+payment_id);
+  //console.log("Payment ID: "+payment_id);
 
   Payment.findById(payment_id)
      .then(payment=>{
@@ -276,7 +338,7 @@ router.route('/get_income_between_days').post(async (req, res) => {
               income+=parseInt(payments[i].amount);
            }
         }
-        console.log(income);
+        //console.log(income);
         res.json(income);
     })
 })
