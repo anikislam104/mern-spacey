@@ -1,5 +1,6 @@
 import axios from "axios";
 import React,{ Component } from "react";
+import NavbarHomepage from "../navbar_homepage";
 var property_id= '';
 var host_id= '';
 var location='';
@@ -109,6 +110,7 @@ export default class RentingHome extends Component {
     render() {
         return (
             <div className="maincontainer">
+                    <NavbarHomepage />
                        {this.showProperties()}
             </div>
         );

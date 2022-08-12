@@ -3,6 +3,8 @@ import React, { useEffect } from "react";
 import Calendar from 'react-calendar';
 import { differenceInCalendarDays } from 'date-fns';
 import 'react-calendar/dist/Calendar.css';
+import NavbarHomepage from "../navbar_homepage";
+
 
 
 const ChooseStayDuration=()=>{
@@ -163,6 +165,7 @@ const ChooseStayDuration=()=>{
     }
     return(
         <div>
+            <NavbarHomepage />
             <h1>Choose Duration</h1>
             <br />
                 <br />

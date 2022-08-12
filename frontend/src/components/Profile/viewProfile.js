@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
+import NavbarHomepage from "../navbar_homepage";
 
 const ViewProfile = () => {
     const [firstName, setFirstName] = useState("");
@@ -41,6 +42,7 @@ const ViewProfile = () => {
     return (
         <div>
             {/* //show user profile */}
+            <NavbarHomepage />
             <div className="container">
                 <div className="row">
                     <div className="col-md-6">

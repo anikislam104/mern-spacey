@@ -492,5 +492,7 @@ router.route('/user_id').get((req, res) => {
     const properties=await Property.find({hostId:user_id});
     res.send(properties);
   }));
+
+  
   module.exports = router;
   module.exports.current_user_id = current_user_id;

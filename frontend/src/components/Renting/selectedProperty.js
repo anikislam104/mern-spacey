@@ -1,5 +1,6 @@
 import axios from "axios";
 import React,{ Component } from "react";
+import NavbarHomepage from "../navbar_homepage";
 
 export default class SelectedProperty extends Component {
     constructor(props) {
@@ -103,54 +104,63 @@ export default class SelectedProperty extends Component {
         
     }
 
+    showProperty(){
+        return this.state.property.map((property) => {
+            return (
+                <div>
+                    <h1>{property.title}</h1>
+                    <h1>Location: {property.location}</h1>
+                    <h1>Size: {property.size} square ft</h1>
+                    <h1>Price Per Day: {property.pricePerDay} tk</h1>
+                    <h1>Description: {property.description}</h1>
+                    {this.getUsername(property.hostId)}
+                    <h1>Host: {this.state.host_name}</h1>
+                    <br></br>
+                    <br></br>
+                    <h1><strong>Rooms:</strong></h1>
+                    {this.state.rooms.map((room) => {
+                        return (
+                            <div>
+                                <h1>{room.roomType} {room.roomNo}</h1>
+                                </div>
+                        )
+                    }
+                    )}
+                    <br></br>
+                    <br></br>
+                    <h1><strong>Facilities:</strong></h1>
+                    {this.state.facilities.map((facility) => {
+                        return (
+                            <div>
+                                <h1>{facility.facilityType}</h1>
+                                </div>
+                        )
+                    }
+                    )}
+                    {/* //design button */}
+                    <br />
+                    <br />
+                    {/* <button className="btn btn-primary" onClick={() => this.sendRentalRequest(property)}>Book Now</button> */}
+                    <button className="btn btn-primary" onClick={
+                        () => {
+                            // this.sendRentalRequest(property);
+                            window.location.href = '/renting/choose_facility';
+                        }
+                    }>Book</button>
+                </div>
+            )
+        
+    })
+}       
 
     render() {
-        
-            return this.state.property.map((property) => {
-                return (
-                    <div>
-                        <h1>{property.title}</h1>
-                        <h1>Location: {property.location}</h1>
-                        <h1>Size: {property.size} square ft</h1>
-                        <h1>Price Per Day: {property.pricePerDay} tk</h1>
-                        <h1>Description: {property.description}</h1>
-                        {this.getUsername(property.hostId)}
-                        <h1>Host: {this.state.host_name}</h1>
-                        <br></br>
-                        <br></br>
-                        <h1><strong>Rooms:</strong></h1>
-                        {this.state.rooms.map((room) => {
-                            return (
-                                <div>
-                                    <h1>{room.roomType} {room.roomNo}</h1>
-                                    </div>
-                            )
-                        }
-                        )}
-                        <br></br>
-                        <br></br>
-                        <h1><strong>Facilities:</strong></h1>
-                        {this.state.facilities.map((facility) => {
-                            return (
-                                <div>
-                                    <h1>{facility.facilityType}</h1>
-                                    </div>
-                            )
-                        }
-                        )}
-                        {/* //design button */}
-                        <br />
-                        <br />
-                        {/* <button className="btn btn-primary" onClick={() => this.sendRentalRequest(property)}>Book Now</button> */}
-                        <button className="btn btn-primary" onClick={
-                            () => {
-                                // this.sendRentalRequest(property);
-                                window.location.href = '/renting/choose_facility';
-                            }
-                        }>Book</button>
-                    </div>
-                )
-            })
-        
+        return (
+            <div>
+                <NavbarHomepage />
+                {this.showProperty()}
+            </div>
+        )
     }
+
+   
 }

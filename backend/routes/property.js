@@ -99,4 +99,44 @@ router.route('/all_properties').get((req, res) => {
 })
 
 
+//delete property
+router.route('/delete_property').post((req, res) => {
+  const property_id = req.body.property_id;
+  console.log(property_id);
+  Property.findByIdAndDelete(property_id)
+    .then(() => res.send('property deleted'))
+  
+});
+
+//edit property
+router.route('/edit_property').post((req, res) => {
+    const property_id = req.body.property_id;
+    const property_title = req.body.property_title;
+    const property_location = req.body.property_location;
+    const property_description = req.body.property_description;
+    const property_size = req.body.property_size;
+    const property_price = req.body.property_price;
+
+    Property.findById(property_id)
+    .then(property => {
+      if(property_title){
+        property.title = property_title;
+      }
+      if(property_location){
+        property.location = property_location;
+      }
+      if(property_description){
+        property.description = property_description;
+      }
+      if(property_size){
+        property.size = property_size;
+      }
+      if(property_price){
+        property.pricePerDay = property_price;
+      }
+      property.save()
+      .then(() => res.send('property updated'))
+    })
+})
+
 module.exports = router;

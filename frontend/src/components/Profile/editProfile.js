@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useRef,useState } from "react";
+import NavbarHomepage from "../navbar_homepage";
 
 const EditProfile = () => {
     //button handler
@@ -90,6 +91,7 @@ const EditProfile = () => {
     }
     return (
         <div>
+            <NavbarHomepage />
             <h1>Edit Profile</h1>
             
             <br />
