@@ -12,6 +12,7 @@ const userSchema = new Schema({
   phoneNumber: { type: Number, required: true },
   dateOfBirth: { type: Date, required: true },
   image: { type: String, required: true },
+  point: { type: Number, default: 0 },
 }, {
   timestamps: true,
 });

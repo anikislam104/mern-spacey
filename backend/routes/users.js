@@ -471,13 +471,18 @@ router.route('/user_id').get((req, res) => {
 
   router.route('/get_notifications').post(asyncHandler(async(req, res) => {
     const user_id = req.body.user_id;
+    console.log(user_id);
     const notifications=await Notification.find({user_id:user_id});
-    //arrange them in descending order
-    notifications.sort(function(a, b){
-      return b.date - a.date;
-    });
-    console.log(notifications);
-    res.send(notifications);
+    
+    var notifications_array=[];
+
+    for(var i=0;i<notifications.length;i++){
+      notifications_array.push(notifications[notifications.length-1-i]);
+    }
+
+    
+    console.log(notifications_array);
+    res.send(notifications_array);
   }));
 
   module.exports = router;

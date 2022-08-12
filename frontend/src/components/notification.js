@@ -1,14 +1,17 @@
 import axios from "axios";
-import React, { useState,useEffect } from "react";
+import React, { useEffect } from "react";
 
 const Notification = () => {
-    const [notification, setNotification] = useState([]);
-    const [user_id, setUser_id] = useState();
+    const [notification, setNotification] = React.useState([]);
 
     useEffect(() => {
-        setUser_id(localStorage.getItem('user_id'));
-
-        axios.post("http://localhost:5000/users/get_notifications",{user_id:user_id})
+        const id=localStorage.getItem("user_id");
+        const user={
+            user_id:id
+        }
+        console.log(localStorage.getItem('user_id'));
+        console.log(id);
+        axios.post("http://localhost:5000/users/get_notifications",user)
             .then(res => {
                 console.log(res.data);
                 setNotification(res.data);
@@ -16,16 +19,24 @@ const Notification = () => {
     }, []);
     return (
         <div>
+            <h1>Notifications</h1>
+            <div className="container">
+                <div className="notification">
+
             {notification.map((notification) => {
                 
                 return (
+
                     <div>
+
                         <p>{notification.message}</p>
                         <br />
                         <br />
                     </div>
                 )
             })}
+            </div>
+            </div>
 
         </div>
     );
