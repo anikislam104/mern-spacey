@@ -44,6 +44,7 @@ import ShowMyBlog from "./components/Blog/showMyBlog";
 import EditBlog from "./components/Blog/editBlog";
 import ChooseStayDuration from "./components/Renting/choose_facility";
 import Notification from "./components/notification";
+import ViewProperties from "./components/Profile/viewProperties";
 
 
 
@@ -73,6 +74,7 @@ function App() {
         <Route path="editProfile" element={<EditProfile />} />
         <Route path="viewProfile" element={<ViewProfile />} />
         <Route path="notification" element={<Notification />} />
+        <Route path="viewProperties" element={<ViewProperties />} />
         
         
 

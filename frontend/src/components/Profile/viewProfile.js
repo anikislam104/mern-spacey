@@ -32,6 +32,11 @@ const ViewProfile = () => {
         window.location = "/editProfile";
     }
 
+    const showProperties = (e) => {
+        e.preventDefault();
+        window.location = "/viewProperties";
+    }
+
     
     return (
         <div>
@@ -49,6 +54,9 @@ const ViewProfile = () => {
             </div>
             <div>
                 <button className="btn btn-primary" onClick={handleEdit}>Edit Profile</button>
+                <br />
+                <br />
+                <button className="btn btn-primary" onClick={showProperties}>Show my properties</button>
             </div>
         </div>
     );

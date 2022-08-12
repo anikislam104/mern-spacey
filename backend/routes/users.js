@@ -10,6 +10,7 @@ const cryptr = new Cryptr('ReallySecretKey');
 const generateToken=require('../config/generateToken');
 const OTP = require('../models/otp');
 var Notification = require('../models/notification');
+var Property = require('../models/property');
 // @ts-ignore
 const { Auth } = require("two-step-auth");
 
@@ -485,5 +486,11 @@ router.route('/user_id').get((req, res) => {
     res.send(notifications_array);
   }));
 
+  //get my properties
+  router.route('/get_my_properties').post(asyncHandler(async(req, res) => {
+    const user_id = req.body.user_id;
+    const properties=await Property.find({hostId:user_id});
+    res.send(properties);
+  }));
   module.exports = router;
   module.exports.current_user_id = current_user_id;

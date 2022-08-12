@@ -3,9 +3,7 @@ import React, { useEffect } from "react";
 import Calendar from 'react-calendar';
 import { differenceInCalendarDays } from 'date-fns';
 import 'react-calendar/dist/Calendar.css';
-//import calender.css
 
-// import axios from "axios";
 
 const ChooseStayDuration=()=>{
     const [start_date, setStartDate] = React.useState('');
@@ -166,6 +164,8 @@ const ChooseStayDuration=()=>{
     return(
         <div>
             <h1>Choose Duration</h1>
+            <br />
+                <br />
             <form>
                 
                 <h1>Start Date:</h1>
@@ -178,7 +178,8 @@ const ChooseStayDuration=()=>{
                 {/* //show start date if clicked */}
 
                 
-                
+                <br />
+                <br />
                 
                 
 
@@ -191,7 +192,8 @@ const ChooseStayDuration=()=>{
                 
                 {/* //show end date if clicked */}
                 
-                
+                <br />
+                <br />
                 <button className="btn btn-primary" onClick={handleSubmit}>Submit</button>
             </form>
         </div>
