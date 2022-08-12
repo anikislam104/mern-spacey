@@ -22,6 +22,8 @@ export default class MobileBanking extends Component {
             host_email:'',
             renter_email:'',
             property_title:'',
+            point:'',
+            discount:'',
         }
 
     }
@@ -59,19 +61,44 @@ export default class MobileBanking extends Component {
                                 this.setState({
                                     property_title: res.data,
                                 });
-                            });        
+                            });  
+                            
+                            const id3={
+                                renter_id: localStorage.getItem('user_id'),
+                              }
+                              axios.post('http://localhost:5000/payments/get_renter_point',id3)
+                                .then(res => 
+                                    {
+                                        console.log(res.data);
+                                        this.setState({
+                                            point: res.data,
+                                        });
+                                    });
     }
 
     onChangeAmount(e) {
         this.setState({
             amount: e.target.value,
         });
+
+        const id3={
+            renter_id: localStorage.getItem('user_id'),
+            amount: e.target.value,
+        }
+        axios.post('http://localhost:5000/payments/get_renter_discount',id3)
+            .then(res => 
+                {
+                    console.log(res.data);
+                    this.setState({
+                        discount: res.data,
+                    });
+                }); 
     }
 
     async handleToken (token){
         const payment={
             renter_id: this.state.renter_id,
-            amount: this.state.amount,
+            amount: this.state.amount-this.state.discount,
             date: this.state.date,
             property_id: this.state.property_id,
             host_id: this.state.host_id,
@@ -144,7 +171,8 @@ export default class MobileBanking extends Component {
                                         <h5> Host ID: {this.state.host_id}</h5><br/>
                                         <h5> Host: {this.state.host_email}</h5><br/>
                                         <h5> Property Title: {this.state.property_title}</h5><br/>
-
+                                        <h5> Your Current Point:{this.state.point}     &emsp;&emsp;&emsp; Discount: {this.state.discount} </h5><br/>
+                                        <h5> Amount to pay:{this.state.amount-this.state.discount} </h5><br/>
                                         <form encType="multipart/form-data">
                                                <div class="form-group sm-3">
                                                <label><b>Amount: </b></label><br/><br/>
