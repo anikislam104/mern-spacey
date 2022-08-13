@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import NavbarHomepage from "../navbar_homepage";
 
+
 const CurrentBookings = () => {
     const [bookings, setBookings] = React.useState([]);
 
@@ -59,8 +60,21 @@ const CurrentBookings = () => {
                                 <br />
                                 <button className="btn btn-primary" onClick={
                                     () => {
-                                        localStorage.setItem('cancel_booking_id',booking[6] );
-                                        window.location.href = "/cancel_booking";
+                                        const id={
+                                            booking_id:booking[0]
+                                        }
+                                        axios.post("http://localhost:5000/renting/cancel_booking",id)
+                                        .then(res => {
+                                            console.log(res.data);
+                                            if(res.data === "pre"){
+                                                window.location="/current_bookings";
+                                                alert("Booking cancelled");
+                                            }
+                                            else if(res.data === "curr"){
+                                                alert("Booking cannot be cancelled");
+                                            }
+
+                                        })
                                     }
                                 }>Cancel Booking</button>
                             </div>

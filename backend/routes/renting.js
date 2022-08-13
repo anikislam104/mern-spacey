@@ -7,6 +7,7 @@ const Notification = require('../models/notification');
 let Facility = require('../models/facility');
 let Room = require('../models/room');
 let ExtendBookingRequest = require('../models/extendBookingRequest');
+let PastBooking = require('../models/pastBooking');
 const { request } = require('express');
 
 router.route('/selected_property').post((req, res) => {
@@ -426,6 +427,46 @@ router.route('/decline_extend_booking_request').post(async (req, res) =>{
     .then(() => {
         res.send('ok');
     });
+})
+
+//cancel booking
+router.route('/cancel_booking').post(async (req, res) =>{
+    const booking_id = req.body.booking_id;
+    console.log(booking_id);
+    const booking = await Booking.findById(booking_id);
+    const start_date = booking.start_time;
+    const today = new Date();
+    const difference = start_date.getTime() - today.getTime();
+    var days = difference/(1000*60*60*24);
+    console.log(days);
+    if(days>0){
+        const notification = new Notification({
+            user_id: booking.renter_id,
+            message: "Your booking has been cancelled",
+        });
+        await notification.save();
+        //get Property name
+        const property = await Property.findById(booking.property_id);
+        const property_title = property.title;
+        //get renter name
+        const renter = await User.findById(booking.renter_id);
+        const renter_name = renter.firstName + " " + renter.lastName;
+        const message = renter_name + " has cancelled his booking for " + property_title;
+        const notification_message = new Notification({
+            user_id: booking.host_id,
+            message: message,
+        });
+        await notification_message.save();
+        await Booking.deleteOne({_id: booking_id})
+        .then(() => {
+            res.send('pre');
+        });
+    }
+    else{
+        //ceil days variable
+        res.send('curr');
+    }
+
 })
 
 module.exports = router;

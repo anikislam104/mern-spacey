@@ -9,10 +9,11 @@ const pastBookingSchema = new Schema({
     booking_id: { type: String, required: true },
     start_time: { type: Date },
     end_time: { type: Date },
+    price: { type: String ,default:0},
 }, {
   timestamps: true,
 });
 
-const Booking= mongoose.model('Booking', bookingSchema);
+const PastBooking= mongoose.model('PastBooking', pastBookingSchema);
 
-module.exports = Booking;
+module.exports = PastBooking;
