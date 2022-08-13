@@ -101,6 +101,9 @@ export default class NavbarHomepage extends Component {
                     <NavDropdown.Item href={'/renting/my_bookings'}>
                     My Bookings
                     </NavDropdown.Item>
+                    <NavDropdown.Item href={'extend_notification'}>
+                    Extend booking requests
+                    </NavDropdown.Item>
                     <NavDropdown.Item href={'/logout'}>
                     Log out
                     </NavDropdown.Item>

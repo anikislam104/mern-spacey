@@ -49,6 +49,10 @@ import EditProperty from "./components/Profile/editProperty";
 import MyBookings from "./components/Renting/myBookings";
 import EditRooms from "./components/Profile/editRooms";
 import EditFacilities from "./components/Profile/editFacilities";
+import CurrentBookings from "./components/Renting/current_bookings";
+import ChangeDuration from "./components/Renting/changeDuration";
+import ExtendNotification from "./components/Renting/extendNotification";
+import CancelBooking from "./components/Renting/cancelBooking";
 
 
 function App() {
@@ -110,6 +114,9 @@ function App() {
         <Route path="rent_request_notifications" element={<RentRequestNotification />} />
         <Route path="renting/choose_facility" element={<ChooseStayDuration />} />
         <Route path="renting/my_bookings" element={<MyBookings />} />
+        <Route path="current_bookings" element={<CurrentBookings />} />
+        <Route path="change_duration" element={<ChangeDuration />} />
+        <Route path="extend_notification" element={<ExtendNotification />} />
 
 
         {/* Payment */}

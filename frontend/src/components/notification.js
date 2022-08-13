@@ -9,8 +9,8 @@ const Notification = () => {
         const user={
             user_id:id
         }
-        console.log(localStorage.getItem('user_id'));
-        console.log(id);
+        // console.log(localStorage.getItem('user_id'));
+        // console.log(id);
         axios.post("http://localhost:5000/users/get_notifications",user)
             .then(res => {
                 console.log(res.data);
