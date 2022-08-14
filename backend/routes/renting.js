@@ -7,7 +7,7 @@ const Notification = require('../models/notification');
 let Facility = require('../models/facility');
 let Room = require('../models/room');
 let ExtendBookingRequest = require('../models/extendBookingRequest');
-let PastBooking = require('../models/pastBooking');
+
 const { request } = require('express');
 
 router.route('/selected_property').post((req, res) => {
@@ -362,10 +362,13 @@ router.route('/get_extend_booking_requests').post(async (req, res) =>{
         var req_id=extend_booking_requests[i]._id;
         var booking_id = extend_booking_requests[i].booking_id;
         var new_end_date = extend_booking_requests[i].end_date;
+
+        console.log("booking id " + booking_id);
         
         const booking = await Booking.findById(booking_id);
         //check if host id is the same as user id
-        if(booking.host_id == user_id){
+        console.log(booking);
+        if(booking.host_id  == user_id){
             //get renter name
             const renter = await User.findById(booking.renter_id);
             renter_name = renter.firstName + " " + renter.lastName;
@@ -400,6 +403,15 @@ router.route('/accept_extend_booking_request').post(async (req, res) =>{
     const new_end_date = extend_booking_request.end_date;
     console.log(new_end_date);
     //set new end date in booking
+    const start_date = booking.start_time;
+    //calculate difference in days between start date and new end date
+    var difference = new_end_date.getTime() - start_date.getTime();
+    var days = difference/(1000*60*60*24);
+    const property = await Property.findById(booking.property_id);
+    var pricePerDay = property.pricePerDay;
+    var total_price = days*pricePerDay;
+
+    booking.price = total_price;
     booking.end_time = new_end_date;
     await booking.save();
     //delete extend booking request

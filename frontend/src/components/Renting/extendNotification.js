@@ -88,7 +88,7 @@ const ExtendNotification = () => {
         .then(res => {
             console.log(res.data);
         })
-        window.location="/current_bookings";
+        window.location.reload();
     }
 
     return (
