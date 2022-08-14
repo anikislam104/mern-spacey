@@ -234,9 +234,9 @@ router.route('/get_payment_notifications_as_renter').post(async (req, res) => {
 })
 */
 
-router.route('/approveRenterPayment').post((req,res)=>{
+router.route('/approveRenterPayment').post(async(req,res)=>{
   const payment_id=req.body.payment_id;
-  //console.log("Payment ID: "+payment_id);
+  console.log("Payment ID: "+payment_id);
   let amount=0;
   //const renter_id='';
 
@@ -267,17 +267,35 @@ router.route('/approveRenterPayment').post((req,res)=>{
               .then(user=>{
                   //console.log(user.point*0.05);
                   let point=parseInt(user.point);
-                  console.log("Point: "+point+"    Amount: "+amount);
+                  //console.log("Point: "+point+"    Amount: "+amount);
                   point+=(amount/100);
-                  console.log("Point: "+point+"    Amount: "+amount);
+                  //console.log("Point: "+point+"    Amount: "+amount);
                   user.point=point;
                   user.save();
               })  
 
           payment.save();
-          console.log(payment);
-          res.json('ok');
+
+          console.log("Payment ID " + payment_id);
+          //console.log(payment);
+
+          //get booking from payment
+          
      })
+     console.log("Payment ID: " + payment_id);
+     const payment=await Payment.findById(payment_id);
+     var bill=payment.amount;
+     console.log("Bill: " + bill);
+    //  console.log("payment "+payment.booking_id);
+     const booking_id=payment.booking_id;
+     console.log("Booking ID: "+booking_id);
+      Booking.findById(booking_id)
+          .then(booking=>{
+              booking.payment_status='Paid';
+              booking.price=bill;
+              booking.save();
+          })
+      res.json('ok');
 })
 
 router.route('/rejectRenterPayment').post((req,res)=>{

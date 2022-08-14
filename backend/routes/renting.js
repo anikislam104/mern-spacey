@@ -104,12 +104,22 @@ router.route('/accept_rent_request').post(async (req, res) =>
     const rent_request = await RentRequest.findById(rent_request_id);
     const renter_id = rent_request.renter_id;
     console.log("rent_request:" + rent_request);
+    //calculate price
+    const start_date = rent_request.start_date;
+    const end_date = rent_request.end_date;
+    var difference = Math.abs(new Date(end_date).getTime() - new Date(start_date).getTime());
+    var days = Math.ceil(difference / (1000 * 3600 * 24));
+    
+    const property = await Property.findById(rent_request.property_id);
+    const pricePerDay = property.pricePerDay;
+    const price = days * pricePerDay;
     const newBooking = new Booking({
         host_id: rent_request.host_id,
         renter_id: rent_request.renter_id,
         property_id: rent_request.property_id,
         start_time: rent_request.start_date,
         end_time: rent_request.end_date,
+        price: price,
     });
     await newBooking.save();
     await RentRequest.deleteOne({ _id: rent_request_id });
@@ -237,21 +247,15 @@ router.route('/get_current_bookings').post(async (req, res) =>{
         const property = await Property.findById(bookings[i].property_id);
         property_title = property.title;
         //get difference between start date and end date
-        var difference = end_date.getTime() - start_date.getTime();
-        console.log(difference);
-        price = property.pricePerDay*difference/(1000*60*60*24);
+        price = bookings[i].price;
         
-        //set this price in booking object
         
-        Booking.findById(bookings[i]._id)
-            .then(booking => {
-                booking.price = price;
-                booking.save();
-            })
 
         var today = new Date();
-        
-        current_bookings.push([bookings[i]._id, host_name, property_title, start_date, end_date,price,bookings[i].property_id]);
+        console.log(bookings[i].payment_status);
+
+        if(bookings[i].payment_status == "pending")
+            current_bookings.push([bookings[i]._id, host_name, property_title, start_date, end_date,price,bookings[i].property_id]);
         
     }
     
@@ -469,6 +473,55 @@ router.route('/cancel_booking').post(async (req, res) =>{
 
 })
 
+//set a timer to track the end date of the booking
+router.route('/get_time').post(async (req, res) =>{
+    const booking_id = req.body.booking_id;
+    const booking = await Booking.findById(booking_id);
+    const end_date = booking.end_time;
+    const today = new Date();
+    const difference = end_date.getTime() - today.getTime();
+    var days = difference/(1000*60*60*24);
+    console.log(days);
+    if(days<0){
+        res.send('ok');
+    }
+    else{
+        res.send('curr');
+    }
+})
 
+//get past bookings
+
+router.route('/get_past_bookings').post(async (req, res) =>{
+    const user_id = req.body.user_id;
+    const bookings = await Booking.find({renter_id: user_id});
+    console.log("s "+bookings.length);
+    var past_bookings = [];
+    for(var i=0; i<bookings.length; i++){
+        var start_date = bookings[i].start_time;
+        var end_date = bookings[i].end_time;
+        
+        const host = await User.findById(bookings[i].host_id);
+        host_name = host.firstName + " " + host.lastName;
+        
+        const property = await Property.findById(bookings[i].property_id);
+        property_title = property.title;
+        //get difference between start date and end date
+        
+        price = bookings[i].price;
+        
+       
+        
+
+
+        var today = new Date();
+
+        if(bookings[i].payment_status=="Paid")
+            past_bookings.push([bookings[i]._id, host_name, property_title, start_date, end_date,price,bookings[i].property_id]);
+        
+    }
+    console.log(past_bookings);
+    res.send(past_bookings);
+})
 
 module.exports = router;

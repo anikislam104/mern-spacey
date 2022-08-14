@@ -9,6 +9,7 @@ const bookingSchema = new Schema({
     start_time: { type: Date },
     end_time: { type: Date },
     price: { type: String ,default:0},
+    payment_status: { type: String, default: 'pending' },
 }, {
   timestamps: true,
 });
