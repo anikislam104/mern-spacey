@@ -54,6 +54,7 @@ import CurrentBookings from "./components/Renting/current_bookings";
 import ChangeDuration from "./components/Renting/changeDuration";
 import ExtendNotification from "./components/Renting/extendNotification";
 import PastBooking from "./components/Renting/past_bookings";
+import MyHostings from "./components/Renting/myHostings";
 
 
 
@@ -120,6 +121,7 @@ function App() {
         <Route path="change_duration" element={<ChangeDuration />} />
         <Route path="extend_notification" element={<ExtendNotification />} />
         <Route path="past_bookings" element={<PastBooking />} />
+        <Route path="my_hostings" element={<MyHostings />} />
         
 
 
