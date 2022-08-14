@@ -10,11 +10,12 @@ export default class CashPayment extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
+        booking_id:'',
         renter_id:'',
         amount: '',
         date: new Date(),
-        property_id:'62f5121a01422442835ac1be',
-        host_id:'62d51ffeaa2f44071d1adf20',
+        property_id:'',
+        host_id:'',
         status: 'pending',
         update_date:'',
         host_email:'',
@@ -27,21 +28,31 @@ export default class CashPayment extends Component {
 }
 
 componentDidMount() {
-  fetch('http://localhost:5000/users/user_id')
-      .then((res) => res.json())
-      .then((json) => {
-          this.setState({
-              renter_id: localStorage.getItem('user_id'),
-              renter_email:localStorage.getItem('email'),
-          });
-          //console.log('Checking....'+this.state.renter_id);
-      })
-      const id={
-          host_id:this.state.host_id,
-      }
+    this.setState({
+        renter_id: localStorage.getItem('user_id'),
+        renter_email:localStorage.getItem('email'),
+        booking_id: localStorage.getItem('payment_booking_id'),
+    });
 
-      axios.post('http://localhost:5000/payments/get_host_email',id)
-          .then(res => 
+    const data ={
+        booking_id: localStorage.getItem('payment_booking_id'),
+    }
+
+    console.log(data);
+
+    axios.post('http://localhost:5000/payments/host_property_id', data)
+        .then(res => {
+            this.setState({
+                host_id: res.data.host_id,
+                property_id: res.data.property_id,
+                amount: res.data.amount,
+            });
+            console.log(this.state.host_id);
+            const id={
+                host_id:this.state.host_id,
+            }
+            axios.post('http://localhost:5000/payments/get_host_email',id)
+            .then(res => 
               {
                   console.log(res.data);
                   this.setState({
@@ -70,7 +81,30 @@ componentDidMount() {
                                 this.setState({
                                     point: res.data,
                                 });
+                                const id4={
+                                    renter_id: localStorage.getItem('user_id'),
+                                    amount: this.state.amount,
+                                }
+                                axios.post('http://localhost:5000/payments/get_renter_discount',id4)
+                                    .then(res => 
+                                        {
+                                            console.log(res.data);
+                                            this.setState({
+                                                discount: res.data,
+                                            });
+                                        }); 
+
+
                             });
+        });
+
+    console.log(this.state.host_id);
+    
+      
+
+      
+
+      
 
 }
 
@@ -79,23 +113,13 @@ onChangeAmount(e) {
         amount: e.target.value,
     });
 
-    const id3={
-        renter_id: localStorage.getItem('user_id'),
-        amount: e.target.value,
-    }
-    axios.post('http://localhost:5000/payments/get_renter_discount',id3)
-        .then(res => 
-            {
-                console.log(res.data);
-                this.setState({
-                    discount: res.data,
-                });
-            }); 
+    
 }
 
 async onSubmit (e){
   e.preventDefault();
     const payment={
+        booking_id: this.state.booking_id,
         renter_id: this.state.renter_id,
         amount: this.state.amount-this.state.discount,
         date: this.state.date,
@@ -116,10 +140,11 @@ async onSubmit (e){
      console.log("Response:", response.data);
      if (res_status === "success") {
         console.log(res_status);
-        window.location = '/payment/payment_success';
+        window.location.reload();
+        alert("Payment Successful");
      } else {
         console.log(res_status);
-        window.location = '/payment/payment_failure';
+        alert("Payment Failed");
      }
     }
 
@@ -202,8 +227,7 @@ async onSubmit (e){
                                         <h5> Amount to pay:{this.state.amount-this.state.discount} </h5><br/>
                                        <form onSubmit={this.onSubmit} encType="multipart/form-data">
                                        <div class="form-group sm-3">
-                                               <label><b>Property Cost: </b></label><br/><br/>
-                                                   <input id="inputAmount" type="amount" placeholder=""  required="" autofocus="" value={this.state.amount} onChange={this.onChangeAmount} class="form-control border-0 shadow-sm px-4" />
+                                               
                                                 </div><br/>
                                                <br/>
                                                <br/>

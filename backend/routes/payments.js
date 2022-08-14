@@ -3,6 +3,7 @@ let Payment = require('../models/payment');
 const stripe = require("stripe")("sk_test_51LQUhSFrHNJyuz7GBJJOrNhKLYVgBkrJsv4nHTiyEE6CbsqrP5Ntg9kuGRoq8RJZSK1l5Ke0CWBUUChp2KE7mq9g00BdwXpg2D");
 let User = require('../models/user');
 let Property = require('../models/property');
+let Booking = require('../models/booking');
 
 router.route('/add_in_mobileBanking').post(async(req, res) =>{
     console.log("Add Payment");
@@ -18,6 +19,7 @@ router.route('/add_in_mobileBanking').post(async(req, res) =>{
         });
         console.log("Token ID: "+token.id+ " ,Customer email: "+customer.email);
 
+        
         const renter_id = payment.renter_id;
         const amount = Number(payment.amount);
         const date = payment.date;
@@ -80,6 +82,7 @@ router.route('/add_in_cash').post(async(req, res) =>{
       const payment = req.body;
       console.log(payment);
 
+      const booking_id = payment.booking_id;
       const renter_id = payment.renter_id;
       const amount = Number(payment.amount);
       const date = payment.date;
@@ -108,6 +111,7 @@ router.route('/add_in_cash').post(async(req, res) =>{
           charge_id: 'cash',
           customer_id: 'cash',
           payment_method: 'cash',
+          booking_id: booking_id,
       });
       paymentMongo.save();
 
@@ -340,6 +344,22 @@ router.route('/get_income_between_days').post(async (req, res) => {
         }
         //console.log(income);
         res.json(income);
+    })
+})
+
+//get host id and property id from booking id
+router.route('/host_property_id').post(async (req, res) => {
+  const booking_id = req.body.booking_id;
+  let host_id='';
+  let property_id='';
+  let amount='';
+  Booking.findById(booking_id)
+    .then(booking=>{
+        console.log(booking);
+        host_id=booking.host_id;
+        property_id=booking.property_id;
+        amount=booking.price;
+        res.json({host_id:host_id,property_id:property_id,amount:amount});
     })
 })
 

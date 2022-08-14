@@ -17,6 +17,7 @@ const paymentSchema = new Schema({
   host_email: { type: String, required: true },
   renter_email: { type: String, required: true },
   property_title: { type: String, required: true },
+  booking_id: { type: String },
 }, {
   timestamps: true,
 });

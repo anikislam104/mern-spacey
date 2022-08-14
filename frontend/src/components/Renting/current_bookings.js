@@ -77,6 +77,14 @@ const CurrentBookings = () => {
                                         })
                                     }
                                 }>Cancel Booking</button>
+                                <br />
+                                <br />
+                                <button className="btn btn-primary" onClick={
+                                    () => {
+                                        localStorage.setItem('payment_booking_id',booking[0]);
+                                        window.location.href = "payment/payment_home";
+                                    }
+                                }>Payment</button>
                             </div>
                         )
                     }
