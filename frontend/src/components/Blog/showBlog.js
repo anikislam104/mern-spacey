@@ -3,9 +3,17 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import NavbarHomepage from '../navbar_homepage';
 // const blog_id=Request.QueryString["data"];
+
+import "./styles.css";
+
 var comments=[];
 var like=0;
 var dislike=0;
+
+//style upvote and downvote buttons
+
+
+
 export default class ShowBlog extends Component {
     constructor(props) {
         super(props);
@@ -85,7 +93,7 @@ export default class ShowBlog extends Component {
                     <br />
                     <br />
                 {/* button for upvote */}
-                <button  type='submit' onClick={
+                <button  type='submit' class="button" onClick={
                     (e) => {
                         const upvote = {
                             blog_id: blog._id,
@@ -102,13 +110,12 @@ export default class ShowBlog extends Component {
                         
                         //disable button after upvote
                         like=like+1;
-                        // window.location.reload();
+                        
                         e.currentTarget.disabled = true;
                     }
-                } >Upvote</button>{blog.like_count}
-                <br />
-                <br />
-                <button type='submit' onClick={
+                } >Upvote</button>   <p>{blog.like_count} upvotes</p>
+               
+                <button type='submit' class="button"  onClick={
                     (e) => {
                         const downvote = {
                             blog_id: blog._id,
@@ -124,19 +131,21 @@ export default class ShowBlog extends Component {
                             }
                         )
                         dislike=dislike+1;
-                        // window.location.reload();
+                        
                         e.currentTarget.disabled = true;
                         
                         
                     }
-                } >Downvote</button>{blog.dislike_count}
+                } >Downvote</button>     <p>{blog.dislike_count} downvotes</p>
 
 {/* // comments */}
 
 <br />
 <br />
                 <input type='text' onChange={this.comment} value={this.state.Comment} ></input>
-                <Link to='../blog/showBlog'><button type='submit' onClick={
+                <br />
+                <br />
+                <Link to='../blog/showBlog'><button type='submit' class="button" onClick={
                     (e) => {
                         const comment = {
                             blog_id: blog._id,
@@ -166,11 +175,13 @@ export default class ShowBlog extends Component {
                         
                     }
                 } >Comment</button></Link>
-                
+                <br />
+                <br />
+                <h1>Comments</h1>
                {blog.comments.map((comment) => {
                     return(
                         <div>
-                            <p>{comment.comment}</p>
+                            <p class="li">{comment.comment}</p>
                         </div>
                     )
                 })

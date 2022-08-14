@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import NavbarHomepage from '../navbar_homepage';
+import "./styles.css";
 // const blog_id=Request.QueryString["data"];
 var comments=[];
 var like=0;
@@ -85,7 +86,7 @@ export default class ShowMyBlog extends Component {
                     <br />
                     <br />
                 {/* button for upvote */}
-                <button  type='submit' onClick={
+                <button  type='submit' class="button" onClick={
                     (e) => {
                         const upvote = {
                             blog_id: blog._id,
@@ -105,10 +106,10 @@ export default class ShowMyBlog extends Component {
                         // window.location.reload();
                         e.currentTarget.disabled = true;
                     }
-                } >Upvote</button>{blog.like_count}
+                } >Upvote</button><p>{blog.like_count} upvotes</p>
                 <br />
                 <br />
-                <button type='submit' onClick={
+                <button type='submit' class="button" onClick={
                     (e) => {
                         const downvote = {
                             blog_id: blog._id,
@@ -129,14 +130,16 @@ export default class ShowMyBlog extends Component {
                         
                         
                     }
-                } >Downvote</button>{blog.dislike_count}
+                } >Downvote</button> <p>{blog.dislike_count} downvotes</p>
 
 {/* // comments */}
 
 <br />
 <br />
                 <input type='text' onChange={this.comment} value={this.state.Comment} ></input>
-                <Link to='../blog/showBlog'><button type='submit' onClick={
+                <br />
+                <br />
+                <Link to='../blog/showBlog'><button type='submit' class="button" onClick={
                     (e) => {
                         const comment = {
                             blog_id: blog._id,
@@ -166,11 +169,13 @@ export default class ShowMyBlog extends Component {
                         
                     }
                 } >Comment</button></Link>
-                
+                <br />
+                <br />
+                <h1>Comments</h1>
                {blog.comments.map((comment) => {
                     return(
                         <div>
-                            <p>{comment.comment}</p>
+                            <p class="li">{comment.comment}</p>
                         </div>
                     )
                 })
@@ -185,14 +190,14 @@ export default class ShowMyBlog extends Component {
 <br />
 
                 
-                <button onClick={
+                <button class="button" onClick={
                     (e) => {
                         window.location='/blog/editBlog';
                     }
                 }>Edit Blog</button>
                 <br />
                 <br />
-                <button onClick={
+                <button class="button" onClick={
                     (e) => {
                         
                         if(window.confirm("Are you sure you want to delete this blog?")){

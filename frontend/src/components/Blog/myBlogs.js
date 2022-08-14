@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { Component } from 'react';
 import NavbarHomepage from '../navbar_homepage';
 
+
+
 export default class MyBlogs extends Component {
     constructor(props) {
         super(props);
@@ -33,6 +35,8 @@ export default class MyBlogs extends Component {
             
     }
 
+    
+
     sendSelectedBlog(blog_id) {
         const id={
             blog_id:blog_id,
@@ -56,7 +60,7 @@ export default class MyBlogs extends Component {
     getMyBlogs(){
         return this.state.blogs.map((blog) => {
             return(
-                <div className="col-md-4">
+                <div className="col-md-4" >
                     <div className="card mb-4 box-shadow">
                         <div className="card-body">
                         <p className="card-text">{blog.title}</p>

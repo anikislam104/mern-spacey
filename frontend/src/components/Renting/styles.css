@@ -1,0 +1,66 @@
+.button {
+    display: inline-block;
+    height: 38px;
+    padding: 0 30px;
+    color: white;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 38px;
+    letter-spacing: .1rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    border-radius: 2px;
+    background-color: #331550;
+    border: 1px solid #331550;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition-duration: 0.4s;
+    
+
+  }
+
+  /* //change the color of the button when hovered */
+  .button:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
+  }
+
+/* //change the color of the button when clicked */
+button:active {
+        background-color: #331550;
+        border: 1px solid #331550;
+}
+
+  .h1 {
+    display: block;
+    font-size: 2em;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+  }
+
+  .p {
+    display: block;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+  }
+
+  .li {
+    background: #ffe5e5;
+    color: darkred;
+    padding: 5px;
+    margin-left: 35px;
+  }

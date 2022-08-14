@@ -2,6 +2,17 @@ import axios from "axios";
 import React,{ Component } from "react"; 
 import NavbarHomepage from "../navbar_homepage";
 
+const style ={
+        backgroundColor: "#f5f5f5",
+        border: "1px solid #ddd",
+        borderRadius: "4px",
+        padding: "10px",
+        marginBottom: "10px",
+        marginTop: "10px",
+        marginLeft: "10px",
+        marginRight: "10px",
+        boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.75)"
+};
 
 export default class RentRequestNotification extends Component {
     constructor(props) {
@@ -61,19 +72,19 @@ export default class RentRequestNotification extends Component {
         console.log(this.state.rent_request);
         return this.state.rent_request.map((request) => {
             return (
-                <div>
+                <div style={style}>
                     
                     <h1>{request.property_title}</h1>
                     <h1>{request.renter_name}</h1>
                     <h1>{request.start_date}</h1>
                     <h1>{request.end_date}</h1>
-                    <button onClick={
+                    <button class="button" onClick={
                         () => {
                             this.acceptRequest(request._id);
                         }
                     }>Accept</button>
                     <p>         </p>
-                    <button onClick={
+                    <button class="button" onClick={
                         () => {
                             this.rejectRequest(request._id);
                         }
