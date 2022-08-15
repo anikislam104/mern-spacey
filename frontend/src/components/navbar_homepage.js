@@ -79,6 +79,7 @@ export default class NavbarHomepage extends Component {
           <li className="navbar-item">
           <Link to={'/renting'} className="nav-link rounded-pill" style={myStyle.textSection}><h6>Rent Storage</h6></Link>
           </li>
+
           &nbsp; &nbsp; 
           
           
@@ -106,6 +107,9 @@ export default class NavbarHomepage extends Component {
                     </NavDropdown.Item>
                     <NavDropdown.Item href={'my_hostings'}>
                     My Hostings
+                    </NavDropdown.Item>
+                    <NavDropdown.Item href={'/chat'}>
+                    Chat
                     </NavDropdown.Item>
                     <NavDropdown.Item href={'/logout'}>
                     Log out

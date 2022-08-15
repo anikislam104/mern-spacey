@@ -55,7 +55,9 @@ import ChangeDuration from "./components/Renting/changeDuration";
 import ExtendNotification from "./components/Renting/extendNotification";
 import PastBooking from "./components/Renting/past_bookings";
 import MyHostings from "./components/Renting/myHostings";
-
+import ChatProvider from "./Context/ChatProvider";
+import { ChakraProvider } from "@chakra-ui/react";
+import Chatpage from "./Pages/Chatpage";
 
 
 function App() {
