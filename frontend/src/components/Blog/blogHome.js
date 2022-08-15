@@ -4,6 +4,7 @@ import BlogHome1 from "./blog_home_1.svg";
 import BlogHome2 from "./blog_home_2.svg";
 
 
+
 export default class BlogHome extends Component {
     constructor(props) {
         super(props);
@@ -112,6 +113,7 @@ export default class BlogHome extends Component {
 
           </div>
             </div>
+            
         )
     }
 }
