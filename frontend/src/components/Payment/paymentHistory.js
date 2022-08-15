@@ -54,7 +54,15 @@ export default class PaymentHistory extends Component{
     }
 
     getPaymentHistory(){
-        
+        const myStyle={
+            textSection1:{
+                textAlign:"right",
+            },
+            textSection2:{
+                textAlign:"center",
+            },
+            
+        }
         return this.state.payments1.map((payment) => {
             
                 return(
@@ -63,11 +71,11 @@ export default class PaymentHistory extends Component{
                             <Table striped>
                             <tbody>
                                 <tr>
-                                <td>{payment.host_id}<br/>{payment.host_email}</td>
-                                <td>{payment.renter_id}<br/>{payment.renter_email}</td>
-                                <td>{payment.property_id}<br/>{payment.property_title}</td>
-                                <td>{payment.amount}</td>
-                                <td>{payment.date}</td>
+                                <td style={myStyle.textSection2}>{payment.host_email}</td>
+                                <td style={myStyle.textSection2}>&emsp;{payment.renter_email}</td>
+                                <td style={myStyle.textSection2}>&emsp;&emsp;&emsp;{payment.property_title}</td>
+                                <td style={myStyle.textSection1}>&emsp;{payment.amount}</td>
+                                <td style={myStyle.textSection2}>{payment.date}</td>
                                 </tr>
                                 
                             
@@ -130,9 +138,9 @@ export default class PaymentHistory extends Component{
                 <thead>
                     <tr>
                     <th style={myStyle.textSection2}>Host</th>
-                    <th style={myStyle.textSection1}>Renter</th>
-                    <th style={myStyle.textSection1}>Property</th>
-                    <th style={myStyle.textSection2}>Amount</th>
+                    <th style={myStyle.textSection2}>Renter</th>
+                    <th style={myStyle.textSection2}>Property</th>
+                    <th>Amount</th>
                     <th>Date</th>
                     </tr>
                 </thead>

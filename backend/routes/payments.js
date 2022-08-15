@@ -19,7 +19,7 @@ router.route('/add_in_mobileBanking').post(async(req, res) =>{
         });
         console.log("Token ID: "+token.id+ " ,Customer email: "+customer.email);
 
-        
+        const booking_id = payment.booking_id;
         const renter_id = payment.renter_id;
         const amount = Number(payment.amount);
         const date = payment.date;
@@ -55,6 +55,7 @@ router.route('/add_in_mobileBanking').post(async(req, res) =>{
             charge_id: charge.id,
             customer_id: charge.customer,
             payment_method: charge.payment_method,
+            booking_id: booking_id,
         });
         paymentMongo.save();
 
@@ -137,7 +138,7 @@ router.route('/get_host_email').post((req,res)=>{
     User.findById(host_id)
      .then(user=>{
           //console.log(user.email);
-          res.json(user.email);
+          res.json(user.firstName+" "+user.lastName);
      })
 })
 

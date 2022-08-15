@@ -30,7 +30,7 @@ export default class CashPayment extends Component {
 componentDidMount() {
     this.setState({
         renter_id: localStorage.getItem('user_id'),
-        renter_email:localStorage.getItem('email'),
+        renter_email:localStorage.getItem('firstName'),
         booking_id: localStorage.getItem('payment_booking_id'),
     });
 
@@ -98,13 +98,7 @@ componentDidMount() {
                             });
         });
 
-    console.log(this.state.host_id);
-    
-      
-
-      
-
-      
+    console.log(this.state.host_id);    
 
 }
 
@@ -112,7 +106,6 @@ onChangeAmount(e) {
     this.setState({
         amount: e.target.value,
     });
-
     
 }
 
@@ -140,10 +133,11 @@ async onSubmit (e){
      console.log("Response:", response.data);
      if (res_status === "success") {
         console.log(res_status);
-        window.location.reload();
+        window.location = '/homepage';
         alert("Payment Successful");
      } else {
         console.log(res_status);
+        window.location.reload();
         alert("Payment Failed");
      }
     }
@@ -219,12 +213,10 @@ async onSubmit (e){
                                      </div>
                                     
                                      <div class="col-lg-5">
-                                     <h5> Property ID: {this.state.property_id}</h5><br/>
-                                        <h5> Host ID: {this.state.host_id}</h5><br/>
                                         <h5> Host: {this.state.host_email}</h5><br/>
                                         <h5> Property Title: {this.state.property_title}</h5><br/>
-                                        <h5> Your Current Point:{this.state.point}     &emsp;&emsp;&emsp; Discount: {this.state.discount} </h5><br/>
-                                        <h5> Amount to pay:{this.state.amount-this.state.discount} </h5><br/>
+                                        <h5> Your Current Point:&nbsp;{this.state.point}     &emsp;&emsp;&emsp; Discount:&nbsp;{this.state.discount} </h5><br/>
+                                        <h5> Amount to pay:&nbsp;{this.state.amount-this.state.discount} </h5><br/>
                                        <form onSubmit={this.onSubmit} encType="multipart/form-data">
                                        <div class="form-group sm-3">
                                                
@@ -237,8 +229,7 @@ async onSubmit (e){
         
                                                     &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                                                     <input type="submit" value="Pay in Cash" className="btn btn-primary" style={myStyle.buttonSection} />
-                                               </div>
-                                               
+                                               </div>                                             
 
                                         </form>
                                      </div>

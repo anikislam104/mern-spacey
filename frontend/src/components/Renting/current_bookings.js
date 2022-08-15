@@ -81,7 +81,7 @@ const CurrentBookings = () => {
                                 <br />
                                 <button className="btn btn-primary" onClick={
                                     () => {
-                                        axios.post("http://localhost:5000/renting/get_time",{booking_id:booking[0]})
+                                        /*axios.post("http://localhost:5000/renting/get_time",{booking_id:booking[0]})
                                         .then(res => {
                                             if(res.data === "ok"){
                                                 localStorage.setItem('payment_booking_id',booking[0]);
@@ -90,7 +90,9 @@ const CurrentBookings = () => {
                                             else{
                                                 alert("Booking period has not ended yet");
                                             }
-                                        })
+                                        })*/
+                                        localStorage.setItem('payment_booking_id',booking[0]);
+                                        window.location.href = "payment/payment_home";
                                         
                                     }
                                 }>Payment</button>
