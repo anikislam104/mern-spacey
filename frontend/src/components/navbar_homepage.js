@@ -5,6 +5,8 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { Box } from '@chakra-ui/react';
+
 
 export default class NavbarHomepage extends Component {
 
@@ -52,6 +54,7 @@ export default class NavbarHomepage extends Component {
     }
 
     return (
+      <Box>
       <nav className="navbar navbar navbar-expand-lg" style={myStyle.navSection}>
          <div class="logo-image">
             <img src={spacey} class="img-responsive" alt=" " />
@@ -126,6 +129,7 @@ export default class NavbarHomepage extends Component {
          </div>
         </div>
       </nav>
+      </Box>
     )
 
   }

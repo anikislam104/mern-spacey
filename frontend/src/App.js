@@ -62,9 +62,12 @@ import Chatpage from "./Pages/Chatpage";
 
 function App() {
   return (
+    <div>
+    
     <ChakraProvider>
     <BrowserRouter>
     <ChatProvider>
+    
       <div className="container">
       {/* <Navbar /> */}
       {/* <br/> */}
@@ -143,6 +146,7 @@ function App() {
         {/* Notifications */}
 
         {/* Chat */}
+        
         <Route path="chat" element={<Chatpage />} />
         
         
@@ -152,6 +156,19 @@ function App() {
       </ChatProvider>
     </BrowserRouter>
     </ChakraProvider>
+    {/* <ChakraProvider>
+      <BrowserRouter>
+      <ChatProvider>
+        <Routes>
+          <div>
+          <Route path="chat" element={<Chatpage />} />
+          </div>
+        </Routes>
+      </ChatProvider>
+      </BrowserRouter>
+    </ChakraProvider> */}
+    </div>
+    
   );
 }
 

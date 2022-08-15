@@ -4,6 +4,7 @@ import Calendar from 'react-calendar';
 import { differenceInCalendarDays } from 'date-fns';
 import 'react-calendar/dist/Calendar.css';
 import NavbarHomepage from "../navbar_homepage";
+import { Box } from "@chakra-ui/react";
 
 
 
@@ -164,6 +165,7 @@ const ChooseStayDuration=()=>{
             })
     }
     return(
+        <Box>
         <div>
             <NavbarHomepage />
             <h1>Choose Duration</h1>
@@ -200,6 +202,7 @@ const ChooseStayDuration=()=>{
                 <button className="btn btn-primary" onClick={handleSubmit}>Submit</button>
             </form>
         </div>
+        </Box>
     )
 }
 
