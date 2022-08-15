@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import NavbarHomepage from '../navbar_homepage';
 import BlogHome1 from "./blog_home_1.svg";
 import BlogHome2 from "./blog_home_2.svg";
+import { Box } from "@chakra-ui/layout";
 
 
 export default class BlogHome extends Component {
@@ -39,7 +40,7 @@ export default class BlogHome extends Component {
      
           }
         return(
-            
+            <Box>
             <div>
                 <NavbarHomepage />
                 <br/>
@@ -112,6 +113,7 @@ export default class BlogHome extends Component {
 
           </div>
             </div>
+            </Box>
         )
     }
 }

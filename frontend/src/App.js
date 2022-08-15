@@ -62,7 +62,7 @@ import Chatpage from "./Pages/Chatpage";
 
 function App() {
   return (
-    <ChakraProvider>
+    
     <BrowserRouter>
     <ChatProvider>
       <div className="container">
@@ -142,16 +142,21 @@ function App() {
         
         {/* Notifications */}
 
-        {/* Chat */}
-        <Route path="chat" element={<Chatpage />} />
+        
         
         
       </Routes>
+      <ChakraProvider>
+      <Routes>
+        {/* Chat */}
+        <Route path="chat" element={<Chatpage />} />
+      </Routes>
+      </ChakraProvider>
 
       </div>
       </ChatProvider>
-    </BrowserRouter>
-    </ChakraProvider>
+      </BrowserRouter>
+    
   );
 }
 
