@@ -32,13 +32,17 @@ import AddInsurance from "./components/Insurance/addInsurance";
 import ForgetPassword from "./components/Authentication/forget_password";
 import ForgetPasswordOTP from "./components/Authentication/forget_password_otp";
 import AdminHomepage from "./components/adminHomepage";
-
+import Chatpage from "./Pages/Chatpage";
+import ChatProvider from "./Context/ChatProvider";
+import { ChakraProvider } from "@chakra-ui/react";
 
 
 
 function App() {
   return (
+    <ChakraProvider>
     <BrowserRouter>
+    <ChatProvider>
       <div className="container">
       {/* <Navbar /> */}
       {/* <br/> */}
@@ -87,14 +91,17 @@ function App() {
         <Route path="payment/cash_payment" element={<CashPayment />} />
         <Route path="payment/payment_success" element={<PaymentSuccess />} />
         <Route path="payment/payment_failure" element={<PaymentFailure />} />
+
+        {/* Chat */}
+        <Route path="chat" element={<Chatpage />} />
+        
         
       </Routes>
 
       </div>
-      
+      </ChatProvider>
     </BrowserRouter>
-    
-    
+    </ChakraProvider>
   );
 }
 

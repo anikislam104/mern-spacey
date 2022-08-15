@@ -61,6 +61,7 @@ export default class Login extends Component {
                   window.location = '/invalidAuth';
                 }
                 else{
+                  localStorage.setItem("userInfo", JSON.stringify(res.data));
                   localStorage.setItem('li_user_id', res.data.user_id);
                   localStorage.setItem('li_email', res.data.email);
                   localStorage.setItem('li_user_type', res.data.user_type);

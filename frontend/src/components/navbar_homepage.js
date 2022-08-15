@@ -56,6 +56,10 @@ export default class NavbarHomepage extends Component {
           </li>
           &nbsp; &nbsp; 
           <li className="navbar-item">
+          <Link to={'/chat'} className="nav-link rounded-pill" style={myStyle.textSection}><h6>Chat</h6></Link>
+          </li>
+          &nbsp; &nbsp; 
+          <li className="navbar-item">
           <Link to={'/logout'} className="nav-link"><h5>Log out</h5></Link>
           </li>
          </ul>

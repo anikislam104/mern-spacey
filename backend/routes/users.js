@@ -26,6 +26,7 @@ var current_date_of_birth = new Date();
 var current_user_type = '';
 var fpEmail='';
 var fpPassword='';
+const {protect} = require('../middleware/authMiddleware');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -347,6 +348,8 @@ router.route('/user_id').get((req, res) => {
   }));
   
   router.route('/jwtlogin').post(asyncHandler(async(req, res) => {
+    
+    console.log(req.body);
     const email = req.body.email;
     const password = req.body.password;
     const user_type = req.body.user_type;
@@ -424,22 +427,24 @@ router.route('/user_id').get((req, res) => {
     User.find({_id: user_id}).deleteOne();
 
     
-  })
+  }));
 
   
-router.route('/').get(async(req, res) => {
+router.route('/').get(protect, asyncHandler(async(req, res) => {
 
   // finding all users which matches search 
+  console.log("search "+req.query.search);
   const keyword = req.query.search ? {
     $or: [
-      { name : { $regex: req.query.search, $options: 'i' } }, // search name that have same pattern as req.query.search
+      { firstName : { $regex: req.query.search, $options: 'i' } }, // search name that have same pattern as req.query.search
       { email : { $regex: req.query.search, $options: 'i' } }, // search email that have same pattern as req.query.search
     ]
   }:{};
 
-  const users = await User.find(keyword)
+  const users = await User.find(keyword).find({_id: {$ne: req.user._id}}); // protect above modifies req to have req.user._id as current user id
+  console.log(users);
   res.send(users);
-});
+}));
 
 
   module.exports = router;
