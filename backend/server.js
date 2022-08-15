@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 
 require('dotenv').config();
 
@@ -31,6 +32,11 @@ app.use('/payments',paymentRouter);
 app.use('/renting',rentingRouter);
 app.use('/insurance',insuranceRouter);
 
-const server = app.listen(port, () => {
+
+// Error Handling middlewares
+// app.use(notFound);
+// app.use(errorHandler);
+
+app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
 });

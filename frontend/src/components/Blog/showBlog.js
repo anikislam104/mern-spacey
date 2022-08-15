@@ -86,7 +86,7 @@ export default class ShowBlog extends Component {
                         
                         //disable button after upvote
                         like=like+1;
-                        window.location.reload();
+                        // window.location.reload();
                         e.currentTarget.disabled = true;
                     }
                 } >Upvote</button>{blog.like_count}
@@ -102,12 +102,13 @@ export default class ShowBlog extends Component {
                         axios.post('http://localhost:5000/blogs/downvote', downvote)
                             .then(res => {
                                 console.log(res.data);
+                                
                             }).catch(err => {
                                 console.log(err);
                             }
                         )
                         dislike=dislike+1;
-                        window.location.reload();
+                        // window.location.reload();
                         e.currentTarget.disabled = true;
                         
                         
