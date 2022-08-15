@@ -128,7 +128,7 @@ export default class AddProperty extends Component {
 
 
     const property = {
-      host_id: this.state.host_id,
+      host_id: localStorage.getItem('user_id'),
       title: this.state.title,
       location: this.state.location,
       description: this.state.description,

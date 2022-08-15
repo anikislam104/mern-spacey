@@ -55,7 +55,7 @@ router.route('/add').post(async (req, res) => {
 
 
   for (let i = 0; i < rooms.length; i++) {
-    const propertyId = current_property_id;
+    const propertyId = newProperty._id;
     const roomType = rooms[i][0];
     const roomNo = rooms[i][1];
     const newRoom = new Room({
@@ -71,7 +71,7 @@ router.route('/add').post(async (req, res) => {
   }
 
   for (let i = 0; i < facilities.length; i++) {
-    const propertyId = current_property_id;
+    const propertyId = newProperty._id;
     const facilityType = facilities[i];
     const newFacility = new Facility({
       propertyId,
@@ -98,5 +98,109 @@ router.route('/all_properties').get((req, res) => {
     )
 })
 
+
+//delete property
+router.route('/delete_property').post((req, res) => {
+  const property_id = req.body.property_id;
+  console.log(property_id);
+  Property.findByIdAndDelete(property_id)
+    .then(() => res.send('property deleted'))
+  
+});
+
+//edit property
+router.route('/edit_property').post((req, res) => {
+    const property_id = req.body.property_id;
+    const property_title = req.body.property_title;
+    const property_location = req.body.property_location;
+    const property_description = req.body.property_description;
+    const property_size = req.body.property_size;
+    const property_price = req.body.property_price;
+
+    Property.findById(property_id)
+    .then(property => {
+      if(property_title){
+        property.title = property_title;
+      }
+      if(property_location){
+        property.location = property_location;
+      }
+      if(property_description){
+        property.description = property_description;
+      }
+      if(property_size){
+        property.size = property_size;
+      }
+      if(property_price){
+        property.pricePerDay = property_price;
+      }
+      property.save()
+      .then(() => res.send('property updated'))
+    })
+})
+
+//increase room no to one room
+router.route('/increase_room').post((req, res) => {
+    const room_id = req.body.room_id;
+    Room.findById(room_id)
+    .then(room => {
+      room.roomNo = room.roomNo + 1;
+      room.save()
+      .then(() => res.send('room updated'))
+    })
+})
+
+//decrease room no to one room
+router.route('/decrease_room').post((req, res) => {
+    const room_id = req.body.room_id;
+    Room.findById(room_id)
+    .then(room => {
+      if(room.roomNo > 1){
+        room.roomNo = room.roomNo - 1;
+        room.save()
+        .then(() => res.send('room updated'))
+      }
+      else
+      {
+        //delete room
+        Room.findByIdAndDelete(room_id)
+        .then(() => res.send('room deleted'))
+      }
+      
+    })
+})
+
+//add room
+router.route('/add_room').post((req, res) => {
+  const property_id = req.body.property_id;
+  const room_type = req.body.room_type;
+  const room_no = req.body.room_no;
+  const newRoom = new Room({
+    propertyId: property_id,
+    roomType: room_type,
+    roomNo: room_no,
+  });
+  newRoom.save()
+    .then(() => res.send('room added'))
+})
+
+//delete facilities
+router.route('/delete_facility').post((req, res) => {
+  const facility_id = req.body.facility_id;
+  Facility.findByIdAndDelete(facility_id)
+    .then(() => res.send('facility deleted'))
+})
+
+//add facilities
+router.route('/add_facility').post((req, res) => {
+  const property_id = req.body.property_id;
+  const facility_type = req.body.facility_type;
+  const newFacility = new Facility({
+    propertyId: property_id,
+    facilityType: facility_type,
+  });
+  newFacility.save()
+    .then(() => res.send('facility added'))
+})
 
 module.exports = router;

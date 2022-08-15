@@ -2,60 +2,53 @@ import axios from 'axios';
 import React, { Component } from 'react';
 import NavbarHomepage from '../navbar_homepage';
 
+
+
 export default class MyBlogs extends Component {
     constructor(props) {
         super(props);
         this.sendSelectedBlog = this.sendSelectedBlog.bind(this);
         this.state = {
-            user_id: 0,
+            user_id: '',
             blogs: [],
         }
         
     }
 
     componentDidMount() {
-        // fetch('http://localhost:5000/blogs/my_blogs')
-        //     .then((res) => res.json())
-        //     .then((json) => {
-        //         //console.log(JSON.stringify(json));
-        //         this.setState({
-        //             blogs: this.state.blogs.concat(json),
-        //         });
-        //     })
-        fetch('http://localhost:5000/users/user_id')
-            .then((res) => res.json())
-            .then((json) => {
-                //console.log(JSON.stringify(json));
-                console.log(json.user_id);
-                this.setState({
-                    user_id: localStorage.getItem('user_id'),
-                });
-                console.log(this.state.user_id);
-                const id={
-                    user_id: this.state.user_id,
-                }
-                console.log(id.user_id);
-                axios.post('http://localhost:5000/blogs/my_blogs',id) 
-                    .then(res => {
-                        console.log(res.data);
-                        this.setState({
-                            blogs: res.data,
-                        });
-                    })
-            })
+        
+        this.setState({
+            user_id: localStorage.getItem('user_id'),
+        });
+        const id={
+            user_id:localStorage.getItem('user_id'),
+        }
+        console.log(id);
+        axios.post('http://localhost:5000/blogs/my_blogs',id) 
+            .then(res => {
+                console.log(res.data);
+                    this.setState({
+                        blogs: res.data,
+                    });
+                })
+            
             
     }
+
+    
 
     sendSelectedBlog(blog_id) {
         const id={
             blog_id:blog_id,
+            user_id:localStorage.getItem('user_id'),
         }
 
         axios.post('http://localhost:5000/blogs/showBlog',id)
             .then(res => 
                 {
                     console.log(res.data);
-                    window.location.href = '/blog/showBlog';
+                    localStorage.setItem('blog_id', res.data._id);
+                    window.location.href = '/blog/showMyBlog';
                     // this.props.history.push('/blog/'+res.data._id);
                 });
     }
@@ -67,7 +60,7 @@ export default class MyBlogs extends Component {
     getMyBlogs(){
         return this.state.blogs.map((blog) => {
             return(
-                <div className="col-md-4">
+                <div className="col-md-4" >
                     <div className="card mb-4 box-shadow">
                         <div className="card-body">
                         <p className="card-text">{blog.title}</p>

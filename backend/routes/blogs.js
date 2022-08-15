@@ -120,13 +120,15 @@ router.route('/showBlog').post((req, res) => {
 })
 
 
-router.route('/get_selected_blog').get((req, res) => {
+router.route('/get_selected_blog').post(async(req, res) => {
     console.log("get_selected_blog");
+    const blog_id = req.body.blog_id;
+    console.log("blog_id: " + blog_id);
     Blog.find()
         .then(blog => {
-            blog=blog.filter(blog => blog._id == selected_blog_id);
-            // console.log(blog[0].content);
-            res.json(blog);
+            blog=blog.filter(blog => blog._id == blog_id);
+            console.log(blog);
+            res.send(blog);
         })
 })
 
@@ -250,5 +252,27 @@ router.route('/get_comments/:blog_id').post((req, res) => {
             res.json(blog.comments);
         }).catch(err => res.status(400).json('Error: ' + err));
 })
+
+//delete blog
+router.route('/delete_blog').post((req, res) => {
+    const blog_id = req.body.blog_id;
+    Blog.findByIdAndDelete(blog_id)
+        .then(() => res.json('Blog deleted.'))
+        .catch(err => res.status(400).json('Error: ' + err));
+})
+
+//edit blog
+router.route('/edit_blog').post((req, res) => {
+    const blog_id = req.body.blog_id;
+    const title = req.body.title;
+    const content = req.body.content;
+    Blog.findById(blog_id)
+        .then(blog => {
+            blog.title = title;
+            blog.content = content;
+            blog.save();
+            res.json('Blog updated!');
+        }).catch(err => res.status(400).json('Error: ' + err));
+});
 
 module.exports = router;

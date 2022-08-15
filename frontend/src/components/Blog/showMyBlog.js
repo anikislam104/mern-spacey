@@ -2,19 +2,12 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import NavbarHomepage from '../navbar_homepage';
-// const blog_id=Request.QueryString["data"];
-
 import "./styles.css";
-
+// const blog_id=Request.QueryString["data"];
 var comments=[];
 var like=0;
 var dislike=0;
-
-//style upvote and downvote buttons
-
-
-
-export default class ShowBlog extends Component {
+export default class ShowMyBlog extends Component {
     constructor(props) {
         super(props);
         this.showComments = this.showComments.bind(this);
@@ -110,12 +103,13 @@ export default class ShowBlog extends Component {
                         
                         //disable button after upvote
                         like=like+1;
-                        
+                        // window.location.reload();
                         e.currentTarget.disabled = true;
                     }
-                } >Upvote</button>   <p>{blog.like_count} upvotes</p>
-               
-                <button type='submit' class="button"  onClick={
+                } >Upvote</button><p>{blog.like_count} upvotes</p>
+                <br />
+                <br />
+                <button type='submit' class="button" onClick={
                     (e) => {
                         const downvote = {
                             blog_id: blog._id,
@@ -131,12 +125,12 @@ export default class ShowBlog extends Component {
                             }
                         )
                         dislike=dislike+1;
-                        
+                        // window.location.reload();
                         e.currentTarget.disabled = true;
                         
                         
                     }
-                } >Downvote</button>     <p>{blog.dislike_count} downvotes</p>
+                } >Downvote</button> <p>{blog.dislike_count} downvotes</p>
 
 {/* // comments */}
 
@@ -196,6 +190,35 @@ export default class ShowBlog extends Component {
 <br />
 
                 
+                <button class="button" onClick={
+                    (e) => {
+                        window.location='/blog/editBlog';
+                    }
+                }>Edit Blog</button>
+                <br />
+                <br />
+                <button class="button" onClick={
+                    (e) => {
+                        
+                        if(window.confirm("Are you sure you want to delete this blog?")){
+                            console.log("yes");
+                            const deleteBlog = {
+                                blog_id: blog._id,
+                                user_id: localStorage.getItem('user_id'),
+                            }
+                            axios.post('http://localhost:5000/blogs/delete_blog', deleteBlog)
+                                .then(res => {
+                                    console.log(res.data);
+                                });
+                            window.location.href='../readBlogs/myBlogs';
+                        }
+                        else{
+                            console.log("no");
+                            window.location.reload();
+                        }
+                        
+                    }
+                }>Delete Blog</button>
                 </div>
 
                 

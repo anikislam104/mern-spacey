@@ -21,20 +21,40 @@ import MyBlogs from "./components/Blog/myBlogs";
 import AllBlogs from "./components/Blog/allBlogs";
 import ShowBlog from "./components/Blog/showBlog";
 import Logout from "./components/logout";
+
+import PaymentHome from "./components/Payment/paymentHome";
 import MobileBanking from "./components/Payment/mobileBanking";
 import CashPayment from "./components/Payment/cashPayment";
 import PaymentSuccess from "./components/Payment/paymentSuccess";
 import PaymentFailure from "./components/Payment/paymentFailure";
+import PaymentNotifications from "./components/Payment/paymentNotifications";
+import PaymentApproval from "./components/Payment/paymentApproval";
+import PaymentReject from "./components/Payment/paymentReject";
+import PaymentHistory from "./components/Payment/paymentHistory";
+
 import RentingHome from "./components/Renting/rentingHome";
 import SelectedProperty from "./components/Renting/selectedProperty";
-import Notification from "./components/Renting/notification";
+import RentRequestNotification from "./components/Renting/notification";
 import AddInsurance from "./components/Insurance/addInsurance";
 import ForgetPassword from "./components/Authentication/forget_password";
 import ForgetPasswordOTP from "./components/Authentication/forget_password_otp";
 import AdminHomepage from "./components/adminHomepage";
-import Chatpage from "./Pages/Chatpage";
-import ChatProvider from "./Context/ChatProvider";
-import { ChakraProvider } from "@chakra-ui/react";
+import EditProfile from "./components/Profile/editProfile";
+import ViewProfile from "./components/Profile/viewProfile";
+import ShowMyBlog from "./components/Blog/showMyBlog";
+import EditBlog from "./components/Blog/editBlog";
+import ChooseStayDuration from "./components/Renting/choose_facility";
+import Notification from "./components/notification";
+import ViewProperties from "./components/Profile/viewProperties";
+import EditProperty from "./components/Profile/editProperty";
+import MyBookings from "./components/Renting/myBookings";
+import EditRooms from "./components/Profile/editRooms";
+import EditFacilities from "./components/Profile/editFacilities";
+import CurrentBookings from "./components/Renting/current_bookings";
+import ChangeDuration from "./components/Renting/changeDuration";
+import ExtendNotification from "./components/Renting/extendNotification";
+import PastBooking from "./components/Renting/past_bookings";
+import MyHostings from "./components/Renting/myHostings";
 
 
 
@@ -59,6 +79,17 @@ function App() {
         <Route path="forget_password" element={<ForgetPassword />} />
         <Route path="forget_password_otp" element={<ForgetPasswordOTP />} />
         <Route path="adminHomepage" element={<AdminHomepage />} />
+        <Route path="logout" element={<Logout />} />
+
+
+        {/* Profile */}
+        <Route path="editProfile" element={<EditProfile />} />
+        <Route path="viewProfile" element={<ViewProfile />} />
+        <Route path="notification" element={<Notification />} />
+        <Route path="viewProperties" element={<ViewProperties />} />
+        <Route path="editProperty" element={<EditProperty />} />
+        <Route path="editRooms" element={<EditRooms />} />
+        <Route path="editFacilities" element={<EditFacilities />} />
         
         
 
@@ -77,20 +108,37 @@ function App() {
         <Route path="readBlogs/myBlogs" element={<MyBlogs />} />
         <Route path="readBlogs/allBlogs" element={<AllBlogs />} />
         <Route path="blog/showBlog" element={<ShowBlog />} />
-        <Route path="logout" element={<Logout />} />
+        <Route path="blog/showMyBlog" element={<ShowMyBlog />} />
+        <Route path="blog/editBlog" element={<EditBlog />} />
+        
 
 
         {/* Renting  */}
         <Route path="renting" element={<RentingHome />} />
         <Route path="renting/selected_property" element={<SelectedProperty />} />
-        <Route path="rent_request_notifications" element={<Notification />} />
+        <Route path="rent_request_notifications" element={<RentRequestNotification />} />
+        <Route path="renting/choose_facility" element={<ChooseStayDuration />} />
+        <Route path="renting/my_bookings" element={<MyBookings />} />
+        <Route path="current_bookings" element={<CurrentBookings />} />
+        <Route path="change_duration" element={<ChangeDuration />} />
+        <Route path="extend_notification" element={<ExtendNotification />} />
+        <Route path="past_bookings" element={<PastBooking />} />
+        <Route path="my_hostings" element={<MyHostings />} />
+        
 
 
         {/* Payment */}
+        <Route path="payment/payment_home" element={<PaymentHome />} />
         <Route path="payment/mobile_banking" element={<MobileBanking />} />
         <Route path="payment/cash_payment" element={<CashPayment />} />
         <Route path="payment/payment_success" element={<PaymentSuccess />} />
         <Route path="payment/payment_failure" element={<PaymentFailure />} />
+        <Route path="payment/payment_approval" element={<PaymentApproval />} />
+        <Route path="payment/payment_reject" element={<PaymentReject />} />
+        <Route path="payment/payment_history" element={<PaymentHistory />} />
+        <Route path="payment/payment_notifications" element={<PaymentNotifications />} />
+        
+        {/* Notifications */}
 
         {/* Chat */}
         <Route path="chat" element={<Chatpage />} />
