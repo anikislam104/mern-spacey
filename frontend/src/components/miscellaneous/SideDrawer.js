@@ -30,6 +30,9 @@ const SideDrawer = () => {
     localStorage.removeItem("userInfo");
     navigate("/");
   };
+  const homePageHandler = () => {
+    navigate("/homepage");
+  };
 
   const toast = useToast();
 
@@ -155,7 +158,10 @@ const SideDrawer = () => {
               <MenuItem>My Profile</MenuItem>{" "}
               </ProfileModal>
               <MenuDivider />
+              <MenuItem onClick={homePageHandler}>Homepage</MenuItem>
+              <MenuDivider />
               <MenuItem onClick={logoutHandler}>Logout</MenuItem>
+              <MenuDivider />
             </MenuList>
           </Menu>
         </div>
