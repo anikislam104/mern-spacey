@@ -1,6 +1,7 @@
 const router = require('express').Router();
 require('dotenv').config();
 let Insurance = require('../models/insurance');
+let User = require('../models/user');
 var current_insurance_id;
 
 
@@ -57,6 +58,29 @@ router.route('/all_insurance').get((req, res) => {
             res.json(insurances);
         }
         )
+})
+
+//get active insurance
+router.route('/get_insurance').post(async (req, res) => {
+    //get active insurance
+    const insurance =await Insurance.findOne({ status: 'active' });
+    console.log(insurance.adderId);
+    //get name of adder
+    const adder = await User.find({ _id: insurance.adderId });
+    //name of adder
+    const adderName = adder[0].firstName + " " + adder[0].lastName;
+    console.log(adderName);
+    console.log(adder);
+    //get policy
+    const policy = insurance.policy;
+    //create json of adder name and policy
+    const insuranceJson = {
+        'name':adderName,
+        'policy':policy,
+    };
+    console.log(insuranceJson);
+    res.json(insuranceJson);
+
 })
 
 

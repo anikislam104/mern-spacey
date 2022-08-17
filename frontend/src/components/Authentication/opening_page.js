@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import spacey from "./spacey.svg";
+// import spacey from "./spacey.svg";
 import opening from "./opening.svg";
 import Navbar from './navbar';
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import spacey from "../Authentication/spacey.svg";
+// import spacey from "../Authentication/spacey.svg";
 import { Link } from 'react-router-dom';
 import NavbarHomepage from '../navbar_homepage';
 import PersonalRoom from "./personal_room.svg";

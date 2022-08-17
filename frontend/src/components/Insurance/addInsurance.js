@@ -44,7 +44,7 @@ export default class AddInsurance extends Component {
 
 
         const insurance = {
-            adder_id: this.state.adder_id,
+            adder_id: localStorage.getItem("user_id"),
             policy: this.state.policy
         }
 

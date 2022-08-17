@@ -179,7 +179,7 @@ export default class PaymentHistory extends Component{
                                         onChange={this.onChangeDate1}
                                         showTimeSelect   
                                         showYearDropdown
-                                        placeholderText={this.state.date1}
+                                        
                                         style={myStyle.borderSection}
                                         placeholderText="Start date"/>
                                     
@@ -191,7 +191,7 @@ export default class PaymentHistory extends Component{
                                         onChange={this.onChangeDate2}
                                         showTimeSelect   
                                         showYearDropdown
-                                        placeholderText={this.state.date2}
+                                        
                                         placeholderText="End date"
                                         />
   
