@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import spacey from "./spacey.svg";
 
+
 export default class AdminNavbar extends Component {
 
   render() {
@@ -36,10 +37,17 @@ export default class AdminNavbar extends Component {
           <li className="navbar-item">
           <Link to={'/show_insurance'} className="nav-link"><h2><b>Show Insurance</b></h2></Link>
           </li>
+          <li className="navbar-item">
+          <Link to={'/logout'} className="nav-link"><h2><b>Log Out</b></h2></Link>
+          </li>
          </ul>
          </div>
         </div>
+
+        
+        
       </nav>
+
        
     )
 

@@ -53,6 +53,7 @@ export default class ShowBlog extends Component {
                 this.setState({
                     blog: this.state.blog.concat(res.data),
                 });
+
             })
         console.log(this.state.blog);
         this.setState({
@@ -93,7 +94,7 @@ export default class ShowBlog extends Component {
                     <br />
                     <br />
                 {/* button for upvote */}
-                <button  type='submit' class="button" onClick={
+                <button  type='submit' id="upvote" class="button" onClick={
                     (e) => {
                         const upvote = {
                             blog_id: blog._id,
@@ -110,8 +111,9 @@ export default class ShowBlog extends Component {
                         
                         //disable button after upvote
                         like=like+1;
-                        
-                        e.currentTarget.disabled = true;
+                        window.location.reload();
+                        window.location.reload();
+                        // e.currentTarget.disabled = true;
                     }
                 } >Upvote</button>   <p>{blog.like_count} upvotes</p>
                
@@ -131,8 +133,9 @@ export default class ShowBlog extends Component {
                             }
                         )
                         dislike=dislike+1;
-                        
-                        e.currentTarget.disabled = true;
+                        window.location.reload();
+                        window.location.reload();
+                        // e.currentTarget.disabled = true;
                         
                         
                     }

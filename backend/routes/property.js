@@ -3,6 +3,7 @@ require('dotenv').config();
 let Property = require('../models/property');
 let Room = require('../models/room');
 let Facility = require('../models/facility');
+const multer = require('multer');
 var current_property_id = 0;
 
 
@@ -14,7 +15,18 @@ router.route('/').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/add').post(async (req, res) => {
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './images');
+  }
+  , filename: function (req, file, cb) {
+    cb(null, file.originalname)
+  }
+})
+
+const upload = multer({ storage: storage });
+
+router.route('/add').post(upload.single("image"),async (req, res) => {
   const hostId = req.body.host_id;
   const title = req.body.title;
   const location = req.body.location;
@@ -24,6 +36,7 @@ router.route('/add').post(async (req, res) => {
   const pricePerDay = req.body.pricePerDay;
   const rooms = req.body.rooms;
   const facilities = req.body.facilities;
+  const image = req.file.originalname;
   const allProperties = await Property.find();
 
 
@@ -39,6 +52,7 @@ router.route('/add').post(async (req, res) => {
     size,
     status,
     pricePerDay,
+    image,
   });
 
   console.log(newProperty);
@@ -53,11 +67,45 @@ router.route('/add').post(async (req, res) => {
 
   console.log(current_property_id);
 
+  //declare 2d array to store rooms
+  let room_array = [];
+  var idx=0;
+  //count comma in rooms string
+  for(let i=0; i<rooms.length; i++){
+    if(rooms[i]==','){
+      idx++;
+    }
+  }
+  //room array size is the number of commas + 1
+  room_array.length = idx+1;
+  //initialize room array
+  for(let i=0; i<room_array.length; i++){
+    room_array[i] = '';
+  }
+  idx=0;
+  for(let i=0;i<rooms.length;i++){
+    //add into room_array[idx] until , comes
+    if(rooms[i]!=','){
+      room_array[idx]+=rooms[i];
+      //take substring excluding first 9 characters from rooms[i]
+      // if(rooms[i].substring(0,9)=='undefined'){
+      //   room_array[idx]=room_array[idx].substring(9);
+      // }
+        
 
-  for (let i = 0; i < rooms.length; i++) {
+    }
+    //if , comes, then skip , and add next char into next array element
+    else{
+      idx++;
+    }
+  }
+  console.log(room_array);
+
+  for (let i = 0; i < room_array.length; i++) {
     const propertyId = newProperty._id;
-    const roomType = rooms[i][0];
-    const roomNo = rooms[i][1];
+    const roomType = room_array[i];
+    const roomNo = Number(room_array[i + 1]);
+    console.log(roomType+" "+roomNo);
     const newRoom = new Room({
       propertyId,
       roomType,
@@ -66,13 +114,42 @@ router.route('/add').post(async (req, res) => {
 
 
     await newRoom.save();
+    i++;
     //.then(() => res.send('room added'))
     //.catch(err => res.status(400).json('Error: ' + err));
   }
 
-  for (let i = 0; i < facilities.length; i++) {
+  //calculate number of commas in facilities string
+  var idx=0;
+  for(let i=0; i<facilities.length; i++){
+    if(facilities[i]==','){
+      idx++;
+    }
+  }
+
+  //facility array size is the number of commas + 1
+  let facility_array = [];
+  facility_array.length = idx+1;
+  //initialize facility array
+  for(let i=0; i<facility_array.length; i++){
+    facility_array[i] = '';
+  }
+  idx=0;
+  for(let i=0;i<facilities.length;i++){
+    //add into facility_array[idx] until , comes
+    if(facilities[i]!=','){
+      facility_array[idx]+=facilities[i];
+    }
+    //if , comes, then skip , and add next char into next array element
+    else{
+      idx++;
+    }
+  }
+  console.log(facility_array);
+
+  for (let i = 0; i < facility_array.length; i++) {
     const propertyId = newProperty._id;
-    const facilityType = facilities[i];
+    const facilityType = facility_array[i];
     const newFacility = new Facility({
       propertyId,
       facilityType,
