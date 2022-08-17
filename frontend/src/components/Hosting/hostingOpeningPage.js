@@ -59,9 +59,9 @@ export default class HostingOpeningPage extends Component {
 
                     <div class="col-lg-6">
                       <div class="card-body">
-                        <h3 class="display-6"><b>What kind of place will you host <br /> with &nbsp;
-                          <img src={spacey} class="img-responsive" alt=" " style={myStyle.logoSection} />
-                          <font style={myStyle.nameSection}>&nbsp;Spacey</font></b> ? </h3>
+                        <h3 class="display-6"><b>What kind of place will you <br /> host with &nbsp;
+                          
+                          <font style={myStyle.nameSection}>Spacey</font></b> ? </h3>
                       </div>
 
 
@@ -85,7 +85,7 @@ export default class HostingOpeningPage extends Component {
               <div class="image">
                 <img src={PersonalRoom} class="img-responsive" alt=" " style={myStyle.openingPicSection} />
               </div>
-              <label><h5>Host your personal space</h5></label><br />
+              <label><h5><b>Host your personal space</b></h5></label><br />
               <div className="container">
                 <br />
                 &emsp;&emsp;
@@ -104,7 +104,7 @@ export default class HostingOpeningPage extends Component {
               <div class="image">
                 <img src={BusinessStorage} class="img-responsive" alt=" " style={myStyle.openingPicSection} />
               </div>
-              <label><h5>Host your free storage</h5></label><br />
+              <label><b><h5>Host your free storage</h5></b></label><br />
               <div className="container">
                 <br />
                 &emsp;&emsp;

@@ -170,6 +170,37 @@ export default class MobileBanking extends Component {
                 <NavbarHomepage />
                
                <div class="container-fluid">
+               <div class="row no-gutter">
+                 
+                  
+                 <div class="col-md-12 bg-light">
+                     <div class="login d-flex align-items-center py-5">
+                        
+                         <div class="container">
+                             <div class="row align-items-center">
+                               
+                               <div class="col-lg-3">
+
+                               </div>
+
+                               <div class="col-lg-8">
+                                     
+                                     <div class="card-body">
+                                         <h5 class="display-6"> <b>Mobile Banking Payment Method</b></h5>
+                                     </div>
+                                   
+                               </div>     
+
+                               <div class="col-lg-1">
+                               
+                                 </div>
+
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+
                    <div class="row no-gutter">
                       
                        
@@ -185,10 +216,11 @@ export default class MobileBanking extends Component {
      
                                      <div class="col-lg-5">
                                         
-                                        <h5> Host: {this.state.host_email}</h5><br/>
-                                        <h5> Property Title: {this.state.property_title}</h5><br/>
-                                        <h5> Your Current Point:&nbsp;{this.state.point}     &emsp;&emsp;&emsp; Discount:&nbsp;{this.state.discount} </h5><br/>
-                                        <h5> Amount to pay:&nbsp;{this.state.amount-this.state.discount} </h5><br/>
+                                        <h5> <b>Host:</b>&nbsp;{this.state.host_email}</h5><br/>
+                                        <h5> <b>Property Title: </b>{this.state.property_title}</h5><br/>
+                                        <h5> <b>Your Current Point:</b>&nbsp;{this.state.point}
+                                             &emsp;&emsp;&emsp; <b>Discount:</b>&nbsp;{this.state.discount}</h5><br/>
+                                        <h5> <b>Amount to pay:</b>&nbsp;{this.state.amount-this.state.discount}</h5><br/>
                                         <form encType="multipart/form-data">
                                                <div class="form-group sm-3">
                                               

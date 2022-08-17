@@ -126,6 +126,9 @@ export default class PaymentHistory extends Component{
             textSection2:{
                 textAlign:"center",
             },
+            borderSection:{
+                borderColor:"blue",
+            },
             
         }
         return(
@@ -169,17 +172,19 @@ export default class PaymentHistory extends Component{
 
                                 <div class="input-group">
                      
-                                    Start Date: 
                                     
-                                        <DatePicker
+                                    
+                                        <DatePicker 
                                         selected={this.state.date1}
                                         onChange={this.onChangeDate1}
                                         showTimeSelect   
                                         showYearDropdown
                                         placeholderText={this.state.date1}
-                                        />
+                                        style={myStyle.borderSection}
+                                        placeholderText="Start date"/>
                                     
-                                    End Date: 
+                                    <br/>
+                                    <label>&nbsp;</label>
                                     
                                         <DatePicker 
                                         selected={this.state.date2}
@@ -187,6 +192,7 @@ export default class PaymentHistory extends Component{
                                         showTimeSelect   
                                         showYearDropdown
                                         placeholderText={this.state.date2}
+                                        placeholderText="End date"
                                         />
   
 

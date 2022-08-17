@@ -19,10 +19,10 @@ export default class Navbar extends Component {
     }
     return (
       <nav className="navbar navbar navbar-expand-lg" style={myStyle.navSection}>
-         <div class="logo-image">
+         
             <img src={spacey} class="img-responsive" alt=" " />
-        </div>
-        <Link to={"/"} className="navbar-brand" style={myStyle.optionSection} ><h2>Spacey</h2></Link>
+        
+        <Link to={"/"} className="navbar-brand" style={myStyle.optionSection} ><h2><b>Spacey</b></h2></Link>
         <div class="col-lg-8">
    
         </div>
@@ -30,11 +30,11 @@ export default class Navbar extends Component {
          <div className="collpase navbar-collapse">
          <ul className="navbar-nav mr-auto">
           <li className="navbar-item">
-          <Link to={'/create-user'} className="nav-link"><h5>Sign Up</h5></Link>
+          <Link to={'/create-user'} className="nav-link"><h2><b>Sign Up</b></h2></Link>
           </li>
 
           <li className="navbar-item">
-          <Link to={'/login'} className="nav-link"><h5>Log In</h5></Link>
+          <Link to={'/login'} className="nav-link"><h2><b>Log In</b></h2></Link>
           </li>
          </ul>
          </div>
