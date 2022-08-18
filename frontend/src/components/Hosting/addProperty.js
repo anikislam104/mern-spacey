@@ -188,7 +188,7 @@ export default class AddProperty extends Component {
       },
 
       buttonSection2: {
-        backgroundColor: "Sea Serpent",
+        backgroundColor: "BlueViolet",
         padding: "7px 10px",
         fontSize: "15px",
         color: "black",

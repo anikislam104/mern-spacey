@@ -24,10 +24,10 @@ export default class AdminNavbar extends Component {
             <img src={spacey} class="img-responsive" alt=" " />
         
         <Link to={"/"} className="navbar-brand" style={myStyle.optionSection} ><h2><b>Spacey</b></h2></Link>
-        <div class="col-lg-8">
+        <div class="col-lg-7">
    
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-5">
          <div className="collpase navbar-collapse">
          <ul className="navbar-nav mr-auto">
           <li className="navbar-item">

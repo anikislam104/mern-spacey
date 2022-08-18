@@ -154,14 +154,10 @@ const SideDrawer = () => {
             />
             </MenuButton>
             <MenuList>
-              <ProfileModal user={user}>
-              <MenuItem>My Profile</MenuItem>{" "}
-              </ProfileModal>
+
               <MenuDivider />
               <MenuItem onClick={homePageHandler}>Homepage</MenuItem>
-              <MenuDivider />
-              <MenuItem onClick={logoutHandler}>Logout</MenuItem>
-              <MenuDivider />
+
             </MenuList>
           </Menu>
         </div>

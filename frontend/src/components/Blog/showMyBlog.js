@@ -136,7 +136,7 @@ export default class ShowMyBlog extends Component {
 
 <br />
 <br />
-                <input type='text' onChange={this.comment} value={this.state.Comment} ></input>
+                <input type='text' onChange={this.comment} value={this.state.Comment} placeholder="write comment"></input>
                 <br />
                 <br />
                 <Link to='../blog/showBlog'><button type='submit' class="button" onClick={

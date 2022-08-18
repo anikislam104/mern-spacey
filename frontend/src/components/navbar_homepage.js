@@ -22,8 +22,9 @@ export default class NavbarHomepage extends Component {
     fetch('http://localhost:5000/users/user_id')
         .then((res) => res.json())
         .then((json) => {
-            this.setState({
-                user_name: localStorage.getItem('firstName'),
+            const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+            this.setState({ 
+                user_name: userInfo.firstName,
             });
   
         })
