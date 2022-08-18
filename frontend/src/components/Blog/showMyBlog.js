@@ -75,15 +75,20 @@ export default class ShowMyBlog extends Component {
     
 
     render() {
+        const myStyle={
+            textSection:{
+                textAlign:"center",
+            }
+        }
         return this.state.blog.map((blog) => {
             
             return(
                 
                 <div>
                     <NavbarHomepage />
-                    <h1>{blog.title}</h1>
-                    <p>Writer: {blog.user_name}</p>
-                    <p>{blog.content}</p>
+                    <h1 class="display-6" style={myStyle.textSection}>{blog.title}</h1>
+                    <p style={myStyle.textSection}>Writer: {blog.user_name}</p>
+                    <p><h1>{blog.content}</h1></p>
                     <br />
                     <br />
                 {/* button for upvote */}

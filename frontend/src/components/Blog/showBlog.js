@@ -106,6 +106,7 @@ export default class ShowBlog extends Component {
                 <div>
                     <NavbarHomepage />
                     <h1 class="display-6" style={myStyle.textSection}>{blog.title}</h1>
+                    <p style={myStyle.textSection}>Writer: {blog.user_name}</p>
                     <p><h1>{blog.content}</h1></p>
                     <br />
                     <br />
