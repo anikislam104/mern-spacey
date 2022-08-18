@@ -138,7 +138,7 @@ router.route('/get_host_email').post((req,res)=>{
     User.findById(host_id)
      .then(user=>{
           //console.log(user.email);
-          res.json(user.firstName+" "+user.lastName);
+          res.json(user.firstName);
      })
 })
 

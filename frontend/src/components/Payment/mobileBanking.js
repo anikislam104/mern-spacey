@@ -30,9 +30,10 @@ export default class MobileBanking extends Component {
     }
 
     componentDidMount() {
+        const userInfo = JSON.parse(localStorage.getItem("userInfo"));
         this.setState({
             renter_id: localStorage.getItem('user_id'),
-            renter_email:localStorage.getItem('firstName'),
+            renter_email: userInfo.firstName,
             booking_id: localStorage.getItem('payment_booking_id'),
         });
     

@@ -94,15 +94,19 @@ export default class ShowBlog extends Component {
     
 
     render() {
+        const myStyle={
+            textSection:{
+                textAlign:"center",
+            }
+        }
         return this.state.blog.map((blog) => {
             
             return(
                 
                 <div>
                     <NavbarHomepage />
-                    <h1>{blog.title}</h1>
-                    <p>Writer: {blog.user_name}</p>
-                    <p>{blog.content}</p>
+                    <h1 class="display-6" style={myStyle.textSection}>{blog.title}</h1>
+                    <p><h1>{blog.content}</h1></p>
                     <br />
                     <br />
                     <br />
@@ -158,7 +162,7 @@ export default class ShowBlog extends Component {
 
 <br />
 <br />
-                <input type='text' onChange={this.comment} value={this.state.Comment} ></input>
+                <input type='text' placeholder="write comment" onChange={this.comment} value={this.state.Comment} ></input>
                 <br />
                 <br />
                 <Link to='../blog/showBlog'><button type='submit' class="button" onClick={

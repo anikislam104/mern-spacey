@@ -188,7 +188,7 @@ export default class AddProperty extends Component {
       },
 
       buttonSection2: {
-        backgroundColor: "Sea Serpent",
+        backgroundColor: "BlueViolet",
         padding: "7px 10px",
         fontSize: "15px",
         color: "black",
@@ -285,7 +285,7 @@ export default class AddProperty extends Component {
 
                         <br />
                         <div class="form-group sm-3">
-                                <label>Profile Picture: </label>
+                                <label>Room Picture: </label>
                                 <br/><br/>
                                                   <div class="custom-file sm-3">
                                                     <input type="file" filename="image" class="custom-file-input form-control  border-0 shadow-sm px-4" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" onChange={this.onChangeImage} />

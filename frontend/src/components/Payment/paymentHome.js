@@ -43,40 +43,48 @@ export default class PaymentHome extends Component{
                 <NavbarHomepage />
                 <br/>
             <div class="container-fluid">
-              <div class="row no-gutter">
-                 
-                  
-                  <div class="col-md-12 bg-light">
-                      <div class="login d-flex align-items-center py-5">
-                         
-                          <div class="container">
-                              <div class="row align-items-center">
-                                
-                                <div class="col-lg-2">
 
-                                </div>
+             <div class="row no-gutter">
 
-                                <div class="col-lg-9">
-                                      
-                                      <div class="card-body">
-                                           <h1 class="card-title">&emsp;&emsp;Welcome to Spacey Payment Module!</h1>
-                                           <br/>
-                                           <h5 class="card-subtitle text-muted">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                                           &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Easy & Secure payment system!</h5>
-                                      </div>
-                                    
-                                </div>     
 
-                                <div class="col-lg-1">
-                                
-                                  </div>
+            <div class="col-md-12 bg-light">
+              <div class="login d-flex align-items-center py-5">
 
-                              </div>
-                          </div>
+                <div class="container">
+                  <div class="row align-items-center">
+
+                    <div class="col-lg-2">
+
+                    </div>
+
+                    <div class="col-lg-8">
+                      <div class="card-body">
+                        <h3 class="display-6"><b>&emsp;Welcome to 
+                          
+                          <font style={myStyle.nameSection}>&nbsp;Spacey Payment Module!</font></b>
+                          
+                          </h3>
+                          <br/>
+                          <h5 class="card-subtitle text-muted">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                          <b>Easy & Secure payment system!!</b></h5>
+                                            
+                          
                       </div>
+
+
+                    </div>
+
+                    <div class="col-lg-2">
+
+                    </div>
+
                   </div>
+                </div>
               </div>
-             <br/><br/>
+            </div>
+          </div>
+          <br/><br/>
     <div class="row no-gutter">
         <div class="col-lg-1">
                                 
@@ -85,7 +93,7 @@ export default class PaymentHome extends Component{
           <div class="image">
                 <img src={PaymentHome1} class="img-responsive" alt=" "  style={myStyle.openingPicSection}/>
           </div> <br/>
-          <label><h5>&emsp;&emsp;&emsp;&emsp;Pay in person</h5></label><br/>
+          <label><h5>&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<b>Pay in person</b></h5></label><br/>
           <div className="container">
                 <br/>
                 &emsp;&emsp;
@@ -100,7 +108,7 @@ export default class PaymentHome extends Component{
             <div class="image">
                     <img src={PaymentHome2} class="img-responsive" alt=" "  style={myStyle.openingPicSection}/>
             </div> <br/>
-              <label><h5>&emsp;&emsp;&emsp;&emsp;Pay with card </h5></label><br/>
+              <label><h5>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<b>Pay with card </b></h5></label><br/>
               <div className="container">
                 <br/>
                 &emsp;&emsp;
