@@ -82,6 +82,7 @@ export default class ShowMyBlog extends Component {
                 <div>
                     <NavbarHomepage />
                     <h1>{blog.title}</h1>
+                    <p>Writer: {blog.user_name}</p>
                     <p>{blog.content}</p>
                     <br />
                     <br />

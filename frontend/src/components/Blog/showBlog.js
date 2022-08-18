@@ -10,6 +10,7 @@ var comments=[];
 var like=0;
 var dislike=0;
 
+
 //style upvote and downvote buttons
 
 
@@ -19,6 +20,7 @@ export default class ShowBlog extends Component {
         super(props);
         this.showComments = this.showComments.bind(this);
         this.comment = this.comment.bind(this);
+        this.showWriterName = this.showWriterName.bind(this);
         // this.showSelectedBlog = this.showSelectedBlog.bind(this);
         this.state = {
             blog: [],
@@ -54,6 +56,10 @@ export default class ShowBlog extends Component {
                     blog: this.state.blog.concat(res.data),
                 });
 
+                
+                //get user name
+            
+
             })
         console.log(this.state.blog);
         this.setState({
@@ -80,6 +86,11 @@ export default class ShowBlog extends Component {
             )
         }
     }
+
+    showWriterName(id){
+        
+
+    }
     
 
     render() {
@@ -90,7 +101,9 @@ export default class ShowBlog extends Component {
                 <div>
                     <NavbarHomepage />
                     <h1>{blog.title}</h1>
+                    <p>Writer: {blog.user_name}</p>
                     <p>{blog.content}</p>
+                    <br />
                     <br />
                     <br />
                 {/* button for upvote */}

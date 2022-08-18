@@ -55,7 +55,7 @@ export default class AddInsurance extends Component {
         axios.post('http://localhost:5000/insurance/add', insurance)
             .then(res => {
                 console.log(res.data);
-                window.location = '/homepage';
+                window.location = '/adminHomepage';
             });
 
 
