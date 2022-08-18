@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import NavbarHomepage from "../navbar_homepage";
-import { Box } from "@chakra-ui/layout";
 
 const ViewProfile = () => {
   const [firstName, setFirstName] = useState("");
