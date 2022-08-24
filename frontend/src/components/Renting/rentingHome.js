@@ -24,14 +24,14 @@ export default class RentingHome extends Component {
     }
     //get all properties from the database
     componentDidMount(){
-        fetch('http://localhost:5000/property/all_properties')
-            .then((res) => res.json())
-            .then((json) => {
-                //console.log(JSON.stringify(json));
+        const id={
+            user_id: localStorage.getItem('user_id'),
+        }
+        axios.post('http://localhost:5000/property/all_properties',id)
+            .then((res) => {
                 this.setState({
-                    properties: this.state.properties.concat(json),
+                    properties: res.data
                 });
-                console.log(this.state.properties);
             })
     }
 

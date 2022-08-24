@@ -231,6 +231,21 @@ router.route('/get_my_bookings').post(async (req, res) =>{
     res.send(bookings);
 })
 
+//checking if own property
+
+router.route('/check_if_mine').post(async (req,res) =>{
+    const user_id = req.body.user_id;
+    const property_id = req.body.property_id;
+    const property = await Property.findById(property_id);
+    if(property.hostId == user_id){
+        res.send("yes");
+    }
+    else{
+        res.send("no");
+    }
+}
+)
+
 //get current bookings
 router.route('/get_current_bookings').post(async (req, res) =>{
     const user_id = req.body.user_id;
