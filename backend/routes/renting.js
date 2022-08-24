@@ -65,12 +65,16 @@ router.route('/send_rental_request').post(async (req, res) =>
     end.setHours(end.getHours() + 6);
     start_date=start.toUTCString();
     end_date=end.toUTCString();
+    var today=new Date();
 
     console.log("renter_id:" + renter_id + " property_id:" + property_id + " host_id:" + host_id);
     console.log("start date: " + start_date + " end date: " + end_date);
 
     if(host_id===renter_id){
-        res.send("You can't rent your own property");
+        res.send("You cannot rent your own property");
+    }
+    else if(start>end || start===end || today>start || today>end){
+        res.send("Invalid date");
     }
     else{
         const newRentRequest = new RentRequest({
@@ -549,6 +553,56 @@ router.route('/get_past_bookings').post(async (req, res) =>{
     }
     console.log(past_bookings);
     res.send(past_bookings);
+})
+
+//get my current hostings
+router.route('/get_current_hostings').post(async (req, res) =>{
+    const user_id = req.body.user_id;
+    const bookings = await Booking.find({host_id: user_id});
+    console.log("s "+bookings.length);
+    var current_hostings = [];
+    for(var i=0; i<bookings.length; i++){
+        var start_date = bookings[i].start_time;
+        var end_date = bookings[i].end_time;
+        
+        const renter = await User.findById(bookings[i].renter_id);
+        renter_name = renter.firstName + " " + renter.lastName;
+        
+        const property = await Property.findById(bookings[i].property_id);
+        property_title = property.title;
+        //get difference between start date and end date
+        
+        price = bookings[i].price;
+        if(bookings[i].payment_status=="pending")
+            current_hostings.push([bookings[i]._id, renter_name, property_title, start_date, end_date,price]);
+    }
+    console.log(current_hostings);
+    res.send(current_hostings);
+})
+
+//get my past hostings
+router.route('/get_past_hostings').post(async (req, res) =>{
+    const user_id = req.body.user_id;
+    const bookings = await Booking.find({host_id: user_id});
+    console.log("s "+bookings.length);
+    var past_hostings = [];
+    for(var i=0; i<bookings.length; i++){
+        var start_date = bookings[i].start_time;
+        var end_date = bookings[i].end_time;
+        
+        const renter = await User.findById(bookings[i].renter_id);
+        renter_name = renter.firstName + " " + renter.lastName;
+        
+        const property = await Property.findById(bookings[i].property_id);
+        property_title = property.title;
+        //get difference between start date and end date
+        
+        price = bookings[i].price;
+        if(bookings[i].payment_status=="Paid")
+            past_hostings.push([bookings[i]._id, renter_name, property_title, start_date, end_date,price]);
+    }
+    console.log(past_hostings);
+    res.send(past_hostings);
 })
 
 module.exports = router;

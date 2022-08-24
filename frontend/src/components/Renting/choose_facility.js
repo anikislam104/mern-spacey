@@ -158,6 +158,10 @@ const ChooseStayDuration=()=>{
                     alert('Rental request sent successfully');
                     window.location = '/renting';
                 }
+                else if(res.data === 'Invalid date'){
+                    alert('Invalid date');
+                    window.location.reload();
+                }
                 else{
                     alert('You cannot book your own property');
                     window.location = '/renting';
