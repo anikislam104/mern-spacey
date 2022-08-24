@@ -7,6 +7,7 @@ const Notification = require('../models/notification');
 let Facility = require('../models/facility');
 let Room = require('../models/room');
 let ExtendBookingRequest = require('../models/extendBookingRequest');
+let ReviewRating = require('../models/rating_review');
 
 const { request } = require('express');
 
@@ -603,6 +604,43 @@ router.route('/get_past_hostings').post(async (req, res) =>{
     }
     console.log(past_hostings);
     res.send(past_hostings);
+})
+
+//set rating review
+router.route('/set_rating_review').post(async (req, res) =>{
+    const booking_id = req.body.booking_id;
+    const rating = req.body.rating;
+    const review = req.body.review;
+    
+    const booking = await Booking.findById(booking_id);
+
+    const property_id = booking.property_id;
+
+    //create a new review rating
+    const review_rating = new ReviewRating({
+        booking_id: booking_id,
+        property_id: property_id,
+        rating: rating,
+        review: review,
+    });
+    await review_rating.save();
+    res.send('ok');
+    
+})
+
+//get all reviews and ratings of a property
+router.route('/get_reviews_ratings').post(async (req, res) =>{
+    const property_id = req.body.property_id;
+    const reviews_ratings = await ReviewRating.find({property_id: property_id});
+    var reviews = [];
+    for(var i=0; i<reviews_ratings.length; i++){
+        const booking = await Booking.findById(reviews_ratings[i].booking_id);
+        const renter = await User.findById(booking.renter_id);
+        renter_name = renter.firstName + " " + renter.lastName;
+        reviews.push([renter_name, reviews_ratings[i].rating, reviews_ratings[i].review]);
+    }
+    console.log(reviews);
+    res.send(reviews);
 })
 
 module.exports = router;
