@@ -2,15 +2,15 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const ratingSchema = new Schema({
+const complaintSchema = new Schema({
     booking_id: { type: String, required: true },
-    property_id: { type: String, required: true },
-    review: { type: String, required: true },
-    rating: { type: Number, required: true },
+    complainant_id: { type: String, required: true },
+    complainee_id: { type: String, required: true },
+    complaint: { type: String, required: true }, 
 }, {
   timestamps: true,
 });
 
-const ReviewRating = mongoose.model('ReviewRating', ratingSchema);
+const Complaint = mongoose.model('Complaint', complaintSchema);
 
-module.exports = ReviewRating;
+module.exports = Complaint;

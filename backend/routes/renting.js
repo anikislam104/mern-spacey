@@ -8,6 +8,7 @@ let Facility = require('../models/facility');
 let Room = require('../models/room');
 let ExtendBookingRequest = require('../models/extendBookingRequest');
 let ReviewRating = require('../models/rating_review');
+let Complaint = require('../models/complaint');
 
 const { request } = require('express');
 
@@ -615,6 +616,11 @@ router.route('/set_rating_review').post(async (req, res) =>{
     const booking = await Booking.findById(booking_id);
 
     const property_id = booking.property_id;
+    const property = await Property.findById(property_id);
+    
+    //get title
+    const property_title = property.title;
+    
     //check if already rated
     const rating_review = await ReviewRating.findOne({booking_id: booking_id});
     if(rating_review){
@@ -629,6 +635,14 @@ router.route('/set_rating_review').post(async (req, res) =>{
             review: review,
         });
         await review_rating.save();
+
+        //send notification to host
+        const host_id = booking.host_id;
+        const newNotification = new Notification({
+            user_id: host_id,
+            message: "You have received a new review for your property "+property_title,
+        });
+        await newNotification.save();
         res.send('ok');
     }
     
@@ -647,6 +661,76 @@ router.route('/get_reviews_ratings').post(async (req, res) =>{
     }
     console.log(reviews);
     res.send(reviews);
+})
+
+//set renter complaint
+router.route('/set_renter_complaint').post(async (req, res) =>{
+    const booking_id = req.body.booking_id;
+    const complaint = req.body.complaint;
+
+    const booking = await Booking.findById(booking_id);
+    const renter_id = booking.renter_id;
+    const host_id = booking.host_id;
+
+    //get renter name
+    const renter = await User.findById(renter_id);
+    renter_name = renter.firstName + " " + renter.lastName;
+
+    //get property and title
+    const property = await Property.findById(booking.property_id);
+    const property_title = property.title;
+
+    //create new complaint
+    const newComplaint = new Complaint({
+        booking_id: booking_id,
+        complainant_id: renter_id,
+        complainee_id: host_id,
+        complaint: complaint,
+    });
+    await newComplaint.save();
+
+    //send notification to host
+    const newNotification = new Notification({
+        user_id: host_id,
+        message: "You have received a new complaint from a renter named " + renter_name + " for your property " + property_title,
+    });
+    await newNotification.save();
+    res.send('ok');
+})
+
+//set host complaint
+router.route('/set_host_complaint').post(async (req, res) =>{
+    const booking_id = req.body.booking_id;
+    const complaint = req.body.complaint;
+
+    const booking = await Booking.findById(booking_id);
+    const renter_id = booking.renter_id;
+    const host_id = booking.host_id;
+
+    //get host name
+    const host = await User.findById(host_id);
+    host_name = host.firstName + " " + host.lastName;
+
+    //get property and title
+    const property = await Property.findById(booking.property_id);
+    const property_title = property.title;
+
+    //create new complaint
+    const newComplaint = new Complaint({
+        booking_id: booking_id,
+        complainant_id: host_id,
+        complainee_id: renter_id,
+        complaint: complaint,
+    });
+    await newComplaint.save();
+
+    //send notification to renter
+    const newNotification = new Notification({
+        user_id: renter_id,
+        message: "You have received a new complaint from a host named " + host_name + " for your booked property " + property_title,
+    });
+    await newNotification.save();
+    res.send('ok');
 })
 
 module.exports = router;
