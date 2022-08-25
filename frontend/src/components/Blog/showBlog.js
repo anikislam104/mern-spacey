@@ -112,6 +112,7 @@ export default class ShowBlog extends Component {
                     <br />
                     <br />
                     <br />
+                    
                 {/* button for upvote */}
                 <button  type='submit' id="upvote" class="button" onClick={
                     (e) => {
