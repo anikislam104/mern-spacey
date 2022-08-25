@@ -11,6 +11,7 @@ export default class SelectedProperty extends Component {
             property:[],
             rooms:[],
             facilities:[],
+            review_ratings:[],
             host_name:'',
             renter_name:''
         }
@@ -52,6 +53,14 @@ export default class SelectedProperty extends Component {
                 console.log(res.data);
                 this.setState({
                     facilities: this.state.facilities.concat(res.data),
+                });
+            })
+
+            axios.post('http://localhost:5000/renting/get_reviews_ratings', property)
+            .then(res => {
+                console.log(res.data);
+                this.setState({
+                    review_ratings: this.state.review_ratings.concat(res.data),
                 });
             })
         
@@ -144,9 +153,52 @@ export default class SelectedProperty extends Component {
                     <button className="btn btn-primary" onClick={
                         () => {
                             // this.sendRentalRequest(property);
-                            window.location.href = '/renting/choose_facility';
+                            const info = {
+                                property_id: property._id,
+                                user_id: localStorage.getItem('user_id'),
+                            }
+                            axios.post('http://localhost:5000/renting/check_if_mine', info)
+                                .then(res => {
+                                    console.log(res.data);
+                                    if(res.data === 'yes'){
+                                        alert("You cannot book your own property");
+                                    }
+                                    else{
+                                        window.location.href = '/renting/choose_facility';
+                                    }
+
+                                })
+                            
                         }
                     }>Book</button>
+                    <br />
+                    <br />
+                    <button className="btn btn-primary" onClick={
+                        () => {
+                            //show retrav if hidden
+                            if(document.getElementById('revrat').style.display === 'none'){
+                                document.getElementById('revrat').style.display = 'block';
+                            }
+                            else{
+                                document.getElementById('revrat').style.display = 'none';
+                            }
+                        }
+                    }>See Reviews</button>
+                    <br />
+                    <br />
+                    <div  id="revrat" style={{display:"none"}}>
+                    <h1><strong>Reviews:</strong></h1>
+                    {this.state.review_ratings.map((review_rating) => {
+                        return (
+                            <div >
+                                <h1>Renter name: {review_rating[0]}</h1>
+                                <h1>Rating: {review_rating[1]}*</h1>
+                                <h1>Review: {review_rating[2]}</h1>
+                                <br></br>
+                            </div>
+                        )
+                    })}
+                    </div>
                 </div>
             )
         

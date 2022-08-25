@@ -7,6 +7,7 @@ const Notification = require('../models/notification');
 let Facility = require('../models/facility');
 let Room = require('../models/room');
 let ExtendBookingRequest = require('../models/extendBookingRequest');
+let ReviewRating = require('../models/rating_review');
 
 const { request } = require('express');
 
@@ -65,12 +66,16 @@ router.route('/send_rental_request').post(async (req, res) =>
     end.setHours(end.getHours() + 6);
     start_date=start.toUTCString();
     end_date=end.toUTCString();
+    var today=new Date();
 
     console.log("renter_id:" + renter_id + " property_id:" + property_id + " host_id:" + host_id);
     console.log("start date: " + start_date + " end date: " + end_date);
 
     if(host_id===renter_id){
-        res.send("You can't rent your own property");
+        res.send("You cannot rent your own property");
+    }
+    else if(start>end || start===end || today>start || today>end){
+        res.send("Invalid date");
     }
     else{
         const newRentRequest = new RentRequest({
@@ -230,6 +235,21 @@ router.route('/get_my_bookings').post(async (req, res) =>{
     console.log(bookings.length);
     res.send(bookings);
 })
+
+//checking if own property
+
+router.route('/check_if_mine').post(async (req,res) =>{
+    const user_id = req.body.user_id;
+    const property_id = req.body.property_id;
+    const property = await Property.findById(property_id);
+    if(property.hostId == user_id){
+        res.send("yes");
+    }
+    else{
+        res.send("no");
+    }
+}
+)
 
 //get current bookings
 router.route('/get_current_bookings').post(async (req, res) =>{
@@ -534,6 +554,93 @@ router.route('/get_past_bookings').post(async (req, res) =>{
     }
     console.log(past_bookings);
     res.send(past_bookings);
+})
+
+//get my current hostings
+router.route('/get_current_hostings').post(async (req, res) =>{
+    const user_id = req.body.user_id;
+    const bookings = await Booking.find({host_id: user_id});
+    console.log("s "+bookings.length);
+    var current_hostings = [];
+    for(var i=0; i<bookings.length; i++){
+        var start_date = bookings[i].start_time;
+        var end_date = bookings[i].end_time;
+        
+        const renter = await User.findById(bookings[i].renter_id);
+        renter_name = renter.firstName + " " + renter.lastName;
+        
+        const property = await Property.findById(bookings[i].property_id);
+        property_title = property.title;
+        //get difference between start date and end date
+        
+        price = bookings[i].price;
+        if(bookings[i].payment_status=="pending")
+            current_hostings.push([bookings[i]._id, renter_name, property_title, start_date, end_date,price]);
+    }
+    console.log(current_hostings);
+    res.send(current_hostings);
+})
+
+//get my past hostings
+router.route('/get_past_hostings').post(async (req, res) =>{
+    const user_id = req.body.user_id;
+    const bookings = await Booking.find({host_id: user_id});
+    console.log("s "+bookings.length);
+    var past_hostings = [];
+    for(var i=0; i<bookings.length; i++){
+        var start_date = bookings[i].start_time;
+        var end_date = bookings[i].end_time;
+        
+        const renter = await User.findById(bookings[i].renter_id);
+        renter_name = renter.firstName + " " + renter.lastName;
+        
+        const property = await Property.findById(bookings[i].property_id);
+        property_title = property.title;
+        //get difference between start date and end date
+        
+        price = bookings[i].price;
+        if(bookings[i].payment_status=="Paid")
+            past_hostings.push([bookings[i]._id, renter_name, property_title, start_date, end_date,price]);
+    }
+    console.log(past_hostings);
+    res.send(past_hostings);
+})
+
+//set rating review
+router.route('/set_rating_review').post(async (req, res) =>{
+    const booking_id = req.body.booking_id;
+    const rating = req.body.rating;
+    const review = req.body.review;
+    
+    const booking = await Booking.findById(booking_id);
+
+    const property_id = booking.property_id;
+
+    //create a new review rating
+    const review_rating = new ReviewRating({
+        booking_id: booking_id,
+        property_id: property_id,
+        rating: rating,
+        review: review,
+    });
+    await review_rating.save();
+    res.send('ok');
+    
+})
+
+//get all reviews and ratings of a property
+router.route('/get_reviews_ratings').post(async (req, res) =>{
+    const property_id = req.body.property_id;
+    const reviews_ratings = await ReviewRating.find({property_id: property_id});
+    var reviews = [];
+    for(var i=0; i<reviews_ratings.length; i++){
+        const booking = await Booking.findById(reviews_ratings[i].booking_id);
+        const renter = await User.findById(booking.renter_id);
+        renter_name = renter.firstName + " " + renter.lastName;
+        reviews.push([renter_name, reviews_ratings[i].rating, reviews_ratings[i].review]);
+    }
+    console.log(reviews);
+    res.send(reviews);
 })
 
 module.exports = router;

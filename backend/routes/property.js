@@ -166,13 +166,16 @@ router.route('/add').post(upload.single("image"),async (req, res) => {
 
 
 //get all properties
-router.route('/all_properties').get((req, res) => {
+router.route('/all_properties').post(async (req, res) => {
+  console.log(req.body);
+  const user_id = req.body.user_id;
   Property.find()
     .then(properties => {
-      console.log(properties[0].location);
-      res.json(properties);
-    }
-    )
+      //exclude user's own properties
+      let filtered_properties = properties.filter(property => property.hostId != user_id);
+      console.log(filtered_properties);
+      res.json(filtered_properties);
+    })
 })
 
 
