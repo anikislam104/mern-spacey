@@ -74,8 +74,9 @@ const ExtendNotification = () => {
         axios.post("http://localhost:5000/renting/accept_extend_booking_request",id)
         .then(res => {
             console.log(res.data);
+            window.location.reload();
         })
-        window.location="/current_bookings";
+        
     }
 
     //handle decline button
@@ -87,8 +88,9 @@ const ExtendNotification = () => {
         axios.post("http://localhost:5000/renting/decline_extend_booking_request",id)
         .then(res => {
             console.log(res.data);
+            window.location.reload();
         })
-        window.location.reload();
+        
     }
 
     return (

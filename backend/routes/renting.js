@@ -93,6 +93,7 @@ router.route('/send_rental_request').post(async (req, res) =>
         const newNotification =new Notification( {
             user_id:host_id,
             message:message,
+            type:"rental_request",
         });
 
         newNotification.save();
@@ -135,6 +136,7 @@ router.route('/accept_rent_request').post(async (req, res) =>
     const newNotification =new Notification( {
         user_id: renter_id,
         message,
+        type:"booking",
     });
     newNotification.save();
 
@@ -145,13 +147,14 @@ router.route('/reject_rent_request').post(async (req, res) =>
 {
     const rent_request_id = req.body.id;
     //console.log("rent_request_id:" + rent_request_id);
-    const rent_request = await RentRequest.findById(rent_request_id);
+    const rent_request = await RentRequest.findBNotificationYouyId(rent_request_id);
     const renter_id = rent_request.renter_id;
     var message="Your rental request for " + rent_request.property_title +  " has been rejected";
     await RentRequest.deleteOne({ _id: rent_request_id });
     newNotification =new Notification( {
         user_id: renter_id,
         message,
+        type:"booking",
     });
     newNotification.save();
     res.send('ok');
@@ -359,6 +362,18 @@ router.route('/send_change_duration_request').post(async (req, res) =>{
     else{
         //save extend booking request
         await extend_booking_request.save();
+        //send notification to host
+        const host_id = booking.host_id;
+        //get renter's name
+        const renter = await User.findById(booking.renter_id);
+        const renter_name = renter.firstName + " " + renter.lastName;
+        const message = "You have a new extend booking request from " + renter_name;
+        const notification = new Notification({
+            user_id: host_id,
+            message: message,
+            type: "extend",
+        });
+        await notification.save();
         res.send('ok');
     }
     
@@ -439,6 +454,7 @@ router.route('/accept_extend_booking_request').post(async (req, res) =>{
     const notification = new Notification({
         user_id: booking.renter_id,
         message: "Your booking has been extended",
+        type: "booking",
     });
     await notification.save();
     await ExtendBookingRequest.deleteOne({_id: request_id})
@@ -458,6 +474,7 @@ router.route('/decline_extend_booking_request').post(async (req, res) =>{
     const notification = new Notification({
         user_id: booking.renter_id,
         message: "Your booking extension request has been declined",
+        type: "booking",
     });
     await notification.save();
     await ExtendBookingRequest.deleteOne({_id: request_id})
@@ -480,6 +497,7 @@ router.route('/cancel_booking').post(async (req, res) =>{
         const notification = new Notification({
             user_id: booking.renter_id,
             message: "Your booking has been cancelled",
+            type: "booking",
         });
         await notification.save();
         //get Property name
@@ -492,6 +510,7 @@ router.route('/cancel_booking').post(async (req, res) =>{
         const notification_message = new Notification({
             user_id: booking.host_id,
             message: message,
+            type: "hosting",
         });
         await notification_message.save();
         await Booking.deleteOne({_id: booking_id})
@@ -641,6 +660,7 @@ router.route('/set_rating_review').post(async (req, res) =>{
         const newNotification = new Notification({
             user_id: host_id,
             message: "You have received a new review for your property "+property_title,
+            type: "review",
         });
         await newNotification.save();
         res.send('ok');
@@ -693,6 +713,7 @@ router.route('/set_renter_complaint').post(async (req, res) =>{
     const newNotification = new Notification({
         user_id: host_id,
         message: "You have received a new complaint from a renter named " + renter_name + " for your property " + property_title,
+        type: "hosting",
     });
     await newNotification.save();
     res.send('ok');
@@ -728,6 +749,7 @@ router.route('/set_host_complaint').post(async (req, res) =>{
     const newNotification = new Notification({
         user_id: renter_id,
         message: "You have received a new complaint from a host named " + host_name + " for your booked property " + property_title,
+        type: "booking",
     });
     await newNotification.save();
     res.send('ok');
