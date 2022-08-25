@@ -75,7 +75,12 @@ export default class RentRequestNotification extends Component {
                 <div style={style}>
                     
                     <h1>{request.property_title}</h1>
-                    <h1>{request.renter_name}</h1>
+                    <h1><button onClick={
+                        () => {
+                            localStorage.setItem('clicked_user_id', request.renter_id);
+                            window.location.href = "/user_profile";
+                        }
+                    }>{request.renter_name}</button></h1>
                     <h1>{request.start_date}</h1>
                     <h1>{request.end_date}</h1>
                     <button class="button" onClick={
@@ -83,7 +88,8 @@ export default class RentRequestNotification extends Component {
                             this.acceptRequest(request._id);
                         }
                     }>Accept</button>
-                    <p>         </p>
+                    <br />
+                    <br />
                     <button class="button" onClick={
                         () => {
                             this.rejectRequest(request._id);

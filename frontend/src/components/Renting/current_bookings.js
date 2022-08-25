@@ -73,7 +73,20 @@ const CurrentBookings = () => {
                         return (
                             <div style={style}>
                                 <h2>Property title: {booking[2]}</h2>
-                                <p>Host name: {booking[1]}</p>
+                                <p><button onClick={
+                                    () => {
+                                        const data={
+                                            booking_id:booking[0],
+                                        }
+                                        axios.post('http://localhost:5000/renting/get_renter_host_id', data)
+                                            .then(res => {
+                                                const host_id=res.data.host_id;
+                                                // console.log(renter_id);
+                                                localStorage.setItem("clicked_user_id", host_id);
+                                                window.location = "/user_profile";
+                                })
+                                    }
+                                }>Host name: {booking[1]}</button></p>
                                 <p>Start date: {booking[3]}</p>
                                 <p>End date: {booking[4]}</p>
                                 <p>Price: {booking[5]}</p>
