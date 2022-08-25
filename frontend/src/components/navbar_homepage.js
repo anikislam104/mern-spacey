@@ -114,7 +114,7 @@ const NavbarHomepage = () => {
          </div>
         </div>
       </nav>
-      
+           
     )
 
   }

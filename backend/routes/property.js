@@ -5,15 +5,16 @@ let Room = require('../models/room');
 let Facility = require('../models/facility');
 const multer = require('multer');
 var current_property_id = 0;
+const {protect} = require('../middleware/authMiddleware');
+const asyncHandler = require('express-async-handler');
 
 
 
-
-router.route('/').get((req, res) => {
+/*router.route('/').get((req, res) => {
   Property.find()
     .then(properties => res.json(properties))
     .catch(err => res.status(400).json('Error: ' + err));
-});
+});*/
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -282,5 +283,22 @@ router.route('/add_facility').post((req, res) => {
   newFacility.save()
     .then(() => res.send('facility added'))
 })
+
+router.route('/').get(protect, asyncHandler(async(req, res) => {
+
+  // finding all users which matches search 
+  console.log("search "+req.query.search);
+  const keyword = req.query.search ? {
+    $or: [
+      { title : { $regex: req.query.search, $options: 'i' } }, // search name that have same pattern as req.query.search
+      { location : { $regex: req.query.search, $options: 'i' } }, // search email that have same pattern as req.query.search
+    ]
+  }:{};
+
+  const properties = await Property.find(keyword); // protect above modifies req to have req.user._id as current user id
+  console.log(properties);
+  res.send(properties);
+}));
+
 
 module.exports = router;
