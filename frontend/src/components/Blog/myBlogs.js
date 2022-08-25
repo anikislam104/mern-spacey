@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { Component } from 'react';
 import NavbarHomepage from '../navbar_homepage';
 
-
+const arr=[];
 
 export default class MyBlogs extends Component {
     constructor(props) {
@@ -58,38 +58,106 @@ export default class MyBlogs extends Component {
     }
     
     getMyBlogs(){
+        const myStyle={
+            blogSection:{
+                width:"300px",
+                height:"250px",
+                textAlign:"center",
+            },
+            buttonSection:{
+                margin:"0 auto",
+            },
+            textSection:{
+                fontSize:"23px",
+                backgroundColor:"#f4f0ec",
+            },
+        }
         return this.state.blogs.map((blog) => {
-            return(
-                <div className="col-md-4" >
-                    <div className="card mb-4 box-shadow">
-                        <div className="card-body">
-                        <p className="card-text">{blog.title}</p>
-                            {/* <p className="card-text">{property.location}</p> */}
-                            <div className="d-flex justify-content-between align-items-center">
-                                <div className="btn-group">
-                                    <button type="button" className="btn btn-sm btn-outline-secondary" onClick={
-                                        () => {
-                                            this.sendSelectedBlog(blog._id);
-                                        }
-                                    }>View</button>
+            var image=blog.image;
+            var path=process.env.PUBLIC_URL+"/images/"+image;
+            console.log(path);
+            arr.push(<div className="col-md-4">
+            <div className="card mb-4 box-shadow" style={{ width:"300px", height:"250px",textAlign:"center", backgroundImage:`url(${path})` }}>
+                <div className="card-body">
+                <br/><br/>
+                <p className="card-text"><b style={myStyle.textSection}>{blog.title}</b></p>
+                    {/* <p className="card-text">{property.location}</p> */}
+                    <div className="d-flex justify-content-between align-items-center">
+                    <br/><br/><br/><br/><br/>
+                        <div className="btn-group" style={myStyle.buttonSection}>
+                            <button type="button" className="btn btn-sm btn-outline-secondary" style={{color:"#808080",backgroundColor:"white"}} onClick={
+                                () => {
+                                    this.sendSelectedBlog(blog._id);
+                                }
+                            }>View</button>
 
-                                </div>
-                                {/* <small className="text-muted">{property.size} square ft</small> */}
-                            </div>
                         </div>
+                        {/* <small className="text-muted">{property.size} square ft</small> */}
                     </div>
                 </div>
+            </div>
+        </div>);
+            return(
+                <div>
+                    
+                </div>
             );
+            
         })
     }
 
 
+    getArrayElements(){
+        let first=-3;
+        let second=-2;
+        let third=-1;
+        //let flag1=0;
+        //let flag2=0;
+        return arr.map((item)=>{
+            first=first+3;
+            second=second+3;
+            third=third+3;
+            /*if(second>=arr.length || flag2===1){
+                second=-1;
+                flag2=1;
+            }
+            if(first>=arr.length || flag1===1){
+                first=-1;
+                flag1=1;
+            }*/
+            return(
+                <div class="row align-items-center">
+
+                <div class="col-lg-2">
+                    {arr[first]}  
+                </div>
+                <div class="col-lg-2">
+
+                    </div>
+                <div class="col-lg-2">
+                    {arr[second]}  
+                </div>
+                <div class="col-lg-2">
+
+                    </div>
+                <div class="col-lg-2">
+                    {arr[third]}  
+                </div>
+                </div>
+            );
+        })
+            
+        
+    }
+
     render() {
         return(
             <div class="col-lg-12 bg-light">
+                {/* {allBlogs} */}
                 <NavbarHomepage />
-                <br />
+                <br/ >
                 {this.getMyBlogs()}
+                {this.getArrayElements()}
             </div>
         )
     }

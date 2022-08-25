@@ -41,7 +41,7 @@ export default class BlogHome extends Component {
           }
         return(
             
-            <div>
+            <div class="bg-light">
                 <NavbarHomepage />
                 <br/>
             <div class="container-fluid">
@@ -86,7 +86,7 @@ export default class BlogHome extends Component {
             </div>
           </div>
               
-    <div class="row no-gutter">
+    <div class="row no-gutter bg-light">
         <div class="col-lg-1">
                                 
         </div>

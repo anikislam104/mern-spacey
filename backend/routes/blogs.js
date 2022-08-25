@@ -9,11 +9,10 @@ let path = require('path');
 let selected_blog_id = "";  
 // const { current_user_id } = require('./users');
 
-
 //image upload
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, './images');
+      cb(null, '../frontend/public/images');
     }
     , filename: function (req, file, cb) {
       cb(null, file.originalname)
@@ -126,7 +125,6 @@ router.route('/showBlog').post((req, res) => {
         })
 })
 
-
 router.route('/get_selected_blog').post(async(req, res) => {
     console.log("get_selected_blog");
     const blog_id = req.body.blog_id;
@@ -134,10 +132,23 @@ router.route('/get_selected_blog').post(async(req, res) => {
     Blog.find()
         .then(blog => {
             blog=blog.filter(blog => blog._id == blog_id);
-            console.log(blog);
+            //console.log(blog);
             res.send(blog);
         })
 })
+
+/*
+router.route('/get_image/:fileName').get((req, res) => {
+    console.log("get_selected_blog");
+    const blog_id = req.body.blog_id;
+    console.log("blog_id: " + blog_id);
+    Blog.find()
+        .then(blog => {
+            blog=blog.filter(blog => blog._id == blog_id);
+            const filePath="C:/Users/user/Documents/VsCode/mern-spacey/backend/images/${blog.image}";
+            res.send(blog);
+        })
+})*/
 
 
 router.route('/upvote').post((req, res) => {

@@ -11,6 +11,7 @@ const generateToken=require('../config/generateToken');
 const OTP = require('../models/otp');
 var Notification = require('../models/notification');
 var Property = require('../models/property');
+let Complaint = require('../models/complaint');
 // @ts-ignore
 const { Auth } = require("two-step-auth");
 
@@ -32,7 +33,7 @@ const {protect} = require('../middleware/authMiddleware');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './images');
+    cb(null, '../frontend/public/images');
   }
   , filename: function (req, file, cb) {
     cb(null, file.originalname)
@@ -513,6 +514,25 @@ router.route('/').get(protect, asyncHandler(async(req, res) => {
   console.log(users);
   res.send(users);
 }));
+
+//get user info and complains
+router.route('/clicked_profile').post(asyncHandler(async(req, res) => {
+    const user_id = req.body.user_id;
+    //get name and email and phone number
+    const user=await User.findOne({_id:user_id});
+    var name=user.firstName+" "+user.lastName;
+    var email=user.email;
+    var phoneNumber=user.phoneNumber;
+    var image=user.image;
+    //get complaints
+    const complaints=await Complaint.find({complainee_id:user_id});
+    var complaints_array=[];
+    for(var i=0;i<complaints.length;i++){
+      complaints_array.push(complaints[complaints.length-1-i]);
+    }
+    res.send({name:name,email:email,phoneNumber:phoneNumber,complaints:complaints_array,image:image});
+}));
+
 
 
   module.exports = router;
