@@ -99,7 +99,8 @@ export default class ShowMyBlog extends Component {
                 
                 <div class="bg-light">
                     <NavbarHomepage />
-                    <h1 class="display-6" style={myStyle.textSection}>{blog.title}</h1>
+                    <br/><br/>
+                    <h1 class="display-6" style={myStyle.textSection}><b>{blog.title}</b></h1>
                     <p style={myStyle.textSection}><i>Written by {blog.user_name}</i></p>
                     <br/><br/>
                     <br/>

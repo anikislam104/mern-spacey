@@ -79,6 +79,7 @@ export default class WriteBlog extends Component {
              backgroundColor: "BlueViolet",
              color: "white",
              position:"center",
+             
             },
      
             inputSection:{
@@ -113,12 +114,14 @@ export default class WriteBlog extends Component {
 
                                        <form onSubmit={this.onSubmit} encType="multipart/form-data">
                                                <div class="form-group sm-3">
-                                               <label>Title: </label>
+                                               <label><b>Title: </b></label>
+                                               <br/>
                                                    <input id="inputTitle" type="text" placeholder=""  required="" autofocus="" value={this.state.title} onChange={this.onChangeTitle} class="form-control border-0 shadow-sm px-4" />
                                                </div>
                                                <br/>
                                                <div class="form-group sm-3">
-                                                   <label>Experience: </label>
+                                                   <label><b>Experience: </b></label>
+                                                   <br/><br/>
                                                    <textarea id="inputContent" type="text" placeholder="" required="" value={this.state.content} onChange={this.onChangeContent} class="form-control  border-0 shadow-sm px-4 text-primary" style={myStyle.experienceSection} />
                                                </div>
                                                {/* <br/>
@@ -130,13 +133,16 @@ export default class WriteBlog extends Component {
                                                <br/>
                                                <div class="form-group sm-3">
                                                   <div class="custom-file sm-3">
-                                                    <label>Add Picture: </label>
+                                                    <label><b>Add Picture: </b></label>
+                                                    <br/><br/>
                                                     <input type="file" filename="image" class="custom-file-input form-control  border-0 shadow-sm px-4" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" onChange={this.onChangeImage} />
                                                   </div>
                                                </div>
-                                               <br/>
+                                               <br/><br/>
                                                <div className="form-group">
-        
+                                               &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                                               &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                                               &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                                                     <input type="submit" value="Post" className="btn btn-primary" style={myStyle.buttonSection} />
                                                </div>
                                                

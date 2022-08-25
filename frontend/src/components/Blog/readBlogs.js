@@ -79,7 +79,7 @@ export default class ReadBlogs extends Component {
           <div class="image">
                 <img src={MyBlog} class="img-responsive" alt=" "  style={myStyle.openingPicSection}/>
           </div> 
-          <label><h5>&emsp;<b>See your prevoius posts</b> </h5></label><br/>
+          <label><h5>&emsp;<b>See your previous posts</b> </h5></label><br/>
           <div className="container">
                 <br/>
                 &emsp;&emsp;

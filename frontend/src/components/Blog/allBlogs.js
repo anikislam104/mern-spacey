@@ -62,7 +62,8 @@ export default class AllBlogs extends Component {
                 margin:"0 auto",
             },
             textSection:{
-                fontSize:"20px",
+                fontSize:"23px",
+                backgroundColor:"white",
             },
         }
         return this.state.blogs.map((blog) => {
@@ -72,11 +73,11 @@ export default class AllBlogs extends Component {
             arr.push(<div className="col-md-4">
             <div className="card mb-4 box-shadow" style={{ width:"300px", height:"250px",textAlign:"center", backgroundImage:`url(${path})` }}>
                 <div className="card-body">
-                <br/><br/><br/>
+                <br/><br/>
                 <p className="card-text"><b style={myStyle.textSection}>{blog.title}</b></p>
                     {/* <p className="card-text">{property.location}</p> */}
                     <div className="d-flex justify-content-between align-items-center">
-                        <br/><br/><br/><br/><br/><br/><br/><br/>
+                        <br/><br/><br/><br/><br/>
                         <div className="btn-group" style={myStyle.buttonSection}>
                             <button type="button" className="btn btn-sm btn-outline-secondary" style={{color:"#808080",backgroundColor:"white"}} onClick={
                                 () => {
