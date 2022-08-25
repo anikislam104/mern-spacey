@@ -45,7 +45,28 @@ const Notification = () => {
                 return (
 
                     <div>
-                        <button style={btn}>
+                        <button style={btn} onClick={
+                            () => {
+                                if(notification.type==="notification"){
+                                    window.location.reload();
+                                }
+                                else if(notification.type==="rental_request"){
+                                    window.location.href = "/rent_request_notifications";
+                                }
+                                else if(notification.type==="booking"){
+                                    window.location.href = "/current_bookings";
+                                }
+                                else if(notification.type==="hosting"){
+                                    window.location.href = "/current_hostings";
+                                }
+                                else if(notification.type==="review"){
+                                    window.location.href = "/viewProperties";
+                                }
+                                else if(notification.type==="extend"){
+                                    window.location.href = "/extend_notification";
+                                }
+                            }
+                        }>
                         <p>{notification.message}</p>
                         </button>
                         <br />
