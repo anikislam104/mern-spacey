@@ -69,7 +69,7 @@ export default class MyBlogs extends Component {
             },
             textSection:{
                 fontSize:"23px",
-                backgroundColor:"white",
+                backgroundColor:"#f4f0ec",
             },
         }
         return this.state.blogs.map((blog) => {
