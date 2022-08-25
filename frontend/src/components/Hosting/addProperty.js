@@ -24,6 +24,7 @@ export default class AddProperty extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.handleClick1 = this.handleClick1.bind(this);
     this.handleClick2 = this.handleClick2.bind(this);
+    this.onChangeImage = this.onChangeImage.bind(this);
 
 
     this.state = {
@@ -37,7 +38,8 @@ export default class AddProperty extends Component {
       roomNo: '',
       rooms: [],
       facility: '',
-      facilities: []
+      facilities: [],
+      image: null,
     }
   }
 
@@ -100,6 +102,13 @@ export default class AddProperty extends Component {
     })
   }
 
+  onChangeImage(e) {
+    console.log(e.target.files[0]);
+    this.setState({
+        image: e.target.files[0]
+        })
+    }
+
 
 
   handleClick1(e) {
@@ -127,22 +136,33 @@ export default class AddProperty extends Component {
     e.preventDefault();
 
 
-    const property = {
-      host_id: localStorage.getItem('user_id'),
-      title: this.state.title,
-      location: this.state.location,
-      description: this.state.description,
-      size: this.state.size,
-      pricePerDay: this.state.pricePerDay,
-      rooms: this.state.rooms,
-      facilities: this.state.facilities
-    }
+    // const property = {
+    //   host_id: localStorage.getItem('user_id'),
+    //   title: this.state.title,
+    //   location: this.state.location,
+    //   description: this.state.description,
+    //   size: this.state.size,
+    //   pricePerDay: this.state.pricePerDay,
+    //   rooms: this.state.rooms,
+    //   facilities: this.state.facilities
+    // }
+
+    const formData = new FormData();
+    formData.append('image', this.state.image);
+    formData.append('host_id', localStorage.getItem('user_id'));
+    formData.append('title', this.state.title);
+    formData.append('location', this.state.location);
+    formData.append('description', this.state.description);
+    formData.append('size', this.state.size);
+    formData.append('pricePerDay', this.state.pricePerDay);
+    formData.append('rooms', this.state.rooms);
+    formData.append('facilities', this.state.facilities);
 
 
 
-    console.log(property);
+    // console.log(property);
 
-    axios.post('http://localhost:5000/property/add', property)
+    axios.post('http://localhost:5000/property/add', formData)
       .then(res => {
         console.log(res.data);
         window.location = '/hosting';
@@ -168,7 +188,7 @@ export default class AddProperty extends Component {
       },
 
       buttonSection2: {
-        backgroundColor: "Sea Serpent",
+        backgroundColor: "BlueViolet",
         padding: "7px 10px",
         fontSize: "15px",
         color: "black",
@@ -202,7 +222,7 @@ export default class AddProperty extends Component {
                     </div>
 
                     <div class="col-lg-5">
-                      <form onSubmit={this.onSubmit}>
+                      <form onSubmit={this.onSubmit} encType="multipart/form-data">
                         <div class="form-group sm-2">
                           <label>Title: </label>
                           <input id="inputTitle" type="title" required="" autofocus="" value={this.state.title} onChange={this.onChangeTitle} class="form-control rounded-pill border-0 shadow-sm px-4" />
@@ -264,6 +284,15 @@ export default class AddProperty extends Component {
 
 
                         <br />
+                        <div class="form-group sm-3">
+                                <label>Room Picture: </label>
+                                <br/><br/>
+                                                  <div class="custom-file sm-3">
+                                                    <input type="file" filename="image" class="custom-file-input form-control  border-0 shadow-sm px-4" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" onChange={this.onChangeImage} />
+                                                  </div>
+                                               </div>
+                                               <br />
+                                               <br />
                         <div className="form-group">
                           &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                           <input type="submit" value="Post" className="btn btn-primary" style={myStyle.buttonSection} />

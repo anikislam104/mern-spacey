@@ -32,38 +32,44 @@ export default class ReadBlogs extends Component {
                 <NavbarHomepage />
                 <br/>
             <div class="container-fluid">
+
               <div class="row no-gutter">
-                 
-                  
-                  <div class="col-md-12 bg-light">
-                      <div class="login d-flex align-items-center py-5">
-                         
-                          <div class="container">
-                              <div class="row align-items-center">
-                                
-                                <div class="col-lg-3">
 
-                                </div>
 
-                                <div class="col-lg-8">
-                                      
-                                      <div class="card-body">
-                                           <h1 class="card-title">Experience hosting resources!</h1>
-                                           <br/>
-                                           <h5 class="card-subtitle text-muted">&emsp;Find answers & get inspired along your hosting journey</h5>
-                                      </div>
-                                    
-                                </div>     
+            <div class="col-md-12 bg-light">
+              <div class="login d-flex align-items-center py-5">
 
-                                <div class="col-lg-1">
-                                
-                                  </div>
+                <div class="container">
+                  <div class="row align-items-center">
 
-                              </div>
-                          </div>
+                    <div class="col-lg-3">
+
+                    </div>
+
+                    <div class="col-lg-6">
+                      <div class="card-body">
+                        <h3 class="display-6"><b>Experience hosting resources!</b>
+                          
+                          </h3>
+                          <br/>
+                          <h5 class="card-subtitle text-muted">&emsp;&emsp;&emsp;&emsp;&emsp;
+                          <b>Find answers & get inspired along your hosting journey</b></h5>
+                                            
+                          
                       </div>
+
+
+                    </div>
+
+                    <div class="col-lg-3">
+
+                    </div>
+
                   </div>
+                </div>
               </div>
+            </div>
+          </div>
               
     <div class="row no-gutter">
         <div class="col-lg-1">
@@ -73,7 +79,7 @@ export default class ReadBlogs extends Component {
           <div class="image">
                 <img src={MyBlog} class="img-responsive" alt=" "  style={myStyle.openingPicSection}/>
           </div> 
-          <label><h5>&emsp;See your prevoius posts </h5></label><br/>
+          <label><h5>&emsp;<b>See your prevoius posts</b> </h5></label><br/>
           <div className="container">
                 <br/>
                 &emsp;&emsp;
@@ -88,7 +94,7 @@ export default class ReadBlogs extends Component {
               <div class="image">
                   <img src={OtherBlog} class="img-responsive" alt=" "  style={myStyle.openingPicSection}/>
               </div> 
-              <label><h5>Explore what others are sharing </h5></label><br/>
+              <label><h5><b>Explore what others are sharing </b></h5></label><br/>
               <div className="container">
                 <br/>
                 &emsp;&emsp;&emsp;

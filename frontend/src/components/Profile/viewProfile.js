@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import NavbarHomepage from "../navbar_homepage";
 
+
 const ViewProfile = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");

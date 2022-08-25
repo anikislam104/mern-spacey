@@ -75,14 +75,20 @@ export default class ShowMyBlog extends Component {
     
 
     render() {
+        const myStyle={
+            textSection:{
+                textAlign:"center",
+            }
+        }
         return this.state.blog.map((blog) => {
             
             return(
                 
                 <div>
                     <NavbarHomepage />
-                    <h1>{blog.title}</h1>
-                    <p>{blog.content}</p>
+                    <h1 class="display-6" style={myStyle.textSection}>{blog.title}</h1>
+                    <p style={myStyle.textSection}>Writer: {blog.user_name}</p>
+                    <p><h1>{blog.content}</h1></p>
                     <br />
                     <br />
                 {/* button for upvote */}
@@ -136,7 +142,7 @@ export default class ShowMyBlog extends Component {
 
 <br />
 <br />
-                <input type='text' onChange={this.comment} value={this.state.Comment} ></input>
+                <input type='text' onChange={this.comment} value={this.state.Comment} placeholder="write comment"></input>
                 <br />
                 <br />
                 <Link to='../blog/showBlog'><button type='submit' class="button" onClick={

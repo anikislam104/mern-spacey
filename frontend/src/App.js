@@ -58,6 +58,7 @@ import MyHostings from "./components/Renting/myHostings";
 import ChatProvider from "./Context/ChatProvider";
 import { ChakraProvider } from "@chakra-ui/react";
 import Chatpage from "./Pages/Chatpage";
+import ShowInsurance from "./components/Insurance/showInsurance";
 
 
 function App() {
@@ -65,6 +66,7 @@ function App() {
     
     <BrowserRouter>
     <ChatProvider>
+    
       <div className="container">
       {/* <Navbar /> */}
       {/* <br/> */}
@@ -101,7 +103,8 @@ function App() {
         <Route path="add-business-storage" element={<AddBusinessStorage />}/>
 
         {/* Insurance */}
-        <Route path="add-insurance" element={<AddInsurance />}/>
+        <Route path="add_insurance" element={<AddInsurance />}/>
+        <Route path="show_insurance" element={<ShowInsurance />}/>
 
         {/* Blog */}
         <Route path="blog" element={<BlogHome />} />
@@ -149,6 +152,7 @@ function App() {
       <ChakraProvider>
       <Routes>
         {/* Chat */}
+        
         <Route path="chat" element={<Chatpage />} />
       </Routes>
       </ChakraProvider>

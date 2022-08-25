@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import spacey from "./spacey.svg";
+// import spacey from "./spacey.svg";
 import opening from "./opening.svg";
 import Navbar from './navbar';
 
@@ -60,10 +60,10 @@ export default class OpeningPage extends Component {
                                     
                                    </div>
                                    <div class="col-lg-6">
-                                    <br/><br/><br/> 
+                                    <br/>
                                          <h3 class="display-6"><b>Let’s Find Your Desirebale <br/> Space with &nbsp;
-                                                  <img src={spacey} class="img-responsive" alt=" " style={myStyle.logoSection} />
-                                         <font style={myStyle.nameSection}>&nbsp;Spacey</font></b> </h3>
+                                                 
+                                         <font style={myStyle.nameSection}>Spacey</font></b> </h3>
                                          <br/>
                                          <p style={myStyle.textSection}>Are you ready to visit or start over in a new area? <br/>Spacey will help you on your journey!</p>
                                          <br/>

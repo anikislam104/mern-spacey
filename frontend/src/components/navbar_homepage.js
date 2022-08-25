@@ -6,6 +6,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
+
 export default class NavbarHomepage extends Component {
 
   constructor(props) {
@@ -21,8 +22,9 @@ export default class NavbarHomepage extends Component {
     fetch('http://localhost:5000/users/user_id')
         .then((res) => res.json())
         .then((json) => {
-            this.setState({
-                user_name: localStorage.getItem('firstName'),
+            const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+            this.setState({ 
+                user_name: userInfo.firstName,
             });
   
         })
@@ -52,24 +54,25 @@ export default class NavbarHomepage extends Component {
     }
 
     return (
+      
       <nav className="navbar navbar navbar-expand-lg" style={myStyle.navSection}>
-         <div class="logo-image">
+         
             <img src={spacey} class="img-responsive" alt=" " />
-        </div>
-        <Link to={"/homepage"} className="navbar-brand" style={myStyle.optionSection} ><h2>Spacey</h2></Link>
-        <div class="col-lg-3">
+        
+        <Link to={"/homepage"} className="navbar-brand"  ><font style={myStyle.optionSection}><b>&nbsp;Spacey</b></font></Link>
+        <div class="col-lg-4">
    
         </div>
-        <div class="col-lg-9">
+        <div class="col-lg-8">
          <div className="collpase navbar-collapse">
          <ul className="navbar-nav mr-auto">
           <li className="navbar-item">
             
-          <Link to={'/rent_request_notifications'} className="nav-link"><h5>Rent Requests</h5></Link>
+          <Link to={'/rent_request_notifications'} className="nav-link"><h5><b>Rent Requests</b></h5></Link>
           </li>
           &nbsp; &nbsp; 
           <li className="navbar-item">
-          <Link to={'/blog'} className="nav-link"><h5>Blog</h5></Link>
+          <Link to={'/blog'} className="nav-link"><h5><b>Blog</b></h5></Link>
           </li>
           &nbsp; &nbsp; 
           <li className="navbar-item">
@@ -88,8 +91,8 @@ export default class NavbarHomepage extends Component {
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
-                  <NavDropdown title={this.state.user_name} id="basic-nav-dropdown">
-                    <NavDropdown.Item href={'/payment/payment_notifications'}>Payment Notifications</NavDropdown.Item>
+                  <NavDropdown title={this.state.user_name} id="basic-nav-dropdown" className="nav-brand">
+                    <NavDropdown.Item href={'/payment/payment_notifications'} >Payment Notifications</NavDropdown.Item>
                     <NavDropdown.Item href={'/payment/payment_history'}>
                       Payment History
                     </NavDropdown.Item>
@@ -126,6 +129,7 @@ export default class NavbarHomepage extends Component {
          </div>
         </div>
       </nav>
+      
     )
 
   }

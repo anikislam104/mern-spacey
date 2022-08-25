@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 const blogSchema = new Schema({
   user_id: { type: String, required: true },
+  user_name: { type: String },
   content: { type: String, required: true },
   title: { type: String, required: true },
   time_created: { type: Date, required: true },

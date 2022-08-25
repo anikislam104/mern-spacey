@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import spacey from "./spacey.svg";
 
-export default class Navbar extends Component {
+
+export default class AdminNavbar extends Component {
 
   render() {
     const myStyle= {    
@@ -23,23 +24,30 @@ export default class Navbar extends Component {
             <img src={spacey} class="img-responsive" alt=" " />
         
         <Link to={"/"} className="navbar-brand" style={myStyle.optionSection} ><h2><b>Spacey</b></h2></Link>
-        <div class="col-lg-8">
+        <div class="col-lg-7">
    
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-5">
          <div className="collpase navbar-collapse">
          <ul className="navbar-nav mr-auto">
           <li className="navbar-item">
-          <Link to={'/create-user'} className="nav-link"><h2><b>Sign Up</b></h2></Link>
+          <Link to={'/add_insurance'} className="nav-link"><h2><b>Add Insurance</b></h2></Link>
           </li>
 
           <li className="navbar-item">
-          <Link to={'/login'} className="nav-link"><h2><b>Log In</b></h2></Link>
+          <Link to={'/show_insurance'} className="nav-link"><h2><b>Show Insurance</b></h2></Link>
+          </li>
+          <li className="navbar-item">
+          <Link to={'/logout'} className="nav-link"><h2><b>Log Out</b></h2></Link>
           </li>
          </ul>
          </div>
         </div>
+
+        
+        
       </nav>
+
        
     )
 

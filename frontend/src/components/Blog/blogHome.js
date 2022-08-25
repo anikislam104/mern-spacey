@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import NavbarHomepage from '../navbar_homepage';
 import BlogHome1 from "./blog_home_1.svg";
 import BlogHome2 from "./blog_home_2.svg";
-import { Box } from "@chakra-ui/layout";
+
 
 
 export default class BlogHome extends Component {
@@ -40,43 +40,51 @@ export default class BlogHome extends Component {
      
           }
         return(
-            <Box>
+            
             <div>
                 <NavbarHomepage />
                 <br/>
             <div class="container-fluid">
+
               <div class="row no-gutter">
-                 
-                  
-                  <div class="col-md-12 bg-light">
-                      <div class="login d-flex align-items-center py-5">
-                         
-                          <div class="container">
-                              <div class="row align-items-center">
-                                
-                                <div class="col-lg-3">
 
-                                </div>
 
-                                <div class="col-lg-5">
-                                      
-                                      <div class="card-body">
-                                           <h1 class="card-title">Welcome to Spacey blog!</h1>
-                                           <br/>
-                                           <h5 class="card-subtitle text-muted">&emsp;&emsp;&emsp;&emsp;Share & Explore Experiences!</h5>
-                                      </div>
-                                    
-                                </div>     
+            <div class="col-md-12 bg-light">
+              <div class="login d-flex align-items-center py-5">
 
-                                <div class="col-lg-4">
-                                
-                                  </div>
+                <div class="container">
+                  <div class="row align-items-center">
 
-                              </div>
-                          </div>
+                    <div class="col-lg-3">
+
+                    </div>
+
+                    <div class="col-lg-6">
+                      <div class="card-body">
+                        <h3 class="display-6"><b>&emsp;Welcome to 
+                          
+                          <font style={myStyle.nameSection}>&nbsp;Spacey blog!</font></b>
+                          
+                          </h3>
+                          <br/>
+                          <h5 class="card-subtitle text-muted">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                          <b>Share & Explore Experiences!</b></h5>
+                                            
+                          
                       </div>
+
+
+                    </div>
+
+                    <div class="col-lg-3">
+
+                    </div>
+
                   </div>
+                </div>
               </div>
+            </div>
+          </div>
               
     <div class="row no-gutter">
         <div class="col-lg-1">
@@ -86,7 +94,8 @@ export default class BlogHome extends Component {
           <div class="image">
                 <img src={BlogHome1} class="img-responsive" alt=" "  style={myStyle.openingPicSection}/>
           </div> 
-          <label><h5>Share your hosting experience</h5></label><br/>
+          <h5><b>Share your hosting experience</b></h5>
+          <br/>
           <div className="container">
                 <br/>
                 &emsp;&emsp;
@@ -101,7 +110,7 @@ export default class BlogHome extends Component {
               <div class="image">
                   <img src={BlogHome2} class="img-responsive" alt=" "  style={myStyle.openingPicSection}/>
               </div> 
-              <label><h5>&emsp;Explore your & others blogs </h5></label><br/>
+              <label><h5>&emsp;<b>Explore your & others blogs </b></h5></label><br/>
               <div className="container">
                 <br/>
                 &emsp;&emsp;
@@ -113,7 +122,7 @@ export default class BlogHome extends Component {
 
           </div>
             </div>
-            </Box>
+            
         )
     }
 }

@@ -10,6 +10,7 @@ var comments=[];
 var like=0;
 var dislike=0;
 
+
 //style upvote and downvote buttons
 
 
@@ -19,6 +20,7 @@ export default class ShowBlog extends Component {
         super(props);
         this.showComments = this.showComments.bind(this);
         this.comment = this.comment.bind(this);
+        this.showWriterName = this.showWriterName.bind(this);
         // this.showSelectedBlog = this.showSelectedBlog.bind(this);
         this.state = {
             blog: [],
@@ -53,6 +55,11 @@ export default class ShowBlog extends Component {
                 this.setState({
                     blog: this.state.blog.concat(res.data),
                 });
+
+                
+                //get user name
+            
+
             })
         console.log(this.state.blog);
         this.setState({
@@ -79,21 +86,33 @@ export default class ShowBlog extends Component {
             )
         }
     }
+
+    showWriterName(id){
+        
+
+    }
     
 
     render() {
+        const myStyle={
+            textSection:{
+                textAlign:"center",
+            }
+        }
         return this.state.blog.map((blog) => {
             
             return(
                 
                 <div>
                     <NavbarHomepage />
-                    <h1>{blog.title}</h1>
-                    <p>{blog.content}</p>
+                    <h1 class="display-6" style={myStyle.textSection}>{blog.title}</h1>
+                    <p style={myStyle.textSection}>Writer: {blog.user_name}</p>
+                    <p><h1>{blog.content}</h1></p>
+                    <br />
                     <br />
                     <br />
                 {/* button for upvote */}
-                <button  type='submit' class="button" onClick={
+                <button  type='submit' id="upvote" class="button" onClick={
                     (e) => {
                         const upvote = {
                             blog_id: blog._id,
@@ -110,8 +129,9 @@ export default class ShowBlog extends Component {
                         
                         //disable button after upvote
                         like=like+1;
-                        
-                        e.currentTarget.disabled = true;
+                        window.location.reload();
+                        window.location.reload();
+                        // e.currentTarget.disabled = true;
                     }
                 } >Upvote</button>   <p>{blog.like_count} upvotes</p>
                
@@ -131,8 +151,9 @@ export default class ShowBlog extends Component {
                             }
                         )
                         dislike=dislike+1;
-                        
-                        e.currentTarget.disabled = true;
+                        window.location.reload();
+                        window.location.reload();
+                        // e.currentTarget.disabled = true;
                         
                         
                     }
@@ -142,7 +163,7 @@ export default class ShowBlog extends Component {
 
 <br />
 <br />
-                <input type='text' onChange={this.comment} value={this.state.Comment} ></input>
+                <input type='text' placeholder="write comment" onChange={this.comment} value={this.state.Comment} ></input>
                 <br />
                 <br />
                 <Link to='../blog/showBlog'><button type='submit' class="button" onClick={

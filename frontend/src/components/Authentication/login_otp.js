@@ -53,7 +53,7 @@ export default class LogInOTP extends Component {
           console.log(this.state.sent_otp);
           
           // if(Number(this.state.otp) === Number(this.state.sent_otp))
-          if(1===1){
+          if(Number(this.state.otp) === Number(this.state.sent_otp)){
             console.log('OTP matched');
             localStorage.setItem('user_id', localStorage.getItem('li_user_id'));
             localStorage.setItem('email', localStorage.getItem('li_email'));
@@ -62,7 +62,12 @@ export default class LogInOTP extends Component {
             localStorage.removeItem('li_user_id');
             localStorage.removeItem('li_email');
             localStorage.removeItem('li_user_type');
-            window.location = '/homepage';
+            if(localStorage.getItem('user_type') === 'User'){
+              window.location.href = '/homepage';
+            }
+            else{
+              window.location.href = '/adminHomepage';
+            }
           }
           else{
             console.log('OTP not matched');

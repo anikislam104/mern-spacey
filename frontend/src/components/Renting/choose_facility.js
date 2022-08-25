@@ -7,6 +7,7 @@ import NavbarHomepage from "../navbar_homepage";
 
 
 
+
 const ChooseStayDuration=()=>{
     const [start_date, setStartDate] = React.useState('');
     const [end_date, setEndDate] = React.useState('');
@@ -164,6 +165,7 @@ const ChooseStayDuration=()=>{
             })
     }
     return(
+        
         <div>
             <NavbarHomepage />
             <h1>Choose Duration</h1>
@@ -200,6 +202,7 @@ const ChooseStayDuration=()=>{
                 <button className="btn btn-primary" onClick={handleSubmit}>Submit</button>
             </form>
         </div>
+        
     )
 }
 

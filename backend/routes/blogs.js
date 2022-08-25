@@ -3,6 +3,7 @@ let User = require('../models/user');
 let Blog = require('../models/blog');
 let BlogReaction = require('../models/blogReaction');
 const multer = require('multer');
+
 // const { v4: uuidv4 } = require('uuid');
 let path = require('path');
 let selected_blog_id = "";  
@@ -21,7 +22,7 @@ const storage = multer.diskStorage({
   
   const upload = multer({ storage: storage });
 
-router.route('/writeBlog').post(upload.single("image"),(req, res) => {
+router.route('/writeBlog').post(upload.single("image"),async (req, res) => {
     console.log("writeBlog");
     const user_id = req.body.user_id;
     const content = req.body.content;
@@ -31,7 +32,12 @@ router.route('/writeBlog').post(upload.single("image"),(req, res) => {
     const dislike_count=0;
     const image = req.file.originalname;
 
-    
+    console.log(user_id);
+
+    const user=await User.findById(user_id);
+    console.log(user);
+    const user_name=user.firstName+" "+user.lastName;
+    console.log(user_name);
     
 
     // var img=String(image);
@@ -39,6 +45,7 @@ router.route('/writeBlog').post(upload.single("image"),(req, res) => {
 
     const blog = new Blog({
         user_id: user_id,
+        user_name: user_name,
         content: content,
         title: title,
         time_created: time_created,
@@ -268,11 +275,24 @@ router.route('/edit_blog').post((req, res) => {
     const content = req.body.content;
     Blog.findById(blog_id)
         .then(blog => {
-            blog.title = title;
-            blog.content = content;
+            if(title){
+                blog.title = title;
+            }
+            if(content){
+                blog.content = content;
+            }
             blog.save();
             res.json('Blog updated!');
         }).catch(err => res.status(400).json('Error: ' + err));
 });
 
+//get writer name
+router.route('/get_writer_name').post((req, res) => {
+    const user_id = req.body.user_id;
+    User.findById(user_id)
+        .then(user => {
+            res.json(user.firstName + " " + user.lastName);
+        })
+
+})
 module.exports = router;

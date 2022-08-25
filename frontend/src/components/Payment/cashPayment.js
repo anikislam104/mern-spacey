@@ -28,9 +28,10 @@ export default class CashPayment extends Component {
 }
 
 componentDidMount() {
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
     this.setState({
         renter_id: localStorage.getItem('user_id'),
-        renter_email:localStorage.getItem('firstName'),
+        renter_email: userInfo.firstName,
         booking_id: localStorage.getItem('payment_booking_id'),
     });
 
@@ -184,7 +185,7 @@ async onSubmit (e){
                                <div class="col-lg-6">
                                      
                                      <div class="card-body">
-                                          <h1>&emsp;&nbsp;Cash Payment Method</h1>
+                                          <h1 class="display-6">&emsp;&nbsp;<b>Cash Payment Method</b></h1>
                                      </div>
                                    
                                </div>     
@@ -213,10 +214,11 @@ async onSubmit (e){
                                      </div>
                                     
                                      <div class="col-lg-5">
-                                        <h5> Host: {this.state.host_email}</h5><br/>
-                                        <h5> Property Title: {this.state.property_title}</h5><br/>
-                                        <h5> Your Current Point:&nbsp;{this.state.point}     &emsp;&emsp;&emsp; Discount:&nbsp;{this.state.discount} </h5><br/>
-                                        <h5> Amount to pay:&nbsp;{this.state.amount-this.state.discount} </h5><br/>
+                                     <h5> <b>Host:</b>&nbsp;{this.state.host_email}</h5><br/>
+                                        <h5> <b>Property Title: </b>{this.state.property_title}</h5><br/>
+                                        <h5> <b>Your Current Point:</b>&nbsp;{this.state.point}
+                                             &emsp;&emsp;&emsp; <b>Discount:</b>&nbsp;{this.state.discount}</h5><br/>
+                                        <h5> <b>Amount to pay:</b>&nbsp;{this.state.amount-this.state.discount}</h5><br/>
                                        <form onSubmit={this.onSubmit} encType="multipart/form-data">
                                        <div class="form-group sm-3">
                                                

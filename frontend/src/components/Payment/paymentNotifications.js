@@ -18,7 +18,8 @@ export default class Notifications extends Component{
             user_id:'',
             payments1:[],
         }
-
+    
+        
     }
 
     componentDidMount() {

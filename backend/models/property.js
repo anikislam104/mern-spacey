@@ -10,6 +10,7 @@ const propertySchema = new Schema({
   size: { type: Number, required: true },
   status: { type: String, required: true },
   pricePerDay: { type: Number, required: true },
+  image: { type: String },
 }, {
   timestamps: true,
 });

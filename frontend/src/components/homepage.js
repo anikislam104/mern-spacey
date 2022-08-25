@@ -36,16 +36,77 @@ export default class Homepage extends Component {
 
     
     render() {
-        
+        const myStyle = {
+            logoSection: {
+              width: "60px",
+              height: "60px",
+      
+            },
+            picSection: {
+              backgroundColor: "#4E4C87",
+            },
+            textSection: {
+              color: "#E1E3EE",
+            },
+            nameSection: {
+              color: "#0E2A53",
+            },
+            buttonSection: {
+              padding: "10px 40px",
+              fontSize: "20px",
+              borderRadius: "10px",
+              backgroundColor: "#395cf9",
+              color: "white",
+            },
+            openingPicSection: {
+              width: "300px",
+              height: "300px",
+      
+            },
+          }
         
         return(
             
-            <div><NavbarHomepage />
-            <br />
-            <h1 align="center">Welcome to Spacey</h1>
-            <br />
-            <br />
+            <div className="maincontainer">
+        <NavbarHomepage />
+        <br />
+
+        <div class="container-fluid">
+          <div class="row no-gutter">
+
+
+            <div class="col-md-12 bg-light">
+              <div class="login d-flex align-items-center py-5">
+
+                <div class="container">
+                  <div class="row align-items-center">
+
+                    <div class="col-lg-3">
+
+                    </div>
+
+                    <div class="col-lg-6">
+                      <div class="card-body">
+                        <h3 class="display-6"><b>&emsp;Welcome to &nbsp;
+                          
+                          <font style={myStyle.nameSection}>&nbsp;Spacey</font></b>  </h3>
+                      </div>
+
+
+                    </div>
+
+                    <div class="col-lg-3">
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
             
+            </div>
             </div>
         )
         
