@@ -60,7 +60,7 @@ export default class MyBlogs extends Component {
     getMyBlogs(){
         return this.state.blogs.map((blog) => {
             return(
-                <div className="col-md-4" >
+                <div className="col-md-4 bg-light" >
                     <div className="card mb-4 box-shadow">
                         <div className="card-body">
                         <p className="card-text">{blog.title}</p>

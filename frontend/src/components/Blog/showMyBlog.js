@@ -17,7 +17,6 @@ export default class ShowMyBlog extends Component {
             blog: [],
             user_id: '',
             Comment: "",
-            
         }
     }
     componentDidMount() {
@@ -81,16 +80,19 @@ export default class ShowMyBlog extends Component {
             }
         }
         return this.state.blog.map((blog) => {
-            
+            var image=blog.image;
             return(
                 
-                <div>
+                <div class="bg-light">
                     <NavbarHomepage />
                     <h1 class="display-6" style={myStyle.textSection}>{blog.title}</h1>
                     <p style={myStyle.textSection}>Writer: {blog.user_name}</p>
                     <p><h1>{blog.content}</h1></p>
-                    <br />
-                    <br />
+                    <img src={process.env.PUBLIC_URL+"/images/"+image} alt="..." 
+                    style={{ margin:'0 auto', width: "40%" , display: "flex" }} />
+                    <p><h1>{blog.image}</h1></p>
+                    <br/>
+                    <br/>
                 {/* button for upvote */}
                 <button  type='submit' class="button" onClick={
                     (e) => {

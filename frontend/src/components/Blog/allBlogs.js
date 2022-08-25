@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import NavbarHomepage from '../navbar_homepage';
 // import { Link } from 'react-router-dom';
 
-
+const arr=[];
 
 export default class AllBlogs extends Component {
     constructor(props) {
@@ -53,6 +53,25 @@ export default class AllBlogs extends Component {
 
     getAllBlogs(){
         return this.state.blogs.map((blog) => {
+            arr.push(<div className="col-md-4">
+            <div className="card mb-4 box-shadow">
+                <div className="card-body">
+                <p className="card-text">{blog.title}</p>
+                    {/* <p className="card-text">{property.location}</p> */}
+                    <div className="d-flex justify-content-between align-items-center">
+                        <div className="btn-group">
+                            <button type="button" className="btn btn-sm btn-outline-secondary" onClick={
+                                () => {
+                                    this.sendSelectedBlog(blog._id);
+                                }
+                            }>View</button>
+
+                        </div>
+                        {/* <small className="text-muted">{property.size} square ft</small> */}
+                    </div>
+                </div>
+            </div>
+        </div>);
             return(
                 <div className="col-md-4">
                     <div className="card mb-4 box-shadow">
@@ -77,6 +96,16 @@ export default class AllBlogs extends Component {
         })
     }
 
+    getArrayElements(){
+        if(arr.length>=1){
+            for(let i=0;i<arr.length;i++){
+                return(
+                    arr[i]
+                )
+            }
+        }
+    }
+
     render() {
         return(
             <div class="col-lg-12 bg-light">
@@ -84,6 +113,7 @@ export default class AllBlogs extends Component {
                 <NavbarHomepage />
                 <br/ >
                 {this.getAllBlogs()}
+                {this.getArrayElements()}
             </div>
         )
     }

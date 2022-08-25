@@ -28,7 +28,7 @@ export default class ReadBlogs extends Component {
           }
         return(
             
-            <div>
+            <div class="bg-light">
                 <NavbarHomepage />
                 <br/>
             <div class="container-fluid">
