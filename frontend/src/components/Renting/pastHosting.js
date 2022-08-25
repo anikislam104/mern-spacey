@@ -36,7 +36,20 @@ const PastHostings = () => {
             {hostings.map((hosting) => (
                 <div style={box}>
                     <h2>Property title:{hosting[2]}</h2>
-                    <h2>Renter name:{hosting[1]}</h2>
+                    <h2><button onClick={
+                        () => {
+                            const data = {
+                                booking_id: hosting[0],
+                            }
+                            axios.post('http://localhost:5000/renting/get_renter_host_id', data)
+                                .then(res => {
+                                    const renter_id = res.data.renter_id;
+                                    console.log(renter_id);
+                                    localStorage.setItem("clicked_user_id", renter_id);
+                                    window.location = "/user_profile";
+                                })
+                        }
+                    }>Renter name:{hosting[1]}</button></h2>
                     <h2>Start date:{hosting[3]}</h2>
                     <h2>End date:{hosting[4]}</h2>
                     <h2>Price:{hosting[5]}</h2>

@@ -61,6 +61,7 @@ import Chatpage from "./Pages/Chatpage";
 import ShowInsurance from "./components/Insurance/showInsurance";
 import CurrentHostings from "./components/Renting/currentHosting";
 import PastHostings from "./components/Renting/pastHosting";
+import UserProfile from "./components/Profile/clickedProfile";
 
 
 function App() {
@@ -96,6 +97,7 @@ function App() {
         <Route path="editProperty" element={<EditProperty />} />
         <Route path="editRooms" element={<EditRooms />} />
         <Route path="editFacilities" element={<EditFacilities />} />
+        <Route path="user_profile" element={<UserProfile />} />
         
         
 

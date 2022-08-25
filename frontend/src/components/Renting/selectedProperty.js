@@ -113,6 +113,8 @@ export default class SelectedProperty extends Component {
         
     }
 
+    
+
     showProperty(){
         return this.state.property.map((property) => {
             return (
@@ -123,7 +125,12 @@ export default class SelectedProperty extends Component {
                     <h1>Price Per Day: {property.pricePerDay} tk</h1>
                     <h1>Description: {property.description}</h1>
                     {this.getUsername(property.hostId)}
-                    <h1>Host: {this.state.host_name}</h1>
+                    <h1>Host: <button onClick={
+                        () => {
+                            localStorage.setItem("clicked_user_id",property.hostId);
+                            window.location = '/user_profile';
+                        }
+                    }>{this.state.host_name}</button></h1>
                     <br></br>
                     <br></br>
                     <h1><strong>Rooms:</strong></h1>

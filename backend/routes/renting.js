@@ -755,4 +755,17 @@ router.route('/set_host_complaint').post(async (req, res) =>{
     res.send('ok');
 })
 
+//get renter and host id from booking id
+router.route('/get_renter_host_id').post(async (req, res) =>{
+    const booking_id = req.body.booking_id;
+    const booking = await Booking.findById(booking_id);
+    const renter_id = booking.renter_id;
+    const host_id = booking.host_id;
+    const data = {
+        renter_id: renter_id,
+        host_id: host_id,
+    }
+    res.send(data);
+})
+
 module.exports = router;
