@@ -30,7 +30,27 @@ const Homepage = () => {
       setSearchResult([]);
       return;
     }
-        
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      };
+      const { data } = await axios.get(
+        `http://localhost:5000/property?search=${search}`,
+        config
+      );
+      setSearchResult(data);
+      console.log(searchResult);
+    } catch (error) {
+      toast({
+        title: "Error Occured!",
+        description: "Failed to Load the Search Results",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom-left",
+      });
     }
   };
 
@@ -145,7 +165,7 @@ const Homepage = () => {
             <input
               className="form-control mr-sm-2"
               type="search"
-              placeholder="Location, Apartment, etc."
+              placeholder="Location, Apartment, Host, etc."
               aria-label="Search"
               name="search"
               value={search}
