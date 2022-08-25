@@ -96,24 +96,41 @@ export default class ShowBlog extends Component {
         const myStyle={
             textSection:{
                 textAlign:"center",
-            }
+            },
+            experienceSection:{
+                width: "350px",
+                height: "150px",
+             },
         }
         return this.state.blog.map((blog) => {
             var image=blog.image;
+            let db = new Date(blog.createdAt);
+            const year=db.getFullYear();
+            const day=db.getDate();
+            const name = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+            const month=name[db.getMonth()];
+
             return(
-                <div>
+                <div class="bg-light">
                     <NavbarHomepage />
-                    <h1 class="display-6" style={myStyle.textSection}>{blog.title}</h1>
-                    <p style={myStyle.textSection}>Writer: {blog.user_name}</p>
-                    <p><h1>{blog.content}</h1></p>
+                    <br/><br/>
+                    <h1 class="display-6" style={myStyle.textSection}><b>{blog.title}</b></h1>
+                    <p style={myStyle.textSection}><i>Written by {blog.user_name}</i></p>
+                    <br/><br/>
+                    <br/>
                     <img src={process.env.PUBLIC_URL+"/images/"+image} alt="..." 
-                    style={{ margin:'0 auto', width: "40%" , display: "flex" }} />
-                    <p><h1>{blog.image}</h1></p>
+                    style={{ margin:"0 auto", width: "500px" , height: "400px ", display: "flex" }} />
+                    <br/><br/>
+                    <p><h1 class="card-subtitle text-muted"><i>&emsp;Posted on {month} {day},{year}</i></h1></p>
+                    <br/><br/>
+                    <p><h1>&nbsp;{blog.content}</h1></p>
                     <br />
                     <br />
                     <br />
-                    
+
+            <div class="row align-items-center">
                 {/* button for upvote */}
+                <div class="col-lg-4">
                 <button  type='submit' id="upvote" class="button" onClick={
                     (e) => {
                         const upvote = {
@@ -135,8 +152,9 @@ export default class ShowBlog extends Component {
                         window.location.reload();
                         // e.currentTarget.disabled = true;
                     }
-                } >Upvote</button>   <p>{blog.like_count} upvotes</p>
-               
+                } >Upvote</button>&emsp;<b>{blog.like_count}</b> upvotes
+               </div>
+               <div class="col-lg-4">
                 <button type='submit' class="button"  onClick={
                     (e) => {
                         const downvote = {
@@ -159,15 +177,15 @@ export default class ShowBlog extends Component {
                         
                         
                     }
-                } >Downvote</button>     <p>{blog.dislike_count} downvotes</p>
+                } >Downvote</button>&emsp;<b>{blog.dislike_count}</b> downvotes
+                </div>
 
 {/* // comments */}
 
-<br />
-<br />
-                <input type='text' placeholder="write comment" onChange={this.comment} value={this.state.Comment} ></input>
-                <br />
-                <br />
+                <div class="col-lg-4">
+                <br/><br/><br/><br/><br/><br/><br/>
+                <textarea id="inputComment" type="text" placeholder="write comment" required="" value={this.state.Comment} onChange={this.comment} class="form-control  border-0 shadow-sm px-4 text-primary" style={myStyle.experienceSection} />
+                <br/>
                 <Link to='../blog/showBlog'><button type='submit' class="button" onClick={
                     (e) => {
                         const comment = {
@@ -198,13 +216,19 @@ export default class ShowBlog extends Component {
                         
                     }
                 } >Comment</button></Link>
+                </div>
+            </div>       
+
                 <br />
                 <br />
-                <h1>Comments</h1>
+                <br/><br/>
+                <p><h1><b>Comments:</b></h1></p>
+                <br/>
                {blog.comments.map((comment) => {
                     return(
                         <div>
-                            <p class="li">{comment.comment}</p>
+                            <p>&emsp;{comment.comment}</p>
+                            <br/>
                         </div>
                     )
                 })

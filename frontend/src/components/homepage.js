@@ -67,7 +67,7 @@ export default class Homepage extends Component {
         
         return(
             
-            <div className="maincontainer">
+            <div className="bg-light">
         <NavbarHomepage />
         <br />
 
@@ -75,7 +75,7 @@ export default class Homepage extends Component {
           <div class="row no-gutter">
 
 
-            <div class="col-md-12 bg-light">
+            <div class="col-md-12">
               <div class="login d-flex align-items-center py-5">
 
                 <div class="container">

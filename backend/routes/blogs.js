@@ -132,7 +132,7 @@ router.route('/get_selected_blog').post(async(req, res) => {
     Blog.find()
         .then(blog => {
             blog=blog.filter(blog => blog._id == blog_id);
-            console.log(blog);
+            //console.log(blog);
             res.send(blog);
         })
 })
