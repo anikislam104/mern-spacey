@@ -615,16 +615,22 @@ router.route('/set_rating_review').post(async (req, res) =>{
     const booking = await Booking.findById(booking_id);
 
     const property_id = booking.property_id;
-
+    //check if already rated
+    const rating_review = await ReviewRating.findOne({booking_id: booking_id});
+    if(rating_review){
+        res.send('already rated');
+    }
     //create a new review rating
-    const review_rating = new ReviewRating({
-        booking_id: booking_id,
-        property_id: property_id,
-        rating: rating,
-        review: review,
-    });
-    await review_rating.save();
-    res.send('ok');
+    else{
+        const review_rating = new ReviewRating({
+            booking_id: booking_id,
+            property_id: property_id,
+            rating: rating,
+            review: review,
+        });
+        await review_rating.save();
+        res.send('ok');
+    }
     
 })
 

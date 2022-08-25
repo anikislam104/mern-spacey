@@ -165,9 +165,9 @@ const PastBookings = () => {
                                         (e) => {
                                             
                                             setRating(5);
-                                            var x = e.clientX;
-                                            var y = e.clientY;
-                                            window.scrollTo(x,y);
+                                            var x = window.scrollX;
+                                            var currentScroll = window.scrollY;   
+                                            window.scrollTo(x,currentScroll);
                                             
                                         }
                                     }/>
@@ -175,37 +175,38 @@ const PastBookings = () => {
                                     <input type="radio" id={star4array[idx]} name="rate" value="4" onClick={
                                         (e) => {
                                             setRating(4);
-                                            var x = e.clientX;
-                                            var y = e.clientY;
-                                            window.scrollTo(x,y);
+                                            var x = window.scrollX;
+                                            var currentScroll = window.scrollY;   
+                                            window.scrollTo(x,currentScroll);
                                         }
                                     }/>
                                     <label for={star4array[idx]} title="text">4 stars</label>
                                     <input type="radio" id={star3array[idx]} name="rate" value="3" onClick={
                                         (e) => {
                                             setRating(3);
-                                            var x = e.clientX;
-                                            var y = e.clientY;
-                                            window.scrollTo(x,y);
+                                            var x = window.scrollX;
+                                            var currentScroll = window.scrollY;   
+                                            window.scrollTo(x,currentScroll);
                                         }
                                     }/>
                                     <label for={star3array[idx]} title="text">3 stars</label>
                                     <input type="radio" id={star2array[idx]} name="rate" value="2" onClick={
                                         (e) => {
                                             setRating(2);
-                                            //get mouse cursor position
-                                            var x = e.clientX;
-                                            var y = e.clientY;
-                                            window.scrollTo(x,y);
+                                            //get current window position
+                                            var x = window.scrollX;
+                                            var currentScroll = window.scrollY;   
+                                            window.scrollTo(x,currentScroll);
+
                                         }
                                     }/>
                                     <label for={star2array[idx]} title="text">2 stars</label>
                                     <input type="radio" id={star1array[idx]} name="rate" value="1" onClick={
                                         (e) => {
                                             setRating(1);
-                                            var x = e.clientX;
-                                            var y = e.clientY;
-                                            window.scrollTo(x,y);
+                                            var x = window.scrollX;
+                                            var currentScroll = window.scrollY;   
+                                            window.scrollTo(x,currentScroll);
                                         }
                                     }/>
                                     <label for={star1array[idx]} title="text">1 star</label>
@@ -225,7 +226,12 @@ const PastBookings = () => {
                                         
                                         axios.post("http://localhost:5000/renting/set_rating_review",rr)
                                             .then(res => {
-                                                console.log(res.data);
+                                                if(res.data === "ok"){
+                                                    window.location.reload();
+                                                }
+                                                else{
+                                                    alert("You have already reviewed this property");
+                                                }
                                             });
 
                                     }
