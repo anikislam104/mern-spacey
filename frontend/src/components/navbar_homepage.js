@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import spacey from "../components/Authentication/spacey.svg";
 import Container from 'react-bootstrap/Container';
@@ -6,31 +6,16 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
+const NavbarHomepage = () => {
 
-export default class NavbarHomepage extends Component {
 
-  constructor(props) {
-    super(props);
+  const [user_name, setUser_Name] = useState('');
 
-    this.state = {
-        user_name:'',
-    }
+  useEffect(() => {
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    setUser_Name(userInfo.firstName);
+  }, [user_name]);
 
-  }
-
-  componentDidMount() {
-    fetch('http://localhost:5000/users/user_id')
-        .then((res) => res.json())
-        .then((json) => {
-            const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-            this.setState({ 
-                user_name: userInfo.firstName,
-            });
-  
-        })
-  }
-
-  render() {
     const myStyle= {
       navSection:{
        backgroundColor: "#C2C6CC",
@@ -91,7 +76,7 @@ export default class NavbarHomepage extends Component {
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
-                  <NavDropdown title={this.state.user_name} id="basic-nav-dropdown" className="nav-brand">
+                  <NavDropdown title={user_name} id="basic-nav-dropdown" className="nav-brand">
                     <NavDropdown.Item href={'/payment/payment_notifications'} >Payment Notifications</NavDropdown.Item>
                     <NavDropdown.Item href={'/payment/payment_history'}>
                       Payment History
@@ -133,4 +118,4 @@ export default class NavbarHomepage extends Component {
     )
 
   }
-}
+ export default NavbarHomepage;
