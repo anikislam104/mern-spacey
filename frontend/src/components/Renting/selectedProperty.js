@@ -52,32 +52,27 @@ const SelectedProperty = () => {
             
                 
             })
-            // const renter_id={
-            //                user_id: localStorage.getItem('user_id'),
-            //     }
-            // axios.post('http://localhost:5000/users/get_user_name',renter_id)
-            //          .then(res3 => {
-            //                 console.log(res3.data);
-            //                 setRenterName(res3.data.user_name);
-            //                         })
+                }, []);
                                     
             
         
-        } , [])
+   
     //get username of host
-
-
     
 
-    return (
-        <div>
-            <NavbarHomepage />
-            <div className="container">
-                    <h1>{property.title}</h1>
+   
+
+
+        return (
+            <div>
+                <NavbarHomepage />
+                <div className="container">
+                <h1>{property.title}</h1>
                     <h1>Location: {property.location}</h1>
                     <h1>Size: {property.size} square ft</h1>
                     <h1>Price Per Day: {property.pricePerDay} tk</h1>
                     <h1>Description: {property.description}</h1>
+                    {/* {this.getUsername(property.hostId)} */}
                     <h1>Host: <button onClick={
                         () => {
                             localStorage.setItem("clicked_user_id",property.hostId);
@@ -89,35 +84,23 @@ const SelectedProperty = () => {
                     <h1><strong>Rooms:</strong></h1>
                     {rooms.map((room) => {
                         return (
-                            <div style={{textAlign:"center"}}>
-                                
-                                <ul style={{display:"inline-block",textAlign:"center"}}>
-                                <li><h1>{room.roomType} <b>{room.roomNo}</b></h1></li>
-                                </ul>
+                            <div>
+                                <h1>{room.roomType} {room.roomNo}</h1>
                                 </div>
                         )
                     }
                     )}
-                    </div>
-                    <div class="col-lg-2">
-
-                    </div>
                     <br></br>
                     <br></br>
                     <h1><strong>Facilities:</strong></h1>
                     {facilities.map((facility) => {
                         return (
-                            <div style={{textAlign:"center"}}>
-                                <ul style={{display:"inline-block",textAlign:"center"}}>
-                                <li><h1>{facility.facilityType}</h1></li>
-                                </ul>
+                            <div>
+                                <h1>{facility.facilityType}</h1>
                                 </div>
                         )
                     }
                     )}
-                    </div>
-                   </div>
-
                     {/* //design button */}
                     <br />
                     <br />
@@ -142,11 +125,9 @@ const SelectedProperty = () => {
                             
                         }
                     }>Book</button>
-                    </div>
                     <br />
                     <br />
-                    <div class="col-lg-2">
-                    <button className="btn btn-primary" style={myStyle.buttonSection} onClick={
+                    <button className="btn btn-primary" onClick={
                         () => {
                             //show retrav if hidden
                             if(document.getElementById('revrat').style.display === 'none'){
@@ -157,8 +138,6 @@ const SelectedProperty = () => {
                             }
                         }
                     }>See Reviews</button>
-                    </div>
-                    </div>
                     <br />
                     <br />
                     <div  id="revrat" style={{display:"none"}}>
@@ -166,20 +145,19 @@ const SelectedProperty = () => {
                     {review_ratings.map((review_rating) => {
                         return (
                             <div >
-                                <p>
-                                <h1>&emsp;&emsp;&emsp;&emsp;&emsp;Rating: <b>{review_rating[1]}*</b></h1>
-                                <h1>&emsp;&emsp;&emsp;&emsp;&emsp;<i>"{review_rating[2]}"</i></h1>
-                                <h1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;---{review_rating[0]}</h1>
-                                </p>
+                                <h1>Renter name: {review_rating[0]}</h1>
+                                <h1>Rating: {review_rating[1]}*</h1>
+                                <h1>Review: {review_rating[2]}</h1>
                                 <br></br>
                             </div>
                         )
                     })}
                     </div>
+                </div>
             </div>
-        </div>
         )
    
+
 }
 
 export default SelectedProperty;
