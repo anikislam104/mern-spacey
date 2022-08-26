@@ -17,7 +17,6 @@ export default class SelectedProperty extends Component {
         }
     }
     componentDidMount() {
-        
         const property = {
             property_id: localStorage.getItem('selected_property_id'),
         }
@@ -34,7 +33,7 @@ export default class SelectedProperty extends Component {
                 }
             axios.post('http://localhost:5000/users/get_user_name',renter_id)
                      .then(res3 => {
-                            console.log(res3.data);
+                            //console.log(res3.data);
                              this.setState({
                             renter_name: res3.data,
                                             });
@@ -42,7 +41,7 @@ export default class SelectedProperty extends Component {
                                     
             axios.post('http://localhost:5000/renting/get_rooms', property)
             .then(res => {
-                console.log(res.data);
+                //console.log(res.data);
                 this.setState({
                     rooms: this.state.rooms.concat(res.data),
                 });
@@ -70,10 +69,10 @@ export default class SelectedProperty extends Component {
         const id={
             user_id: host_id,
         }
-        console.log(host_id);
+        //console.log(host_id);
         axios.post('http://localhost:5000/users/get_user_name',id)
             .then(res => {
-                console.log(res.data);
+                //console.log(res.data);
                 this.setState({
                     host_name: res.data,
                 });
@@ -112,9 +111,6 @@ export default class SelectedProperty extends Component {
             
         
     }
-
-    
-
     showProperty(){
         return this.state.property.map((property) => {
             return (
