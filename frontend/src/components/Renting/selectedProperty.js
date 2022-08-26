@@ -66,8 +66,7 @@ const SelectedProperty = () => {
         } , [])
     //get username of host
 
-        } , [])
-    //get username of host
+
     
 
     return (
