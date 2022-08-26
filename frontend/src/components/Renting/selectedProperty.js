@@ -58,52 +58,116 @@ const SelectedProperty = () => {
         
    
     //get username of host
-    
+    const myStyle={
+        textSection:{
+            textAlign:"left",
+        },
+        experienceSection:{
+            width: "350px",
+            height: "150px",
+         },
+         buttonSection:{
+            width:"120px",
+            height:"40px",
+            backgroundColor:"blueViolet",
+         },
+    }
 
-   
-
-
+    var image=property.image;
         return (
-            <div>
+            <div class="bg-light">
                 <NavbarHomepage />
                 <div className="container">
-                <h1>{property.title}</h1>
-                    <h1>Location: {property.location}</h1>
-                    <h1>Size: {property.size} square ft</h1>
-                    <h1>Price Per Day: {property.pricePerDay} tk</h1>
-                    <h1>Description: {property.description}</h1>
+                <div class="row align-items-center">
+                        <div class="col-lg-2">
+
+                        </div>
+                        <div class="col-lg-3">
+                        <br/>
+                        <br/>
+                    <h1 class="display-6" style={myStyle.textSection}><b>{property.title}</b></h1>
+                    <br/>
+                    <h1><b>Location:</b> {property.location}</h1>
+                    <br/>
+                    <h1><b>Size:</b> {property.size} square ft</h1>
+                    <br/>
+                    <h1><b>Price Per Day:</b> {property.pricePerDay} tk</h1>
+                    <br/>
+                    
                     {/* {this.getUsername(property.hostId)} */}
-                    <h1>Host: <button onClick={
+                    <h1><b>Host:</b> <button onClick={
                         () => {
                             localStorage.setItem("clicked_user_id",property.hostId);
                             window.location = '/user_profile';
                         }
-                    }>{host_name}</button></h1>
+                    }><i>{host_name}</i></button></h1>
+                    </div>
+                    <div class="col-lg-1">
+
+                    </div>
+                    <div class="col-lg-6">
+                        <br/><br/><br/>
+                    <img src={process.env.PUBLIC_URL+"/images/"+image} alt="..." 
+                    style={{  width: "450px" , height: "350px ", display: "flex" }} />
+                    </div>
+
+                    </div>
                     <br></br>
                     <br></br>
-                    <h1><strong>Rooms:</strong></h1>
+                    <br/>
+                    <h1><b>&emsp;&emsp;Description:</b> {property.description}</h1>
+                    <br/><br/>
+
+                    
+                    <div class="row align-items-center">
+                    <div class="col-lg-1">
+
+                    </div>
+                        <div class="col-lg-4">
+
+                    <h1 style={{textAlign:"center"}}><strong >Rooms:</strong></h1>
+                    <br/>
                     {rooms.map((room) => {
                         return (
-                            <div>
-                                <h1>{room.roomType} {room.roomNo}</h1>
+                            <div style={{textAlign:"center"}}>
+
+                                <ul style={{display:"inline-block",textAlign:"center"}}>
+                                <li><h1>{room.roomType} <b>{room.roomNo}</b></h1></li>
+                                </ul>
                                 </div>
                         )
                     }
                     )}
-                    <br></br>
-                    <br></br>
-                    <h1><strong>Facilities:</strong></h1>
+                    </div>
+                    <div class="col-lg-2">
+
+                    </div>
+                    
+                    <div class="col-lg-4">
+                    <h1 style={{textAlign:"center"}}><strong>Facilities:</strong></h1>
+                    <br/>
                     {facilities.map((facility) => {
                         return (
-                            <div>
-                                <h1>{facility.facilityType}</h1>
+                            <div style={{textAlign:"center"}}>
+                                <ul style={{display:"inline-block",textAlign:"center"}}>
+                                <li><h1>{facility.facilityType}</h1></li>
+                                </ul>
                                 </div>
                         )
                     }
                     )}
+                     </div>
+                   </div>
+
                     {/* //design button */}
                     <br />
                     <br />
+
+                    <div class="row align-items-center">
+
+                <div class="col-lg-10">
+                    &emsp;&emsp;
+
                     <button className="btn btn-primary" onClick={
                         () => {
                             // this.sendRentalRequest(property);
@@ -125,8 +189,10 @@ const SelectedProperty = () => {
                             
                         }
                     }>Book</button>
+                    </div>
                     <br />
                     <br />
+                    <div class="col-lg-2">
                     <button className="btn btn-primary" onClick={
                         () => {
                             //show retrav if hidden
@@ -138,16 +204,21 @@ const SelectedProperty = () => {
                             }
                         }
                     }>See Reviews</button>
+                    </div>
+                    </div>
                     <br />
                     <br />
                     <div  id="revrat" style={{display:"none"}}>
                     <h1><strong>Reviews:</strong></h1>
+                    <br/>
                     {review_ratings.map((review_rating) => {
                         return (
                             <div >
-                                <h1>Renter name: {review_rating[0]}</h1>
-                                <h1>Rating: {review_rating[1]}*</h1>
-                                <h1>Review: {review_rating[2]}</h1>
+                                <p>
+                                <h1>&emsp;&emsp;&emsp;&emsp;&emsp;Rating: <b>{review_rating[1]}*</b></h1>
+                                <h1>&emsp;&emsp;&emsp;&emsp;&emsp;<i>"{review_rating[2]}"</i></h1>
+                                <h1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;---{review_rating[0]}</h1>
+                                </p>
                                 <br></br>
                             </div>
                         )
