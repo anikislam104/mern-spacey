@@ -132,7 +132,7 @@ export default class LogInOTP extends Component {
 
 
                             <div className="form-group"> 
-                                <label>OTP: </label>
+                                
                                 <input  type="text"
                                 required
                                 className="form-control"

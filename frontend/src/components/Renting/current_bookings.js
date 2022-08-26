@@ -188,7 +188,7 @@ const CurrentBookings = () => {
                                         </div>
 
                                         <div class="col-lg-6">
-                                <textarea type="text" id={inputArray[idx]} style={{width:"500px",height:"200px",backgroundColor:"#e5e4e2"}} placeholder="Enter complain" onChange={
+                                <textarea type="text" id={inputArray[idx]} style={{width:"500px",height:"200px",backgroundColor:"#e5e4e2",display:"none"}}  placeholder="Enter complain" onChange={
                                     (e) => {
                                         setComplaint(e.target.value);
                                     }
@@ -207,7 +207,7 @@ const CurrentBookings = () => {
     </div>
 
     <div class="col-lg-6">
-                                <button className="btn btn-primary"  id={btn_array[idx]}  onClick={
+                                <button className="btn btn-primary"  id={btn_array[idx]} style={{display:"none"}} onClick={
                                     () => {
                                         console.log(complaint);
                                         const complain={

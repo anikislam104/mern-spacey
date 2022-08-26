@@ -18,9 +18,10 @@ const ViewProperties = () => {
             });
     }, []);
     return (
-        <div>
+        <div class="bg-light">
             <NavbarHomepage />
-            <h1>My Properties</h1>
+            <br/>
+            <h1 class="display-6" style={{textAlign:"center"}}><b>My Properties</b></h1>
             <div className="container">
                 <div className="notification">
                     {myProperties.map((myProperty) => {
