@@ -170,20 +170,29 @@ const ChooseStayDuration=()=>{
     }
     return(
         
-        <div>
+        <div class="bg-light">
             <NavbarHomepage />
-            <h1>Choose Duration</h1>
+            <br />
+                
+            <h1 class="display-6" style={{textAlign:"center"}}><b>Choose Duration</b></h1>
             <br />
                 <br />
+
+        
             <form>
-                
-                <h1>Start Date:</h1>
+                <div class="row align-items-center">
+
+                <div class="col-lg-9">
+                <h1><b>Start Date:</b></h1>
+                <br/>
                 <Calendar
                 tileDisabled={tileDisabled}
                 value={start_date}
                 onClickDay={onChangeStartDate}
                 
                     />
+
+                    </div>
                 {/* //show start date if clicked */}
 
                 
@@ -191,19 +200,24 @@ const ChooseStayDuration=()=>{
                 <br />
                 
                 
-
-                <h1>End Date:</h1>
+                <div class="col-lg-3">
+                <h1><b>End Date:</b></h1>
+                <br/>
                 <Calendar
                 tileDisabled={tileDisabled}
                 value={end_date}
                 onClickDay={onChangeEndDate}
                     />
-                
+
+                </div>    
+                </div>
                 {/* //show end date if clicked */}
                 
                 <br />
                 <br />
-                <button className="btn btn-primary" onClick={handleSubmit}>Submit</button>
+                <div style={{margin:"0 auto", textAlign:"center"}}>
+                <button className="btn btn-primary" style={{width:"120px",height:"40px"}} onClick={handleSubmit}>Submit</button>
+                </div>
             </form>
         </div>
         

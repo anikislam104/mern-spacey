@@ -19,7 +19,7 @@ const Notification = () => {
             });
     }, []);
 
-    const btn = {
+    /*const btn = {
         //design white button with full width for notification
         width: "100%",
         height: "50px",
@@ -31,12 +31,12 @@ const Notification = () => {
         marginLeft: "10px",
         marginRight: "10px",
         boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.75)"
-    }
+    }*/
+
     return (
-        <div>
+        <div class="bg-light">
             <NavbarHomepage />
-            <h1>Notifications</h1>
-            
+            <br/>
             <div className="container">
                 <div className="notification">
 
@@ -45,7 +45,10 @@ const Notification = () => {
                 return (
 
                     <div>
-                        <button style={btn} onClick={
+                        <div className="col-md-12" style={{textAlign:"center"}}>
+                        <div className="card mb-4 box-shadow">
+                            <div className="card-body">
+                        <button onClick={
                             () => {
                                 if(notification.type==="notification"){
                                     window.location.reload();
@@ -69,6 +72,9 @@ const Notification = () => {
                         }>
                         <p>{notification.message}</p>
                         </button>
+                        </div>
+                        </div>
+                        </div>
                         <br />
                         <br />
                     </div>

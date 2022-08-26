@@ -35,23 +35,12 @@ const ExtendNotification = () => {
         alignItems: "center"
     };
 
-    const styleForHeader = {
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-        width: "100%",
-        height: "100%",
-        borderBottom: "1px solid black",
-        paddingBottom: "10px"
-    };
-    
     //css styling for buttons small and beauitful
     const styleForButtons = {
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        width: "30%",
+        width: "10%",
         height: "30%",
         borderBottom: "1px solid black",
         paddingBottom: "10px",
@@ -59,7 +48,7 @@ const ExtendNotification = () => {
         marginTop: "10px",
         marginLeft: "10px",
         marginRight: "10px",
-        boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.75)",
+
         border: "1px solid #ddd",
         borderRadius: "4px",
         justifyContent: "center"
@@ -94,22 +83,24 @@ const ExtendNotification = () => {
     }
 
     return (
-              <div>
-                <NavbarHomepage />
-                <div style={styleForHeader}>
-                    <h1>Extend Booking Requests</h1>
-                </div>
+        <div class="bg-light">
+        <NavbarHomepage />
+        <br/>
+        <h1 class="display-6" style={{textAlign:"center"}}><b>Extend Bookings Requests</b></h1>
+        <br/>
                 <div className="container">
                     <div className="extendRequest">
                         {extendRequest.map((extendRequest) => {
                             return (
                                 <div style={style}>
-                                    <h2>Property title: {extendRequest[2]}</h2>
-                                    <p>Host name: {extendRequest[1]}</p>
-                                    <p>Start date: {extendRequest[3]}</p>
-                                    <p>End date: {extendRequest[4]}</p>
-                                    <p>Requested end date: {extendRequest[5]}</p>
+                                    <h2><b>Property title: </b>{extendRequest[2]}</h2>
+                                    <p><b>Host name: </b>{extendRequest[1]}</p>
+                                    <p><b>Start date: </b>{extendRequest[3]}</p>
+                                    <p><b>End date: </b>{extendRequest[4]}</p>
+                                    <p><b>Requested end date: </b>{extendRequest[5]}</p>
                                     <br />
+
+                                    
                                     <button className="btn btn-primary" style={styleForButtons} onClick={
                                         () => {
                                             handleAccept(extendRequest[0]);

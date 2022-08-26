@@ -76,7 +76,7 @@ const PastBookings = () => {
         backgroundColor: "#f5f5f5",
         border: "1px solid #ddd",
         borderRadius: "4px",
-        padding: "10px",
+        padding: "8px",
         marginBottom: "10px",
         marginTop: "10px",
         marginLeft: "10px",
@@ -92,16 +92,16 @@ const PastBookings = () => {
     const inputStyle={
         display: "none",
         //design input box
-        width: "50%",
-        height: "50px",
-        borderRadius: "10px",
+        width: "500px",
+        height: "200px",
+
         border: "1px solid #ddd",
         padding: "10px",
         marginBottom: "10px",
         marginTop: "10px",
         marginLeft: "10px",
         marginRight: "10px",
-        boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.75)",
+        backgroundColor:"#e5e4e2",
     }
 
     const btn={
@@ -111,14 +111,16 @@ const PastBookings = () => {
     return(
         <div>
             <NavbarHomepage />
-            <h1>Past Bookings</h1>
+            <br/>
+            <h1 class="display-6" style={{textAlign:"center"}}><b>Past Bookings</b></h1>
+            <br/>
             <div className="container">
                 <div className="bookings">
                     {bookings.map((booking,idx) => {
                         return (
                             <div style={style}>
-                                
-                                <h2>Property title: {booking[2]}</h2>
+                                <br/>
+                                <h2><b>&nbsp;Property: </b>{booking[2]}</h2>
                                 <p><button onClick={
                                     () => {
                                         const data={
@@ -132,10 +134,10 @@ const PastBookings = () => {
                                                 window.location = "/user_profile";
                                 })
                                     }
-                                }>Host name: {booking[1]}</button></p>
-                                <p>Start date: {booking[3]}</p>
-                                <p>End date: {booking[4]}</p>
-                                <p>Price: {booking[5]}</p>
+                                }><b>&nbsp;Host: </b>{booking[1]}</button></p>
+                                <p><b>&nbsp;Start date: </b>{booking[3]}</p>
+                                <p><b>&nbsp;End date: </b>{booking[4]}</p>
+                                <p><b>&nbsp;Price: </b>{booking[5]}</p>
                                 <br />
                                 <br />
                                 <button className="btn btn-primary" onClick={
@@ -166,12 +168,14 @@ const PastBookings = () => {
                                         }
                                     }
                                 }>Review and Rate</button>
+                                <br/>
+
                                 
-                                <input id={reviewarray[idx]} style={inputStyle} onChange={
+                                <textarea id={reviewarray[idx]} style={inputStyle} onChange={
                                     (e) => {
                                         setReview(e.target.value);
                                     }
-                                }></input>
+                                }/>
                                 <br />
                                 <div class="rate" id={ratingArray[idx]} style={{display:"none"}}>
                                     <input type="radio" id={star5array[idx]} name="rate" value="5" onClick={
