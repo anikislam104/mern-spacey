@@ -219,11 +219,11 @@ async function sendOTP(emailId) {
 //get user name
 router.route('/get_user_name').post(async (req, res) => {
   const user_id = req.body.user_id;
-  User.find()
-    .then(users => {
-        users=users.filter(user=>user._id==user_id);
-        res.send(users[0].firstName+" "+users[0].lastName);
-    })
+  console.log("user_id "+user_id);
+  
+  const user=await User.findById(user_id);
+  const user_name=user.firstName+" "+user.lastName;
+  res.send(user_name);
 })
 
 //forget password
