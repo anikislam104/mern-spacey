@@ -66,6 +66,8 @@ const SelectedProperty = () => {
         } , [])
     //get username of host
 
+        } , [])
+    //get username of host
     
 
     return (
@@ -88,23 +90,35 @@ const SelectedProperty = () => {
                     <h1><strong>Rooms:</strong></h1>
                     {rooms.map((room) => {
                         return (
-                            <div>
-                                <h1>{room.roomType} {room.roomNo}</h1>
+                            <div style={{textAlign:"center"}}>
+                                
+                                <ul style={{display:"inline-block",textAlign:"center"}}>
+                                <li><h1>{room.roomType} <b>{room.roomNo}</b></h1></li>
+                                </ul>
                                 </div>
                         )
                     }
                     )}
+                    </div>
+                    <div class="col-lg-2">
+
+                    </div>
                     <br></br>
                     <br></br>
                     <h1><strong>Facilities:</strong></h1>
                     {facilities.map((facility) => {
                         return (
-                            <div>
-                                <h1>{facility.facilityType}</h1>
+                            <div style={{textAlign:"center"}}>
+                                <ul style={{display:"inline-block",textAlign:"center"}}>
+                                <li><h1>{facility.facilityType}</h1></li>
+                                </ul>
                                 </div>
                         )
                     }
                     )}
+                    </div>
+                   </div>
+
                     {/* //design button */}
                     <br />
                     <br />
@@ -129,9 +143,11 @@ const SelectedProperty = () => {
                             
                         }
                     }>Book</button>
+                    </div>
                     <br />
                     <br />
-                    <button className="btn btn-primary" onClick={
+                    <div class="col-lg-2">
+                    <button className="btn btn-primary" style={myStyle.buttonSection} onClick={
                         () => {
                             //show retrav if hidden
                             if(document.getElementById('revrat').style.display === 'none'){
@@ -142,6 +158,8 @@ const SelectedProperty = () => {
                             }
                         }
                     }>See Reviews</button>
+                    </div>
+                    </div>
                     <br />
                     <br />
                     <div  id="revrat" style={{display:"none"}}>
@@ -149,9 +167,11 @@ const SelectedProperty = () => {
                     {review_ratings.map((review_rating) => {
                         return (
                             <div >
-                                <h1>Renter name: {review_rating[0]}</h1>
-                                <h1>Rating: {review_rating[1]}*</h1>
-                                <h1>Review: {review_rating[2]}</h1>
+                                <p>
+                                <h1>&emsp;&emsp;&emsp;&emsp;&emsp;Rating: <b>{review_rating[1]}*</b></h1>
+                                <h1>&emsp;&emsp;&emsp;&emsp;&emsp;<i>"{review_rating[2]}"</i></h1>
+                                <h1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;---{review_rating[0]}</h1>
+                                </p>
                                 <br></br>
                             </div>
                         )

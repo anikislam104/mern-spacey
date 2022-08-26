@@ -62,8 +62,15 @@ export default class AllBlogs extends Component {
                 margin:"0 auto",
             },
             textSection:{
-                fontSize:"23px",
-                backgroundColor:"#f4f0ec",
+                fontSize:"23px",    
+                display:"flex",
+                justifyContent:"center",
+                flexDirection:"column",
+                alignItems:"center",
+                backgroundColor:"rgba(0,0,0,0.5)",
+                width:"100%",
+                height:"100%",
+                color:"white",
             },
         }
         return this.state.blogs.map((blog) => {
@@ -72,9 +79,9 @@ export default class AllBlogs extends Component {
             console.log(path);
             arr.push(<div className="col-md-4">
             <div className="card mb-4 box-shadow" style={{ width:"300px", height:"250px",textAlign:"center", backgroundImage:`url(${path})` }}>
-                <div className="card-body">
+                <div className="card-body" style={myStyle.textSection}>
                 <br/><br/>
-                <p className="card-text"><b style={myStyle.textSection}>{blog.title}</b></p>
+                <p className="card-text"><b>{blog.title}</b></p>
                     {/* <p className="card-text">{property.location}</p> */}
                     <div className="d-flex justify-content-between align-items-center">
                         <br/><br/><br/><br/><br/>

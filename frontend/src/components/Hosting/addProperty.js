@@ -3,7 +3,7 @@ import axios from 'axios';
 import NavbarHomepage from '../navbar_homepage';
 
 
-
+let value=0;
 
 // import { useHistory } from 'react-router-dom'
 // import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
@@ -26,6 +26,8 @@ export default class AddProperty extends Component {
     this.handleClick2 = this.handleClick2.bind(this);
     this.onChangeImage = this.onChangeImage.bind(this);
 
+    this.onChangeIncrement = this.onChangeIncrement.bind(this);
+    this.onChangeDecrement = this.onChangeDecrement.bind(this);
 
     this.state = {
       host_id: '',
@@ -35,7 +37,7 @@ export default class AddProperty extends Component {
       size: '',
       pricePerDay: '',
       roomType: '',
-      roomNo: '',
+      roomNo: '0',
       rooms: [],
       facility: '',
       facilities: [],
@@ -94,6 +96,25 @@ export default class AddProperty extends Component {
     this.setState({
       roomNo: e.target.value
     })
+  }
+
+  onChangeIncrement(e){
+    e.preventDefault();
+    value++;
+    this.setState({
+      roomNo: value
+    })
+  }
+
+  onChangeDecrement(e){
+    e.preventDefault();
+    if(value<=0) alert("Room no cannot be less than 0");
+    else{
+      value--;
+      this.setState({
+        roomNo: value
+      })
+    }
   }
 
   onChangeFacility(e) {
@@ -168,11 +189,8 @@ export default class AddProperty extends Component {
         window.location = '/hosting';
       });
   }
+ 
   render() {
-
-
-
-
 
     const myStyle = {
       buttonSection: {
@@ -181,10 +199,6 @@ export default class AddProperty extends Component {
         borderRadius: "10px",
         backgroundColor: "BlueViolet",
         color: "white",
-      },
-
-      inputSection: {
-        padding: "10px 10px",
       },
 
       buttonSection2: {
@@ -197,17 +211,60 @@ export default class AddProperty extends Component {
         width: "500px",
         height: "400px",
       },
-
+      inputSection: {
+        width: "300px",
+        height: "40px",
+      },
+      nameSection:{
+        color:"#0E2A53",
+        fontSize:"50px",
+      },
+      inputSection2: {
+        width: "100px",
+        height: "40px",
+      },
+      buttonSection3: {
+        backgroundColor: "#b9f2ff",
+        padding: "5px 15px",
+        fontSize: "25px",
+        color: "black",
+      },
     }
 
 
 
     return (
 
-      <div className="maincontainer">
+      <div className="maincontainer bg-light">
         <NavbarHomepage />
         <br />
+        
         <div class="container-fluid">
+
+        <div class="row no-gutter">
+
+
+<div class="col-md-12 bg-light">
+  <div class="login d-flex align-items-center py-5">
+
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-6">
+          <div class="card-body">
+            <h3 class="display-6"><b>&emsp;Personal Room Hosting </b> </h3>                                
+          </div>
+        </div>
+        <div class="col-lg-3">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
           <div class="row no-gutter">
 
 
@@ -224,37 +281,53 @@ export default class AddProperty extends Component {
                     <div class="col-lg-5">
                       <form onSubmit={this.onSubmit} encType="multipart/form-data">
                         <div class="form-group sm-2">
-                          <label>Title: </label>
+                          <label><b>Title: </b></label><br/>
                           <input id="inputTitle" type="title" required="" autofocus="" value={this.state.title} onChange={this.onChangeTitle} class="form-control rounded-pill border-0 shadow-sm px-4" />
+                          <br/>
                         </div>
                         <div class="form-group sm-2">
-                          <label>Location: </label>
+                          <label><b>Location: </b></label><br/>
                           <input id="inputLocation" type="location" required="" autofocus="" value={this.state.location} onChange={this.onChangeLocation} class="form-control rounded-pill border-0 shadow-sm px-4" />
                         </div>
                         <br />
                         <div class="form-group sm-2">
-                          <label>Description: </label>
+                          <label><b>Description:</b> </label><br/>
                           <textarea id="inputContent" type="text" placeholder="" required="" value={this.state.description} onChange={this.onChangeDescription} class="form-control  border-0 shadow-sm px-4 text-primary" style={myStyle.descriptionSection} />
                         </div>
                         <br />
                         <div class="form-group sm-2">
-                          <label>Size: </label>
+                          <label><b>Size: </b></label><br/>
                           <input id="inputSize" type="size" required="" autofocus="" value={this.state.size} onChange={this.onChangeSize} class="form-control rounded-pill border-0 shadow-sm px-4" />
                         </div>
                         <br />
                         <div class="form-group sm-2">
-                          <label>Price Per Day: </label>
+                          <label><b>Price Per Day: </b></label><br/>
                           <input id="inputPricePerDay" type="pricePerDay" required="" value={this.state.pricePerDay} onChange={this.onChangePricePerDay} class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" />
                         </div>
+                        <br/>
                         <div class="form-group sm-2">
-                          <label>Room Type </label>
-                          <input id="inputRoomType" type="roomType" required="" value={this.state.roomType} onChange={this.onChangeRoomType} class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" />
-                          <label>Room No </label>
-                          <input id="inputRoomNo" type="roomNo" required="" value={this.state.roomNo} onChange={this.onChangeRoomNo} class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" />
-                          <div>
+                          <label><b>Room Type </b></label><br/>
+                          <input id="inputRoomType" type="roomType" required="" style={{width: "350px", height: "35px",}} value={this.state.roomType} onChange={this.onChangeRoomType} class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" />
+                          <br/>
+                        </div>
+                        
+                        <div class="row align-items-center">  
+                         <div class="col-lg-9">
+                          <label><b>Room No </b></label><br/>
+                          <div class="row">
+                              <div class="col-lg-3"><button type="button" class="rounded-pill px-3" onClick={this.onChangeIncrement} style={myStyle.buttonSection3}>+</button></div>
+                              <div class="col-lg-4"><input id="inputRoomNo" type="roomNo" required="" style={myStyle.inputSection2} value={this.state.roomNo} class="form-control" /></div>
+                              <div class="col-lg-3"><button type="button" class="rounded-pill px-3" onClick={this.onChangeDecrement} style={myStyle.buttonSection3}>-</button></div>
+                          </div>
+                          
+                         </div>
+                          <br/>
+                          <div class="col-lg-3">
                             <br />
                             <button type="button" onClick={this.handleClick1} style={myStyle.buttonSection2}>Add Room</button>
                           </div>
+                        </div> 
+                          
                           <div>
                             <ul>
                               {this.state.rooms.map(item => {
@@ -262,30 +335,38 @@ export default class AddProperty extends Component {
                               })}
                             </ul>
                           </div>
-                        </div>
+                        
 
-                        <div class="form-group sm-2">
-                          <label>Facility </label>
-                          <input id="inputFacility" type="facility" required="" value={this.state.facility} onChange={this.onChangeFacility} class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" />
-                          <br />
-                          <div>
-                            <button type="button" onClick={this.handleClick2} style={myStyle.buttonSection2}>Add Facility</button>
+                        
+                        <br/>
+                          <div class="row align-items-center">
+                             <div class="col-lg-9">
+                                <label><b>Facility </b></label><br/>
+                                <input id="inputFacility" type="facility" required="" style={myStyle.inputSection} value={this.state.facility} onChange={this.onChangeFacility} class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" />
+                             </div>
+                            
+                             <div class="col-lg-3">
+                             <br/>
+                                <button type="button" onClick={this.handleClick2} style={myStyle.buttonSection2}>Add Facility</button>
+                             </div>
                           </div>
-                          <div>
 
+                          <div>
+                            <br/>
                             <ul>
+                              
                               {this.state.facilities.map(item => {
                                 return <li>{item}</li>;
                               })}
                             </ul>
                           </div>
 
-                        </div>
+                        
 
 
                         <br />
                         <div class="form-group sm-3">
-                                <label>Room Picture: </label>
+                                <label><b>Room Picture: </b></label>
                                 <br/><br/>
                                                   <div class="custom-file sm-3">
                                                     <input type="file" filename="image" class="custom-file-input form-control  border-0 shadow-sm px-4" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" onChange={this.onChangeImage} />
@@ -305,9 +386,16 @@ export default class AddProperty extends Component {
 
                     </div>
 
-                    <div class="col-lg-5">
-                      <br /><br /><br /><br /><br /><br />
-                      <h3 class="display-4">Let's host your <p>free space!</p></h3>
+                    <div class="col-lg-5 bg-light">
+                      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+                      <br /><br /><br />
+                      
+                      <div>
+                      <h3 class="display-4">Let's host <br/> your free <br/> space with <br/> 
+                          
+                          <b style={myStyle.nameSection}><i>Spacey </i></b></h3>
+              
+                          </div>
                       <br />
                       <p class="text-muted mb-4">Spacey makes hosting easier and safer!</p>
                       <br />
