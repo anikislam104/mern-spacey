@@ -111,7 +111,7 @@ const CurrentHostings = () => {
                                         </div>
 
                                         <div class="col-lg-6">
-                                <textarea type="text" id={inputArray[idx]} style={{width:"500px",height:"200px",backgroundColor:"#e5e4e2"}} placeholder="Enter complain" onChange={
+                                <textarea type="text" id={inputArray[idx]} style={{width:"500px",height:"200px",backgroundColor:"#e0ffff",display:"none"}} placeholder="Enter complain" onChange={
                                     (e) => {
                                         setComplaint(e.target.value);
                                     }
@@ -121,7 +121,7 @@ const CurrentHostings = () => {
                                         </div>
                              
 
-                                <button className="btn btn-primary" id={btn_array[idx]} style={{float:"right"}} onClick={
+                                <button className="btn btn-primary" id={btn_array[idx]} style={{float:"right",display:"none"}} onClick={
                                     () => {
                                         console.log(complaint);
                                         const complain={

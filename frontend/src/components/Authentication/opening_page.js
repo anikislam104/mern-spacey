@@ -32,11 +32,11 @@ export default class OpeningPage extends Component {
         return (
        
             <div className="maincontainer">
-                <Navbar /><br/>
+                <Navbar />
         
-                 <div class="row no-gutter">
+                 <div class="row no-gutter" style={{backgroundColor: "#4E4C87",}}>
                              
-                     <div class="col-md-12 bg-light">
+                     <div class="bg-light">
                          <div class="login d-flex align-items-center py-4" style={myStyle.picSection}>
                                     
                          </div>
