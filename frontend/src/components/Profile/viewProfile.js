@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import NavbarHomepage from "../navbar_homepage";
-
+import  "./viewProfile.css";
 
 const ViewProfile = () => {
   const [firstName, setFirstName] = useState("");
@@ -11,6 +11,7 @@ const ViewProfile = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [nidNumber, setNidNumber] = useState("");
+  const [image, setImage] = useState("");
 
   useEffect(() => {
     const user = {
@@ -26,6 +27,7 @@ const ViewProfile = () => {
         setEmail(res.data.email);
         setPhone(res.data.phoneNumber);
         setNidNumber(res.data.nidNumber);
+        setImage(res.data.image);
       });
   }, []);
 
@@ -40,32 +42,87 @@ const ViewProfile = () => {
   };
 
   return (
-    <div>
+    <div class="bg-light">
         {/* //show user profile */}
         <NavbarHomepage />
-        <div className="container">
-          <div className="row">
-            <div className="col-md-6">
-              <h1>
-                Name: {firstName} {lastName}
-              </h1>
-              <h3> Date of Birth: {dateOfBirth}</h3>
-              <h3>Email: {email}</h3>
-              <h3>Phone: {phone}</h3>
-              <h3>Nid Number: {nidNumber}</h3>
-            </div>
-          </div>
-        </div>
+        
+
+        <div class="page-content page-container" id="page-content">
+    <div class="padding">
+        <div class="row container d-flex justify-content-center">
+<div class="col-xl-12 col-md-12">
+                      <div class="card user-card-full">
+                          <div class="row m-l-0 m-r-0">
+                              <div class="col-sm-4 bg-c-lite-green user-profile">
+                                  <div class="card-block text-center text-white">
+                                      <div class="m-b-25">
+                                      <img src={process.env.PUBLIC_URL+"/images/"+image}  
+                                      style={{  margin:"0 auto",width: "250px" , height: "300px ", display: "flex" }} alt="..."/>
+                                      </div>
+                                      <h6 class="f-w-600">{firstName} {lastName}</h6>
+                                      
+                                      <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+                                  </div>
+                              </div>
+                              <div class="col-sm-8">
+                                  <div class="card-block">
+                                    <br/><br/><br/>
+                                      <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h6>
+                                      <div class="row">
+                                          <div class="col-sm-6">
+                                              <p class="m-b-10 f-w-600">Email</p>
+                                              <h6 class="text-muted f-w-400"> {email}</h6>
+                                          </div>
+                                          <div class="col-sm-6">
+                                              <p class="m-b-10 f-w-600">Phone</p>
+                                              <h6 class="text-muted f-w-400">{phone}</h6>
+                                          </div>
+                                      </div>
+                                      
+                                      <div class="row">
+                                          <div class="col-sm-6">
+                                          <br/>
+                                              <p class="m-b-10 f-w-600"> Date of Birth</p>
+                                              <h6 class="text-muted f-w-400">{dateOfBirth}</h6>
+                                          </div>
+                                          <div class="col-sm-6">
+                                          <br/>
+                                              <p class="m-b-10 f-w-600">Nid Number</p>
+                                              <h6 class="text-muted f-w-400">{nidNumber}</h6>
+                                          </div>
+                                      </div>
+                                  
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                    </div>
+                      </div>
+                  </div>
+
         <div>
           <br />
-          <button className="btn btn-primary" onClick={handleEdit}>
+
+          <div class="row align-items-center">
+          <div class="col-lg-1"></div>
+              <div class="col-lg-8">
+
+          <button className="btn btn-primary" style={{backgroundColor:"#ee5a6f"}} onClick={handleEdit}>
             Edit Profile
           </button>
+          </div>
           <br />
           <br />
-          <button className="btn btn-primary" onClick={showProperties}>
+          <div class="col-lg-3">
+          
+          <button className="btn btn-primary" style={{backgroundColor:"#ee5a6f"}} onClick={showProperties}>
             Show my properties
           </button>
+          </div>
+          </div>
+
+
         </div>
     </div>
   );

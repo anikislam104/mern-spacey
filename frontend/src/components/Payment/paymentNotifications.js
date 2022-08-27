@@ -82,10 +82,12 @@ export default class Notifications extends Component{
                     <div className="col-md-12">
                         <div className="card mb-4 box-shadow">
                             <div className="card-body">
-                            <p className="card-text">Renter {payment.renter_email} has <b>requested</b> for payment approval of amount <b>{payment.amount}</b> for the property <b>{payment.property_title}</b> at {payment.update_date}</p>
+                                
+                            <p className="card-text" style={{textAlign:"center"}}>Renter {payment.renter_email} has <b>requested</b> for payment approval of amount <b>{payment.amount}</b> for the property <b>{payment.property_title}</b> at {payment.update_date}</p>
+                                <br/>
                                 <div className="d-flex justify-content-between align-items-center">
                                     <div className="btn-group">
-                                        <button type="button" className="btn btn-sm btn-outline-secondary" onClick={
+                                        <button type="button" style={{backgroundColor:"#8b008b", color:"white"}} className="btn btn-sm" onClick={
                                             () => {
                                                 this.approvePaymentRequest(payment._id);
                                             }
@@ -93,7 +95,10 @@ export default class Notifications extends Component{
                                         &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                                         &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                                         &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                                        <button type="button" className="btn btn-sm btn-outline-secondary" onClick={
+                                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                                        <button type="button" style={{backgroundColor:"#8b008b", color:"white"}} className="btn btn-sm" onClick={
                                             () => {
                                                 this.rejectPaymentRequest(payment._id);
                                             }
@@ -111,7 +116,7 @@ export default class Notifications extends Component{
                     <div className="col-md-12">
                         <div className="card mb-4 box-shadow">
                             <div className="card-body">
-                            <p className="card-text">Your payment request of amount <b>{payment.amount}</b> to Host {payment.host_email} for the property <b>{payment.property_title}</b> is <b>{payment.status}</b> at {payment.update_date}</p>
+                            <p className="card-text" style={{textAlign:"center"}}>Your payment request of amount <b>{payment.amount}</b> to Host {payment.host_email} for the property <b>{payment.property_title}</b> is <b>{payment.status}</b> at {payment.update_date}</p>
                             </div>
                         </div>
                     </div>
@@ -122,7 +127,7 @@ export default class Notifications extends Component{
                     <div className="col-md-12">
                         <div className="card mb-4 box-shadow">
                             <div className="card-body">
-                            <p className="card-text">Host {payment.host_email} has <b>{payment.status}</b> your payment request of amount <b>{payment.amount}</b> for the property <b>{payment.property_title}</b> at {payment.update_date}</p>
+                            <p className="card-text" style={{textAlign:"center"}}>Host {payment.host_email} has <b>{payment.status}</b> your payment request of amount <b>{payment.amount}</b> for the property <b>{payment.property_title}</b> at {payment.update_date}</p>
                             </div>
                         </div>
                     </div>

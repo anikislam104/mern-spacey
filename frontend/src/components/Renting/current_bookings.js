@@ -39,7 +39,7 @@ const CurrentBookings = () => {
         backgroundColor: "#f5f5f5",
         border: "1px solid #ddd",
         borderRadius: "4px",
-        padding: "10px",
+        padding: "12px",
         marginBottom: "10px",
         marginTop: "10px",
         marginLeft: "10px",
@@ -47,7 +47,7 @@ const CurrentBookings = () => {
         boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.75)"
     };
 
-    const inputStyle={
+    /*const inputStyle={
         display: "none",
         //design input box
         width: "50%",
@@ -60,19 +60,21 @@ const CurrentBookings = () => {
         marginLeft: "10px",
         marginRight: "10px",
         boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.75)",
-    }
+    }*/
 
 
     return(
-        <div>
+        <div class="bg-light">
             <NavbarHomepage />
-            <h1>Current Bookings</h1>
+            <br/>
+            <h1 class="display-6" style={{textAlign:"center"}}><b>Current Bookings</b></h1>
+            <br/>
             <div className="container">
                 <div className="bookings">
                     {bookings.map((booking,idx) => {
                         return (
                             <div style={style}>
-                                <h2>Property title: {booking[2]}</h2>
+                                <h2><b>&nbsp;Property: </b>{booking[2]}</h2>
                                 <p><button onClick={
                                     () => {
                                         const data={
@@ -86,11 +88,16 @@ const CurrentBookings = () => {
                                                 window.location = "/user_profile";
                                 })
                                     }
-                                }>Host name: {booking[1]}</button></p>
-                                <p>Start date: {booking[3]}</p>
-                                <p>End date: {booking[4]}</p>
-                                <p>Price: {booking[5]}</p>
+                                }><b>&nbsp;Host: </b>{booking[1]}</button></p>
+                                <p><b>&nbsp;Start date: </b>{booking[3]}</p>
+                                <p><b>&nbsp;End date: </b>{booking[4]}</p>
+                                <p><b>&nbsp;Price: </b>{booking[5]}</p>
                                 <br />
+
+                                <div class="row align-items-center">
+
+                  
+                                    <div class="col-lg-3">
                                 
                                 <button className="btn btn-primary" onClick={
                                     () => {
@@ -99,8 +106,10 @@ const CurrentBookings = () => {
                                         window.location.href = "/change_duration";
                                     }
                                 }>Extend Duration</button>
+                                </div>
                                 <br />
                                 <br />
+                                <div class="col-lg-4">
                                 <button className="btn btn-primary" onClick={
                                     () => {
                                         const id={
@@ -120,8 +129,10 @@ const CurrentBookings = () => {
                                         })
                                     }
                                 }>Cancel Booking</button>
+                                </div>
                                 <br />
                                 <br />
+                                <div class="col-lg-3">
                                 <button className="btn btn-primary" onClick={
                                     () => {
                                         axios.post("http://localhost:5000/renting/get_time",{booking_id:booking[0]})
@@ -140,8 +151,10 @@ const CurrentBookings = () => {
                                         
                                     }
                                 }>Payment</button>
+                                </div>
                                 <br />
                                 <br />
+                                <div class="col-lg-2">
                                 <button className="btn btn-primary" onClick={
                                     () => {
                                         //show input box if hidden and vice versa
@@ -161,14 +174,40 @@ const CurrentBookings = () => {
                                         }
                                     }
                                 }>Complain</button>
+                                </div>
+                                </div>
+
                                 <br />
-                                <input type="text" id={inputArray[idx]} style={inputStyle} placeholder="Enter complain" onChange={
+                                <br/>
+
+                                
+                                <div class="row align-items-center">
+
+                  
+                                    <div class="col-lg-3">
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                <textarea type="text" id={inputArray[idx]} style={{width:"500px",height:"200px",backgroundColor:"#e5e4e2",display:"none"}}  placeholder="Enter complain" onChange={
                                     (e) => {
                                         setComplaint(e.target.value);
                                     }
                                 } />
                                 <br />
-                                <button className="btn btn-primary" id={btn_array[idx]} style={{display:"none"}} onClick={
+                                <br />
+                                <div class="col-lg-3">
+                                        </div>
+                                </div>
+                                </div>
+
+                                <div class="row align-items-center">
+
+                  
+<div class="col-lg-5">
+    </div>
+
+    <div class="col-lg-6">
+                                <button className="btn btn-primary"  id={btn_array[idx]} style={{display:"none"}} onClick={
                                     () => {
                                         console.log(complaint);
                                         const complain={
@@ -188,6 +227,12 @@ const CurrentBookings = () => {
                                         })
                                     }
                                 } >Send</button>
+                                </div>
+
+                                    <div class="col-lg-3">
+                                        </div>
+                                </div>
+                                
                             </div>
                         )
                     }

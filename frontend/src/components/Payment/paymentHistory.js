@@ -71,11 +71,24 @@ export default class PaymentHistory extends Component{
                             <Table striped>
                             <tbody>
                                 <tr>
-                                <td style={myStyle.textSection2}>{payment.host_email}</td>
-                                <td style={myStyle.textSection2}>&emsp;{payment.renter_email}</td>
-                                <td style={myStyle.textSection2}>&emsp;&emsp;&emsp;{payment.property_title}</td>
-                                <td style={myStyle.textSection1}>&emsp;{payment.amount}</td>
-                                <td style={myStyle.textSection2}>{payment.date}</td>
+
+                                <div class="row align-items-center">
+
+                  
+                                    <div class="col-lg-2">   
+                                <td>{payment.host_email}</td></div>
+                                <div class="col-lg-2">
+                                <td>{payment.renter_email}</td></div>
+                                <div class="col-lg-2">
+                                <td>{payment.property_title}</td></div>
+                                <div class="col-lg-2">
+                                <td>&emsp;{payment.amount}</td></div>
+                                <div class="col-lg-3">
+                                <td style={myStyle.textSection2}>{payment.date}</td></div>
+                                <div class="col-lg-1">
+                                <td >{payment.status}</td></div>
+
+                                </div>
                                 </tr>
                                 
                             
@@ -119,18 +132,7 @@ export default class PaymentHistory extends Component{
     }
 
     render(){
-        const myStyle={
-            textSection1:{
-                textAlign:"right",
-            },
-            textSection2:{
-                textAlign:"center",
-            },
-            borderSection:{
-                borderColor:"blue",
-            },
-            
-        }
+
         return(
 
             <div>
@@ -140,12 +142,27 @@ export default class PaymentHistory extends Component{
                <Table>
                 <thead>
                     <tr>
-                    <th style={myStyle.textSection2}>Host</th>
-                    <th style={myStyle.textSection2}>Renter</th>
-                    <th style={myStyle.textSection2}>Property</th>
-                    <th>Amount</th>
-                    <th>Date</th>
+
+                     <div class="row align-items-center">
+
+                  
+                                    <div class="col-lg-2">    
+                    <th>Host</th>
+                    </div>
+                    <div class="col-lg-2"> 
+                    <th>Renter</th></div>
+                    <div class="col-lg-2"> 
+                    <th>Property</th></div>
+                    <div class="col-lg-2"> 
+                    <th>Amount</th></div>
+                    <div class="col-lg-3"> 
+                    <th>&emsp;&emsp;&emsp;&emsp;Date</th></div>
+                    <div class="col-lg-1"> 
+                    <th>Status</th></div>
+
+                    </div>
                     </tr>
+
                 </thead>
                 </Table>
                 </div>
@@ -170,7 +187,7 @@ export default class PaymentHistory extends Component{
                     <br/>
                 <form onSubmit={this.onSubmit} encType="multipart/form-data">
 
-                                <div class="input-group">
+                                <div class="input-group" >
                      
                                     
                                     
@@ -180,7 +197,7 @@ export default class PaymentHistory extends Component{
                                         showTimeSelect   
                                         showYearDropdown
                                         
-                                        style={myStyle.borderSection}
+                                        
                                         placeholderText="Start date"/>
                                     
                                     <br/>

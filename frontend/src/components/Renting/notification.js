@@ -73,28 +73,43 @@ export default class RentRequestNotification extends Component {
         return this.state.rent_request.map((request) => {
             return (
                 <div style={style}>
-                    
-                    <h1>{request.property_title}</h1>
+
+
+                    <div class="row align-items-center">
+
+                  
+                    <div class="col-lg-9">
+                    <br/>
+                    <h1><b>&emsp;Property:</b>&nbsp; {request.property_title}</h1>
                     <h1><button onClick={
                         () => {
                             localStorage.setItem('clicked_user_id', request.renter_id);
                             window.location.href = "/user_profile";
                         }
-                    }>{request.renter_name}</button></h1>
-                    <h1>{request.start_date}</h1>
-                    <h1>{request.end_date}</h1>
+                    }><b>&emsp;Requester:</b> &nbsp;{request.renter_name}</button></h1>
+                    <h1><b>&emsp;Start date:</b>&nbsp;{request.start_date}</h1>
+                    <h1><b>&emsp;End date:</b>&nbsp;{request.end_date}</h1>
+                    <br/>
+                    </div>
+
+                <div class="col-lg-3">
                     <button class="button" onClick={
                         () => {
                             this.acceptRequest(request._id);
                         }
                     }>Accept</button>
+                    
                     <br />
                     <br />
+
                     <button class="button" onClick={
                         () => {
                             this.rejectRequest(request._id);
                         }
                     }>Reject</button>
+
+</div>
+                    </div>
                     <br />
                     <br />
                 </div>
@@ -107,7 +122,7 @@ export default class RentRequestNotification extends Component {
             return (
                 <div>
                     <NavbarHomepage />
-                    <h1>Rent Request Notifications</h1>
+                    {/*<h1>Rent Request Notifications</h1>*/}
                     <br />
                     {this.showRentRequest()}
                 </div>

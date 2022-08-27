@@ -154,7 +154,9 @@ export default class Login extends Component {
                                               <input id="inputPassword" type="password" placeholder="Password" required="" value={this.state.password} onChange={this.onChangePassword} class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" />
                                           </div>
                                           <div class="form-group sm-2">
+                                            <br/>
                                             <label>User type: </label>
+                                            <br/><br/>
                                             <select id="inputUserType" class="form-control rounded-pill border-0 shadow-sm px-4"   onChange={this.onChangeUserType} placeholder="user type">
                                                 <option value="">Select</option>
                                                 <option value="User" >User</option>

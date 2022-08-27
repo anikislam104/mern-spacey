@@ -29,13 +29,15 @@ const PastHostings = () => {
 
     }
     return (
-        <div>
+        <div class="bg-light">
             <NavbarHomepage />
-            <h1>Past Hostings</h1>
+            <br/>
+            <h1 class="display-6" style={{textAlign:"center"}}><b>Past Hostings</b></h1>
+            <br/>
             
             {hostings.map((hosting) => (
                 <div style={box}>
-                    <h2>Property title:{hosting[2]}</h2>
+                    <h2><b>Property title:</b>&nbsp;{hosting[2]}</h2>
                     <h2><button onClick={
                         () => {
                             const data = {
@@ -49,11 +51,13 @@ const PastHostings = () => {
                                     window.location = "/user_profile";
                                 })
                         }
-                    }>Renter name:{hosting[1]}</button></h2>
-                    <h2>Start date:{hosting[3]}</h2>
-                    <h2>End date:{hosting[4]}</h2>
-                    <h2>Price:{hosting[5]}</h2>
+                    }><b>Renter:</b>&nbsp;{hosting[1]}</button></h2>
+                    <h2><b>Start date:</b>&nbsp;{hosting[3]}</h2>
+                    <h2><b>End date:</b>&nbsp;{hosting[4]}</h2>
+                    <h2><b>Price:</b>&nbsp;{hosting[5]}</h2>
+                    <br/>
                 </div>
+                
             ))}
 
         </div>

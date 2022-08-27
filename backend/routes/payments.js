@@ -318,7 +318,7 @@ router.route('/get_payment_history').post(async (req, res) => {
 
   Payment.find()
     .then(payments => {
-        payments=payments.filter(payment=>(payment.host_id==user_id || payment.renter_id==user_id) && payment.status=='approved'); 
+        payments=payments.filter(payment=>(payment.host_id==user_id || payment.renter_id==user_id) && (payment.status=='approved' || payment.status=='rejected')); 
         payments.sort((a,b)=>{
           let da = new Date(a.update_date),
               db = new Date(b.update_date);

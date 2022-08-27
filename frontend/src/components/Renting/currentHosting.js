@@ -24,7 +24,7 @@ const CurrentHostings = () => {
         btn_array[i] = i+total;
     }
 
-    const inputStyle={
+    /*const inputStyle={
         display: "none",
         //design input box
         width: "50%",
@@ -37,7 +37,7 @@ const CurrentHostings = () => {
         marginLeft: "10px",
         marginRight: "10px",
         boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.75)",
-    }
+    }*/
 
 
     const box={
@@ -56,13 +56,15 @@ const CurrentHostings = () => {
 
     }
     return (
-        <div>
+        <div class="bg-light">
             <NavbarHomepage />
-            <h1>Current Hostings</h1>
+            <br/>
+            <h1 class="display-6" style={{textAlign:"center"}}><b>Current Hostings</b></h1>
+            <br/>
             
             {hostings.map((hosting,idx) => (
                 <div style={box}>
-                    <h2>Property title:{hosting[2]}</h2>
+                    <h2><b>Property title:</b>&nbsp;{hosting[2]}</h2>
                     <h2><button onClick={
                         () => {
                             const data = {
@@ -76,10 +78,10 @@ const CurrentHostings = () => {
                                     window.location = "/user_profile";
                                 })
                         }
-                    }>Renter name:{hosting[1]}</button></h2>
-                    <h2>Start date:{hosting[3]}</h2>
-                    <h2>End date:{hosting[4]}</h2>
-                    <h2>Price:{hosting[5]}</h2>
+                    }><b>Renter:</b>&nbsp;{hosting[1]}</button></h2>
+                    <h2><b>Start date:</b>&nbsp;{hosting[3]}</h2>
+                    <h2><b>End date:</b>&nbsp;{hosting[4]}</h2>
+                    <h2><b>Price:</b>&nbsp;{hosting[5]}</h2>
                     <br />
                     <button className="btn btn-primary" onClick={
                                     () => {
@@ -101,13 +103,25 @@ const CurrentHostings = () => {
                                     }
                                 }>Complain</button>
                                 <br />
-                                <input type="text" id={inputArray[idx]} style={inputStyle} placeholder="Enter complain" onChange={
+
+                                <div class="row align-items-center">
+
+                  
+                                    <div class="col-lg-1">
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                <textarea type="text" id={inputArray[idx]} style={{width:"500px",height:"200px",backgroundColor:"#e5e4e2"}} placeholder="Enter complain" onChange={
                                     (e) => {
                                         setComplaint(e.target.value);
                                     }
                                 } />
                                 <br />
-                                <button className="btn btn-primary" id={btn_array[idx]} style={{display:"none"}} onClick={
+                                <div class="col-lg-2">
+                                        </div>
+                             
+
+                                <button className="btn btn-primary" id={btn_array[idx]} style={{float:"right"}} onClick={
                                     () => {
                                         console.log(complaint);
                                         const complain={
@@ -127,6 +141,11 @@ const CurrentHostings = () => {
                                         })
                                     }
                                 } >Send</button>
+                                </div>
+
+<div class="col-lg-3">
+    </div>
+</div>
                 </div>
             ))}
 

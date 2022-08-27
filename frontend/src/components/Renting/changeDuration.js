@@ -126,18 +126,24 @@ const ChangeDuration = () => {
             })
     }
     return(
-        <div>
+        <div class="bg-light">
             <NavbarHomepage />
-            <h1>Select new end date:</h1>
+            <br/>
+            <br/>
+            <br/>
+            <div>
+            <h1><b>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+            &emsp;&emsp;&emsp;&emsp;&emsp;
+                Select new end date:</b></h1>
             <br />
                 <br />
+                <div class="row align-items-center">
+                <div class="col-lg-4">
+                    </div>
+                  
+                                    <div class="col-lg-4">
             <form>
                 
-            
-                
-                
-
-                <h1>End Date:</h1>
                 <Calendar
                 tileDisabled={tileDisabled}
                 value={end_date}
@@ -148,8 +154,13 @@ const ChangeDuration = () => {
                 
                 <br />
                 <br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                 <button className="btn btn-primary" onClick={handleSubmit}>Submit</button>
             </form>
+            </div>
+            </div>
+            
+            </div>
         </div>
     )
 }
