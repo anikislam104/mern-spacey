@@ -95,7 +95,7 @@ const SelectedProperty = () => {
                     <div class="col-lg-2">
 
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                     <br/>
                     <br/>
                 <h1 class="display-6" style={myStyle.textSection}><b>{property.title}</b></h1>
@@ -114,10 +114,20 @@ const SelectedProperty = () => {
                         window.location = '/user_profile';
                     }
                 }><i>{host_name}</i></button></h1>
-                </div>
-                <div class="col-lg-1">
+                <br/><br/>
+                <div style={{textAlign:"center"}}>
+                 <button
+                  className="btn btn-primary"
+                  onClick={() => {
+    
+                    navigate("/chat");
+                  }}
+                >
+                  Chat With Host
+                </button></div>
 
                 </div>
+           
                 <div class="col-lg-6">
                     <br/><br/><br/>
                 <img src={process.env.PUBLIC_URL+"/images/"+image} alt="..." 
@@ -127,31 +137,22 @@ const SelectedProperty = () => {
                 </div>
 
 
-                <button
-                  className="btn btn-primary"
-                  onClick={() => {
-    
-                    navigate("/chat");
-                  }}
-                >
-                  Chat With Host
-                </button>
-
-
                 <br></br>
                 <br></br>
-                <br/>
-                <p class="fs-4"><h1><b>&emsp;&emsp;Description:</b> <p>{property.description}</p></h1></p>
-                <br/><br/>
+                <br/><br/><br/>
+                <h1 class="fs-4" style={{fontFamily:"Merriweather"}}>&emsp;&emsp;
+                {property.description}</h1>
+                <br/><br/><br/><br/><br/><br/><br/>
 
                 
                 <div class="row align-items-center">
-                <div class="col-lg-1">
+                <div class="col-lg-2">
 
-                </div>
-                    <div class="col-lg-4">
-
-                    <p class="fs-4"><h1 style={{textAlign:"center"}}><strong >Rooms:</strong></h1></p>
+</div>
+                    <div class="col-lg-3">
+                    <div className="card mb-4 box-shadow" style={{width:"330px", height:"300px",backgroundColor:"white",textAlign:"center"}}>
+                        <br/><br/><br/>
+                    <p class="fs-4"><h1><strong >Rooms:</strong></h1></p>
                 <br/>
                 {rooms.map((room) => {
                     return (
@@ -163,14 +164,18 @@ const SelectedProperty = () => {
                             </div>
                     )
                 }
-                )}
+                )}</div>
+                
                 </div>
                 <div class="col-lg-2">
 
                 </div>
                 
                 <div class="col-lg-4">
-                <p class="fs-4"><h1 style={{textAlign:"center"}}><strong>Facilities:</strong></h1></p>
+
+                <div className="card mb-4 box-shadow" style={{width:"330px", height:"300px",backgroundColor:"white",textAlign:"center"}}>
+                    <br/><br/><br/>
+                <p class="fs-4"><h1><strong>Facilities:</strong></h1></p>
                 <br/>
                 {facilities.map((facility) => {
                     return (
@@ -181,73 +186,76 @@ const SelectedProperty = () => {
                             </div>
                     )
                 }
-                )}
+                )}</div>
+    
+
                  </div>
                </div>
 
                 {/* //design button */}
                 <br />
                 <br />
-
                 
-
+                <br />
+                <br />
+                
                 <div class="row align-items-center">
 
-            <div class="col-lg-10">
-                &emsp;&emsp;
+<div class="col-lg-10">
+    &emsp;&emsp;
 
-                <button className="btn btn-primary" onClick={
-                    () => {
-                        // this.sendRentalRequest(property);
-                        const info = {
-                            property_id: property._id,
-                            user_id: localStorage.getItem('user_id'),
-                        }
-                        axios.post('http://localhost:5000/renting/check_if_mine', info)
-                            .then(res => {
-                                console.log(res.data);
-                                if(res.data === 'yes'){
-                                    alert("You cannot book your own property");
-                                }
-                                else{
-                                    window.location.href = '/renting/choose_facility';
-                                }
-
-                            })
-                        
+    <button className="btn btn-primary" onClick={
+        () => {
+            // this.sendRentalRequest(property);
+            const info = {
+                property_id: property._id,
+                user_id: localStorage.getItem('user_id'),
+            }
+            axios.post('http://localhost:5000/renting/check_if_mine', info)
+                .then(res => {
+                    console.log(res.data);
+                    if(res.data === 'yes'){
+                        alert("You cannot book your own property");
                     }
-                }>Book</button>
-</div>
+                    else{
+                        window.location.href = '/renting/choose_facility';
+                    }
+
+                })
             
-              
-                <br />
-                <br />
-                <div class="col-lg-2">
-                <button className="btn btn-primary" onClick={
-                    () => {
-                        //show retrav if hidden
-                        if(document.getElementById('revrat').style.display === 'none'){
-                            document.getElementById('revrat').style.display = 'block';
-                        }
-                        else{
-                            document.getElementById('revrat').style.display = 'none';
-                        }
-                    }
-                }>See Reviews</button>
-                </div>
-                </div>
-                <br />
-                <br />
+        }
+    }>Book</button>
+</div>
+
+  
+    <br />
+    <br />
+    <div class="col-lg-2">
+    <button className="btn btn-primary" onClick={
+        () => {
+            //show retrav if hidden
+            if(document.getElementById('revrat').style.display === 'none'){
+                document.getElementById('revrat').style.display = 'block';
+            }
+            else{
+                document.getElementById('revrat').style.display = 'none';
+            }
+        }
+    }>See Reviews</button>
+    </div>
+    </div>
+    <br/><br/>
+                
                 <div  id="revrat" style={{display:"none"}}>
                 <p class="fs-4"><h1><strong>Reviews:</strong></h1></p>
                 <br/>
                 {review_ratings.map((review_rating) => {
                     return (
                         
-                        <div className="card mb-5 box-shadow" style={{width:"550px", height:"90px",backgroundColor:"white"}}>
+                        <div className="card mb-5 box-shadow align-items-center" style={{width:"1270px", height:"90px",backgroundColor:"white"}}>
                             <p>
-                            <h1 style={style}>&emsp;&emsp;&emsp;&emsp;&emsp;Rating: <b>{review_rating[1]}*</b></h1>
-                            <p><h1 style={{fontSize:"20px"}}>&emsp;&emsp;&emsp;&emsp;<i>"{review_rating[2]}"</i></h1></p>
+                            <h1 style={style}>Rating: <b>{review_rating[1]}*</b></h1>
+                            <p><h1 style={{fontSize:"20px"}}><i>"{review_rating[2]}"</i></h1></p>
                             <h1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;---<b>{review_rating[0]}</b></h1>
                             </p>
                             <br></br>
@@ -255,6 +263,9 @@ const SelectedProperty = () => {
                     )
                 })}
                 </div>
+
+
+
             </div>
         </div>
     )
