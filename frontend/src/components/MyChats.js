@@ -7,7 +7,7 @@ import ChatLoading from './ChatLoading';
 
 const MyChats = ({ fetchAgain }) => {
   const [loggedUser, setLoggedUser] = useState();
-  const { selectedChat, setSelectedChat, user, chats, setChats } = ChatState();
+  const { selectedChat, setSelectedChat, user, chats, setChats, hostId } = ChatState();
     
   const fetchChats = async () => {
     try {
@@ -37,9 +37,8 @@ const MyChats = ({ fetchAgain }) => {
   useEffect(() => {
     setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
     fetchChats();
-    
     // eslint-disable-next-line
-  }, [fetchAgain]);
+  }, []);//[fetchAgain]
   
   return (
     <>
