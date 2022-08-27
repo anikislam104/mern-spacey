@@ -20,20 +20,6 @@ const ExtendNotification = () => {
     }, []);
 
     //css styling for request info
-    const style = {
-        margin: "10px",
-        padding: "10px",
-        border: "1px solid black",
-        borderRadius: "4px",
-        boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.75)",
-        backgroundColor: "#f5f5f5",
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        alignItems: "center"
-    };
 
     //css styling for buttons small and beauitful
     const styleForButtons = {
@@ -82,6 +68,29 @@ const ExtendNotification = () => {
         
     }
 
+    const fontStyle={
+        //font color blue and bold
+        color: "black",
+        fontWeight: "normal",
+        fontSize:"18px",
+    }
+
+    const box={
+        width: "100%",
+        height: "100%",
+        backgroundColor: "white",
+        borderRadius: "10px",
+        boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.1)",
+        padding: "20px",
+        marginBottom: "20px",
+        //align in center
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+
+    }
+
     return (
         <div class="bg-light">
         <NavbarHomepage />
@@ -91,14 +100,30 @@ const ExtendNotification = () => {
                 <div className="container">
                     <div className="extendRequest">
                         {extendRequest.map((extendRequest) => {
+                           
+                            let db = new Date(extendRequest[3]);
+                const year=db.getFullYear();
+                const day=db.getDate();
+                const name = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+                const month=name[db.getMonth()];
+                db=new Date(extendRequest[4]);
+                const year2=db.getFullYear();
+                const day2=db.getDate();
+                const month2=name[db.getMonth()];
+                db=new Date(extendRequest[5]);
+                const year3=db.getFullYear();
+                const day3=db.getDate();
+                const month3=name[db.getMonth()];
                             return (
-                                <div style={style}>
-                                    <h2><b>Property title: </b>{extendRequest[2]}</h2>
-                                    <p><b>Host name: </b>{extendRequest[1]}</p>
-                                    <p><b>Start date: </b>{extendRequest[3]}</p>
-                                    <p><b>End date: </b>{extendRequest[4]}</p>
-                                    <p><b>Requested end date: </b>{extendRequest[5]}</p>
+                                <div style={box}>
+                                    <h2 style={fontStyle}><b>Property title: </b>{extendRequest[2]}</h2>
+                                    <h2 style={fontStyle}><b>Renter: </b>{extendRequest[1]}</h2>
+                                    <h2 style={fontStyle}><b>&nbsp;Start date: </b>{month} {day},{year}</h2>
+                                <h2 style={fontStyle}><b>&nbsp;End date: </b>{month2} {day2},{year2}</h2>
+                                    <h2 style={fontStyle}><b>Requested end date: </b>{month3} {day3},{year3}</h2>
                                     <br />
+
+                                    
 
                                     
                                     <button className="btn btn-primary" style={styleForButtons} onClick={

@@ -35,10 +35,11 @@ const CurrentBookings = () => {
         btn_array[i] = i+total;
     }
     console.log(inputArray);
-    const link={
+    const fontStyle={
         //font color blue and bold
-        color: "blue",
-        fontWeight: "bold",
+        color: "black",
+        fontWeight: "normal",
+        fontSize:"18px",
     }
     const style = {
         backgroundColor: "white",
@@ -94,6 +95,16 @@ const CurrentBookings = () => {
                 <div>
                     {bookings.map((booking,idx) => {
                         var image=booking[7];
+                        let db = new Date(booking[3]);
+            const year=db.getFullYear();
+            const day=db.getDate();
+            const name = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+            const month=name[db.getMonth()];
+            db=new Date(booking[4]);
+            const year2=db.getFullYear();
+            const day2=db.getDate();
+            const month2=name[db.getMonth()];
+
                         return (
                             <div style={style}>
                                 <br/>
@@ -107,8 +118,8 @@ const CurrentBookings = () => {
                                         //console.log(localStorage.getItem("selected_property_id"));
                                         window.location.href = "/renting/selected_property";
                                     }
-                                }><h2 style={link}><b>&nbsp;Property: </b>{booking[2]}</h2></button>
-                                <p style={link}><button onClick={
+                                }><h2 style={fontStyle}><b>&nbsp;Property: </b>{booking[2]}</h2></button>
+                                <h2 style={fontStyle}><button onClick={
                                     () => {
                                         const data={
                                             booking_id:booking[0],
@@ -121,10 +132,10 @@ const CurrentBookings = () => {
                                                 window.location = "/user_profile";
                                 })
                                     }
-                                }><b>&nbsp;Host: </b>{booking[1]}</button></p>
-                                <p><b>&nbsp;Start date: </b>{booking[3]}</p>
-                                <p><b>&nbsp;End date: </b>{booking[4]}</p>
-                                <p><b>&nbsp;Price: </b>{booking[5]}</p>
+                                }><b>&nbsp;Host: </b>{booking[1]}</button></h2>
+                                <h2 style={fontStyle}><b>&nbsp;Start date: </b>{month} {day},{year}</h2>
+                                <h2 style={fontStyle}><b>&nbsp;End date: </b>{month2} {day2},{year2}</h2>
+                                <h2 style={fontStyle}><b>&nbsp;Price: </b>{booking[5]}</h2>
                                 <br />
                                 </div>
 
@@ -179,7 +190,7 @@ const CurrentBookings = () => {
                                 </div>
                                 <br />
                                 <br />
-                                <div class="col-lg-3">
+                                <div class="col-lg-2">
                                 <button className="btn btn-primary" onClick={
                                     () => {
                                         axios.post("http://localhost:5000/renting/get_time",{booking_id:booking[0]})
@@ -201,7 +212,7 @@ const CurrentBookings = () => {
                                 </div>
                                 <br />
                                 <br />
-                                <div class="col-lg-2">
+                                <div class="col-lg-2" style={{textAlign:"center"}}>
                                 <button className="btn btn-primary" onClick={
                                     () => {
                                         //show input box if hidden and vice versa

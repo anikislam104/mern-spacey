@@ -86,6 +86,13 @@ const SelectedProperty = () => {
         marginTop: "10px",
     };
 
+    const fontStyle={
+        //font color blue and bold
+        color: "black",
+        fontWeight: "normal",
+        fontSize:"19px",
+    }
+
     var image=property.image;
     return (
         <div class="bg-light">
@@ -98,22 +105,22 @@ const SelectedProperty = () => {
                     <div class="col-lg-4">
                     <br/>
                     <br/>
-                <h1 class="display-6" style={myStyle.textSection}><b>{property.title}</b></h1>
+                <h2 class="display-6" style={myStyle.textSection}><b>{property.title}</b></h2>
                 <br/>
-                <h1><b>Location:</b> {property.location}</h1>
+                <h2 style={fontStyle}><b>Location:</b> {property.location}</h2>
                 <br/>
-                <h1><b>Size:</b> {property.size} square ft</h1>
+                <h2 style={fontStyle}><b>Size:</b> {property.size} square ft</h2>
                 <br/>
-                <h1><b>Price Per Day:</b> {property.pricePerDay} tk</h1>
+                <h2 style={fontStyle}><b>Price Per Day: </b>{property.pricePerDay} tk</h2>
                 <br/>
                 
                 {/* {this.getUsername(property.hostId)} */}
-                <h1><b>Host:</b> <button onClick={
+                <h2 style={fontStyle}><b>Host:</b> <button onClick={
                     () => {
                         localStorage.setItem("clicked_user_id",property.hostId);
                         window.location = '/user_profile';
                     }
-                }><i>{host_name}</i></button></h1>
+                }>{host_name}</button></h2>
                 <br/><br/>
                 <div style={{textAlign:"left"}}>
                  <button
@@ -160,15 +167,15 @@ const SelectedProperty = () => {
                     <div class="col-lg-3">
                     <div className="card mb-4 box-shadow" style={{width:"330px", height:"300px",backgroundColor:"#e0ffff",textAlign:"center"}}>
                         <br/><br/><br/>
-                    <p class="fs-4"><h1><strong >Rooms:</strong></h1></p>
+                    <p class="fs-4"><h1><strong >Rooms</strong></h1></p>
                 <br/>
                 {rooms.map((room) => {
                     return (
                         <div style={{textAlign:"center"}}>
 
-                            <ul style={{display:"inline-block",textAlign:"center"}}>
-                            <li><h1>{room.roomType} <b>{room.roomNo}</b></h1></li>
-                            </ul>
+                            
+                            <h1>{room.roomType} <b>{room.roomNo}</b></h1>
+                            
                             </div>
                     )
                 }
@@ -183,14 +190,14 @@ const SelectedProperty = () => {
 
                 <div className="card mb-4 box-shadow" style={{width:"330px", height:"300px",backgroundColor:"#e0ffff",textAlign:"center"}}>
                     <br/><br/><br/>
-                <p class="fs-4"><h1><strong>Facilities:</strong></h1></p>
+                <p class="fs-4"><h1><strong>Facilities</strong></h1></p>
                 <br/>
                 {facilities.map((facility) => {
                     return (
                         <div style={{textAlign:"center"}}>
-                            <ul style={{display:"inline-block",textAlign:"center"}}>
-                            <li><h1>{facility.facilityType}</h1></li>
-                            </ul>
+                            
+                            <h1>{facility.facilityType}</h1>
+                            
                             </div>
                     )
                 }
@@ -255,7 +262,7 @@ const SelectedProperty = () => {
     <br/><br/>
                 
                 <div  id="revrat" style={{display:"none"}}>
-                <p class="fs-4"><h1><strong>Reviews:</strong></h1></p>
+                <p class="fs-4"><h1><strong>Reviews</strong></h1></p>
                 <br/>
                 {review_ratings.map((review_rating) => {
                     return (

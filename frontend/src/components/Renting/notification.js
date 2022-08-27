@@ -3,7 +3,7 @@ import React,{ Component } from "react";
 import NavbarHomepage from "../navbar_homepage";
 
 const style ={
-        backgroundColor: "#f5f5f5",
+        backgroundColor: "white",
         border: "1px solid #ddd",
         borderRadius: "4px",
         padding: "10px",
@@ -11,7 +11,7 @@ const style ={
         marginTop: "10px",
         marginLeft: "10px",
         marginRight: "10px",
-        boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.75)"
+        boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.1)",
 };
 
 export default class RentRequestNotification extends Component {
@@ -69,8 +69,25 @@ export default class RentRequestNotification extends Component {
     }
 
     showRentRequest(){
+
+        const fontStyle={
+            //font color blue and bold
+            color: "black",
+            fontWeight: "normal",
+            fontSize:"18px",
+        }
+
         console.log(this.state.rent_request);
         return this.state.rent_request.map((request) => {
+            let db = new Date(request.start_date);
+            const year=db.getFullYear();
+            const day=db.getDate();
+            const name = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+            const month=name[db.getMonth()];
+            db=new Date(request.end_date);
+            const year2=db.getFullYear();
+            const day2=db.getDate();
+            const month2=name[db.getMonth()];
             return (
                 <div style={style}>
 
@@ -80,20 +97,20 @@ export default class RentRequestNotification extends Component {
                   
                     <div class="col-lg-9">
                     <br/>
-                    <h1><b>&emsp;Property:</b>&nbsp; {request.property_title}</h1>
-                    <h1><button onClick={
+                    <h2 style={fontStyle}><b>&emsp;&emsp;Property: </b>{request.property_title}</h2>
+                    <h2 style={fontStyle}><button onClick={
                         () => {
                             localStorage.setItem('clicked_user_id', request.renter_id);
                             window.location.href = "/user_profile";
                         }
-                    }><b>&emsp;Requester:</b> &nbsp;{request.renter_name}</button></h1>
-                    <h1><b>&emsp;Start date:</b>&nbsp;{request.start_date}</h1>
-                    <h1><b>&emsp;End date:</b>&nbsp;{request.end_date}</h1>
+                    }><b>&emsp;&emsp;Requester:</b>{request.renter_name}</button></h2>
+                    <h2 style={fontStyle}><b>&emsp;&emsp;Start date: </b>{month} {day},{year}</h2>
+                    <h2 style={fontStyle}><b>&emsp;&emsp;End date: </b>{month2} {day2},{year2}</h2>
                     <br/>
                     </div>
 
                 <div class="col-lg-3">
-                    <button class="button" onClick={
+                    <button className="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" onClick={
                         () => {
                             this.acceptRequest(request._id);
                         }
@@ -102,7 +119,7 @@ export default class RentRequestNotification extends Component {
                     <br />
                     <br />
 
-                    <button class="button" onClick={
+                    <button className="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" onClick={
                         () => {
                             this.rejectRequest(request._id);
                         }
