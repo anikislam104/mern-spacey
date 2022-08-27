@@ -123,15 +123,22 @@ export default class ShowBlog extends Component {
                     <br/><br/>
                     <p><h1 class="card-subtitle text-muted"><i>&emsp;Posted on {month} {day},{year}</i></h1></p>
                     <br/><br/>
-                    <p><h1>&nbsp;{blog.content}</h1></p>
-                    <br />
-                    <br />
-                    <br />
+
+                    <div class="row align-items-center">
+                <div class="col-lg-0"></div>
+
+                <div class="col-lg-8">
+                    <h2 class="fs-4" style={{fontFamily:"Merriweather"}}>{blog.content}</h2>
+                    </div>
+                <div class="col-lg-3"></div>
+                </div>
+
+                <br/><br/><br/><br/><br/><br/><br/>
 
             <div class="row align-items-center">
                 {/* button for upvote */}
                 <div class="col-lg-4">
-                <button  type='submit' id="upvote" class="button" onClick={
+                <button className="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" type='submit' id="upvote" onClick={
                     (e) => {
                         const upvote = {
                             blog_id: blog._id,
@@ -155,7 +162,7 @@ export default class ShowBlog extends Component {
                 } >Upvote</button>&emsp;<b>{blog.like_count}</b> upvotes
                </div>
                <div class="col-lg-4">
-                <button type='submit' class="button"  onClick={
+                <button type='submit' className="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off"  onClick={
                     (e) => {
                         const downvote = {
                             blog_id: blog._id,
@@ -186,7 +193,7 @@ export default class ShowBlog extends Component {
                 <br/><br/><br/><br/><br/><br/><br/>
                 <textarea id="inputComment" type="text" placeholder="write comment" required="" value={this.state.Comment} onChange={this.comment} class="form-control  border-0 shadow-sm px-4 text-primary" style={myStyle.experienceSection} />
                 <br/>
-                <Link to='../blog/showBlog'><button type='submit' class="button" onClick={
+                <Link to='../blog/showBlog'><button type='submit' className="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" onClick={
                     (e) => {
                         const comment = {
                             blog_id: blog._id,
@@ -222,12 +229,13 @@ export default class ShowBlog extends Component {
                 <br />
                 <br />
                 <br/><br/>
-                <p><h1><b>Comments:</b></h1></p>
+                <p class="fs-4"><h1><strong>Comments</strong></h1></p>
                 <br/>
                {blog.comments.map((comment) => {
                     return(
-                        <div>
-                            <p>&emsp;{comment.comment}</p>
+                        <div className="card mb-5 box-shadow" style={{width:"1300px", height:"90px",backgroundColor:"white"}}>
+                            <br/>
+                            <p><h1 style={{fontSize:"20px"}}><i>&emsp;&emsp;&emsp;&emsp;&emsp;"{comment.comment}"</i></h1></p>
                             <br/>
                         </div>
                     )
