@@ -16,8 +16,7 @@ export default class AddBusinessStorage extends Component {
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangeSize = this.onChangeSize.bind(this);
     this.onChangePricePerDay = this.onChangePricePerDay.bind(this);
-    this.onChangeRoomType = this.onChangeRoomType.bind(this);
-    this.onChangeRoomNo = this.onChangeRoomNo.bind(this);
+    
     this.onChangeFacility = this.onChangeFacility.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.handleClick1 = this.handleClick1.bind(this);
@@ -35,9 +34,6 @@ export default class AddBusinessStorage extends Component {
       description: '',
       size: '',
       pricePerDay: '',
-      roomType: '',
-      roomNo: '0',
-      rooms: [],
       facility: '',
       facilities: [],
       image: null,
@@ -175,14 +171,13 @@ export default class AddBusinessStorage extends Component {
     formData.append('description', this.state.description);
     formData.append('size', this.state.size);
     formData.append('pricePerDay', this.state.pricePerDay);
-    formData.append('rooms', this.state.rooms);
     formData.append('facilities', this.state.facilities);
 
 
 
     // console.log(property);
 
-    axios.post('http://localhost:5000/property/add', formData)
+    axios.post('http://localhost:5000/property/addBusinessStorage', formData)
       .then(res => {
         console.log(res.data);
         window.location = '/hosting';
@@ -305,34 +300,11 @@ export default class AddBusinessStorage extends Component {
                           <input id="inputPricePerDay" type="pricePerDay" required="" value={this.state.pricePerDay} onChange={this.onChangePricePerDay} class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" />
                         </div>
                         <br/>
-                        <div class="form-group sm-2">
-                          <label><b>Room Type </b></label><br/>
-                          <input id="inputRoomType" type="roomType" required="" style={{width: "350px", height: "35px",}} value={this.state.roomType} onChange={this.onChangeRoomType} class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" />
-                          <br/>
-                        </div>
                         
-                        <div class="row align-items-center">  
-                          <div class="col-lg-9">
-                              <div class="row">
-                                    <div class="col-lg-3"><button type="button" class="rounded-pill px-3" onClick={this.onChangeIncrement} style={myStyle.buttonSection3}>+</button></div>
-                                    <div class="col-lg-4"><input id="inputRoomNo" type="roomNo" required="" style={myStyle.inputSection2} value={this.state.roomNo} class="form-control" /></div>
-                                    <div class="col-lg-3"><button type="button" class="rounded-pill px-3" onClick={this.onChangeDecrement} style={myStyle.buttonSection3}>-</button></div>
-                               </div>
-                          </div>
-                          <br/>
-                          <div class="col-lg-3">
-                            <br />
-                            <button type="button" onClick={this.handleClick1} style={myStyle.buttonSection2}>Add Room</button>
-                          </div>
-                        </div> 
+                        
+                        
                           
-                          <div>
-                            <ul>
-                              {this.state.rooms.map(item => {
-                                return <li>{item[0]} {item[1]}</li>;
-                              })}
-                            </ul>
-                          </div>
+                          
                         
 
                         

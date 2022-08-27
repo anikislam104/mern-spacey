@@ -52,6 +52,7 @@ router.route("/add").post(upload.single("image"), async (req, res) => {
     status,
     pricePerDay,
     image,
+    type: "personal",
   });
 
   console.log(newProperty);
@@ -114,6 +115,95 @@ router.route("/add").post(upload.single("image"), async (req, res) => {
     //.then(() => res.send('room added'))
     //.catch(err => res.status(400).json('Error: ' + err));
   }
+
+  //calculate number of commas in facilities string
+  var idx = 0;
+  for (let i = 0; i < facilities.length; i++) {
+    if (facilities[i] == ",") {
+      idx++;
+    }
+  }
+
+  //facility array size is the number of commas + 1
+  let facility_array = [];
+  facility_array.length = idx + 1;
+  //initialize facility array
+  for (let i = 0; i < facility_array.length; i++) {
+    facility_array[i] = "";
+  }
+  idx = 0;
+  for (let i = 0; i < facilities.length; i++) {
+    //add into facility_array[idx] until , comes
+    if (facilities[i] != ",") {
+      facility_array[idx] += facilities[i];
+    }
+    //if , comes, then skip , and add next char into next array element
+    else {
+      idx++;
+    }
+  }
+  console.log(facility_array);
+
+  for (let i = 0; i < facility_array.length; i++) {
+    const propertyId = newProperty._id;
+    const facilityType = facility_array[i];
+    const newFacility = new Facility({
+      propertyId,
+      facilityType,
+    });
+    await newFacility.save();
+    //.then(() => res.send('facility added'))
+    //.catch(err => res.status(400).json('Error: ' + err));
+  }
+
+  res.send("property added");
+  return;
+});
+
+
+router.route("/addBusinessStorage").post(upload.single("image"), async (req, res) => {
+  const hostId = req.body.host_id;
+  const title = req.body.title;
+  const location = req.body.location;
+  const description = req.body.description;
+  const size = req.body.size;
+  const status = "Unoccupied";
+  const pricePerDay = req.body.pricePerDay;
+  const rooms = req.body.rooms;
+  const facilities = req.body.facilities;
+  const image = req.file.originalname;
+  const allProperties = await Property.find();
+
+  console.log(rooms);
+
+  const newProperty = new Property({
+    hostId,
+    title,
+    location,
+    description,
+    size,
+    status,
+    pricePerDay,
+    image,
+    type: "business",
+  });
+
+  console.log(newProperty);
+
+  await newProperty.save();
+  //.then(() => res.send('property added'))
+  //.catch(err => res.status(400).json('Error: ' + err));
+
+  for (let i = 0; i < allProperties.length; i++) {
+    current_property_id = allProperties[i]._id;
+  }
+
+  console.log(current_property_id);
+
+  
+  
+
+ 
 
   //calculate number of commas in facilities string
   var idx = 0;
@@ -334,5 +424,24 @@ router.route("/get_rec").get(
     res.send(similar_properties);
   })
 );
+
+//get all personal properties
+router.route("/get_personal_properties").post(async (req, res) => {
+  const user_id = req.body.user_id;
+  //find properties of which host id is not user id and type is personal
+  Property.find({ hostId: { $ne: user_id }, type: "personal" }).then((properties) => {
+    res.send(properties);
+  })
+
+});
+
+//get all business properties
+router.route("/get_business_properties").post((req, res) => {
+  const user_id = req.body.user_id;
+  //find properties of which host id is not user id and type is business
+  Property.find({ hostId: { $ne: user_id }, type: "business" }).then((properties) => {
+    res.send(properties);
+  })
+});
 
 module.exports = router;

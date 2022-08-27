@@ -1,6 +1,6 @@
 import { useToast } from "@chakra-ui/react";
 import axios from "axios";
-import React, { Component, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { ChatState } from "../Context/ChatProvider";
 // import axios from 'axios';
 import NavbarHomepage from "./navbar_homepage";
@@ -15,6 +15,8 @@ const Homepage = () => {
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
   const [recommendedProperties, setRecommendedProperties] = useState([]);
+  const [personal_properties, setPersonalProperties] = useState([]);
+  const [business_properties, setBusinessProperties] = useState([]);
 
   const { user } = ChatState();
   const toast = useToast();
@@ -47,6 +49,21 @@ const Homepage = () => {
   useEffect(() => {
     getRecommendedProperties();
     console.log("updated");
+    const id ={
+      user_id: localStorage.getItem("user_id"),
+    }
+    axios.post('http://localhost:5000/property/get_personal_properties', id)
+    .then(res => { 
+      console.log(res.data);
+      setPersonalProperties(res.data);
+
+      axios.post('http://localhost:5000/property/get_business_properties', id)
+      .then(res => {
+        console.log(res.data);
+        setBusinessProperties(res.data);
+      })
+    })
+
   } , []);
 
   const handleSearch = async () => {
@@ -74,14 +91,14 @@ const Homepage = () => {
       setSearchResult(data);
       console.log(searchResult);
     } catch (error) {
-      toast({
-        title: "Error Occured!",
-        description: "Failed to Load the Search Results",
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-        position: "bottom-left",
-      });
+      // toast({
+      //   title: "Error Occured!",
+      //   description: "Failed to Load the Search Results",
+      //   status: "error",
+      //   duration: 5000,
+      //   isClosable: true,
+      //   position: "bottom-left",
+      // });
     }
   };
 
@@ -245,6 +262,88 @@ const Homepage = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div>
+        <button className="btn btn-primary" onClick={
+          () => {
+            document.getElementById("personal").style.display = "block";
+            document.getElementById("business").style.display = "none";
+          }
+        }>Personal Property</button>
+        &nbsp;&nbsp;&nbsp;
+        <button className="btn btn-primary" onClick={
+          () => {
+            document.getElementById("personal").style.display = "none";
+            document.getElementById("business").style.display = "block";
+          }
+        }>Business Storage</button>
+        <div id="personal" style={{display:"none"}}>
+          {/* loop through the personal properties and show them */}
+          {personal_properties.map((property) => {
+            return (
+              <div className="col-md-4">
+              <div className="card mb-4 box-shadow">
+                <div className="card-body">
+                  <p className="card-text">{property.title}</p>
+                  <p className="card-text">{property.location}</p>
+                  <div className="d-flex justify-content-between align-items-center">
+                    <div className="btn-group">
+                      <button
+                        type="button"
+                        className="btn btn-sm btn-outline-secondary"
+                        onClick={() => {
+                          setSelectedProperty(property);
+                          sendSelectedProperty();
+                        }}
+                      >
+                        View
+                      </button>
+                    </div>
+                    <small className="text-muted">{property.size} square ft</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+              );
+          }
+          )}
+                      
+
+        </div>
+        <div id="business" style={{display:"none"}}>
+          {/* loop through the personal properties and show them */}
+          {business_properties.map((property) => {
+            return (
+              <div className="col-md-4">
+              <div className="card mb-4 box-shadow">
+                <div className="card-body">
+                  <p className="card-text">{property.title}</p>
+                  <p className="card-text">{property.location}</p>
+                  <div className="d-flex justify-content-between align-items-center">
+                    <div className="btn-group">
+                      <button
+                        type="button"
+                        className="btn btn-sm btn-outline-secondary"
+                        onClick={() => {
+                          setSelectedProperty(property);
+                          sendSelectedProperty();
+                        }}
+                      >
+                        View
+                      </button>
+                    </div>
+                    <small className="text-muted">{property.size} square ft</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+              );
+          }
+          )}
+                      
+
+        </div>
+              
       </div>
     </div>
   );
