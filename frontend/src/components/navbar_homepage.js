@@ -99,6 +99,9 @@ const NavbarHomepage = () => {
                     <NavDropdown.Item href={'/chat'}>
                     Chat
                     </NavDropdown.Item>
+                    <NavDropdown.Item href={'/view_complaints'}>
+                    Complaints
+                    </NavDropdown.Item>
                     <NavDropdown.Item href={'/logout'}>
                     Log out
                     </NavDropdown.Item>

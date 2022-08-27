@@ -119,7 +119,7 @@ router.route('/accept_rent_request').post(async (req, res) =>
     
     const property = await Property.findById(rent_request.property_id);
     const pricePerDay = property.pricePerDay;
-    const price = days * pricePerDay;
+    const price = days * pricePerDay + pricePerDay;
     const newBooking = new Booking({
         host_id: rent_request.host_id,
         renter_id: rent_request.renter_id,
@@ -712,6 +712,7 @@ router.route('/set_renter_complaint').post(async (req, res) =>{
         complainant_id: renter_id,
         complainee_id: host_id,
         complaint: complaint,
+        date: new Date(),
     });
     await newComplaint.save();
 
@@ -719,7 +720,7 @@ router.route('/set_renter_complaint').post(async (req, res) =>{
     const newNotification = new Notification({
         user_id: host_id,
         message: "You have received a new complaint from a renter named " + renter_name + " for your property " + property_title,
-        type: "hosting",
+        type: "complaint",
     });
     await newNotification.save();
     res.send('ok');
@@ -748,6 +749,7 @@ router.route('/set_host_complaint').post(async (req, res) =>{
         complainant_id: host_id,
         complainee_id: renter_id,
         complaint: complaint,
+        date: new Date(),
     });
     await newComplaint.save();
 
@@ -755,7 +757,7 @@ router.route('/set_host_complaint').post(async (req, res) =>{
     const newNotification = new Notification({
         user_id: renter_id,
         message: "You have received a new complaint from a host named " + host_name + " for your booked property " + property_title,
-        type: "booking",
+        type: "complaint",
     });
     await newNotification.save();
     res.send('ok');
@@ -772,6 +774,57 @@ router.route('/get_renter_host_id').post(async (req, res) =>{
         host_id: host_id,
     }
     res.send(data);
+})
+
+//get all complaints where complainant id is user id
+router.route('/get_my_complaints').post(async (req, res) =>{
+    const user_id = req.body.user_id;
+    const complaints = await Complaint.find({complainant_id: user_id});
+    var my_complaints = [];
+    for(var i=0; i<complaints.length; i++){
+        const complainee_id = complaints[i].complainee_id;
+        const complainee = await User.findById(complainee_id);
+        var complainee_name = complainee.firstName + " " + complainee.lastName;
+
+        const booking = await Booking.findById(complaints[i].booking_id);
+        const property = await Property.findById(booking.property_id);
+
+        const property_title = property.title;
+        const property_id = property._id;
+
+        const complaint=complaints[i].complaint;
+        const date = complaints[i].date;
+
+        my_complaints.push({complainee_id: complainee_id, complainee_name: complainee_name, property_title: property_title, property_id: property_id, complaint: complaint, date: date});
+    }
+    res.send(my_complaints);
+})
+
+//get all complaints where complainee id is user id
+router.route('/get_my_complaints_received').post(async (req, res) =>{
+    const user_id = req.body.user_id;
+    const complaints = await Complaint.find({complainee_id: user_id});
+    var my_complaints = [];
+    // console.log(complaints.length);
+    for(var i=0; i<complaints.length; i++){
+        const complainant_id = complaints[i].complainant_id;
+        const complainant = await User.findById(complainant_id);
+        var complainant_name = complainant.firstName + " " + complainant.lastName;
+        // console.log(complaints[i].booking_id);
+        const booking = await Booking.findById(complaints[i].booking_id);
+        // console.log('booking');
+        // console.log(booking);
+        const property = await Property.findById(booking.property_id);
+
+        const property_title = property.title;
+        const property_id = property._id;
+
+        const complaint=complaints[i].complaint;
+        const date = complaints[i].date;
+
+        my_complaints.push({complainant_id: complainant_id, complainant_name: complainant_name, property_title: property_title, property_id: property_id, complaint: complaint, date: date});
+    }
+    res.send(my_complaints);
 })
 
 module.exports = router;

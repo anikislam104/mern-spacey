@@ -1,5 +1,5 @@
 import React from "react";
-import AdminNavbar from "./Authentication/adminNavbar";
+import AdminNavbar from "./adminNavbar";
 
 const AdminHomepage = () => {
     return (

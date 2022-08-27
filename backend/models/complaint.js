@@ -7,6 +7,7 @@ const complaintSchema = new Schema({
     complainant_id: { type: String, required: true },
     complainee_id: { type: String, required: true },
     complaint: { type: String, required: true }, 
+    date: { type: Date,default: new Date() },
 }, {
   timestamps: true,
 });
