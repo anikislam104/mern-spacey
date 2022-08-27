@@ -67,6 +67,21 @@ const CurrentBookings = () => {
         boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.75)",
     }*/
 
+    const box={
+        width: "100%",
+        height: "100%",
+        backgroundColor: "white",
+        borderRadius: "10px",
+        boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.1)",
+        padding: "20px",
+        marginBottom: "20px",
+        //align in center
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+
+    }
 
     return(
         <div class="bg-light">
@@ -74,8 +89,8 @@ const CurrentBookings = () => {
             <br/>
             <h1 class="display-6" style={{textAlign:"center"}}><b>Current Bookings</b></h1>
             <br/>
-            <div className="container">
-                <div className="bookings">
+        
+                <div>
                     {bookings.map((booking,idx) => {
                         return (
                             <div style={style}>
@@ -105,7 +120,7 @@ const CurrentBookings = () => {
                                 <p><b>&nbsp;Price: </b>{booking[5]}</p>
                                 <br />
 
-                                <div class="row align-items-center">
+                                <div class="row ">
 
                   
                                     <div class="col-lg-3">
@@ -199,7 +214,7 @@ const CurrentBookings = () => {
                                         </div>
 
                                         <div class="col-lg-6">
-                                <textarea type="text" id={inputArray[idx]} style={{width:"500px",height:"200px",backgroundColor:"#e5e4e2",display:"none"}}  placeholder="Enter complain" onChange={
+                                <textarea type="text" id={inputArray[idx]} style={{width:"500px",height:"200px",backgroundColor:"#e0ffff",display:"none"}}  placeholder="Enter complain" onChange={
                                     (e) => {
                                         setComplaint(e.target.value);
                                     }
@@ -249,7 +264,7 @@ const CurrentBookings = () => {
                     }
                     )}
                 </div>
-            </div>
+            
         </div>
     )
 }

@@ -150,7 +150,7 @@ const SelectedProperty = () => {
 
 </div>
                     <div class="col-lg-3">
-                    <div className="card mb-4 box-shadow" style={{width:"330px", height:"300px",backgroundColor:"white",textAlign:"center"}}>
+                    <div className="card mb-4 box-shadow" style={{width:"330px", height:"300px",backgroundColor:"#e0ffff",textAlign:"center"}}>
                         <br/><br/><br/>
                     <p class="fs-4"><h1><strong >Rooms:</strong></h1></p>
                 <br/>
@@ -173,7 +173,7 @@ const SelectedProperty = () => {
                 
                 <div class="col-lg-4">
 
-                <div className="card mb-4 box-shadow" style={{width:"330px", height:"300px",backgroundColor:"white",textAlign:"center"}}>
+                <div className="card mb-4 box-shadow" style={{width:"330px", height:"300px",backgroundColor:"#e0ffff",textAlign:"center"}}>
                     <br/><br/><br/>
                 <p class="fs-4"><h1><strong>Facilities:</strong></h1></p>
                 <br/>

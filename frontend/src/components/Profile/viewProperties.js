@@ -26,7 +26,7 @@ const ViewProperties = () => {
             return(
                 arr.push (
                     <div className="col-md-6">     
-                    <div className="card mb-4 box-shadow" style={{width:"330px", height:"300px",backgroundColor:"white",textAlign:"center"}}>
+                    <div className="card mb-4 box-shadow" style={{width:"330px", height:"300px",backgroundColor:"#e0ffff",textAlign:"center"}}>
                         <br/>
                         <br/>
                         <h1><b>{myProperty.title}</b></h1>
