@@ -115,7 +115,7 @@ const SelectedProperty = () => {
                     }
                 }><i>{host_name}</i></button></h1>
                 <br/><br/>
-                <div style={{textAlign:"center"}}>
+                <div style={{textAlign:"left"}}>
                  <button
                   className="btn btn-primary"
                   onClick={() => {
@@ -140,11 +140,19 @@ const SelectedProperty = () => {
                 <br></br>
                 <br></br>
                 <br/><br/><br/>
-                <h1 class="fs-4" style={{fontFamily:"Merriweather"}}>&emsp;&emsp;
+
+                <div class="row align-items-center">
+                <div class="col-lg-2"></div>
+
+                <div class="col-lg-8">
+                <h1 class="fs-4" style={{fontFamily:"Merriweather"}}>
                 {property.description}</h1>
+                </div>
+                <div class="col-lg-2"></div>
+                </div>
+
                 <br/><br/><br/><br/><br/><br/><br/>
 
-                
                 <div class="row align-items-center">
                 <div class="col-lg-2">
 

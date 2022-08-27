@@ -41,7 +41,7 @@ const CurrentBookings = () => {
         fontWeight: "bold",
     }
     const style = {
-        backgroundColor: "#f5f5f5",
+        backgroundColor: "white",
         border: "1px solid #ddd",
         borderRadius: "4px",
         padding: "12px",
@@ -49,7 +49,7 @@ const CurrentBookings = () => {
         marginTop: "10px",
         marginLeft: "10px",
         marginRight: "10px",
-        boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.75)"
+        boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.1)",
     };
 
     /*const inputStyle={
@@ -83,6 +83,7 @@ const CurrentBookings = () => {
 
     }
 
+    
     return(
         <div class="bg-light">
             <NavbarHomepage />
@@ -92,8 +93,14 @@ const CurrentBookings = () => {
         
                 <div>
                     {bookings.map((booking,idx) => {
+                        var image=booking[7];
                         return (
                             <div style={style}>
+                                <br/>
+                            <div class="row align-items-center ">
+
+                            <div class="col-lg-1"></div>
+                            <div class="col-lg-3">
                                 <button onClick={
                                     () => {
                                         localStorage.setItem("selected_property_id", booking[6]);
@@ -119,9 +126,23 @@ const CurrentBookings = () => {
                                 <p><b>&nbsp;End date: </b>{booking[4]}</p>
                                 <p><b>&nbsp;Price: </b>{booking[5]}</p>
                                 <br />
+                                </div>
 
-                                <div class="row ">
+                                <div class="col-lg-3">
+                                    </div>
 
+                                    <div class="col-lg-5">
+                                <img src={process.env.PUBLIC_URL+"/images/"+image} alt="..." 
+                style={{  width: "350px" , height: "230px ", display: "flex" }} />
+
+                                </div>
+                                </div>
+
+                                <br/>
+                                <br/>
+                                
+                                <div class="row align-items-center ">
+                                <div class="col-lg-1"></div>
                   
                                     <div class="col-lg-3">
                                 
@@ -135,7 +156,7 @@ const CurrentBookings = () => {
                                 </div>
                                 <br />
                                 <br />
-                                <div class="col-lg-4">
+                                <div class="col-lg-3">
                                 <button className="btn btn-primary" onClick={
                                     () => {
                                         const id={
