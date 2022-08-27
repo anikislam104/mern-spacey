@@ -49,7 +49,7 @@ const ViewComplaints = () => {
                     <button onClick={
                         () => {
                                   localStorage.setItem("selected_property_id", complaint.property_id);
-                                    window.location = "/renting/selected_property"; 
+                                  window.location = "/renting/selected_property"; 
                         }
                     }><h1>Property title : {complaint.property_title}</h1></button>
                     <br />

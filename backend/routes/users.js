@@ -12,6 +12,7 @@ const OTP = require('../models/otp');
 var Notification = require('../models/notification');
 var Property = require('../models/property');
 let Complaint = require('../models/complaint');
+let Booking = require('../models/booking');
 // @ts-ignore
 const { Auth } = require("two-step-auth");
 
@@ -558,7 +559,12 @@ router.route('/get_all_complaints').get(asyncHandler(async(req, res) => {
     var complaint=complaints[i].complaint;
     var date=complaints[i].date;
 
-    complaints_array.push({complainant_id:complainant_id,complainant_name:complainant_name,complainee_id:complainee_id,complainee_name:complainee_name,complaint:complaint,date:date,complaint_id:complaints[i]._id});
+    const booking = await Booking.findOne({_id:complaints[i].booking_id});
+    const property = await Property.findOne({_id:booking.property_id});
+    var property_id = property._id;
+    var property_title = property.title;
+
+    complaints_array.push({property_id:property_id,property_title:property_title,complainant_id:complainant_id,complainant_name:complainant_name,complainee_id:complainee_id,complainee_name:complainee_name,complaint:complaint,date:date,complaint_id:complaints[i]._id});
   }
   console.log(complaints_array);
   res.send(complaints_array);

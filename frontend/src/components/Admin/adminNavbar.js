@@ -23,7 +23,7 @@ export default class AdminNavbar extends Component {
          
             <img src={spacey} class="img-responsive" alt=" " />
         
-        <Link to={"/"} className="navbar-brand" style={myStyle.optionSection} ><h2><b>Spacey</b></h2></Link>
+        <Link to={"/adminHomepage"} className="navbar-brand" style={myStyle.optionSection} ><h2><b>Spacey</b></h2></Link>
         <div class="col-lg-7">
    
         </div>

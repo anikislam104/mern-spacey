@@ -23,6 +23,13 @@ const ShowComplaints = () => {
                 <div>
                     <button onClick={
                         () => {
+                            localStorage.setItem("selected_property_id", complaint.property_id);
+                            window.location = "/renting/selected_property"; 
+                        }
+                    }><h2>Property title : {complaint.property_title}</h2></button>
+                    <br />
+                    <button onClick={
+                        () => {
                             localStorage.setItem("clicked_user_id", complaint.complainant_id);
                             window.location = "/user_profile";
                         }
