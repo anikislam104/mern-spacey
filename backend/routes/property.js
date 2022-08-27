@@ -3,6 +3,7 @@ require("dotenv").config();
 let Property = require("../models/property");
 let Room = require("../models/room");
 let Facility = require("../models/facility");
+let Booking = require("../models/booking");
 const multer = require("multer");
 var current_property_id = 0;
 const { protect } = require("../middleware/authMiddleware");
@@ -288,6 +289,7 @@ router.route("/").get(
 router.route("/get_rec").get(
   protect,
   asyncHandler(async (req, res) => {
+    console.log("here");
     const recommender = new ContentBasedRecommender({
       minScore: 0.1,
       maxSimilarDocs: 100,
@@ -310,12 +312,14 @@ router.route("/get_rec").get(
     });
     if(filtered_booking.length == 0){
       res.send([]);
+      return;
     }
     const similarDocuments = recommender.getSimilarDocuments(filtered_booking[filtered_booking.length - 1].property_id, 0, 5);
     const similar_properties = [];
     for (let i = 0; i < similarDocuments.length; i++) {
       similar_properties.push(properties.findById(similarDocuments[i].id));
     }
+    console.log(similiar_properties);
     res.send(similar_properties);
   })
 );

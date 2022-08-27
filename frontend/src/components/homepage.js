@@ -1,6 +1,6 @@
 import { useToast } from "@chakra-ui/react";
 import axios from "axios";
-import React, { Component, useState } from "react";
+import React, { Component, useEffect, useState } from "react";
 import { ChatState } from "../Context/ChatProvider";
 // import axios from 'axios';
 import NavbarHomepage from "./navbar_homepage";
@@ -14,9 +14,40 @@ var size = "";
 const Homepage = () => {
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
+  const [recommendedProperties, setRecommendedProperties] = useState([]);
 
   const { user } = ChatState();
   const toast = useToast();
+
+  const getRecommendedProperties = async () => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      };
+      const { data } =await axios.get(
+        'http://localhost:5000/property/get_rec',
+        config
+      );
+      setRecommendedProperties(data);
+      console.log(recommendedProperties);
+    } catch (error) {
+      toast({
+        title: "Error Occured!",
+        description: "Failed to Load the Search Results",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom-left",
+      });
+    }
+  };
+
+  useEffect(() => {
+    getRecommendedProperties();
+    console.log("updated");
+  } , []);
 
   const handleSearch = async () => {
     if (!search) {
@@ -98,8 +129,8 @@ const Homepage = () => {
   };
 
   //show all properties  location
-  const showProperties = () => {
-    return searchResult.map((property) => {
+  const showProperties = (properties) => {
+    return properties.map((property) => {
       return (
         <div className="col-md-4">
           <div className="card mb-4 box-shadow">
@@ -201,12 +232,13 @@ const Homepage = () => {
                             </font>
                           </b>{" "}
                         </h3>
+                        {showProperties(recommendedProperties)}
                       </div>
                     </div>
-                  ) : (
-                    showProperties()
+                  )
+                  : (
+                    showProperties(searchResult)
                   )}
-
                   <div class="col-lg-3"></div>
                 </div>
               </div>

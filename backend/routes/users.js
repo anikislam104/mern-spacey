@@ -313,6 +313,7 @@ router.route('/user_id').get((req, res) => {
 
     if(user_exists){
       res.send('invalid');
+     
     }
     else{
       const encryptedPassword = cryptr.encrypt(password);
@@ -358,9 +359,15 @@ router.route('/user_id').get((req, res) => {
 
     if(!email || !password || !user_type){
       res.send('invalid');
+      return;
     }
 
     const user = await User.findOne({email: email});
+    if(!user)
+    {
+      res.send('invalid');
+      return;
+    }
     const decryptedPassword = cryptr.decrypt(user.password);
     console.log(decryptedPassword+ " "+password);
     console.log(user_type+ " "+user.user_type);
