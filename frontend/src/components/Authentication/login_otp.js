@@ -128,6 +128,7 @@ export default class LogInOTP extends Component {
                             <div class="container">
                                 <div class="row align-items-center col-lg-5">
                                 <h3>Enter your OTP:</h3>
+                                <br/><br/>
                                 <form onSubmit={this.onSubmit}>
 
 

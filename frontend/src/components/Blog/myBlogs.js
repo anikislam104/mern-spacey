@@ -88,7 +88,7 @@ export default class MyBlogs extends Component {
                 <br/><br/>
                 
                     <div>
-                        <p><b>{blog.title}</b></p>    
+                        <p class="fs-4"><b>{blog.title}</b></p>    
                     </div>
                     {/* <p className="card-text">{property.location}</p> */}
                     <div className="d-flex justify-content-between align-items-center">
