@@ -1,6 +1,6 @@
 import { Avatar, Box, Button, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, Input, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Spinner, Text, Tooltip, useDisclosure, useToast } from '@chakra-ui/react';
 import { BellIcon, ChevronDownIcon } from '@chakra-ui/icons';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ChatState } from '../../Context/ChatProvider';
 import ProfileModal from './ProfileModal';
 import { useNavigate } from 'react-router-dom';
@@ -22,9 +22,17 @@ const SideDrawer = () => {
     setNotification,
     chats,
     setChats,
+    hostId,
   } = ChatState();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if(hostId)
+    {
+      accessChat(hostId);
+    }
+  }, []);
 
   const logoutHandler = () => {
     localStorage.removeItem("userInfo");

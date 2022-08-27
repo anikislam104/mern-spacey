@@ -266,6 +266,17 @@ router.route("/add_facility").post((req, res) => {
   newFacility.save().then(() => res.send("facility added"));
 });
 
+router.route("/personal_property").get(
+  protect,
+  asyncHandler(async (req, res) => {
+    all_properties = await Property.find();
+    for(let i = 0; i < all_properties.length; i++)
+    {
+      
+    }
+  })
+);
+
 router.route("/").get(
   protect,
   asyncHandler(async (req, res) => {
