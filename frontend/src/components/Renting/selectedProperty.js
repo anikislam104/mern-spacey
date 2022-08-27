@@ -72,6 +72,13 @@ const SelectedProperty = () => {
             backgroundColor:"blueViolet",
          },
     }
+    const style = {
+        fontSize: "17px",
+        color: "#0E2A53",
+        fontWeight: "bold",
+        textAlign: "left",
+        marginTop: "10px",
+    };
 
     var image=property.image;
         return (
@@ -115,7 +122,7 @@ const SelectedProperty = () => {
                     <br></br>
                     <br></br>
                     <br/>
-                    <h1><b>&emsp;&emsp;Description:</b> {property.description}</h1>
+                    <p class="fs-4"><h1><b>&emsp;&emsp;Description:</b> <p>{property.description}</p></h1></p>
                     <br/><br/>
 
                     
@@ -125,7 +132,7 @@ const SelectedProperty = () => {
                     </div>
                         <div class="col-lg-4">
 
-                    <h1 style={{textAlign:"center"}}><strong >Rooms:</strong></h1>
+                        <p class="fs-4"><h1 style={{textAlign:"center"}}><strong >Rooms:</strong></h1></p>
                     <br/>
                     {rooms.map((room) => {
                         return (
@@ -144,7 +151,7 @@ const SelectedProperty = () => {
                     </div>
                     
                     <div class="col-lg-4">
-                    <h1 style={{textAlign:"center"}}><strong>Facilities:</strong></h1>
+                    <p class="fs-4"><h1 style={{textAlign:"center"}}><strong>Facilities:</strong></h1></p>
                     <br/>
                     {facilities.map((facility) => {
                         return (
@@ -209,15 +216,16 @@ const SelectedProperty = () => {
                     <br />
                     <br />
                     <div  id="revrat" style={{display:"none"}}>
-                    <h1><strong>Reviews:</strong></h1>
+                    <p class="fs-4"><h1><strong>Reviews:</strong></h1></p>
                     <br/>
                     {review_ratings.map((review_rating) => {
                         return (
-                            <div >
+                            
+                            <div className="card mb-5 box-shadow" style={{width:"550px", height:"90px",backgroundColor:"white"}}>
                                 <p>
-                                <h1>&emsp;&emsp;&emsp;&emsp;&emsp;Rating: <b>{review_rating[1]}*</b></h1>
-                                <h1>&emsp;&emsp;&emsp;&emsp;&emsp;<i>"{review_rating[2]}"</i></h1>
-                                <h1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;---{review_rating[0]}</h1>
+                                <h1 style={style}>&emsp;&emsp;&emsp;&emsp;&emsp;Rating: <b>{review_rating[1]}*</b></h1>
+                                <p><h1 style={{fontSize:"20px"}}>&emsp;&emsp;&emsp;&emsp;<i>"{review_rating[2]}"</i></h1></p>
+                                <h1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;---<b>{review_rating[0]}</b></h1>
                                 </p>
                                 <br></br>
                             </div>

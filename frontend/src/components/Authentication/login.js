@@ -155,7 +155,7 @@ export default class Login extends Component {
                                           </div>
                                           <div class="form-group sm-2">
                                             <br/>
-                                            <label>User type: </label>
+                                            <label><b>User type: </b></label>
                                             <br/><br/>
                                             <select id="inputUserType" class="form-control rounded-pill border-0 shadow-sm px-4"   onChange={this.onChangeUserType} placeholder="user type">
                                                 <option value="">Select</option>
@@ -170,13 +170,15 @@ export default class Login extends Component {
                                               <input id="customCheck1" type="checkbox" class="custom-control-input"  style={myStyle.inputSection} />
                                               <label for="customCheck1" class="custom-control-label" style={myStyle.inputSection}>Remember password</label>
                                           </div>
+
+                                          <a href="/forget_password"><h1 class="bg-light" style={{font:"5px"}}>&emsp;&emsp;<u>Forget Password?</u></h1></a>
                                           <br/>
-                                          <br/>
+                                          <br/><br/>
                                           <div className="form-group">
                                                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                                                <input type="submit" value="Log in" className="btn btn-primary" style={myStyle.buttonSection} />
                                           </div>
-                                          <a href="/forget_password">Forget Password</a>
+                                    
                                 
                                    </form>
                                    {/* <button onClick={

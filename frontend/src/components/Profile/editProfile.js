@@ -89,15 +89,22 @@ const EditProfile = () => {
             });
 
     }
+    
     return (
-        <div>
+        <div class="bg-light">
             <NavbarHomepage />
-            <h1>Edit Profile</h1>
+            <br/>
+            <h1 class="display-6" style={{textAlign:"center"}}><b>Edit Your Profile</b></h1>
             
             <br />
-            <button className="btn btn-primary" onClick={handlePersonal}>Edit personal details</button>    
-            <input
-                style={{display: 'none'}}
+            
+            <div class="row align-items-center">
+          <div class="col-lg-3"></div>
+          <div class="col-lg-5">
+            <br/>
+
+          <input
+                style={{display: 'none',width:"500px",height:"30px",backgroundColor:"white"}}
                 ref={inputFirstName}
                 type="text"
                 placeholder="Enter your first name"
@@ -106,7 +113,7 @@ const EditProfile = () => {
             />
             <br />
             <input
-                style={{display: 'none'}}
+                style={{display: 'none',width:"500px",height:"30px"}}
                 ref={inputLastName}
                 type="text"
                 placeholder="Enter your last name"
@@ -115,17 +122,32 @@ const EditProfile = () => {
             />
             <br />
             <input type="date" 
-                style={{display: 'none'}}
+                style={{display: 'none',width:"500px",height:"30px"}}
                 ref={inputDateOfBirth}
                 placeholder="Enter your date of birth"
                 value={dateOfBirth}
                 onChange={(e) => setDateOfBirth(e.target.value)}
             />
             <br />
+            </div>
+
+            <div class="col-lg-2">    
+            <button className="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" onClick={handlePersonal}>Edit personal details</button>    
             <br />
-            <button className="btn btn-primary" onClick={handleContact}>Edit contact details</button>
+            </div>
+
+            <div class="col-lg-2"></div>
+            </div>
+            
+            <br />
+
+            <div class="row align-items-center">
+          <div class="col-lg-3"></div>
+          <div class="col-lg-5">
+            <br/>
+            
             <input type="text"
-                style={{display: 'none'}}
+                style={{display: 'none',width:"500px",height:"30px"}}
                 ref={inputPhone}
                 value={phone}
                 placeholder="Enter your phone"
@@ -133,7 +155,7 @@ const EditProfile = () => {
             <br />
             
             <input type="email"
-             style={{display: 'none'}}
+             style={{display: 'none',width:"500px",height:"30px"}}
                 ref={inputEmail}
                 placeholder="Enter your email"
                 value={email}
@@ -141,17 +163,58 @@ const EditProfile = () => {
             <br />
             
             <br />
-            <button className="btn btn-primary" onClick={handlePassword}>Edit password</button>
-            <input type="password"
-                style={{display: 'none'}}
-                ref={inputPassword}
-                placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)} />
+          </div>
+
+              <div class="col-lg-2">
+
+              <button className="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" onClick={handleContact}>Edit contact details</button>
+            <br />
+            
+            </div>
+            <div class="col-lg-2"></div>
+            </div>  
             <br />
             <br />
-            <button className="btn btn-primary" onClick={handleSubmit}>Save</button>
+
+
+
+            <div class="row align-items-center">
+          <div class="col-lg-3"></div>
+          <div class="col-lg-5">
+          <br />
+         
+         <input type="password"
+             style={{display: 'none',width:"500px",height:"30px"}}
+             ref={inputPassword}
+             placeholder="Enter your password"
+             value={password}
+             onChange={(e) => setPassword(e.target.value)} />
+         <br />
+         </div>
+
+            <br />
+            <div class="col-lg-2">
+            &emsp;<button className="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" onClick={handlePassword}>Edit password</button>
+            </div>
+            <div class="col-lg-2"></div>
+            </div>
+            
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+
+            <div class="row align-items-center">
+            <div class="col-lg-5"></div>
+            <div class="col-lg-2">
+            &emsp;&emsp;<button className="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" onClick={handleSubmit}>Save</button>
+            </div>
+            <div class="col-lg-5"></div>
+            </div>
+            <br/><br/><br/>
+        
         </div>
+
         )    
  
 }
