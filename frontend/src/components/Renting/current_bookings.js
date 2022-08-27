@@ -35,6 +35,11 @@ const CurrentBookings = () => {
         btn_array[i] = i+total;
     }
     console.log(inputArray);
+    const link={
+        //font color blue and bold
+        color: "blue",
+        fontWeight: "bold",
+    }
     const style = {
         backgroundColor: "#f5f5f5",
         border: "1px solid #ddd",
@@ -74,8 +79,14 @@ const CurrentBookings = () => {
                     {bookings.map((booking,idx) => {
                         return (
                             <div style={style}>
-                                <h2><b>&nbsp;Property: </b>{booking[2]}</h2>
-                                <p><button onClick={
+                                <button onClick={
+                                    () => {
+                                        localStorage.setItem("selected_property_id", booking[6]);
+                                        //console.log(localStorage.getItem("selected_property_id"));
+                                        window.location.href = "/renting/selected_property";
+                                    }
+                                }><h2 style={link}><b>&nbsp;Property: </b>{booking[2]}</h2></button>
+                                <p style={link}><button onClick={
                                     () => {
                                         const data={
                                             booking_id:booking[0],

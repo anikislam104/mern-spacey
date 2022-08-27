@@ -269,6 +269,9 @@ router.route('/get_current_bookings').post(async (req, res) =>{
         host_name = host.firstName + " " + host.lastName;
         
         const property = await Property.findById(bookings[i].property_id);
+        // console.log(property._id);
+        // console.log(bookings[i].property_id);
+        property_image = property.image;
         property_title = property.title;
         //get difference between start date and end date
         price = bookings[i].price;
@@ -279,7 +282,7 @@ router.route('/get_current_bookings').post(async (req, res) =>{
         console.log(bookings[i].payment_status);
 
         if(bookings[i].payment_status == "pending")
-            current_bookings.push([bookings[i]._id, host_name, property_title, start_date, end_date,price,bookings[i].property_id]);
+            current_bookings.push([bookings[i]._id, host_name, property_title, start_date, end_date,price,bookings[i].property_id,property_image]);
         
     }
     
@@ -557,6 +560,7 @@ router.route('/get_past_bookings').post(async (req, res) =>{
         host_name = host.firstName + " " + host.lastName;
         
         const property = await Property.findById(bookings[i].property_id);
+        property_image = property.image;
         property_title = property.title;
         //get difference between start date and end date
         
@@ -569,7 +573,7 @@ router.route('/get_past_bookings').post(async (req, res) =>{
         var today = new Date();
 
         if(bookings[i].payment_status=="Paid")
-            past_bookings.push([bookings[i]._id, host_name, property_title, start_date, end_date,price,bookings[i].property_id]);
+            past_bookings.push([bookings[i]._id, host_name, property_title, start_date, end_date,price,bookings[i].property_id,property_image]);
         
     }
     console.log(past_bookings);

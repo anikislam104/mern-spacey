@@ -72,6 +72,11 @@ const PastBookings = () => {
     for(i=0;i<total;i++){
         reviewarray[i]=i+total*7;
     }
+    const link={
+        //font color blue and bold
+        color: "blue",
+        fontWeight: "bold",
+    }
     const style = {
         backgroundColor: "#f5f5f5",
         border: "1px solid #ddd",
@@ -120,8 +125,14 @@ const PastBookings = () => {
                         return (
                             <div style={style}>
                                 <br/>
-                                <h2><b>&nbsp;Property: </b>{booking[2]}</h2>
-                                <p><button onClick={
+                                <button onClick={
+                                    () => {
+                                        localStorage.setItem("selected_property_id", booking[6]);
+                                        //console.log(localStorage.getItem("selected_property_id"));
+                                        window.location.href = "/renting/selected_property";
+                                    }
+                                }><h2 style={link}><b>&nbsp;Property: </b>{booking[2]}</h2></button>
+                                <p style={link}><button onClick={
                                     () => {
                                         const data={
                                             booking_id:booking[0],
