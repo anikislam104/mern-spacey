@@ -11,6 +11,7 @@ const propertySchema = new Schema({
   status: { type: String, required: true },
   pricePerDay: { type: Number, required: true },
   image: { type: String },
+  type: { type: String, default: "personal" },
 }, {
   timestamps: true,
 });
