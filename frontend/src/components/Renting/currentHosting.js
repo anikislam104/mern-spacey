@@ -38,7 +38,11 @@ const CurrentHostings = () => {
         marginRight: "10px",
         boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.75)",
     }*/
-
+    const link={
+        //font color blue and bold
+        color: "blue",
+        fontWeight: "bold",
+    }
 
     const box={
         width: "100%",
@@ -64,8 +68,14 @@ const CurrentHostings = () => {
             
             {hostings.map((hosting,idx) => (
                 <div style={box}>
-                    <h2><b>Property title:</b>&nbsp;{hosting[2]}</h2>
-                    <h2><button onClick={
+                    <button onClick={
+                                    () => {
+                                        localStorage.setItem("selected_property_id", hosting[6]);
+                                        //console.log(localStorage.getItem("selected_property_id"));
+                                        window.location.href = "/renting/selected_property";
+                                    }
+                                }><h2 style={link}><b>&nbsp;Property: </b>{hosting[2]}</h2></button>
+                    <h2 style={link}><button onClick={
                         () => {
                             const data = {
                                 booking_id: hosting[0],

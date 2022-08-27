@@ -594,12 +594,13 @@ router.route('/get_current_hostings').post(async (req, res) =>{
         renter_name = renter.firstName + " " + renter.lastName;
         
         const property = await Property.findById(bookings[i].property_id);
+        property_image = property.image;
         property_title = property.title;
         //get difference between start date and end date
         
         price = bookings[i].price;
         if(bookings[i].payment_status=="pending")
-            current_hostings.push([bookings[i]._id, renter_name, property_title, start_date, end_date,price]);
+            current_hostings.push([bookings[i]._id, renter_name, property_title, start_date, end_date,price,bookings[i].property_id,property_image]);
     }
     console.log(current_hostings);
     res.send(current_hostings);
@@ -619,12 +620,13 @@ router.route('/get_past_hostings').post(async (req, res) =>{
         renter_name = renter.firstName + " " + renter.lastName;
         
         const property = await Property.findById(bookings[i].property_id);
+        property_image = property.image;
         property_title = property.title;
         //get difference between start date and end date
         
         price = bookings[i].price;
         if(bookings[i].payment_status=="Paid")
-            past_hostings.push([bookings[i]._id, renter_name, property_title, start_date, end_date,price]);
+            past_hostings.push([bookings[i]._id, renter_name, property_title, start_date, end_date,price,bookings[i].property_id,property_image]);
     }
     console.log(past_hostings);
     res.send(past_hostings);
