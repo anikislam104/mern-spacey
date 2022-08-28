@@ -191,6 +191,10 @@ export default class ShowPropertyAdmin extends Component {
         
     }
 
+    clearArrayElements(){
+        arr.splice(0, arr.length)
+      }  
+
     render() {
         return(
             <div class="col-lg-12 bg-light">
@@ -199,6 +203,7 @@ export default class ShowPropertyAdmin extends Component {
                 <br/ >
                 {this.showProperties()}
                 {this.getArrayElements()}
+                {this.clearArrayElements()}
             </div>
         )
     }

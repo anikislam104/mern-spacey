@@ -20,7 +20,7 @@ const NavbarHomepage = () => {
     const myStyle= {
       optionSection:{
         color: "#0E2A53",
-        fontSize:"40px",
+        fontSize:"30px",
        },
 
        textSection:{
@@ -35,7 +35,7 @@ const NavbarHomepage = () => {
         backgroundColor: "#C2C6CC",
         color: "white",
         width:"1300px",
-        height:"50px",
+        height:"53px",
        },
 
        navSection2:{
@@ -82,7 +82,7 @@ const NavbarHomepage = () => {
 
           &nbsp;  
 
-          <div class="col-lg-6" style={{textAlign:"center"}}>
+          <div class="col-lg-7" style={{textAlign:"center"}}>
           <li className="navbar-item">
           &nbsp; &nbsp;
           <Link to={'/hosting'} className="nav-link rounded-pill" style={myStyle.textSection}><h6>Become A Host</h6></Link>

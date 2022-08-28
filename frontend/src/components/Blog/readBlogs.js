@@ -105,6 +105,8 @@ export default class ReadBlogs extends Component {
     </div>
 
           </div>
+          <br/>
+
             </div>
         )
     }

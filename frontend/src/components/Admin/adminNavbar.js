@@ -24,10 +24,10 @@ export default class AdminNavbar extends Component {
             <img src={spacey} class="img-responsive" alt=" " />
         
         <Link to={"/adminHomepage"} className="navbar-brand" style={myStyle.optionSection} ><h2><b>Spacey</b></h2></Link>
-        <div class="col-lg-7">
+        <div class="col-lg-5">
    
         </div>
-        <div class="col-lg-5">
+        <div class="col-lg-7">
          <div className="collpase navbar-collapse">
          <ul className="navbar-nav mr-auto">
           <li className="navbar-item">
@@ -37,6 +37,11 @@ export default class AdminNavbar extends Component {
           <li className="navbar-item">
           <Link to={'/show_complaints'} className="nav-link"><h2><b>Show Complaints</b></h2></Link>
           </li>
+
+          <li className="navbar-item">
+          <Link to={'/payment_history_all'} className="nav-link"><h2><b>Payment Transactions</b></h2></Link>
+          </li>
+
           <li className="navbar-item">
           <Link to={'/logout'} className="nav-link"><h2><b>Log Out</b></h2></Link>
           </li>

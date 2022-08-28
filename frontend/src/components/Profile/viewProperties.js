@@ -109,6 +109,11 @@ const ViewProperties = () => {
         
     }
 
+    const clearArrayElements=()=>{
+        arr.splice(0, arr.length)
+      }  
+    
+
     return(
         <div class="col-lg-12 bg-light">
             {/* {allBlogs} */}
@@ -118,6 +123,8 @@ const ViewProperties = () => {
             <br/>
             {getMyProperties()}
             {getArrayElements()}
+            {clearArrayElements()}
+            
         </div>
     )
 

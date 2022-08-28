@@ -306,9 +306,7 @@ export default class ShowBlog extends Component {
                 
                 
                 <br />
-<br />
 
-                
                 </div>
 
                 

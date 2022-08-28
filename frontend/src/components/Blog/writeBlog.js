@@ -159,7 +159,12 @@ export default class WriteBlog extends Component {
                            </div>
                        </div>
                    </div>
+
+                   
                </div>
+               <br/>
+
+               
              </div>
              
        )

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { ChatState } from "../Context/ChatProvider";
 // import axios from 'axios';
 import NavbarHomepage from "./navbar_homepage";
+import Footer from './Footer';
 var property_id = "";
 var host_id = "";
 var location = "";
@@ -420,7 +421,7 @@ const Homepage = () => {
   };
 
   return (
-    <div className="maincontainer">
+    <div className="maincontainer bg-light">
       <NavbarHomepage />
       <br />
       <nav className="navbar navbar-expand-lg navbar-light bg-light border-top p-3">
@@ -729,6 +730,12 @@ const Homepage = () => {
           {getArrayElements(totalBusinessProperties)}
         </div>
       </div>
+      <br/>
+      
+<br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/>
+<Footer/>
     </div>
   );
 };

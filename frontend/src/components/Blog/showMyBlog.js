@@ -344,7 +344,8 @@ export default class ShowMyBlog extends Component {
                 </div>
             </div>
             <br/><br/><br/>
-            
+            <br/>
+
             </div>
 
                 

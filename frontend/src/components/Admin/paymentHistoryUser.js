@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { Component } from 'react';
-import NavbarHomepage from '../navbar_homepage';
+import AdminNavbar from "./adminNavbar";
 import Table from 'react-bootstrap/Table';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
@@ -32,7 +32,7 @@ export default class PaymentHistory extends Component{
             .then((res) => res.json())
             .then((json) => {
                 this.setState({
-                    user_id: localStorage.getItem('user_id'),
+                    user_id: localStorage.getItem('clicked_user_id'),
                 });
                 console.log('Checking....'+this.state.user_id);
                 const current_id={
@@ -86,7 +86,7 @@ export default class PaymentHistory extends Component{
                                 <div class="col-lg-2">
                                 <td>&emsp;{payment.amount}</td></div>
                                 <div class="col-lg-3">
-                                <td style={myStyle.textSection2}>&emsp;{name[new Date(payment.update_date).getMonth()]},{new Date(payment.update_date).getDate()} {new Date(payment.update_date).getFullYear()}</td></div>
+                                <td style={myStyle.textSection1}>&emsp;{name[new Date(payment.update_date).getMonth()]},{new Date(payment.update_date).getDate()} {new Date(payment.update_date).getFullYear()}</td></div>
                                 <div class="col-lg-1">
                                 <td >{payment.status}</td></div>
 
@@ -138,7 +138,7 @@ export default class PaymentHistory extends Component{
         return(
 
             <div>
-                <NavbarHomepage />
+                <AdminNavbar />
                <br/>
                <div>
                <Table>
@@ -172,7 +172,7 @@ export default class PaymentHistory extends Component{
                     {this.getPaymentHistory()}
                 <p>
                     <br/>
-                    <b>Your Total Income: {this.state.total_income} </b>
+                    <b>Total Income: {this.state.total_income} </b>
                 </p>
 
                     <div class="col-md-12 bg-light">
@@ -224,7 +224,7 @@ export default class PaymentHistory extends Component{
                       
                          </form>
                     <p><b><br/>
-                        Your Total Income between these dates: {this.state.income_between_days}
+                         Total Income between these dates: {this.state.income_between_days}
                         </b>
                     </p>
                 </div>
