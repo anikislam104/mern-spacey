@@ -123,9 +123,9 @@ export default class Login extends Component {
      }
       return (
         
-         <div className="maincontainer">
+         <div className="bg-light">
           <Navbar />
-          <br />
+          
           <div class="container-fluid">
               <div class="row no-gutter">
                  
