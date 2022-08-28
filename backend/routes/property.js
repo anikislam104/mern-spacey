@@ -356,22 +356,14 @@ router.route("/add_facility").post((req, res) => {
   newFacility.save().then(() => res.send("facility added"));
 });
 
-router.route("/personal_property").get(
-  protect,
-  asyncHandler(async (req, res) => {
-    all_properties = await Property.find();
-    for(let i = 0; i < all_properties.length; i++)
-    {
-      
-    }
-  })
-);
+
 
 router.route("/").get(
   protect,
   asyncHandler(async (req, res) => {
     // finding all users which matches search
-    console.log("search " + req.query.search);
+    //console.log("search " + req.query.search);
+    console.log("in search");
     const keyword = req.query.search
       ? {
           $or: [
@@ -382,7 +374,7 @@ router.route("/").get(
       : {};
 
     const properties = await Property.find(keyword); // protect above modifies req to have req.user._id as current user id
-    console.log(properties);
+    ///console.log(properties);
     res.send(properties);
   })
 );
@@ -390,40 +382,89 @@ router.route("/").get(
 router.route("/get_rec").get(
   protect,
   asyncHandler(async (req, res) => {
-    console.log("here");
+    console.log("in recon");
     const recommender = new ContentBasedRecommender({
       minScore: 0.1,
       maxSimilarDocs: 100,
     });
     const user_id = req.user._id;
     const documents = [];
-    var filtered_properties = [];
-    Property.find().then((properties) => {
-      filtered_properties = properties.filter(
-        (property) => property.hostId != user_id
-      );
-    });
+    const filtered_properties = await Property.find();
+    
     for (let i = 0; i < filtered_properties.length; i++) {
       documents.push({ id : String(filtered_properties[i]._id), content : filtered_properties[i].description });
     }
     recommender.train(documents);
-    var filtered_booking = [];
+    const filtered_booking = [];
     Booking.find().then((bookings) => {
-      filtered_booking = bookings.filter((booking) => booking.renter_id == user_id);
+      filtered_booking.push(bookings.filter((booking) => booking.renter_id == user_id));
     });
-    if(filtered_booking.length == 0){
-      res.send([]);
-      return;
-    }
+    
     const similarDocuments = recommender.getSimilarDocuments(filtered_booking[filtered_booking.length - 1].property_id, 0, 5);
     const similar_properties = [];
     for (let i = 0; i < similarDocuments.length; i++) {
-      similar_properties.push(properties.findById(similarDocuments[i].id));
+      console.log(properties.findById(similarDocuments[i].id));
+      ///similar_properties.push(properties.findById(similarDocuments[i].id));
     }
     console.log(similiar_properties);
     res.send(similar_properties);
   })
 );
+
+router.route("/get_rec").post(async(req, res) => {
+  const user_id = req.body.user_id;
+  console.log("in recon");
+  const recommender = new ContentBasedRecommender({
+    minScore: 0.0,
+    maxSimilarDocs: 100,
+  });
+  const documents = [];
+  const filtered_properties = await Property.find({ hostId: { $ne: user_id }});
+  var dict = {};
+  var count = 0;
+  for (let i = 0; i < filtered_properties.length; i++) {
+    dict[String(filtered_properties[i]._id)] = count;
+    //documents.push({ id : String(count), content : filtered_properties[i].description });
+    documents.push({ id : String(filtered_properties[i]._id), content : filtered_properties[i].description });
+    count++;
+  }
+  console.log(documents);
+  recommender.train(documents);
+  const filtered_booking = await Booking.find({ renter_id: { $eq: user_id }});
+  if(filtered_booking.length == 0) {
+    res.send([]);
+  }
+  var similarDocuments = [];
+  for(let i = filtered_booking.length - 1; i >= 0; i--)
+  {
+    similarDocuments = recommender.getSimilarDocuments(String(filtered_booking[i].property_id), 0, 5);
+    if(similarDocuments.length != 0)
+    {
+      console.log(filtered_booking[i]);
+      console.log(similarDocuments);
+      break;
+    }
+  }
+  ///console.log(dict[String(filtered_booking[filtered_booking.length - 1].property_id)]);
+  //const similarDocuments = recommender.getSimilarDocuments(String(filtered_booking[filtered_booking.length - 1].property_id), 0, 5);
+  ///console.log(similarDocuments);
+  ///res.send(similarDocuments);
+  const similar_properties = [];
+  const all_properties = await Property.find();
+  for(let i = 0; i < all_properties.length; i++)
+  {
+    for(let j = 0; j < similarDocuments.length; j++)
+    {
+      if(String(all_properties[i]._id) === similarDocuments[j].id)
+      {
+        similar_properties.push(all_properties[i]);
+      }
+    }
+  }
+    console.log("baire");
+    console.log(similar_properties);
+    res.send(similar_properties);
+})
 
 //get all personal properties
 router.route("/get_personal_properties").post(async (req, res) => {
