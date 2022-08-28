@@ -301,7 +301,7 @@ const PastBookings = () => {
                                 <div class="row align-items-center">
 
                   
-<div class="col-lg-5">
+<div class="col-lg-6">
     </div>
 
     <div class="col-lg-1" style={{float:"right"}} >
