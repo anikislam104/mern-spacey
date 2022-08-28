@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import "./navbar.css"
 
 const NavbarHomepage = () => {
 
@@ -41,7 +42,7 @@ const NavbarHomepage = () => {
 
     return (
       
-      <nav className="navbar navbar navbar-expand-lg" style={myStyle.navSection}>
+      <nav className="navbar navbar navbar-expand-lg"  style={myStyle.navSection}>
         
             
             &nbsp;<img src={spacey} class="img-responsive" alt=" " />

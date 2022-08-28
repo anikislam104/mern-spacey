@@ -13,6 +13,7 @@
     "autoprefixer": "10.4.5",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.0-beta1",
+    "content-based-recommender": "^1.5.0",
     "framer-motion": "^7.2.0",
     "react": "^18.2.0",
     "react-bootstrap-validation": "^0.1.11",
