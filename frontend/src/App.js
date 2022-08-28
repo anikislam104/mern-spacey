@@ -64,6 +64,7 @@ import PastHostings from "./components/Renting/pastHosting";
 import UserProfile from "./components/Profile/clickedProfile";
 import ShowComplaints from "./components/Admin/showComplaints";
 import ViewComplaints from "./components/Profile/viewComplaints";
+import UserSearch from "./components/Admin/userSearch";
 
 
 function App() {
@@ -157,6 +158,7 @@ function App() {
 
         {/* Admin */}
         <Route path="show_complaints" element={<ShowComplaints />} />
+        <Route path="user_search" element={<UserSearch />} />
         
         
         

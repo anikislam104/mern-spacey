@@ -593,5 +593,15 @@ router.route('/delete_complaint').post(asyncHandler(async(req, res) => {
   });
 }));
 
+  //get recommended user list based on string input
+  router.route('/get_recommended_users').post(asyncHandler(async(req, res) => {
+    const search_string = req.body.search_string;
+
+    //get users whose firstname or lastname contains search string
+    const users = await User.find({$or: [{firstName: {$regex: search_string, $options: 'i'}}, {lastName: {$regex: search_string, $options: 'i'}}]});
+    console.log(users);
+    res.send(users);
+  }));
+
   module.exports = router;
   module.exports.current_user_id = current_user_id;

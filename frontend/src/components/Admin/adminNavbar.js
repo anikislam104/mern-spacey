@@ -31,7 +31,7 @@ export default class AdminNavbar extends Component {
          <div className="collpase navbar-collapse">
          <ul className="navbar-nav mr-auto">
           <li className="navbar-item">
-          <Link to={'/add_insurance'} className="nav-link"><h2><b>Add Insurance</b></h2></Link>
+          <Link to={'/user_search'} className="nav-link"><h2><b>User Search</b></h2></Link>
           </li>
 
           <li className="navbar-item">
