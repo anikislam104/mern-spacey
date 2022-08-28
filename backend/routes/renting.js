@@ -147,7 +147,7 @@ router.route('/reject_rent_request').post(async (req, res) =>
 {
     const rent_request_id = req.body.id;
     //console.log("rent_request_id:" + rent_request_id);
-    const rent_request = await RentRequest.findBNotificationYouyId(rent_request_id);
+    const rent_request = await RentRequest.findById(rent_request_id);
     const renter_id = rent_request.renter_id;
     var message="Your rental request for " + rent_request.property_title +  " has been rejected";
     await RentRequest.deleteOne({ _id: rent_request_id });

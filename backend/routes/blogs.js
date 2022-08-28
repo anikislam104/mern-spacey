@@ -2,6 +2,7 @@ const router = require('express').Router();
 let User = require('../models/user');
 let Blog = require('../models/blog');
 let BlogReaction = require('../models/blogReaction');
+let BlogComment = require('../models/blogComment');
 const multer = require('multer');
 
 // const { v4: uuidv4 } = require('uuid');
@@ -253,10 +254,21 @@ router.route('/downvote').post((req, res) => {
         });
     
 })
-router.route('/comment').post((req, res) =>{
+router.route('/comment').post(async (req, res) =>{
     const blog_id = req.body.blog_id;
     const user_id = req.body.user_id;
     const comment = req.body.comment;
+
+    const user = await User.findById(user_id);
+    const user_name = user.firstName + " " + user.lastName;
+
+    const newBlogComment = new BlogComment({
+        blog_id: blog_id,
+        user_id: user_id,
+        user_name: user_name,
+        comment: comment,
+    });
+    await newBlogComment.save();
 
     Blog.findById(blog_id)
         .then(blog => {
@@ -267,6 +279,13 @@ router.route('/comment').post((req, res) =>{
             blog.save();
             res.json(blog.comments);
         }).catch(err => res.status(400).json('Error: ' + err));
+})
+
+router.route('/get_blog_comments').post(async (req, res) =>{
+    const blog_id = req.body.blog_id;
+    
+    const blogComments = await BlogComment.find({blog_id: blog_id});
+    res.json(blogComments);
 })
 
 router.route('/get_comments/:blog_id').post((req, res) => {
@@ -318,8 +337,12 @@ router.route('/check_reaction').post((req, res) => {
     const user_id = req.body.user_id;
     const blog_id = req.body.blog_id;
 
+    
+
+
     BlogReaction.findOne({user_id: user_id, blog_id: blog_id})
         .then(blogReaction => {
+            if(blogReaction){
             if(blogReaction.hasUserLiked === true){
                 res.send("liked");
             }
@@ -329,6 +352,10 @@ router.route('/check_reaction').post((req, res) => {
             else{
                 res.send("none");
             }
+        }
+        else{
+            res.send("none");
+        }
         })
 })
 

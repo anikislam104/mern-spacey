@@ -5,7 +5,7 @@ import NavbarHomepage from '../navbar_homepage';
 // const blog_id=Request.QueryString["data"];
 import "./styles.css";
 
-var comments=[];
+
 
 
 
@@ -16,7 +16,7 @@ var comments=[];
 export default class ShowBlog extends Component {
     constructor(props) {
         super(props);
-        this.showComments = this.showComments.bind(this);
+        // this.showComments = this.showComments.bind(this);
         this.comment = this.comment.bind(this);
         this.showWriterName = this.showWriterName.bind(this);
         // this.showSelectedBlog = this.showSelectedBlog.bind(this);
@@ -26,6 +26,7 @@ export default class ShowBlog extends Component {
             Comment: "",
             like: "",
             dislike: "",
+            comments:[],
             
         }
     }
@@ -74,6 +75,17 @@ export default class ShowBlog extends Component {
                     }
                 })
 
+                const data1 ={
+                    blog_id:localStorage.getItem('blog_id'),
+                }
+                axios.post('http://localhost:5000/blogs/get_blog_comments', data1)
+                .then(res => {
+                    console.log(res.data);
+                    this.setState({
+                        comments: this.state.comments.concat(res.data),
+                    })
+                })
+
             })
         
     }
@@ -85,18 +97,7 @@ export default class ShowBlog extends Component {
     }
 
     
-    showComments(){
-        console.log("hellooooooooooo");
-        for(var i=0;i<comments.length;i++){
-            console.log(comments[i].comment);
-            // this.renderComments(comments[i].comment);
-            return(
-                <div>
-                    <p>{comments[i].comment}</p>
-                    </div>
-            )
-        }
-    }
+    
 
     showWriterName(id){
         
@@ -252,11 +253,11 @@ export default class ShowBlog extends Component {
                             .then(res => {
 
                                 console.log(res.data);
-                                comments=res.data;
-                                //loop through comments and display
-                                for(var i=0;i<comments.length;i++){
-                                    console.log(comments[i].comment);
-                                }
+                                // comments=res.data;
+                                // //loop through comments and display
+                                // for(var i=0;i<comments.length;i++){
+                                //     console.log(comments[i].comment);
+                                // }
                                 
                                 
                                 
@@ -279,14 +280,23 @@ export default class ShowBlog extends Component {
                 <br/><br/>
                 <p class="fs-4"><h1><strong>Comments</strong></h1></p>
                 <br/>
-               {blog.comments.map((comment) => {
-                    return(
-                        <div className="card mb-5 box-shadow" style={{width:"1300px", height:"90px",backgroundColor:"white"}}>
-                            <br/>
-                            <p><h1 style={{fontSize:"20px"}}><i>&emsp;&emsp;&emsp;&emsp;&emsp;"{comment.comment}"</i></h1></p>
-                            <br/>
-                        </div>
-                    )
+               {this.state.comments.map((comment) => {
+                     return(
+                          <div class="row align-items-center">
+                            <div class="col-lg-4">
+                                 <p class="fs-4"><strong><button onClick={
+                                    () => {
+                                       localStorage.setItem('clicked_user_id', comment.user_id); 
+                                        window.location.href = '/user_profile';
+                                    }
+                                 }>{comment.user_name}</button></strong></p>
+                            </div>
+                            <div class="col-lg-8">
+                                 <p class="fs-4">{comment.comment}</p>
+                            </div>
+                          </div>
+                     )
+                
                 })
                 
                 } 

@@ -102,6 +102,17 @@ const UserProfile = () => {
             >
               Chat with {name}
             </button></p>
+            <br />
+            <p style={{textAlign:"right"}}>
+            <button
+              className="btn btn-primary"
+              
+              onClick={() => {
+                navigate("/show_clicked_blogs");
+              }}
+            >
+              Show blogs
+            </button></p>
 
             </div>
             </div>

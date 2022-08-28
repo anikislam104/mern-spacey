@@ -1,6 +1,11 @@
 import axios from "axios";
-import React,{ Component } from "react"; 
+import React,{ Component, useEffect, useState } from "react"; 
 import NavbarHomepage from "../navbar_homepage";
+import io from 'socket.io-client';
+import { ChatState } from "../../Context/ChatProvider";
+
+const ENDPOINT = "http://localhost:5000";
+var socket;
 
 const style ={
         backgroundColor: "white",
@@ -14,37 +19,55 @@ const style ={
         boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.1)",
 };
 
-export default class RentRequestNotification extends Component {
-    constructor(props) {
-        super(props);
-        this.acceptRequest = this.acceptRequest.bind(this);
-        this.rejectRequest = this.rejectRequest.bind(this);
-        this.showRentRequest = this.showRentRequest.bind(this);
-        this.state = {
-            rent_request: [],
-            host_id: '',
+const RentRequestNotification = () => {
+    
+
+    const [rentRequest, setRentRequest] = useState([]);
+    const [hostId, setHostId] = useState('');
+    const [socketConnected, setSocketConnected] = React.useState(false);
+    const {user, selectedChat, setSelectedChat, notification1, setNotification1} = ChatState();
+
+
+    
+
+    useEffect(() => {
+        const host_id ={
+            host_id: localStorage.getItem('user_id'),
         }
-    }
+        axios.post('http://localhost:5000/renting/my_rentRequests', host_id)
+            .then(res2 => {
+                console.log(res2.data);
+                setRentRequest(res2.data);
+                // console.log(this.state.rent_request);
+            })
+    }, []);
 
-    componentDidMount() {
-        // window.location.reload();
+    useEffect(() => {
         
-                const host_id ={
-                    host_id: localStorage.getItem('user_id'),
-                }
-                axios.post('http://localhost:5000/renting/my_rentRequests', host_id)
-                    .then(res2 => {
-                        console.log(res2.data);
-                        this.setState({
-                            rent_request: res2.data,
-                            
-                        });
-                        // console.log(this.state.rent_request);
-                    })
-            
-    }
+        // console.log(user);
+        if(user){
+            socket = io(ENDPOINT);
+            socket.emit("setup", user);
+            socket.on("connected", () => setSocketConnected(true));
+        }
+        // eslint-disable-next-line
+      },[user]);
 
-    acceptRequest(id){
+    useEffect(() => {
+        if(socketConnected){
+            socket.on("rental request recieved", (rent_request) => {
+            // setNotification([newMessageRecieved, ...notification]);
+            setRentRequest([rent_request, ...rentRequest]);
+            // const noti={
+            //     message: "You have a new rental request",
+            //     type: "rental_request",
+            // }
+            // setNotification1([noti, ...notification1]);
+            });
+    }
+      });
+
+    function acceptRequest(id){
         const acceptRequest ={
             id: id,
         }
@@ -56,7 +79,7 @@ export default class RentRequestNotification extends Component {
         alert("Request Accepted");
     }
 
-    rejectRequest(id){
+    function rejectRequest(id){
         const rejectRequest ={
             id: id,
         }
@@ -68,7 +91,7 @@ export default class RentRequestNotification extends Component {
         alert("Request Rejected");
     }
 
-    showRentRequest(){
+    function showRentRequest(){
 
         const fontStyle={
             //font color blue and bold
@@ -77,8 +100,8 @@ export default class RentRequestNotification extends Component {
             fontSize:"18px",
         }
 
-        console.log(this.state.rent_request);
-        return this.state.rent_request.map((request) => {
+        console.log(rentRequest);
+        return rentRequest.map((request) => {
             let db = new Date(request.start_date);
             const year=db.getFullYear();
             const day=db.getDate();
@@ -112,7 +135,7 @@ export default class RentRequestNotification extends Component {
                 <div class="col-lg-3">
                     <button className="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" onClick={
                         () => {
-                            this.acceptRequest(request._id);
+                            acceptRequest(request._id);
                         }
                     }>Accept</button>
                     
@@ -121,7 +144,7 @@ export default class RentRequestNotification extends Component {
 
                     <button className="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" onClick={
                         () => {
-                            this.rejectRequest(request._id);
+                            rejectRequest(request._id);
                         }
                     }>Reject</button>
 
@@ -134,16 +157,18 @@ export default class RentRequestNotification extends Component {
         })
      }
 
-    render() {
+    
         
             return (
                 <div>
                     <NavbarHomepage />
                     {/*<h1>Rent Request Notifications</h1>*/}
                     <br />
-                    {this.showRentRequest()}
+                    {showRentRequest()}
                 </div>
             )
         
-    }
+    
 }
+
+export default RentRequestNotification;

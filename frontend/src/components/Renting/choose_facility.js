@@ -4,7 +4,11 @@ import Calendar from 'react-calendar';
 import { differenceInCalendarDays } from 'date-fns';
 import 'react-calendar/dist/Calendar.css';
 import NavbarHomepage from "../navbar_homepage";
+import io from 'socket.io-client';
+import { ChatState } from "../../Context/ChatProvider";
 
+const ENDPOINT = "http://localhost:5000";
+var socket;
 
 
 
@@ -17,6 +21,8 @@ const ChooseStayDuration=()=>{
     const [renter_id, setRenterId] = React.useState(''); 
     const [renter_name, setRenterName] = React.useState('');
     const [allBookedDates, setAllBookedDates] = React.useState([]);
+    const [socketConnected, setSocketConnected] = React.useState(false);
+    const {user, selectedChat, setSelectedChat, notification, setNotification} = ChatState();
     
     
     useEffect(() => {
@@ -54,6 +60,17 @@ const ChooseStayDuration=()=>{
             )
 
     }, []);
+
+    useEffect(() => {
+        
+        // console.log(user);
+        if(user){
+            socket = io(ENDPOINT);
+            socket.emit("setup", user);
+            socket.on("connected", () => setSocketConnected(true));
+        }
+        // eslint-disable-next-line
+      },[user]);
     // //all dates between august 1 and august 31
     // const  = [...Array(31).keys()].map(i => new Date(2022, 7, i + 1));
     //get difference between two dates
@@ -156,6 +173,7 @@ const ChooseStayDuration=()=>{
                 console.log(res.data);
                 if(res.data === 'ok'){
                     alert('Rental request sent successfully');
+                    socket.emit("new rental request", rent_request);
                     window.location = '/renting';
                 }
                 else if(res.data === 'Invalid date'){

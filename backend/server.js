@@ -51,6 +51,7 @@ const io = require("socket.io")(server, {
 io.on("connection", (socket) => {
   console.log("Connected to socket.io");
   socket.on("setup", (userData) => {
+    console.log(userData);
     socket.join(userData.user_id);
     socket.emit("connected");
   });
@@ -73,6 +74,10 @@ io.on("connection", (socket) => {
 
       socket.in(user._id).emit("message recieved", newMessageRecieved);
     });
+  });
+
+  socket.on("new rental request", (rent_request) => {
+    socket.in(rent_request.host_id).emit("rental request recieved",rent_request);
   });
 
   socket.off("setup", () => {

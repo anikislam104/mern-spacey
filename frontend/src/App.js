@@ -68,6 +68,8 @@ import UserSearch from "./components/Admin/userSearch";
 import UserProfileAdmin from "./components/Admin/userProfileAdmin";
 import ShowPropertyAdmin from "./components/Admin/showPropertyAdmin";
 import SelectedPropertyAdmin from "./components/Admin/selectedPropertyAdmin";
+import ShowBlogAdmin from "./components/Admin/ShowBlogAdmin";
+import ShowBlogAd from "./components/Admin/ShowBlog";
 
 
 function App() {
@@ -165,6 +167,8 @@ function App() {
         <Route path="user_profile_admin" element={<UserProfileAdmin />} />
         <Route path="show_property_admin" element={<ShowPropertyAdmin />} />
         <Route path="selected_property_admin" element={<SelectedPropertyAdmin />} />
+        <Route path="show_blogs_admin" element={<ShowBlogAdmin />} />
+        <Route path="show_blog_admin" element={<ShowBlogAd />} />
         
         
       </Routes>

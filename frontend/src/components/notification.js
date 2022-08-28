@@ -1,9 +1,26 @@
 import axios from "axios";
 import React, { useEffect } from "react";
+import { ChatState } from "../Context/ChatProvider";
 import NavbarHomepage from "./navbar_homepage";
+import io from 'socket.io-client';
 
+const ENDPOINT = "http://localhost:5000";
+var socket;
 const Notification = () => {
-    const [notification, setNotification] = React.useState([]);
+    const [socketConnected, setSocketConnected] = React.useState(false);
+    const {user, selectedChat, setSelectedChat, notification1, setNotification1} = ChatState();
+    
+
+    useEffect(() => {
+        
+        // console.log(user);
+        if(user){
+            socket = io(ENDPOINT);
+            socket.emit("setup", user);
+            socket.on("connected", () => setSocketConnected(true));
+        }
+        // eslint-disable-next-line
+      },[user]);
 
     useEffect(() => {
         const id=localStorage.getItem("user_id");
@@ -15,9 +32,23 @@ const Notification = () => {
         axios.post("http://localhost:5000/users/get_notifications",user)
             .then(res => {
                 console.log(res.data);
-                setNotification(res.data);
+                setNotification1(res.data);
             });
     }, []);
+
+    useEffect(() => {
+        if(socketConnected){
+            socket.on("rental request recieved", (rent_request) => {
+            // setNotification([newMessageRecieved, ...notification]);
+            // setRentRequest([rent_request, ...rentRequest]);
+            const noti={
+                message: "You have a new rental request",
+                type: "rental_request",
+            }
+            setNotification1([noti, ...notification1]);
+            });
+    }
+      });
 
     /*const btn = {
         //design white button with full width for notification
@@ -40,7 +71,7 @@ const Notification = () => {
             <div className="container">
                 <div className="notification">
 
-            {notification.map((notification) => {
+            {notification1.map((notification) => {
                 
                 return (
 

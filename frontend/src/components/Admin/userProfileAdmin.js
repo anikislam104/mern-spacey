@@ -122,6 +122,16 @@ const UserProfileAdmin = () => {
             >
               Payment History
             </button></p>
+            <p style={{textAlign:"right"}}>
+            <button
+              className="btn btn-primary"
+              
+              onClick={() => {
+                navigate("/show_blogs_admin");
+              }}
+            >
+              Show Blog
+            </button></p>
 
             </div>
             </div>
