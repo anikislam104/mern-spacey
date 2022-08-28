@@ -68,6 +68,9 @@ const Notification = () => {
                                 else if(notification.type==="extend"){
                                     window.location.href = "/extend_notification";
                                 }
+                                else if(notification.type==="complaint"){
+                                    window.location.href = "/view_complaints";
+                                }
                             }
                         }>
                         <button class="btn btn-hover" style={{width:"1200px"}} >{notification.message}</button>

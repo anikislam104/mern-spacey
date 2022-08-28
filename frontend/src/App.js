@@ -38,7 +38,7 @@ import RentRequestNotification from "./components/Renting/notification";
 import AddInsurance from "./components/Insurance/addInsurance";
 import ForgetPassword from "./components/Authentication/forget_password";
 import ForgetPasswordOTP from "./components/Authentication/forget_password_otp";
-import AdminHomepage from "./components/adminHomepage";
+import AdminHomepage from "./components/Admin/adminHomepage";
 import EditProfile from "./components/Profile/editProfile";
 import ViewProfile from "./components/Profile/viewProfile";
 import ShowMyBlog from "./components/Blog/showMyBlog";
@@ -62,6 +62,8 @@ import ShowInsurance from "./components/Insurance/showInsurance";
 import CurrentHostings from "./components/Renting/currentHosting";
 import PastHostings from "./components/Renting/pastHosting";
 import UserProfile from "./components/Profile/clickedProfile";
+import ShowComplaints from "./components/Admin/showComplaints";
+import ViewComplaints from "./components/Profile/viewComplaints";
 
 
 function App() {
@@ -98,6 +100,7 @@ function App() {
         <Route path="editRooms" element={<EditRooms />} />
         <Route path="editFacilities" element={<EditFacilities />} />
         <Route path="user_profile" element={<UserProfile />} />
+        <Route path="view_complaints" element={<ViewComplaints />} />
         
         
 
@@ -152,6 +155,8 @@ function App() {
         
         {/* Notifications */}
 
+        {/* Admin */}
+        <Route path="show_complaints" element={<ShowComplaints />} />
         
         
         
