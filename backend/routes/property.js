@@ -485,4 +485,12 @@ router.route("/get_business_properties").post((req, res) => {
   })
 });
 
+router.route("/get_my_property").post((req, res) => {
+  const user_id = req.body.user_id;
+  //get all my properties
+  Property.find({ hostId: user_id }).then((properties) => {
+    res.send(properties);
+  }
+  );
+});
 module.exports = router;

@@ -22,20 +22,39 @@ const EditFacilities = () => {
         );
     }, []);
 
+    const myStyle = {
+        inputSection2: {
+          width: "50px",
+          height: "40px",
+        },
+        buttonSection3: {
+          backgroundColor: "#b9f2ff",
+          padding: "5px 15px",
+          fontSize: "25px",
+          color: "black",
+        },
+      }
+
     return(
         <div>
             <NavbarHomepage />
             <div className="container">
                 <div className="notification">
-                    <h1>Current Facilities</h1>
+                    <br/>
+                <h1 class="display-6" style={{textAlign:"center"}}><b>Current Facilities</b></h1>
                     <div className="menu">
+
+                    <div class="row align-items-center">
+                    <div class="col-lg-1"></div>
+          <div class="col-lg-4">
                         {currentFacility.map((facility) => {
                             return (
-                                <div className="menu">
-                                    <h2>{facility.facilityType}</h2>
+                                <div className="card mb-4 box-shadow" style={{width:"250px", height:"200px",backgroundColor:"#e0ffff",textAlign:"center"}}>
+                                    <br/><br/>
+                                    <h2><b>{facility.facilityType}</b></h2>
                                     <br />
                 
-                                    <button className="btn btn-primary" onClick={
+                                     <div style={{textAlign:"center"}}><button className="btn btn-primary" onClick={
                                         () => {
                                             const facility_id = {
                                                 facility_id: facility._id,
@@ -46,21 +65,25 @@ const EditFacilities = () => {
                                                     window.location.reload();
                                                 })
                                         }
-                                    }>Remove</button>
+                                    }>Remove</button></div>
                                     <br />
                                     <br />
                                 </div>
                             )
                         }
                         )}
-                    </div>
+                        </div>
+                    
                     <br />
                     <br />
-                    <h1>Add New Facility</h1>
+                    <div class="col-lg-2"></div>
+                    
+                    <div class="col-lg-5">
+                    <h1><b>Add New Facility</b></h1>
                     <br />
                     <br />
                     <div>
-                        <input type="text" placeholder="Facility " onChange={(e) => setFacility_name(e.target.value)} />
+                        <input type="text" placeholder="Facility " style={{backgroundColor:"#e0ffff"}} onChange={(e) => setFacility_name(e.target.value)} />
                         <br />
                         <br />
                         <button className="btn btn-primary" onClick={
@@ -76,6 +99,9 @@ const EditFacilities = () => {
                                     })
                             }
                         }>Add</button>
+                    </div>
+                    </div>
+                    </div>
                     </div>
                 </div>
                 <br />

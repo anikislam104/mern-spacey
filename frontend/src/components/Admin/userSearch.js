@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import AdminNavbar from "./adminNavbar";
+import "./styles.css";
 
 const UserSearch = () => {
     const [userlist, setUserlist] = React.useState([]);
@@ -21,6 +22,7 @@ const UserSearch = () => {
               className="form-control mr-sm-2"
               type="search"
               name="search"
+              placeholder="Search"
               onChange={(e) => setSearch_string(e.target.value)}
               
             />
@@ -29,12 +31,14 @@ const UserSearch = () => {
               type="button"
                 className="btn btn-outline-success my-2 my-sm-0"
                 onClick={() => {
+                    document.getElementById('list').style.display = "block";
                     const data={
                         search_string:search_string
                     }
                     axios.post("http://localhost:5000/users/get_recommended_users",data)
                     .then(res=>{
                         setUserlist(res.data);
+
                     })
                 }}
             >
@@ -43,10 +47,17 @@ const UserSearch = () => {
           </div>
         </form>
       </nav>
-      <div>
+      <div id="list" style={{ display:"none"  }}>
         {userlist.map((user) => (
             <div>
-                <h1>{user.firstName} {user.lastName}</h1>
+                <button class="button"  onClick={
+                  ()=>{
+                      localStorage.setItem("clicked_user_id",user._id);
+                      window.location="/user_profile_admin";
+                  }
+                } ><h1>{user.firstName} {user.lastName}</h1></button>
+                <br></br>
+                <br></br>
             </div>
         ))}
       </div>

@@ -65,6 +65,9 @@ import UserProfile from "./components/Profile/clickedProfile";
 import ShowComplaints from "./components/Admin/showComplaints";
 import ViewComplaints from "./components/Profile/viewComplaints";
 import UserSearch from "./components/Admin/userSearch";
+import UserProfileAdmin from "./components/Admin/userProfileAdmin";
+import ShowPropertyAdmin from "./components/Admin/showPropertyAdmin";
+import SelectedPropertyAdmin from "./components/Admin/selectedPropertyAdmin";
 
 
 function App() {
@@ -159,7 +162,9 @@ function App() {
         {/* Admin */}
         <Route path="show_complaints" element={<ShowComplaints />} />
         <Route path="user_search" element={<UserSearch />} />
-        
+        <Route path="user_profile_admin" element={<UserProfileAdmin />} />
+        <Route path="show_property_admin" element={<ShowPropertyAdmin />} />
+        <Route path="selected_property_admin" element={<SelectedPropertyAdmin />} />
         
         
       </Routes>

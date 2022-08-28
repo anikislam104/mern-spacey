@@ -41,6 +41,26 @@ const ViewProfile = () => {
     window.location = "/viewProperties";
   };
 
+  const handleBookings = (e) => {
+    e.preventDefault();
+    window.location = "/renting/my_bookings";
+  };
+ 
+  const handleHostings = (e) => {
+    e.preventDefault();
+    window.location = "/my_hostings";
+  };
+
+  const handleComplaints = (e) => {
+    e.preventDefault();
+    window.location = "/view_complaints";
+  };
+
+  const handlePaymentHistory = (e) => {
+    e.preventDefault();
+    window.location = "/payment/payment_history";
+  };
+
   return (
     <div class="bg-light">
         {/* //show user profile */}
@@ -101,13 +121,53 @@ const ViewProfile = () => {
                       </div>
                   </div>
 
-        <div>
           <br />
 
           <div class="row align-items-center">
           <div class="col-lg-1"></div>
-              <div class="col-lg-8">
+              <div class="col-lg-2">
+          <button className="btn btn-primary" style={{backgroundColor:"#ee5a6f"}} onClick={handleBookings}>
+            My Bookings
+          </button>
+          </div>
 
+          <div class="col-lg-1"></div>
+         
+          <div class="col-lg-2">
+          <button className="btn btn-primary" style={{backgroundColor:"#ee5a6f"}} onClick={handleHostings}>
+            My Hostings
+          </button>
+          </div>
+
+          <div class="col-lg-1"></div>
+
+          <div class="col-lg-2">
+          <button className="btn btn-primary" style={{backgroundColor:"#ee5a6f"}} onClick={handlePaymentHistory}>
+            Payment History
+          </button>
+          </div>
+
+          <div class="col-lg-1"></div>
+
+          <div class="col-lg-2">
+          <button className="btn btn-primary" style={{backgroundColor:"#ee5a6f"}} onClick={handleComplaints}>
+            Complaints
+          </button>
+          </div>
+
+          </div>
+          <br />
+          <br />
+
+
+          <br/>
+          <br/>
+
+          <div class="row align-items-center">
+          <div class="col-lg-3"></div>
+              <div class="col-lg-4">
+
+&emsp;
           <button className="btn btn-primary" style={{backgroundColor:"#ee5a6f"}} onClick={handleEdit}>
             Edit Profile
           </button>
@@ -121,10 +181,10 @@ const ViewProfile = () => {
           </button>
           </div>
           </div>
-
-
+          <br/><br/>
         </div>
-    </div>
+      
+    
   );
 };
 
