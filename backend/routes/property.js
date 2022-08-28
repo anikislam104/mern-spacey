@@ -433,6 +433,7 @@ router.route("/get_rec").post(async(req, res) => {
   const filtered_booking = await Booking.find({ renter_id: { $eq: user_id }});
   if(filtered_booking.length == 0) {
     res.send([]);
+    return;
   }
   var similarDocuments = [];
   for(let i = filtered_booking.length - 1; i >= 0; i--)
