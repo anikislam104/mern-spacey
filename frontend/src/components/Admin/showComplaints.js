@@ -16,7 +16,7 @@ const ShowComplaints = () => {
     return (
         <div>
             <AdminNavbar />
-            <h1>Complaints</h1>
+            <h1 class="display-6" style={{textAlign:"center"}}><b>Complaints</b></h1>
             <br />
             {/* //loop through complaints */}
             {complaints.map((complaint) => (
