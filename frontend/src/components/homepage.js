@@ -1,6 +1,6 @@
 import { useToast } from "@chakra-ui/react";
 import axios from "axios";
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ChatState } from "../Context/ChatProvider";
 // import axios from 'axios';
 import NavbarHomepage from "./navbar_homepage";
@@ -10,9 +10,8 @@ var location = "";
 var price = "";
 var description = "";
 var size = "";
-const arr=[];
-const parr=[]
-
+const arr = [];
+const parr = [];
 
 const Homepage = () => {
   const [search, setSearch] = useState("");
@@ -25,20 +24,19 @@ const Homepage = () => {
 
   const { user } = ChatState();
   const toast = useToast();
-  
 
-  function getArrayElements(total){
-    let first=-3;
-    let second=-2;
-    let third=-1;
+  function getArrayElements(total) {
+    let first = -3;
+    let second = -2;
+    let third = -1;
     //let flag1=0;
     //let flag2=0;
-    
-    return arr.map((item)=>{
-        first=first+3;
-        second=second+3;
-        third=third+3;
-        /*if(second>=arr.length || flag2===1){
+
+    return arr.map((item) => {
+      first = first + 3;
+      second = second + 3;
+      third = third + 3;
+      /*if(second>=arr.length || flag2===1){
             second=-1;
             flag2=1;
         }
@@ -46,88 +44,56 @@ const Homepage = () => {
             first=-1;
             flag1=1;
         }*/
-        if(first<total && second<total && third<total){
-        return(
-            <div class="row align-items-center">
-
+      if (first < total && second < total && third < total) {
+        return (
+          <div class="row align-items-center">
             <div class="col-lg-2">
-                {arr[first]} 
-                {/* increment count */}
-                
+              {arr[first]}
+              {/* increment count */}
             </div>
-            <div class="col-lg-2">
-
-                </div>
-            <div class="col-lg-2">
-                {arr[second]} 
-                
-            </div>
-            <div class="col-lg-2">
-
-                </div>
-            <div class="col-lg-2">
-                {arr[third]}  
-                
-            </div>
-            </div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-2">{arr[second]}</div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-2">{arr[third]}</div>
+          </div>
         );
-        }
-        else if(first<total && second<total){
-          return(
+      } else if (first < total && second < total) {
+        return (
           <div class="row align-items-center">
-
-          <div class="col-lg-2">
-              {arr[first]} 
+            <div class="col-lg-2">
+              {arr[first]}
               {/* increment count */}
-              
+            </div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-2">{arr[second]}</div>
+            <div class="col-lg-2"></div>
           </div>
-          <div class="col-lg-2">
-
-              </div>
-          <div class="col-lg-2">
-              {arr[second]} 
-              
-          </div>
-          <div class="col-lg-2">
-
-              </div>
-              </div>
-          );
-        }
-
-        else if(first<total){
-          return(
-          
+        );
+      } else if (first < total) {
+        return (
           <div class="row align-items-center">
-              
-          <div class="col-lg-2">
-              {arr[first]} 
+            <div class="col-lg-2">
+              {arr[first]}
               {/* increment count */}
-              
+            </div>
           </div>
-          </div>
-          );
-        }
-        
-      })
-    
-        
-    
-    }
+        );
+      }
+    });
+  }
 
+  function getArrayElementsPer(total) {
+    let first = -3;
+    let second = -2;
+    let third = -1;
+    //let flag1=0;
+    //let flag2=0;
 
-    function getArrayElementsPer(total){
-      let first=-3;
-      let second=-2;
-      let third=-1;
-      //let flag1=0;
-      //let flag2=0;
-      
-      return arr.map((item)=>{
-          first=first+3;
-          second=second+3;
-          third=third+3;
-          /*if(second>=arr.length || flag2===1){
+    return arr.map((item) => {
+      first = first + 3;
+      second = second + 3;
+      third = third + 3;
+      /*if(second>=arr.length || flag2===1){
               second=-1;
               flag2=1;
           }
@@ -135,96 +101,65 @@ const Homepage = () => {
               first=-1;
               flag1=1;
           }*/
-          if(first<total && second<total && third<total){
-          return(
-              <div class="row align-items-center">
-  
-              <div class="col-lg-2">
-                  {parr[first]} 
-                  {/* increment count */}
-                  
-              </div>
-              <div class="col-lg-2">
-  
-                  </div>
-              <div class="col-lg-2">
-                  {parr[second]} 
-                  
-              </div>
-              <div class="col-lg-2">
-  
-                  </div>
-              <div class="col-lg-2">
-                  {parr[third]}  
-                  
-              </div>
-              </div>
-          );
-          }
-          else if(first<total && second<total){
-            return(
-            <div class="row align-items-center">
-  
+      if (first < total && second < total && third < total) {
+        return (
+          <div class="row align-items-center">
             <div class="col-lg-2">
-                {parr[first]} 
-                {/* increment count */}
-                
+              {parr[first]}
+              {/* increment count */}
             </div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-2">{parr[second]}</div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-2">{parr[third]}</div>
+          </div>
+        );
+      } else if (first < total && second < total) {
+        return (
+          <div class="row align-items-center">
             <div class="col-lg-2">
-  
-                </div>
-            <div class="col-lg-2">
-                {parr[second]} 
-                
+              {parr[first]}
+              {/* increment count */}
             </div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-2">{parr[second]}</div>
+            <div class="col-lg-2"></div>
+          </div>
+        );
+      } else if (first < total) {
+        return (
+          <div class="row align-items-center">
             <div class="col-lg-2">
-  
-                </div>
-                </div>
-            );
-          }
-  
-          else if(first<total){
-            return(
-            
-            <div class="row align-items-center">
-                
-            <div class="col-lg-2">
-                {parr[first]} 
-                {/* increment count */}
-                
+              {parr[first]}
+              {/* increment count */}
             </div>
-            </div>
-            );
-          }
-          
-        })
-      
-          
-      
+          </div>
+        );
       }
+    });
+  }
 
-  const myStyle2={
-    blogSection:{
-        width:"300px",
-        height:"250px",
-        textAlign:"center",
+  const myStyle2 = {
+    blogSection: {
+      width: "300px",
+      height: "250px",
+      textAlign: "center",
     },
-    buttonSection:{
-        margin:"0 auto",
+    buttonSection: {
+      margin: "0 auto",
     },
-    textSection:{
-        fontSize:"23px",    
-        display:"flex",
-        justifyContent:"center",
-        flexDirection:"column",
-        alignItems:"center",
-        backgroundColor:"rgba(0,0,0,0.3)",
-        width:"100%",
-        height:"100%",
-        color:"white",
+    textSection: {
+      fontSize: "23px",
+      display: "flex",
+      justifyContent: "center",
+      flexDirection: "column",
+      alignItems: "center",
+      backgroundColor: "rgba(0,0,0,0.3)",
+      width: "100%",
+      height: "100%",
+      color: "white",
     },
-}
+  };
 
   const getRecommendedProperties = async () => {
     try {
@@ -233,8 +168,8 @@ const Homepage = () => {
           Authorization: `Bearer ${user.token}`,
         },
       };
-      const { data } =await axios.get(
-        'http://localhost:5000/property/get_rec',
+      const { data } = await axios.get(
+        "http://localhost:5000/property/get_rec",
         config
       );
       setRecommendedProperties(data);
@@ -252,28 +187,30 @@ const Homepage = () => {
   };
 
   useEffect(() => {
-    getRecommendedProperties();
     console.log("updated");
-    const id ={
+    const id = {
       user_id: localStorage.getItem("user_id"),
-    }
-    axios.post('http://localhost:5000/property/get_personal_properties', id)
-    .then(res => { 
-      console.log(res.data);
-      setPersonalProperties(res.data);
-      setTotalPersonalProperties(res.data.length);
-      console.log(res.data.length);
-
-      axios.post('http://localhost:5000/property/get_business_properties', id)
-      .then(res => {
+    };
+    axios.post("http://localhost:5000/property/get_rec", id).then((res) => {
+      setRecommendedProperties(res.data);
+    });
+    axios
+      .post("http://localhost:5000/property/get_personal_properties", id)
+      .then((res) => {
         console.log(res.data);
-        setBusinessProperties(res.data);
-        setTotalBusinessProperties(res.data.length);
-        
-      })
-    })
+        setPersonalProperties(res.data);
+        setTotalPersonalProperties(res.data.length);
+        console.log(res.data.length);
 
-  } , []);
+        axios
+          .post("http://localhost:5000/property/get_business_properties", id)
+          .then((res) => {
+            console.log(res.data);
+            setBusinessProperties(res.data);
+            setTotalBusinessProperties(res.data.length);
+          });
+      });
+  }, []);
 
   const handleSearch = async () => {
     if (!search) {
@@ -356,7 +293,6 @@ const Homepage = () => {
 
   //show all properties  location
   const showProperties = (properties) => {
-    
     return properties.map((property) => {
       return (
         <div className="col-md-4">
@@ -383,7 +319,6 @@ const Homepage = () => {
           </div>
         </div>
       );
-      
     });
   };
 
@@ -415,7 +350,6 @@ const Homepage = () => {
   };
 
   return (
-    
     <div className="maincontainer">
       <NavbarHomepage />
       <br />
@@ -449,8 +383,7 @@ const Homepage = () => {
               <div class="container">
                 <div class="row align-items-center">
                   <div class="col-lg-3"></div>
-                  {
-                  searchResult.length === 0 ? (
+                  {searchResult.length === 0 ? (
                     <div class="col-lg-6">
                       <div class="card-body">
                         <h3 class="display-6">
@@ -461,12 +394,9 @@ const Homepage = () => {
                             </font>
                           </b>{" "}
                         </h3>
-                        
                       </div>
-                      {showProperties(recommendedProperties)}
                     </div>
-                  )
-                  : (
+                  ) : (
                     showProperties(searchResult)
                   )}
                   <div class="col-lg-3"></div>
@@ -477,20 +407,27 @@ const Homepage = () => {
         </div>
       </div>
       <div>
-        <button className="btn btn-primary" onClick={
-          () => {
+        {showProperties(recommendedProperties)}
+        <button
+          className="btn btn-primary"
+          onClick={() => {
             document.getElementById("personal").style.display = "block";
             document.getElementById("business").style.display = "none";
-          }
-        }>Personal Property</button>
+          }}
+        >
+          Personal Property
+        </button>
         &nbsp;&nbsp;&nbsp;
-        <button className="btn btn-primary" onClick={
-          () => {
+        <button
+          className="btn btn-primary"
+          onClick={() => {
             document.getElementById("personal").style.display = "none";
             document.getElementById("business").style.display = "block";
-          }
-        }>Business Storage</button>
-        <div id="personal" style={{display:"none"}}>
+          }}
+        >
+          Business Storage
+        </button>
+        <div id="personal" style={{ display: "none" }}>
           {/* loop through the personal properties and show them */}
           {personal_properties.map((property) => {
             // return (
@@ -518,99 +455,133 @@ const Homepage = () => {
             //   </div>
             // </div>
             //   );
-            var image=property.image;
-            var path=process.env.PUBLIC_URL+"/images/"+image;
+            var image = property.image;
+            var path = process.env.PUBLIC_URL + "/images/" + image;
 
-            parr.push(<div className="col-md-4">
-            <div className="card mb-4 box-shadow" style={{ width:"300px", height:"250px",textAlign:"center", backgroundImage:`url(${path})` }}>
-                <div className="card-body" style={myStyle2.textSection}>
-                <br/><br/>
-                <p className="card-text"><b>{property.title}</b></p>
-                <p className="card-text"><b>{property.location}</b></p>
-                <font className="text-muted" style={{fontSize:"18px",fontColor:"white"}}><i>&emsp;&emsp;&emsp;&emsp;&emsp;
-                            ({property.size} square ft)</i></font>
+            parr.push(
+              <div className="col-md-4">
+                <div
+                  className="card mb-4 box-shadow"
+                  style={{
+                    width: "300px",
+                    height: "250px",
+                    textAlign: "center",
+                    backgroundImage: `url(${path})`,
+                  }}
+                >
+                  <div className="card-body" style={myStyle2.textSection}>
+                    <br />
+                    <br />
+                    <p className="card-text">
+                      <b>{property.title}</b>
+                    </p>
+                    <p className="card-text">
+                      <b>{property.location}</b>
+                    </p>
+                    <font
+                      className="text-muted"
+                      style={{ fontSize: "18px", fontColor: "white" }}
+                    >
+                      <i>
+                        &emsp;&emsp;&emsp;&emsp;&emsp; ({property.size} square
+                        ft)
+                      </i>
+                    </font>
                     {/* <p className="card-text">{property.location}</p> */}
                     <div className="d-flex justify-content-between align-items-center">
-                       
-                           < br/> <br/> <br/> <br/>
-                        <div className="btn-group" style={myStyle2.buttonSection}>
-                            
-                            <button type="button" className="btn btn-sm btn-outline-secondary" style={{color:"#808080",backgroundColor:"white"}} onClick={
-                                () => {
-                                  localStorage.setItem("selected_property_id", property._id);
-                                  window.location.href = "/renting/selected_property";
-                                }
-                            }>View</button>
-
-                        </div>
-                        
-                        {/* <small className="text-muted">{property.size} square ft</small> */}
+                      <br /> <br /> <br /> <br />
+                      <div className="btn-group" style={myStyle2.buttonSection}>
+                        <button
+                          type="button"
+                          className="btn btn-sm btn-outline-secondary"
+                          style={{ color: "#808080", backgroundColor: "white" }}
+                          onClick={() => {
+                            localStorage.setItem(
+                              "selected_property_id",
+                              property._id
+                            );
+                            window.location.href = "/renting/selected_property";
+                          }}
+                        >
+                          View
+                        </button>
+                      </div>
+                      {/* <small className="text-muted">{property.size} square ft</small> */}
                     </div>
+                  </div>
                 </div>
-            </div>
-        </div>);
+              </div>
+            );
 
-        return(
-          <div>
-              
-          </div>
-        );
-          }
-          
-          )}
-          {getArrayElementsPer(totalPersonalProperties)}            
-
+            return <div></div>;
+          })}
+          {getArrayElementsPer(totalPersonalProperties)}
         </div>
-        <div id="business" style={{display:"none"}}>
+        <div id="business" style={{ display: "none" }}>
           {/* loop through the personal properties and show them */}
           {business_properties.map((property) => {
-           
-            var image=property.image;
-            var path=process.env.PUBLIC_URL+"/images/"+image;
+            var image = property.image;
+            var path = process.env.PUBLIC_URL + "/images/" + image;
 
-            arr.push(<div className="col-md-4">
-            <div className="card mb-4 box-shadow" style={{ width:"300px", height:"250px",textAlign:"center", backgroundImage:`url(${path})` }}>
-                <div className="card-body" style={myStyle2.textSection}>
-                <br/><br/>
-                <p className="card-text"><b>{property.title}</b></p>
-                <p className="card-text"><b>{property.location}</b></p>
-                <font className="text-muted" style={{fontSize:"18px",fontColor:"white"}}><i>&emsp;&emsp;&emsp;&emsp;&emsp;
-                            ({property.size} square ft)</i></font>
+            arr.push(
+              <div className="col-md-4">
+                <div
+                  className="card mb-4 box-shadow"
+                  style={{
+                    width: "300px",
+                    height: "250px",
+                    textAlign: "center",
+                    backgroundImage: `url(${path})`,
+                  }}
+                >
+                  <div className="card-body" style={myStyle2.textSection}>
+                    <br />
+                    <br />
+                    <p className="card-text">
+                      <b>{property.title}</b>
+                    </p>
+                    <p className="card-text">
+                      <b>{property.location}</b>
+                    </p>
+                    <font
+                      className="text-muted"
+                      style={{ fontSize: "18px", fontColor: "white" }}
+                    >
+                      <i>
+                        &emsp;&emsp;&emsp;&emsp;&emsp; ({property.size} square
+                        ft)
+                      </i>
+                    </font>
                     {/* <p className="card-text">{property.location}</p> */}
                     <div className="d-flex justify-content-between align-items-center">
-                       
-                           < br/> <br/> <br/> <br/>
-                        <div className="btn-group" style={myStyle2.buttonSection}>
-                            
-                            <button type="button" className="btn btn-sm btn-outline-secondary" style={{color:"#808080",backgroundColor:"white"}} onClick={
-                                () => {
-                                  localStorage.setItem("selected_property_id", property._id);
-                                  window.location.href = "/renting/selected_property";
-                                }
-                            }>View</button>
-
-                        </div>
-                        
-                        {/* <small className="text-muted">{property.size} square ft</small> */}
+                      <br /> <br /> <br /> <br />
+                      <div className="btn-group" style={myStyle2.buttonSection}>
+                        <button
+                          type="button"
+                          className="btn btn-sm btn-outline-secondary"
+                          style={{ color: "#808080", backgroundColor: "white" }}
+                          onClick={() => {
+                            localStorage.setItem(
+                              "selected_property_id",
+                              property._id
+                            );
+                            window.location.href = "/renting/selected_property";
+                          }}
+                        >
+                          View
+                        </button>
+                      </div>
+                      {/* <small className="text-muted">{property.size} square ft</small> */}
                     </div>
+                  </div>
                 </div>
-            </div>
-        </div>);
+              </div>
+            );
 
-        return(
-          <div>
-              
-          </div>
-        );
-
-          }
-          
-          )}
+            return <div></div>;
+          })}
           {getArrayElements(totalBusinessProperties)}
-                      
-
         </div>
-              
       </div>
     </div>
   );
