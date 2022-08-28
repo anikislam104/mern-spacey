@@ -190,6 +190,10 @@ export default class RentingHome extends Component {
         
     }
 
+    clearArrayElements(){
+        arr.splice(0, arr.length)
+      } 
+
     render() {
         return(
             <div class="col-lg-12 bg-light">
@@ -198,6 +202,7 @@ export default class RentingHome extends Component {
                 <br/ >
                 {this.showProperties()}
                 {this.getArrayElements()}
+                {this.clearArrayElements()}
             </div>
         )
     }

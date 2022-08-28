@@ -149,14 +149,24 @@ export default class AllBlogs extends Component {
         
     }
 
+    clearArrayElements(){
+        arr.splice(0, arr.length)
+      } 
+
     render() {
         return(
             <div class="col-lg-12 bg-light">
                 {/* {allBlogs} */}
                 <NavbarHomepage />
                 <br/ >
+                <br/>
                 {this.getAllBlogs()}
                 {this.getArrayElements()}
+                {this.clearArrayElements()}
+                <br/>
+<br/>
+<br/>
+
             </div>
         )
     }

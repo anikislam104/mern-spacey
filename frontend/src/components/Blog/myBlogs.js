@@ -160,6 +160,10 @@ export default class MyBlogs extends Component {
         
     }
 
+    clearArrayElements(){
+        arr.splice(0, arr.length)
+      } 
+
     render() {
         return(
             <div class="col-lg-12 bg-light">
@@ -168,6 +172,11 @@ export default class MyBlogs extends Component {
                 <br/ >
                 {this.getMyBlogs()}
                 {this.getArrayElements()}
+                {this.clearArrayElements()}
+                <br/>
+<br/>
+<br/>
+
             </div>
         )
     }

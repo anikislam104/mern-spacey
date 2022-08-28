@@ -97,9 +97,9 @@ export default class BlogHome extends Component {
           <h5><b>Share your hosting experience</b></h5>
           <br/>
           <div className="container">
-                <br/>
+                
                 &emsp;&emsp;
-                <button onClick={this.writeBlog} style={myStyle.buttonSection}> Write Blog</button>
+                <button className="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off"  onClick={this.writeBlog} style={myStyle.buttonSection}> Write Blog</button>
           </div>
         </div>
 
@@ -114,12 +114,13 @@ export default class BlogHome extends Component {
               <div className="container">
                 <br/>
                 &emsp;&emsp;
-                <button onClick={this.readBlogs} style={myStyle.buttonSection}> Read Blogs</button>
+                <button className="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off"  onClick={this.readBlogs} style={myStyle.buttonSection}> Read Blogs</button>
 
              </div> 
         </div>             
     </div>
-
+<br/><br/>
+<br/>
           </div>
             </div>
             

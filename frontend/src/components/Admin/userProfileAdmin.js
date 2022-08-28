@@ -89,8 +89,8 @@ const UserProfileAdmin = () => {
                   </div>
            
                   <div class="row align-items-center">
-          <div class="col-lg-7"></div>
-          <div class="col-lg-4">
+          <div class="col-lg-2"></div>
+          <div class="col-lg-3">
           <p style={{textAlign:"left"}}>
             <button
               className="btn btn-primary"
@@ -101,6 +101,10 @@ const UserProfileAdmin = () => {
             >
               Show Properties
             </button></p>
+            </div>
+
+            <div class="col-lg-2">
+
 <p style={{textAlign:"right"}}>
             <button
               className="btn btn-primary"
@@ -110,20 +114,24 @@ const UserProfileAdmin = () => {
               }}
             >
               Chat with {name}
-            </button></p>
+            </button></p></div>
 
+            <div class="col-lg-2"></div>
+
+            <div class="col-lg-2">
             <p style={{textAlign:"left"}}>
             <button
               className="btn btn-primary"
               
               onClick={() => {
-                navigate("/payment/payment_history");
+                navigate("/payment_history_user");
               }}
             >
               Payment History
             </button></p>
 
             </div>
+            <div class="col-lg-3"></div>
             </div>
 
 <br/><br/><br/>

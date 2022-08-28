@@ -337,7 +337,7 @@ router.route('/get_total_income').post(async (req, res) => {
     .then(payments => {
         payments=payments.filter(payment=>payment.host_id==user_id && payment.status=='approved'); 
         for(let i=0;i<payments.length;i++){
-           income+=parseInt(payments[i].amount);
+           income+=parseFloat(payments[i].amount);
         }
         //console.log(income);
         res.json(income);
@@ -358,7 +358,7 @@ router.route('/get_income_between_days').post(async (req, res) => {
            //console.log(db_date+"   "+date1+"   "+date2);
            //console.log(db_date.getTime()+"   "+date1.getTime()+"   "+date2.getTime());
            if(db_date.getTime()>=date1.getTime() && db_date.getTime()<=date2.getTime()){
-              income+=parseInt(payments[i].amount);
+              income+=parseFloat(payments[i].amount);
            }
         }
         //console.log(income);
@@ -379,6 +379,60 @@ router.route('/host_property_id').post(async (req, res) => {
         property_id=booking.property_id;
         amount=booking.price;
         res.json({host_id:host_id,property_id:property_id,amount:amount});
+    })
+})
+
+
+router.route('/get_payment_history_all').post(async (req, res) => {
+  //const user_id = req.body.user_id;
+
+  Payment.find()
+    .then(payments => {
+        //payments=payments.filter(payment=>(payment.host_id==user_id || payment.renter_id==user_id) && (payment.status=='approved' || payment.status=='rejected')); 
+        payments.sort((a,b)=>{
+          let da = new Date(a.update_date),
+              db = new Date(b.update_date);
+          //console.log(db.getTime()+"   "+da.getTime());    
+          return db.getTime() - da.getTime();
+        });
+        //console.log(payments);
+        res.json(payments);
+    })
+})
+
+router.route('/get_total_transactions').post(async (req, res) => {
+  //const user_id = req.body.user_id;
+  let transactions=0;
+  Payment.find()
+    .then(payments => {
+        payments=payments.filter(payment=>payment.status=='approved'); 
+        for(let i=0;i<payments.length;i++){
+          transactions+=parseFloat(payments[i].amount);
+        }
+        //console.log(income);
+        res.json(transactions);
+    })
+})
+
+router.route('/get_transactions_between_days').post(async (req, res) => {
+  //const user_id = req.body.user_id;
+  let date1=new Date(req.body.date1);
+  let date2=new Date(req.body.date2);
+  //console.log(date1+"   "+date2);
+  let transactions=0;
+  Payment.find()
+    .then(payments => {
+        payments=payments.filter(payment=>payment.status=='approved'); 
+        for(let i=0;i<payments.length;i++){
+           let db_date=new Date(payments[i].date); 
+           //console.log(db_date+"   "+date1+"   "+date2);
+           //console.log(db_date.getTime()+"   "+date1.getTime()+"   "+date2.getTime());
+           if(db_date.getTime()>=date1.getTime() && db_date.getTime()<=date2.getTime()){
+            transactions+=parseFloat(payments[i].amount);
+           }
+        }
+        //console.log(income);
+        res.json(transactions);
     })
 })
 
