@@ -18,16 +18,9 @@ const NavbarHomepage = () => {
   }, [user_name]);
 
     const myStyle= {
-      navSection:{
-       backgroundColor: "#C2C6CC",
-       color: "white",
-       width:"1300px",
-       height:"75px",
-      },
-      
       optionSection:{
         color: "#0E2A53",
-        fontSize:"35px",
+        fontSize:"40px",
        },
 
        textSection:{
@@ -38,24 +31,50 @@ const NavbarHomepage = () => {
         textAlign:"center",
        },
 
+       navSection:{
+        backgroundColor: "#C2C6CC",
+        color: "white",
+        width:"1300px",
+        height:"50px",
+       },
+
+       navSection2:{
+        backgroundColor: "#C2C6CC",
+        color: "white",
+        width:"1300px",
+        height:"48px",
+       },
+
+       navSection3:{
+        backgroundColor: "#C2C6CC",
+        color: "white",
+        width:"1300px",
+        height:"60px",
+       },
+
     }
 
     return (
       <div>
       <nav className="navbar navbar navbar-expand-lg" style={myStyle.navSection}>
         
-            
+        
+{/*             
       &nbsp;&nbsp;<img src={spacey} class="img-responsive" alt=" " />
             
-          <Link to={"/homepage"} className="navbar-brand"  ><font style={myStyle.optionSection}><b> &nbsp;Spacey &nbsp;</b></font></Link>
+          <Link to={"/homepage"} className="navbar-brand"  ><font style={myStyle.optionSection}><b> &nbsp;Spacey &nbsp;</b></font></Link> */}
           
 
         <div class="row align-items-center">
-          
+        
          <ul className="navbar-nav mr-auto">
+
+         <div class="col-lg-3" style={{textAlign:"center"}}></div>
           
-          <div class="col-lg-6" style={{textAlign:"center"}}>
+          <div class="col-lg-7" style={{textAlign:"center"}}>
+            
           <li className="navbar-item">
+            
           &nbsp;
           <Link to={'/blog'} className="nav-link"><h5><b>Blog </b></h5></Link>
           </li>
@@ -93,9 +112,18 @@ const NavbarHomepage = () => {
        
       </nav>
 
+{/* Middle Navbar Code */}
+
+      <nav className="navbar navbar navbar-expand-lg" style={myStyle.navSection2}>
+        
+            
+        &nbsp;&nbsp;<img src={spacey} class="img-responsive" alt=" " />
+              
+            <Link to={"/homepage"} className="navbar-brand"  ><font style={myStyle.optionSection}><b> &nbsp;Spacey &nbsp;</b></font></Link>
+            </nav>
 {/* Lower Navbar Code */}
 
-      <nav className="navbar navbar navbar-expand-lg" style={myStyle.navSection}>
+      <nav className="navbar navbar navbar-expand-lg" style={myStyle.navSection3}>
            
       <div class="row align-items-center">
            <ul className="navbar-nav mr-auto">
@@ -103,10 +131,10 @@ const NavbarHomepage = () => {
 
            <div class="col-lg-4" style={{textAlign:"center"}}></div>
 
-           <div class="col-lg-5" style={{textAlign:"center"}}>
+           <div class="col-lg-4" style={{textAlign:"center"}}>
             <li className="navbar-item">
               &nbsp;
-            <Link to={'/rent_request_notifications'} className="nav-link"><h5><b>&nbsp;&nbsp;&nbsp;Rent Requests </b></h5></Link>
+            <Link to={'/rent_request_notifications'} className="nav-link"><h5><b>&emsp;&emsp;Rent Requests </b></h5></Link>
             </li>
             </div>
             
