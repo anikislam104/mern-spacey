@@ -5,8 +5,7 @@ import NavbarHomepage from '../navbar_homepage';
 import "./styles.css";
 // const blog_id=Request.QueryString["data"];
 var comments=[];
-var like=0;
-var dislike=0;
+
 export default class ShowMyBlog extends Component {
     constructor(props) {
         super(props);
@@ -17,6 +16,8 @@ export default class ShowMyBlog extends Component {
             blog: [],
             user_id: '',
             Comment: "",
+            like:"",
+            dislike:"",
         }
     }
     componentDidMount() {
@@ -45,11 +46,40 @@ export default class ShowMyBlog extends Component {
                 this.setState({
                     blog: this.state.blog.concat(res.data),
                 });
+                axios.post('http://localhost:5000/blogs/get_like_dislike_count', {blog_id:localStorage.getItem('blog_id')}) 
+                    .then(res => {
+                        console.log(res.data);
+                        this.setState({
+                            like:res.data.like_count,
+                            dislike:res.data.dislike_count,
+                        })
+                        console.log(this.state.like);
+                    })
+                
+
+                const data ={
+                    blog_id:localStorage.getItem('blog_id'),
+                    user_id:localStorage.getItem('user_id'),
+                }
+                //check reaction
+                axios.post('http://localhost:5000/blogs/check_reaction', data)
+                .then(res => {
+                    console.log(res.data);
+                    if(res.data==="liked"){
+                        document.getElementById("like").style.color="white";
+                        document.getElementById("like").style.backgroundColor="green";
+                    }
+                    else if(res.data==="disliked"){
+                        document.getElementById("dislike").style.color="white";
+                        document.getElementById("dislike").style.backgroundColor="red";
+                    }
+                    else{
+                        document.getElementById("like").style.color="blue";
+                        document.getElementById("dislike").style.color="blue";
+                    }
+                })
             })
-        console.log(this.state.blog);
-        this.setState({
-            user_id: localStorage.getItem('user_id'),
-        });
+        
     }
 
     comment(e){
@@ -124,7 +154,7 @@ export default class ShowMyBlog extends Component {
             <div class="row align-items-center">    
                 {/* button for upvote */}
                 <div class="col-lg-4">
-                <button  type='submit' className="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" onClick={
+                <button  type='submit' id="like" data-toggle="button" aria-pressed="false" autocomplete="off" onClick={
                     (e) => {
                         const upvote = {
                             blog_id: blog._id,
@@ -134,20 +164,38 @@ export default class ShowMyBlog extends Component {
                         axios.post('http://localhost:5000/blogs/upvote', upvote)
                             .then(res => {
                                 console.log(res.data);
+                                this.setState({
+                                    like: res.data.like_count,
+                                    dislike: res.data.dislike_count,
+                                });
+                                if(res.data.msg === "up"){
+                                    document.getElementById("like").style.color="white";
+                                    document.getElementById("like").style.backgroundColor="green";
+                                }
+                                else if(res.data.msg === "down"){
+                                    document.getElementById("like").style.color="blue";
+                                    document.getElementById("like").style.backgroundColor="white";
+                                }
+                                else if(res.data.msg === "updown"){
+                                    document.getElementById("like").style.color="white";
+                                    document.getElementById("like").style.backgroundColor="green";
+                                    document.getElementById("dislike").style.color="blue";
+                                    document.getElementById("dislike").style.backgroundColor="white";
+                                }
                             }).catch(err => {
                                 console.log(err);
                             }
                         )
                         
                         //disable button after upvote
-                        like=like+1;
+                        // like=like+1;
                         // window.location.reload();
-                        e.currentTarget.disabled = true;
+                        // e.currentTarget.disabled = true;
                     }
-                } >Upvote</button>&emsp;<b>{blog.like_count}</b> upvotes
+                } >Upvote</button>&emsp;<b>{this.state.like}</b> upvotes
                 </div>
                 <div class="col-lg-4">
-                <button type='submit' className="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" onClick={
+                <button type='submit' id="dislike" data-toggle="button" aria-pressed="false" autocomplete="off" onClick={
                     (e) => {
                         const downvote = {
                             blog_id: blog._id,
@@ -157,18 +205,37 @@ export default class ShowMyBlog extends Component {
                         axios.post('http://localhost:5000/blogs/downvote', downvote)
                             .then(res => {
                                 console.log(res.data);
+                                this.setState({
+                                    like: res.data.like_count,
+                                    dislike: res.data.dislike_count,
+                                });
+                                if(res.data.msg === "down"){
+                                    document.getElementById("dislike").style.color="blue";
+                                    document.getElementById("dislike").style.backgroundColor="white";
+                                }
+                                else if(res.data.msg === "up"){
+                                    document.getElementById("dislike").style.color="white";
+                                    document.getElementById("dislike").style.backgroundColor="red";
+                                }
+                                else if(res.data.msg === "updown"){
+                                    document.getElementById("dislike").style.color="white";
+                                    document.getElementById("dislike").style.backgroundColor="red";
+                                    document.getElementById("like").style.color="blue";
+                                    document.getElementById("like").style.backgroundColor="white";
+                                }
+                                
                                 
                             }).catch(err => {
                                 console.log(err);
                             }
                         )
-                        dislike=dislike+1;
+                        // dislike=dislike+1;
                         // window.location.reload();
-                        e.currentTarget.disabled = true;
+                        // e.currentTarget.disabled = true;
                         
                         
                     }
-                } >Downvote</button>&emsp;<b>{blog.dislike_count}</b> downvotes
+                } >Downvote</button>&emsp;<b>{this.state.dislike}</b> downvotes
                 </div>
 {/* // comments */}
 
@@ -200,7 +267,7 @@ export default class ShowMyBlog extends Component {
                             }
                         )
                         window.location.reload();
-                        e.currentTarget.disabled = true;
+                        // e.currentTarget.disabled = true;
                         
                         
                         
