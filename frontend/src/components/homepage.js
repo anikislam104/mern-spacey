@@ -13,6 +13,7 @@ var description = "";
 var size = "";
 const arr = [];
 const parr = [];
+const arr3= [];
 
 const Homepage = () => {
   const [search, setSearch] = useState("");
@@ -25,6 +26,64 @@ const Homepage = () => {
 
   const { user } = ChatState();
   const toast = useToast();
+
+
+  function getArrayElementsRec(total) {
+    let first = -3;
+    let second = -2;
+    let third = -1;
+    //let flag1=0;
+    //let flag2=0;
+
+    return arr.map((item) => {
+      first = first + 3;
+      second = second + 3;
+      third = third + 3;
+      /*if(second>=arr.length || flag2===1){
+            second=-1;
+            flag2=1;
+        }
+        if(first>=arr.length || flag1===1){
+            first=-1;
+            flag1=1;
+        }*/
+      if (first < total && second < total && third < total) {
+        return (
+          <div class="row align-items-center">
+            <div class="col-lg-2">
+              {arr[first]}
+              {/* increment count */}
+            </div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-2">{arr[second]}</div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-2">{arr[third]}</div>
+          </div>
+        );
+      } else if (first < total && second < total) {
+        return (
+          <div class="row align-items-center">
+            <div class="col-lg-2">
+              {arr[first]}
+              {/* increment count */}
+            </div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-2">{arr[second]}</div>
+            <div class="col-lg-2"></div>
+          </div>
+        );
+      } else if (first < total) {
+        return (
+          <div class="row align-items-center">
+            <div class="col-lg-2">
+              {arr[first]}
+              {/* increment count */}
+            </div>
+          </div>
+        );
+      }
+    });
+  }
 
   function getArrayElements(total) {
     let first = -3;
@@ -323,6 +382,17 @@ const Homepage = () => {
     });
   };
 
+  const h1s={
+    //bold big catchy font
+    fontWeight: "bold",
+    fontSize: "50px",
+    fontFamily: "Catchy",
+    //background color light blue
+    backgroundColor: "rgba(0,0,255,0.3)",
+    //text color
+    color: "white",
+  }
+
   const myStyle = {
     logoSection: {
       width: "60px",
@@ -369,7 +439,7 @@ const Homepage = () => {
             <button
               type="button"
               onClick={handleSearch}
-              style={myStyle.buttonSection}
+              className="btn btn-outline-success my-2 my-sm-0"
             >
               Search
             </button>
@@ -408,7 +478,77 @@ const Homepage = () => {
         </div>
       </div>
       <div>
-        {showProperties(recommendedProperties)}
+        {/* {showProperties(recommendedProperties)} */}
+        <h1 style={h1s}>Recommended Properties</h1>
+        <br />
+        <br />
+        <div >
+          {/* loop through the personal properties and show them */}
+          {recommendedProperties.map((property) => {
+            var image = property.image;
+            var path = process.env.PUBLIC_URL + "/images/" + image;
+
+            arr3.push(
+              <div className="col-md-4">
+                <div
+                  className="card mb-4 box-shadow"
+                  style={{
+                    width: "300px",
+                    height: "250px",
+                    textAlign: "center",
+                    backgroundImage: `url(${path})`,
+                  }}
+                >
+                  <div className="card-body" style={myStyle2.textSection}>
+                    <br />
+                    <br />
+                    <p className="card-text">
+                      <b>{property.title}</b>
+                    </p>
+                    <p className="card-text">
+                      <b>{property.location}</b>
+                    </p>
+                    <font
+                      className="text-muted"
+                      style={{ fontSize: "18px", fontColor: "white" }}
+                    >
+                      <i>
+                        &emsp;&emsp;&emsp;&emsp;&emsp; ({property.size} square
+                        ft)
+                      </i>
+                    </font>
+                    {/* <p className="card-text">{property.location}</p> */}
+                    <div className="d-flex justify-content-between align-items-center">
+                      <br /> <br /> <br /> <br />
+                      <div className="btn-group" style={myStyle2.buttonSection}>
+                        <button
+                          type="button"
+                          className="btn btn-sm btn-outline-secondary"
+                          style={{ color: "#808080", backgroundColor: "white" }}
+                          onClick={() => {
+                            localStorage.setItem(
+                              "selected_property_id",
+                              property._id
+                            );
+                            window.location.href = "/renting/selected_property";
+                          }}
+                        >
+                          View
+                        </button>
+                      </div>
+                      {/* <small className="text-muted">{property.size} square ft</small> */}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+
+            return <div></div>;
+          })}
+          {getArrayElementsRec(recommendedProperties.length)}
+        </div>
+        <br />
+        <br />
         <button
           className="btn btn-primary"
           onClick={() => {
@@ -418,7 +558,11 @@ const Homepage = () => {
         >
           Personal Property
         </button>
-        &nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <button
           className="btn btn-primary"
           onClick={() => {
@@ -428,6 +572,8 @@ const Homepage = () => {
         >
           Business Storage
         </button>
+        <br />
+        <br />
         <div id="personal" style={{ display: "none" }}>
           {/* loop through the personal properties and show them */}
           {personal_properties.map((property) => {
