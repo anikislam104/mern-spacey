@@ -19,6 +19,7 @@ const UserProfile = () => {
         const user_id = {
             user_id: localStorage.getItem("clicked_user_id"),
         }
+        setHostId(user_id.user_id);
         axios.post("http://localhost:5000/users/clicked_profile", user_id)
             .then((res) => {
                 console.log(res.data);
@@ -28,6 +29,7 @@ const UserProfile = () => {
                 setComplaints(res.data.complaints);
                 setImage(res.data.image);
             })
+        
     }, []);
 
     //style h2 tag 

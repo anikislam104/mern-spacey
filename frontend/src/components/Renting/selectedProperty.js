@@ -29,6 +29,7 @@ const SelectedProperty = () => {
                     user_id: res.data.hostId,
                 }
                 console.log(id);
+                setHostId(id.user_id);
                 // console.log(host_id);
                 axios.post('http://localhost:5000/users/get_user_name',id)
                     .then(res => {

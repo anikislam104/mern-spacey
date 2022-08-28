@@ -434,7 +434,7 @@ router.route("/get_rec").post(async(req, res) => {
   if(filtered_booking.length == 0) {
     res.send([]);
   }
-  var similarDocuments;
+  var similarDocuments = [];
   for(let i = filtered_booking.length - 1; i >= 0; i--)
   {
     similarDocuments = recommender.getSimilarDocuments(String(filtered_booking[i].property_id), 0, 5);
