@@ -95,7 +95,7 @@ const ExtendNotification = () => {
         <div class="bg-light">
         <NavbarHomepage />
         <br/>
-        <h1 class="display-6" style={{textAlign:"center"}}><b>Extend Bookings Requests</b></h1>
+        {/* <h1 class="display-6" style={{textAlign:"center"}}><b>Extend Bookings Requests</b></h1> */}
         <br/>
                 <div className="container">
                     <div className="extendRequest">
