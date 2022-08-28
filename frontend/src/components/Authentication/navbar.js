@@ -20,7 +20,7 @@ export default class Navbar extends Component {
     return (
       <nav className="navbar navbar navbar-expand-lg" style={myStyle.navSection}>
          
-            <img src={spacey} class="img-responsive" alt=" " />
+            &nbsp;<img src={spacey} class="img-responsive" alt=" " />
         
         <Link to={"/"} className="navbar-brand" style={myStyle.optionSection} ><h2><b>Spacey</b></h2></Link>
         <div class="col-lg-8">
