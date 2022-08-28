@@ -35,8 +35,14 @@ const CurrentBookings = () => {
         btn_array[i] = i+total;
     }
     console.log(inputArray);
+    const fontStyle={
+        //font color blue and bold
+        color: "black",
+        fontWeight: "normal",
+        fontSize:"18px",
+    }
     const style = {
-        backgroundColor: "#f5f5f5",
+        backgroundColor: "white",
         border: "1px solid #ddd",
         borderRadius: "4px",
         padding: "12px",
@@ -44,7 +50,7 @@ const CurrentBookings = () => {
         marginTop: "10px",
         marginLeft: "10px",
         marginRight: "10px",
-        boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.75)"
+        boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.1)",
     };
 
     /*const inputStyle={
@@ -62,20 +68,58 @@ const CurrentBookings = () => {
         boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.75)",
     }*/
 
+    const box={
+        width: "100%",
+        height: "100%",
+        backgroundColor: "white",
+        borderRadius: "10px",
+        boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.1)",
+        padding: "20px",
+        marginBottom: "20px",
+        //align in center
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
 
+    }
+
+    
     return(
         <div class="bg-light">
             <NavbarHomepage />
             <br/>
             <h1 class="display-6" style={{textAlign:"center"}}><b>Current Bookings</b></h1>
             <br/>
-            <div className="container">
-                <div className="bookings">
+        
+                <div>
                     {bookings.map((booking,idx) => {
+                        var image=booking[7];
+                        let db = new Date(booking[3]);
+            const year=db.getFullYear();
+            const day=db.getDate();
+            const name = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+            const month=name[db.getMonth()];
+            db=new Date(booking[4]);
+            const year2=db.getFullYear();
+            const day2=db.getDate();
+            const month2=name[db.getMonth()];
+
                         return (
                             <div style={style}>
-                                <h2><b>&nbsp;Property: </b>{booking[2]}</h2>
-                                <p><button onClick={
+                                <br/>
+                            <div class="row align-items-center ">
+
+                            <div class="col-lg-1"></div>
+                            <div class="col-lg-3">
+                                <button onClick={
+                                    () => {
+                                        localStorage.setItem("selected_property_id", booking[6]);
+                                        //console.log(localStorage.getItem("selected_property_id"));
+                                        window.location.href = "/renting/selected_property";
+                                    }
+                                }><h2 style={fontStyle}><b>&nbsp;Property: </b>{booking[2]}</h2></button>
+                                <h2 style={fontStyle}><button onClick={
                                     () => {
                                         const data={
                                             booking_id:booking[0],
@@ -88,14 +132,28 @@ const CurrentBookings = () => {
                                                 window.location = "/user_profile";
                                 })
                                     }
-                                }><b>&nbsp;Host: </b>{booking[1]}</button></p>
-                                <p><b>&nbsp;Start date: </b>{booking[3]}</p>
-                                <p><b>&nbsp;End date: </b>{booking[4]}</p>
-                                <p><b>&nbsp;Price: </b>{booking[5]}</p>
+                                }><b>&nbsp;Host: </b>{booking[1]}</button></h2>
+                                <h2 style={fontStyle}><b>&nbsp;Start date: </b>{month} {day},{year}</h2>
+                                <h2 style={fontStyle}><b>&nbsp;End date: </b>{month2} {day2},{year2}</h2>
+                                <h2 style={fontStyle}><b>&nbsp;Price: </b>{booking[5]}</h2>
                                 <br />
+                                </div>
 
-                                <div class="row align-items-center">
+                                <div class="col-lg-3">
+                                    </div>
 
+                                    <div class="col-lg-5">
+                                <img src={process.env.PUBLIC_URL+"/images/"+image} alt="..." 
+                style={{  width: "350px" , height: "230px ", display: "flex" }} />
+
+                                </div>
+                                </div>
+
+                                <br/>
+                                <br/>
+                                
+                                <div class="row align-items-center ">
+                                <div class="col-lg-1"></div>
                   
                                     <div class="col-lg-3">
                                 
@@ -109,7 +167,7 @@ const CurrentBookings = () => {
                                 </div>
                                 <br />
                                 <br />
-                                <div class="col-lg-4">
+                                <div class="col-lg-3">
                                 <button className="btn btn-primary" onClick={
                                     () => {
                                         const id={
@@ -132,7 +190,7 @@ const CurrentBookings = () => {
                                 </div>
                                 <br />
                                 <br />
-                                <div class="col-lg-3">
+                                <div class="col-lg-2">
                                 <button className="btn btn-primary" onClick={
                                     () => {
                                         axios.post("http://localhost:5000/renting/get_time",{booking_id:booking[0]})
@@ -154,7 +212,7 @@ const CurrentBookings = () => {
                                 </div>
                                 <br />
                                 <br />
-                                <div class="col-lg-2">
+                                <div class="col-lg-2" style={{textAlign:"center"}}>
                                 <button className="btn btn-primary" onClick={
                                     () => {
                                         //show input box if hidden and vice versa
@@ -188,7 +246,7 @@ const CurrentBookings = () => {
                                         </div>
 
                                         <div class="col-lg-6">
-                                <textarea type="text" id={inputArray[idx]} style={{width:"500px",height:"200px",backgroundColor:"#e5e4e2",display:"none"}}  placeholder="Enter complain" onChange={
+                                <textarea type="text" id={inputArray[idx]} style={{width:"500px",height:"200px",backgroundColor:"#e0ffff",display:"none"}}  placeholder="Enter complain" onChange={
                                     (e) => {
                                         setComplaint(e.target.value);
                                     }
@@ -238,7 +296,7 @@ const CurrentBookings = () => {
                     }
                     )}
                 </div>
-            </div>
+            
         </div>
     )
 }

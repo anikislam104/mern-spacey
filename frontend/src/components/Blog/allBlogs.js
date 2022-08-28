@@ -81,7 +81,7 @@ export default class AllBlogs extends Component {
             <div className="card mb-4 box-shadow" style={{ width:"300px", height:"250px",textAlign:"center", backgroundImage:`url(${path})` }}>
                 <div className="card-body" style={myStyle.textSection}>
                 <br/><br/>
-                <p className="card-text"><b>{blog.title}</b></p>
+                <p class="fs-4"><b>{blog.title}</b></p>
                     {/* <p className="card-text">{property.location}</p> */}
                     <div className="d-flex justify-content-between align-items-center">
                         <br/><br/><br/><br/><br/>

@@ -39,7 +39,6 @@ const CurrentHostings = () => {
         boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.75)",
     }*/
 
-
     const box={
         width: "100%",
         height: "100%",
@@ -55,6 +54,14 @@ const CurrentHostings = () => {
         alignItems: "center",
 
     }
+
+    const fontStyle={
+        //font color blue and bold
+        color: "black",
+        fontWeight: "normal",
+        fontSize:"18px",
+    }
+
     return (
         <div class="bg-light">
             <NavbarHomepage />
@@ -62,10 +69,30 @@ const CurrentHostings = () => {
             <h1 class="display-6" style={{textAlign:"center"}}><b>Current Hostings</b></h1>
             <br/>
             
-            {hostings.map((hosting,idx) => (
+            {hostings.map((hosting,idx) => {
+
+            var image=hosting[7];
+            let db = new Date(hosting[3]);
+            const year=db.getFullYear();
+            const day=db.getDate();
+            const name = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+            const month=name[db.getMonth()];
+            db=new Date(hosting[4]);
+            const year2=db.getFullYear();
+            const day2=db.getDate();
+            const month2=name[db.getMonth()];
+
+            return(
+
                 <div style={box}>
-                    <h2><b>Property title:</b>&nbsp;{hosting[2]}</h2>
-                    <h2><button onClick={
+                    <button onClick={
+                                    () => {
+                                        localStorage.setItem("selected_property_id", hosting[6]);
+                                        //console.log(localStorage.getItem("selected_property_id"));
+                                        window.location.href = "/renting/selected_property";
+                                    }
+                                }><h2 style={fontStyle}><b>&nbsp;Property: </b>{hosting[2]}</h2></button>
+                    <h2 style={fontStyle}><button onClick={
                         () => {
                             const data = {
                                 booking_id: hosting[0],
@@ -78,10 +105,10 @@ const CurrentHostings = () => {
                                     window.location = "/user_profile";
                                 })
                         }
-                    }><b>Renter:</b>&nbsp;{hosting[1]}</button></h2>
-                    <h2><b>Start date:</b>&nbsp;{hosting[3]}</h2>
-                    <h2><b>End date:</b>&nbsp;{hosting[4]}</h2>
-                    <h2><b>Price:</b>&nbsp;{hosting[5]}</h2>
+                    }><b>Renter: </b>{hosting[1]}</button></h2>
+                    <h2 style={fontStyle}><b>&nbsp;Start date: </b>{month} {day},{year}</h2>
+                    <h2 style={fontStyle}><b>&nbsp;End date: </b>{month2} {day2},{year2}</h2>
+                    <h2 style={fontStyle}><b>&nbsp;Price: </b>{hosting[5]}</h2>
                     <br />
                     <button className="btn btn-primary" onClick={
                                     () => {
@@ -111,7 +138,7 @@ const CurrentHostings = () => {
                                         </div>
 
                                         <div class="col-lg-6">
-                                <textarea type="text" id={inputArray[idx]} style={{width:"500px",height:"200px",backgroundColor:"#e5e4e2"}} placeholder="Enter complain" onChange={
+                                <textarea type="text" id={inputArray[idx]} style={{width:"500px",height:"200px",backgroundColor:"#e0ffff",display:"none"}} placeholder="Enter complain" onChange={
                                     (e) => {
                                         setComplaint(e.target.value);
                                     }
@@ -121,7 +148,7 @@ const CurrentHostings = () => {
                                         </div>
                              
 
-                                <button className="btn btn-primary" id={btn_array[idx]} style={{float:"right"}} onClick={
+                                <button className="btn btn-primary" id={btn_array[idx]} style={{float:"right",display:"none"}} onClick={
                                     () => {
                                         console.log(complaint);
                                         const complain={
@@ -147,7 +174,8 @@ const CurrentHostings = () => {
     </div>
 </div>
                 </div>
-            ))}
+            )}
+            )}
 
         </div>
         )

@@ -12,6 +12,7 @@ const OTP = require('../models/otp');
 var Notification = require('../models/notification');
 var Property = require('../models/property');
 let Complaint = require('../models/complaint');
+let Booking = require('../models/booking');
 // @ts-ignore
 const { Auth } = require("two-step-auth");
 
@@ -540,7 +541,67 @@ router.route('/clicked_profile').post(asyncHandler(async(req, res) => {
     res.send({name:name,email:email,phoneNumber:phoneNumber,complaints:complaints_array,image:image});
 }));
 
+//get all complaints
+router.route('/get_all_complaints').get(asyncHandler(async(req, res) => {
+  const complaints=await Complaint.find();
+  
+  var complaints_array=[];
+  for(var i=0;i<complaints.length;i++){
+    //get complainant name
+    const complainant=await User.findOne({_id:complaints[i].complainant_id});
+    var complainant_id = complainant._id;
+    var complainant_name=complainant.firstName+" "+complainant.lastName;
+    //get complainee name
+    const complainee=await User.findOne({_id:complaints[i].complainee_id});
+    var complainee_id = complainee._id;
+    var complainee_name=complainee.firstName+" "+complainee.lastName;
+    //get the complaint
+    var complaint=complaints[i].complaint;
+    var date=complaints[i].date;
 
+    const booking = await Booking.findOne({_id:complaints[i].booking_id});
+    const property = await Property.findOne({_id:booking.property_id});
+    var property_id = property._id;
+    var property_title = property.title;
+
+    complaints_array.push({property_id:property_id,property_title:property_title,complainant_id:complainant_id,complainant_name:complainant_name,complainee_id:complainee_id,complainee_name:complainee_name,complaint:complaint,date:date,complaint_id:complaints[i]._id});
+  }
+  console.log(complaints_array);
+  res.send(complaints_array);
+}));
+
+//delete a complaint
+router.route('/delete_complaint').post(asyncHandler(async(req, res) => {
+  const complaint_id = req.body.complaint_id;
+  const complaint = await Complaint.findOne({_id:complaint_id});
+  //notification for both complainant and complainee
+  const newNotification = new Notification({
+    user_id:complaint.complainant_id,
+    message:"Your complaint" + complaint.complaint +" on "+complaint.date+ "has been deleted",
+    type:"complaint",
+  });
+  newNotification.save();
+  const newNotification2 = new Notification({
+    user_id:complaint.complainee_id,
+    message:"Complaint against you " + complaint.complaint +" on "+complaint.date+ "has been deleted",
+    type:"complaint",
+  });
+  newNotification2.save();
+  Complaint.find({_id:complaint_id}).deleteOne()
+  .then(() => {
+    res.send("success");
+  });
+}));
+
+  //get recommended user list based on string input
+  router.route('/get_recommended_users').post(asyncHandler(async(req, res) => {
+    const search_string = req.body.search_string;
+
+    //get users whose firstname or lastname contains search string
+    const users = await User.find({$or: [{firstName: {$regex: search_string, $options: 'i'}}, {lastName: {$regex: search_string, $options: 'i'}}]});
+    console.log(users);
+    res.send(users);
+  }));
 
   module.exports = router;
   module.exports.current_user_id = current_user_id;

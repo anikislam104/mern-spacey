@@ -48,7 +48,7 @@ const Notification = () => {
                         <div className="col-md-12" style={{textAlign:"center"}}>
                         <div className="card mb-4 box-shadow">
                             <div className="card-body">
-                        <button onClick={
+                        <button class="hover" onClick={
                             () => {
                                 if(notification.type==="notification"){
                                     window.location.reload();
@@ -68,9 +68,12 @@ const Notification = () => {
                                 else if(notification.type==="extend"){
                                     window.location.href = "/extend_notification";
                                 }
+                                else if(notification.type==="complaint"){
+                                    window.location.href = "/view_complaints";
+                                }
                             }
                         }>
-                        <p>{notification.message}</p>
+                        <button class="btn btn-hover" style={{width:"1200px"}} >{notification.message}</button>
                         </button>
                         </div>
                         </div>

@@ -166,8 +166,11 @@ router.route('/upvote').post((req, res) => {
                     .then(blog => {
                         blog.like_count--;
                         blog.save();
+                        //send like and dislike count
+                        res.send({msg:"down",like_count: blog.like_count, dislike_count: blog.dislike_count});
                     })
-                res.json("preliked");
+            
+                
             }
             else if(blogReaction.hasUserLiked === false && blogReaction.hasUserDisliked === true){
                 console.log("user has already disliked this blog");
@@ -179,8 +182,9 @@ router.route('/upvote').post((req, res) => {
                         blog.like_count++;
                         blog.dislike_count--;
                         blog.save();
+                        res.send({msg:"updown",like_count: blog.like_count, dislike_count: blog.dislike_count});
                     }).catch(err => res.status(400).json('Error: ' + err));
-                res.json("predisliked");
+                // res.json("predisliked");
             }
             else{
                 console.log("user has not liked this blog");
@@ -192,7 +196,7 @@ router.route('/upvote').post((req, res) => {
                     console.log(blog.like_count);
                     blog.like_count = blog.like_count + 1;
                     blog.save();
-                    res.json('liked');
+                    res.send({msg:"up",like_count: blog.like_count, dislike_count: blog.dislike_count});
                 }).catch(err => res.status(400).json('Error: ' + err));
                     }
         });
@@ -215,8 +219,9 @@ router.route('/downvote').post((req, res) => {
                     .then(blog => {
                         blog.dislike_count--;
                         blog.save();
+                        res.send({msg:"down",like_count: blog.like_count, dislike_count: blog.dislike_count});
                     });
-                res.json("predisliked");
+                // res.json("predisliked");
             }
             else if(blogReaction.hasUserDisliked === false && blogReaction.hasUserLiked === true){
                 console.log("user has already liked this blog");
@@ -228,8 +233,9 @@ router.route('/downvote').post((req, res) => {
                         blog.like_count--;
                         blog.dislike_count++;
                         blog.save();
+                        res.send({msg:"updown",like_count: blog.like_count, dislike_count: blog.dislike_count});
                     });
-                res.json("preliked");
+                // res.json("preliked");
             }
             else{
                 console.log("user has not disliked this blog");
@@ -241,7 +247,7 @@ router.route('/downvote').post((req, res) => {
                     console.log(blog.like_count);
                     blog.dislike_count = blog.dislike_count + 1;
                     blog.save();
-                    res.json("disliked");
+                    res.send({msg:"up",like_count: blog.like_count, dislike_count: blog.dislike_count});
                 }).catch(err => res.status(400).json('Error: ' + err));
                     }
         });
@@ -305,5 +311,33 @@ router.route('/get_writer_name').post((req, res) => {
             res.json(user.firstName + " " + user.lastName);
         })
 
+})
+
+//check if user reacted on the blog
+router.route('/check_reaction').post((req, res) => {
+    const user_id = req.body.user_id;
+    const blog_id = req.body.blog_id;
+
+    BlogReaction.findOne({user_id: user_id, blog_id: blog_id})
+        .then(blogReaction => {
+            if(blogReaction.hasUserLiked === true){
+                res.send("liked");
+            }
+            else if(blogReaction.hasUserDisliked === true){
+                res.send("disliked");
+            }
+            else{
+                res.send("none");
+            }
+        })
+})
+
+//get like and dislike count
+router.route('/get_like_dislike_count').post((req, res) => {
+    const blog_id = req.body.blog_id;
+    Blog.findById(blog_id)
+        .then(blog => {
+            res.send({like_count: blog.like_count, dislike_count: blog.dislike_count});
+        }).catch(err => res.status(400).json('Error: ' + err));
 })
 module.exports = router;

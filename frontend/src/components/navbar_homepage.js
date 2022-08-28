@@ -42,14 +42,14 @@ const NavbarHomepage = () => {
       
       <nav className="navbar navbar navbar-expand-lg" style={myStyle.navSection}>
          
-            <img src={spacey} class="img-responsive" alt=" " />
+            &nbsp;<img src={spacey} class="img-responsive" alt=" " />
         
         <Link to={"/homepage"} className="navbar-brand"  ><font style={myStyle.optionSection}><b>&nbsp;Spacey</b></font></Link>
         <div class="col-lg-4">
    
         </div>
         <div class="col-lg-8">
-         <div className="collpase navbar-collapse">
+         <div>
          <ul className="navbar-nav mr-auto">
           <li className="navbar-item">
             
@@ -98,6 +98,9 @@ const NavbarHomepage = () => {
                     </NavDropdown.Item>
                     <NavDropdown.Item href={'/chat'}>
                     Chat
+                    </NavDropdown.Item>
+                    <NavDropdown.Item href={'/view_complaints'}>
+                    Complaints
                     </NavDropdown.Item>
                     <NavDropdown.Item href={'/logout'}>
                     Log out

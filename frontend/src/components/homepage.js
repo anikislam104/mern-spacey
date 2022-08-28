@@ -15,6 +15,7 @@ const Homepage = () => {
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
   const [recommendedProperties, setRecommendedProperties] = useState([]);
+  const [counter, setCounter] = useState(0);
 
   const { user } = ChatState();
   const toast = useToast();
@@ -45,9 +46,9 @@ const Homepage = () => {
   };
 
   useEffect(() => {
-    getRecommendedProperties();
-    console.log("updated");
-  } , []);
+    console.log("Updated");
+    ///getRecommendedProperties();
+  }, []);
 
   const handleSearch = async () => {
     if (!search) {
@@ -187,6 +188,7 @@ const Homepage = () => {
   };
 
   return (
+    
     <div className="maincontainer">
       <NavbarHomepage />
       <br />
@@ -232,8 +234,9 @@ const Homepage = () => {
                             </font>
                           </b>{" "}
                         </h3>
-                        {showProperties(recommendedProperties)}
+                        
                       </div>
+                      {showProperties(recommendedProperties)}
                     </div>
                   )
                   : (
