@@ -124,6 +124,7 @@ export default class CreateUser extends Component {
       
           await axios.post('http://localhost:5000/users/jwtsignup', formData)
             .then(res => {console.log(res.data);
+              console.log(res.data);
               if(res.data === 'invalid'){
                 window.location = '/invalidAuth';
               }
@@ -203,7 +204,7 @@ export default class CreateUser extends Component {
                                     <label>User type: </label>
                                     <select id="inputUserType" class="form-control rounded-pill border-0 shadow-sm px-4"  onChange={this.onChangeUserType} >
                                       <option value="">Select</option>
-                                        <option value="Admin" >Admin</option>
+                                        {/* <option value="Admin" >Admin</option> */}
                                         <option value="User" >User</option>
                                     </select>
                                 </div>
