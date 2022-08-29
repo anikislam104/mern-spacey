@@ -20,7 +20,7 @@ const NavbarHomepage = () => {
     const myStyle= {
       optionSection:{
         color: "#0E2A53",
-        fontSize:"30px",
+        fontSize:"38px",
        },
 
        textSection:{

@@ -56,6 +56,18 @@ const CurrentHostings = () => {
 
     }
 
+    const style = {
+        backgroundColor: "white",
+        border: "1px solid #ddd",
+        borderRadius: "4px",
+        padding: "12px",
+        marginBottom: "10px",
+        marginTop: "10px",
+        marginLeft: "10px",
+        marginRight: "10px",
+        boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.1)",
+    };
+
     const fontStyle={
         //font color blue and bold
         color: "black",
@@ -85,7 +97,11 @@ const CurrentHostings = () => {
 
             return(
 
-                <div style={box}>
+                <div style={style}>
+                     <div class="row align-items-center ">
+
+<div class="col-lg-1"></div>
+<div class="col-lg-4">
                     <button onClick={
                                     () => {
                                         localStorage.setItem("selected_property_id", hosting[6]);
@@ -106,12 +122,25 @@ const CurrentHostings = () => {
                                     window.location = "/user_profile";
                                 })
                         }
-                    }><b>Renter: </b>{hosting[1]}</button></h2>
+                    }><b>&nbsp;Renter: </b>{hosting[1]}</button></h2>
                     <h2 style={fontStyle}><b>&nbsp;Start date: </b>{month} {day},{year}</h2>
                     <h2 style={fontStyle}><b>&nbsp;End date: </b>{month2} {day2},{year2}</h2>
                     <h2 style={fontStyle}><b>&nbsp;Price: </b>{hosting[5]}</h2>
                     <br />
-                    <button className="btn btn-primary" onClick={
+                    </div>
+
+<div class="col-lg-3">
+    </div>
+
+    <div class="col-lg-4">
+<img src={process.env.PUBLIC_URL+"/images/"+image} alt="..." 
+style={{  width: "350px" , height: "210px ", display: "flex" }} />
+
+</div>
+</div>
+
+                    <div style={{textAlign:"center"}}>
+                    <button className="btn btn-primary"  onClick={
                                     () => {
                                         //show input box if hidden and vice versa
                                         if(document.getElementById(inputArray[idx]).style.display === "none"){
@@ -131,15 +160,17 @@ const CurrentHostings = () => {
                                     }
                                 }>Complain</button>
                                 <br />
+                                </div>
+                                <br/>
 
                                 <div class="row align-items-center">
 
                   
-                                    <div class="col-lg-1">
+                                    <div class="col-lg-3">
                                         </div>
 
                                         <div class="col-lg-6">
-                                <textarea type="text" id={inputArray[idx]} style={{width:"500px",height:"200px",backgroundColor:"#e0ffff",display:"none"}} placeholder="Enter complain" onChange={
+                                <textarea type="text" id={inputArray[idx]} style={{width:"600px",height:"200px",backgroundColor:"#e0ffff",display:"none"}} placeholder="Enter complain" onChange={
                                     (e) => {
                                         setComplaint(e.target.value);
                                     }
@@ -147,9 +178,19 @@ const CurrentHostings = () => {
                                 <br />
                                 <div class="col-lg-2">
                                         </div>
+                                        </div>
+                                        </div>
                              
 
-                                <button className="btn btn-primary" id={btn_array[idx]} style={{float:"right",display:"none"}} onClick={
+                                        <div class="row align-items-center">
+
+                  
+<div class="col-lg-3">
+    </div>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+    <div class="col-lg-6" style={{textAlign:"center"}}>
+
+                                <button className="btn btn-primary" id={btn_array[idx]} style={{display:"none"}} onClick={
                                     () => {
                                         console.log(complaint);
                                         const complain={
@@ -170,6 +211,7 @@ const CurrentHostings = () => {
                                     }
                                 } >Send</button>
                                 </div>
+                                
 
 <div class="col-lg-3">
     </div>

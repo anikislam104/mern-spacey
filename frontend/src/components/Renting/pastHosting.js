@@ -36,6 +36,19 @@ const PastHostings = () => {
         alignItems: "center",
 
     }
+
+    const style = {
+        backgroundColor: "white",
+        border: "1px solid #ddd",
+        borderRadius: "4px",
+        padding: "12px",
+        marginBottom: "10px",
+        marginTop: "10px",
+        marginLeft: "10px",
+        marginRight: "10px",
+        boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.1)",
+    };
+
     return (
         <div class="bg-light">
             <NavbarHomepage />
@@ -56,7 +69,11 @@ const PastHostings = () => {
                   const month2=name[db.getMonth()];
       
             return(
-                <div style={box}>
+                <div style={style}>
+                    <div class="row align-items-center ">
+
+<div class="col-lg-1"></div>
+<div class="col-lg-4">
                     <button onClick={
                                     () => {
                                         localStorage.setItem("selected_property_id", hosting[6]);
@@ -77,12 +94,22 @@ const PastHostings = () => {
                                     window.location = "/user_profile";
                                 })
                         }
-                    }><b>Renter: </b>{hosting[1]}</button></h2>
+                    }><b>&nbsp;Renter: </b>{hosting[1]}</button></h2>
                     <h2 style={fontStyle}><b>&nbsp;Start date: </b>{month} {day},{year}</h2>
                     <h2 style={fontStyle}><b>&nbsp;End date: </b>{month2} {day2},{year2}</h2>
                     <h2 style={fontStyle}><b>&nbsp;Price: </b>{hosting[5]}</h2>
                     <br/>
                 </div>
+                <div class="col-lg-3">
+    </div>
+
+    <div class="col-lg-4">
+<img src={process.env.PUBLIC_URL+"/images/"+image} alt="..." 
+style={{  width: "350px" , height: "210px ", display: "flex" }} />
+
+</div>
+</div>
+</div>
                 
             )
                 }
