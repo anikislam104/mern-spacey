@@ -27,6 +27,7 @@ export default class ShowBlogAd extends Component {
             Comment: "",
             like: "",
             dislike: "",
+            comments:[],
             
         }
     }
@@ -73,6 +74,16 @@ export default class ShowBlogAd extends Component {
                         document.getElementById("like").style.color="blue";
                         document.getElementById("dislike").style.color="blue";
                     }
+                })
+                const data1 ={
+                    blog_id:localStorage.getItem('blog_id'),
+                }
+                axios.post('http://localhost:5000/blogs/get_blog_comments', data1)
+                .then(res => {
+                    console.log(res.data);
+                    this.setState({
+                        comments: this.state.comments.concat(res.data),
+                    })
                 })
 
             })
@@ -155,14 +166,23 @@ export default class ShowBlogAd extends Component {
                 <br/><br/>
                 <p class="fs-4"><h1><strong>Comments</strong></h1></p>
                 <br/>
-               {blog.comments.map((comment) => {
-                    return(
-                        <div className="card mb-5 box-shadow" style={{width:"1300px", height:"90px",backgroundColor:"white"}}>
-                            <br/>
-                            <p><h1 style={{fontSize:"20px"}}><i>&emsp;&emsp;&emsp;&emsp;&emsp;"{comment.comment}"</i></h1></p>
-                            <br/>
-                        </div>
-                    )
+                {this.state.comments.map((comment) => {
+                     return(
+                          <div class="row align-items-center">
+                            <div class="col-lg-4">
+                                 <p class="fs-4"><strong><button onClick={
+                                    () => {
+                                       localStorage.setItem('clicked_user_id', comment.user_id); 
+                                        window.location.href = '/user_profile';
+                                    }
+                                 }>{comment.user_name}</button></strong></p>
+                            </div>
+                            <div class="col-lg-8">
+                                 <p class="fs-4">{comment.comment}</p>
+                            </div>
+                          </div>
+                     )
+                
                 })
                 
                 } 

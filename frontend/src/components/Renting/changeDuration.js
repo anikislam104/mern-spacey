@@ -5,11 +5,18 @@ import { differenceInCalendarDays } from "date-fns";
 import "react-calendar/dist/Calendar.css";
 import Calendar from "react-calendar";
 import { useEffect } from "react";
+import io from 'socket.io-client';
+import { ChatState } from "../../Context/ChatProvider";
+
+const ENDPOINT = "http://localhost:5000";
+var socket;
 
 const ChangeDuration = () => {
     
     const [end_date, setEndDate] = React.useState('');
     const [allBookedDates, setAllBookedDates] = React.useState([]);
+    const [socketConnected, setSocketConnected] = React.useState(false);
+    const {user, selectedChat, setSelectedChat, notification1, setNotification1} = ChatState();
     
     useEffect(() => {
         
@@ -26,6 +33,17 @@ const ChangeDuration = () => {
             )
 
     }, []);
+
+    useEffect(() => {
+        
+        // console.log(user);
+        if(user){
+            socket = io(ENDPOINT);
+            socket.emit("setup", user);
+            socket.on("connected", () => setSocketConnected(true));
+        }
+        // eslint-disable-next-line
+      },[user]);
     // //all dates between august 1 and august 31
     // const  = [...Array(31).keys()].map(i => new Date(2022, 7, i + 1));
     //get difference between two dates
@@ -117,7 +135,8 @@ const ChangeDuration = () => {
                 console.log(res.data);
                 if(res.data === 'ok'){
                     alert('Extend duration request sent successfully');
-                    window.location = '/current_bookings';
+                    socket.emit("new extend request", rent_request);
+                    // window.location = '/current_bookings';
                 }
                 else{
                     alert(res.data);

@@ -1,63 +1,89 @@
-import axios from 'axios';
-import React, { Component } from 'react';
-import NavbarHomepage from '../navbar_homepage';
-// import AdminNavbar from './adminNavbar';
+import axios from "axios";
+import React,{ Component } from "react";
+import NavbarHomepage from "../navbar_homepage";
+// import AdminNavbar from "./adminNavbar";
+var property_id= '';
+var host_id= '';
+var location='';
+var price='';
+var description='';
+var size='';
 
 const arr=[];
 
-export default class ShowClickedBlogs extends Component {
+export default class ShowClickedProperties extends Component {
+    
     constructor(props) {
         super(props);
-        this.sendSelectedBlog = this.sendSelectedBlog.bind(this);
+
+        this.sendSelectedProperty = this.sendSelectedProperty.bind(this);
+        this.showProperties = this.showProperties.bind(this);
+        this.setSelectedProperty = this.setSelectedProperty.bind(this);
         this.state = {
-            user_id: '',
-            blogs: [],
+            properties: [],
+            
         }
         
     }
-
-    componentDidMount() {
-        
-        this.setState({
+    //get all properties from the database
+    componentDidMount(){
+        const id={
             user_id: localStorage.getItem('clicked_user_id'),
-        });
-        const id={
-            user_id:localStorage.getItem('clicked_user_id'),
         }
-        console.log(id);
-        axios.post('http://localhost:5000/blogs/my_blogs',id) 
-            .then(res => {
-                console.log(res.data);
-                    this.setState({
-                        blogs: res.data,
-                    });
-                })
-            
-            
-    }
-  
-
-    sendSelectedBlog(blog_id) {
-        const id={
-            blog_id:blog_id,
-            user_id:localStorage.getItem('user_id'),
-        }
-
-        axios.post('http://localhost:5000/blogs/showBlog',id)
-            .then(res => 
-                {
-                    console.log(res.data);
-                    localStorage.setItem('blog_id', res.data._id);
-                    window.location.href = '/showClickedBlog';
-                    // this.props.history.push('/blog/'+res.data._id);
+        axios.post('http://localhost:5000/property/get_my_property',id)
+            .then((res) => {
+                this.setState({
+                    properties: res.data
                 });
+            })
     }
 
-    GetRandomNumber (min_num, max_num){
-        return Math.floor(Math.random()* (max_num - min_num) + min_num);
+    //set state of the selected property
+    setSelectedProperty(property){
+        console.log(property._id);
+        // this.setState({
+        //     property_id: property._id,
+        //     host_id: property.hostId,
+        //     location: property.location,
+        //     size: property.size,
+        //     price: property.pricePerDay,
+        //     description: property.description,
+        // });
+        property_id = property._id;
+        host_id = property.hostId;
+        location = property.location;
+        size = property.size;
+        price = property.pricePerDay;
+        description = property.description;
+        console.log(property_id);
+        localStorage.setItem('selected_property_id', property_id);
+        
     }
-    
-    getMyBlogs(){
+
+    //send selected property id to the next page
+    sendSelectedProperty(){
+        
+        // e.preventDefault();
+        const selected_property = {
+            property_id: property_id,
+            host_id: host_id,
+            location: location,
+            size: size,
+            price: price,
+            description: description,
+        }
+        // console.log("id "+id.property);
+        axios.post('http://localhost:5000/renting/selected_property',selected_property)
+            .then(res => {
+                window.location = '/selected_property_clicked';
+            });
+
+        
+    }
+
+
+    //show all properties  location
+    showProperties(){
         const myStyle={
             blogSection:{
                 width:"300px",
@@ -73,50 +99,54 @@ export default class ShowClickedBlogs extends Component {
                 justifyContent:"center",
                 flexDirection:"column",
                 alignItems:"center",
-                backgroundColor:"rgba(0,0,0,0.5)",
+                backgroundColor:"rgba(0,0,0,0.3)",
                 width:"100%",
                 height:"100%",
                 color:"white",
             },
         }
-        return this.state.blogs.map((blog) => {
-            var image=blog.image;
+
+        return this.state.properties.map((property) => {
+            var image=property.image;
             var path=process.env.PUBLIC_URL+"/images/"+image;
-            console.log(path);
+
             arr.push(<div className="col-md-4">
             <div className="card mb-4 box-shadow" style={{ width:"300px", height:"250px",textAlign:"center", backgroundImage:`url(${path})` }}>
                 <div className="card-body" style={myStyle.textSection}>
                 <br/><br/>
-                
-                    <div>
-                        <p class="fs-4"><b>{blog.title}</b></p>    
-                    </div>
+                <p className="card-text"><b>{property.title}</b></p>
+                <p className="card-text"><b>{property.location}</b></p>
+                <font className="text-muted" style={{fontSize:"18px",fontColor:"white"}}><i>&emsp;&emsp;&emsp;&emsp;&emsp;
+                            ({property.size} square ft)</i></font>
                     {/* <p className="card-text">{property.location}</p> */}
                     <div className="d-flex justify-content-between align-items-center">
-                    <br/><br/><br/><br/><br/>
+                       
+                           < br/> <br/> <br/> <br/>
                         <div className="btn-group" style={myStyle.buttonSection}>
+                            
                             <button type="button" className="btn btn-sm btn-outline-secondary" style={{color:"#808080",backgroundColor:"white"}} onClick={
                                 () => {
-                                    this.sendSelectedBlog(blog._id);
+                                    this.setSelectedProperty(property);
+                                    this.sendSelectedProperty();
                                 }
                             }>View</button>
 
                         </div>
+                        
                         {/* <small className="text-muted">{property.size} square ft</small> */}
                     </div>
                 </div>
             </div>
-
         </div>);
+
             return(
                 <div>
                     
                 </div>
             );
-            
+
         })
     }
-
 
     getArrayElements(){
         let first=-3;
@@ -161,15 +191,21 @@ export default class ShowClickedBlogs extends Component {
         
     }
 
+    clearArrayElements(){
+        arr.splice(0, arr.length)
+      }  
+
     render() {
         return(
             <div class="col-lg-12 bg-light">
                 {/* {allBlogs} */}
                 <NavbarHomepage />
                 <br/ >
-                {this.getMyBlogs()}
+                {this.showProperties()}
                 {this.getArrayElements()}
+                {this.clearArrayElements()}
             </div>
         )
     }
+
 }

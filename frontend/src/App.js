@@ -72,6 +72,10 @@ import PaymentHistoryUser from "./components/Admin/paymentHistoryUser";
 import PaymentHistoryAll from "./components/Admin/paymentHistoryAll";
 import ShowBlogAdmin from "./components/Admin/ShowBlogAdmin";
 import ShowBlogAd from "./components/Admin/ShowBlog";
+import ShowClickedBlogs from "./components/Profile/showClickedBlogs";
+import ShowClickedBlog from "./components/Profile/showClickedBlog";
+import ShowClickedProperties from "./components/Profile/showClickedProperties";
+import SelectedPropertyClicked from "./components/Profile/selected_property_clicked";
 
 
 function App() {
@@ -109,6 +113,10 @@ function App() {
         <Route path="editFacilities" element={<EditFacilities />} />
         <Route path="user_profile" element={<UserProfile />} />
         <Route path="view_complaints" element={<ViewComplaints />} />
+        <Route path="showClickedBlogs" element={<ShowClickedBlogs />} />
+        <Route path="showClickedBlog" element={<ShowClickedBlog />} />
+        <Route path="showClickedProperties" element={<ShowClickedProperties />} />
+        <Route path="selected_property_clicked" element={<SelectedPropertyClicked />} />
         
         
 

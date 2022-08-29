@@ -1,9 +1,16 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import NavbarHomepage from "../navbar_homepage";
+import io from 'socket.io-client';
+import { ChatState } from "../../Context/ChatProvider";
+
+const ENDPOINT = "http://localhost:5000";
+var socket;
 
 const ExtendNotification = () => {
     const [extendRequest, setExtendRequest] = React.useState([]);
+    const [socketConnected, setSocketConnected] = React.useState(false);
+    const {user, selectedChat, setSelectedChat, notification1, setNotification1} = ChatState();
 
     useEffect(() => {
         const id=localStorage.getItem("user_id");
@@ -18,6 +25,34 @@ const ExtendNotification = () => {
                 setExtendRequest(res.data);
             });
     }, []);
+
+    useEffect(() => {
+        
+        // console.log(user);
+        if(user){
+            socket = io(ENDPOINT);
+            socket.emit("setup", user);
+            socket.on("connected", () => setSocketConnected(true));
+        }
+        // eslint-disable-next-line
+      },[user]);
+
+      useEffect(() => {
+        if(socketConnected){
+            socket.on("extend request recieved", (rent_request) => {
+            // setNotification([newMessageRecieved, ...notification]);
+            //setExtendRequest([rent_request, ...rentRequest]);
+            console.log(rent_request);
+            alert("You have a new extend booking request");
+            // const noti={
+            //     message: "You have a new rental request",
+            //     type: "rental_request",
+            // }
+            // setNotification1([noti, ...notification1]);
+            });
+    }
+      });
+
 
     //css styling for request info
 
