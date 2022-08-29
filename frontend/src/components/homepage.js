@@ -35,7 +35,7 @@ const Homepage = () => {
     //let flag1=0;
     //let flag2=0;
 
-    return arr.map((item) => {
+    return arr3.map((item) => {
       first = first + 3;
       second = second + 3;
       third = third + 3;
@@ -51,24 +51,24 @@ const Homepage = () => {
         return (
           <div class="row align-items-center">
             <div class="col-lg-2">
-              {arr[first]}
+              {arr3[first]}
               {/* increment count */}
             </div>
             <div class="col-lg-2"></div>
-            <div class="col-lg-2">{arr[second]}</div>
+            <div class="col-lg-2">{arr3[second]}</div>
             <div class="col-lg-2"></div>
-            <div class="col-lg-2">{arr[third]}</div>
+            <div class="col-lg-2">{arr3[third]}</div>
           </div>
         );
       } else if (first < total && second < total) {
         return (
           <div class="row align-items-center">
             <div class="col-lg-2">
-              {arr[first]}
+              {arr3[first]}
               {/* increment count */}
             </div>
             <div class="col-lg-2"></div>
-            <div class="col-lg-2">{arr[second]}</div>
+            <div class="col-lg-2">{arr3[second]}</div>
             <div class="col-lg-2"></div>
           </div>
         );
@@ -76,7 +76,7 @@ const Homepage = () => {
         return (
           <div class="row align-items-center">
             <div class="col-lg-2">
-              {arr[first]}
+              {arr3[first]}
               {/* increment count */}
             </div>
           </div>
@@ -253,6 +253,8 @@ const Homepage = () => {
     };
     axios.post("http://localhost:5000/property/get_rec", id).then((res) => {
       setRecommendedProperties(res.data);
+      console.log("useEffect");
+      console.log(res.data);
     });
     axios
       .post("http://localhost:5000/property/get_personal_properties", id)
