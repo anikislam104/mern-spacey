@@ -131,7 +131,12 @@ export default class ShowMyBlog extends Component {
                     <NavbarHomepage />
                     <br/><br/>
                     <h1 class="display-6" style={myStyle.textSection}><b>{blog.title}</b></h1>
-                    <p style={myStyle.textSection}><i>Written by {blog.user_name}</i></p>
+                    <p style={myStyle.textSection}><i><button onClick={
+                        ()=>{
+                            localStorage.setItem('clicked_user_id',blog.user_id);
+                            window.location.href = "/user_profile";
+                        }
+                    }>Written by {blog.user_name}</button></i></p>
                     <br/><br/>
                     <br/>
                     <img src={process.env.PUBLIC_URL+"/images/"+image} alt="..." 

@@ -52,7 +52,7 @@ const io = require("socket.io")(server, {
 io.on("connection", (socket) => {
   console.log("Connected to socket.io");
   socket.on("setup", (userData) => {
-    console.log("kire shala connect hos na ken");
+    
     console.log(userData);
     socket.join(userData.user_id);
     socket.emit("connected");
@@ -83,7 +83,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("new extend request",async (rent_request) => {
-    console.log("kire chudir vai ashos na ken tui kire");
+    
     const booking_id = rent_request.booking_id;
     console.log(booking_id);
     const booking =await Booking.findById(booking_id);

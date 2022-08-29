@@ -201,9 +201,9 @@ const CurrentBookings = () => {
                                             }
                                             else{
                                                 // will have to uncomment this
-                                                // alert("Booking period has not ended yet");
-                                                localStorage.setItem('payment_booking_id',booking[0]);
-                                                window.location.href = "payment/payment_home";
+                                                alert("Booking period has not ended yet");
+                                                // localStorage.setItem('payment_booking_id',booking[0]);
+                                                // window.location.href = "payment/payment_home";
                                             }
                                         })
                                         

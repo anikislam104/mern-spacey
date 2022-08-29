@@ -110,8 +110,8 @@ const ViewProperties = () => {
     }
 
     const clearArrayElements=()=>{
-        arr.splice(0, arr.length)
-      }  
+        arr.splice(0, arr.length);
+    }  
     
 
     return(

@@ -576,7 +576,7 @@ const Homepage = () => {
         </button>
         <br />
         <br />
-        <div id="personal" style={{ display: "none" }}>
+        <div id="personal" style={{ display: "block" }}>
           {/* loop through the personal properties and show them */}
           {personal_properties.map((property) => {
             // return (

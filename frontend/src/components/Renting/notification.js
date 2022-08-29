@@ -59,7 +59,7 @@ const RentRequestNotification = () => {
             // setNotification([newMessageRecieved, ...notification]);
             setRentRequest([rent_request, ...rentRequest]);
             
-            //alert("You have a new rental request");
+            alert("You have a new rental request");
             // const noti={
             //     message: "You have a new rental request",
             //     type: "rental_request",

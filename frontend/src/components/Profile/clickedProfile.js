@@ -116,7 +116,7 @@ const UserProfile = () => {
                                 navigate("/showClickedBlogs");
                             }}
                         >
-                            Show Properties
+                            Show Blogs
                         </button></p>
                     <br />
                     <p style={{ textAlign: "right" }}>
