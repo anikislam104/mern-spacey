@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import NavbarHomepage from "../navbar_homepage";
+import Footer from '../Footer';
 
 const CurrentHostings = () => {
     const [hostings, setHostings] = React.useState([]);
@@ -176,7 +177,8 @@ const CurrentHostings = () => {
                 </div>
             )}
             )}
-
+<br/><br/><br/>
+<Footer/>  
         </div>
         )
 }

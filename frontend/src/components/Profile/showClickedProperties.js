@@ -1,6 +1,7 @@
 import axios from "axios";
 import React,{ Component } from "react";
 import NavbarHomepage from "../navbar_homepage";
+import Footer from '../Footer';
 // import AdminNavbar from "./adminNavbar";
 var property_id= '';
 var host_id= '';
@@ -204,6 +205,10 @@ export default class ShowClickedProperties extends Component {
                 {this.showProperties()}
                 {this.getArrayElements()}
                 {this.clearArrayElements()}
+                <br/><br/><br/>
+                <br/><br/><br/>
+                <br/><br/><br/>
+<Footer/>  
             </div>
         )
     }

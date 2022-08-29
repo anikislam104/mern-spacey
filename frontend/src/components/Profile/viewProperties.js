@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import NavbarHomepage from "../navbar_homepage";
+import Footer from '../Footer';
 
 const arr=[];
 
@@ -124,7 +125,8 @@ const ViewProperties = () => {
             {getMyProperties()}
             {getArrayElements()}
             {clearArrayElements()}
-            
+            <br/><br/><br/>
+<Footer/>
         </div>
     )
 

@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import NavbarHomepage from "../navbar_homepage";
+import Footer from '../Footer';
 
 const EditProperty = () => {
     const [property_title, setProperty_title] = React.useState("");
@@ -140,10 +141,11 @@ const EditProperty = () => {
                         </div>
                         
                     </div>
-                    <br/>
-                        <br/>
+                 
                 </div>
             </div>
+            <br/><br/><br/>
+<Footer/>
         </div>
     );
 

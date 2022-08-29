@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { ChatState } from "../Context/ChatProvider";
 import NavbarHomepage from "./navbar_homepage";
+import Footer from './Footer';
 import io from 'socket.io-client';
 
 const ENDPOINT = "http://localhost:5000";
@@ -116,7 +117,8 @@ const Notification = () => {
             })}
             </div>
             </div>
-
+            <br/><br/><br/>
+<Footer/>  
         </div>
     );
 }

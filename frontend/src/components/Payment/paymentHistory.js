@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { Component } from 'react';
 import NavbarHomepage from '../navbar_homepage';
+import Footer from '../Footer';
 import Table from 'react-bootstrap/Table';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
@@ -232,7 +233,8 @@ export default class PaymentHistory extends Component{
                 </div>
                 </div>
                 </div>
-            
+                <br/><br/><br/>
+<Footer/> 
             </div>
         )
     }

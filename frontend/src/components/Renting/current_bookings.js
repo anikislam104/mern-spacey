@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import NavbarHomepage from "../navbar_homepage";
-
+import Footer from '../Footer';
 
 const CurrentBookings = () => {
     const [bookings, setBookings] = React.useState([]);
@@ -296,7 +296,8 @@ const CurrentBookings = () => {
                     }
                     )}
                 </div>
-            
+                <br/><br/><br/>
+<Footer/>
         </div>
     )
 }

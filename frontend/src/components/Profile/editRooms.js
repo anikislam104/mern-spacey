@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import NavbarHomepage from "../navbar_homepage";
 import axios from "axios";
+import Footer from '../Footer';
 
 let value=0;
 
@@ -99,7 +100,7 @@ const EditRooms = () => {
                     <div class="col-lg-2"></div>
                     
                     <div class="col-lg-5">
-          
+          <br/>
                     <h1><b>Add New Room</b></h1>
                     <br />
                     
@@ -172,6 +173,10 @@ const EditRooms = () => {
 
                  
                 </div>
+                <br/><br/><br/>
+                <br/><br/><br/>
+                <br/><br/><br/>
+<Footer/>  
         </div>
     )
 }

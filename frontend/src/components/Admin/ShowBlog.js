@@ -168,19 +168,26 @@ export default class ShowBlogAd extends Component {
                 <br/>
                 {this.state.comments.map((comment) => {
                      return(
-                          <div class="row align-items-center">
-                            <div class="col-lg-4">
-                                 <p class="fs-4"><strong><button onClick={
-                                    () => {
-                                       localStorage.setItem('clicked_user_id', comment.user_id); 
-                                        window.location.href = '/user_profile';
-                                    }
-                                 }>{comment.user_name}</button></strong></p>
-                            </div>
-                            <div class="col-lg-8">
-                                 <p class="fs-4">{comment.comment}</p>
-                            </div>
-                          </div>
+                        <div className="card mb-5 box-shadow align-items-center" style={{width:"1270px", height:"90px",backgroundColor:"white"}}>
+                        {/* <div class="col-lg-4">
+                             <p class="fs-4"><strong><button onClick={
+                                () => {
+                                   localStorage.setItem('clicked_user_id', comment.user_id); 
+                                    window.location.href = '/user_profile';
+                                }
+                             }>{comment.user_name}</button></strong></p>
+                        </div> */}
+                        
+                        <p class="fs-4"><i>"{comment.comment}"</i></p>
+                        
+                             <p class="fs-4"><strong><button onClick={
+                                () => {
+                                   localStorage.setItem('clicked_user_id', comment.user_id); 
+                                    window.location.href = '/user_profile';
+                                }
+                             }>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;---<b>{comment.user_name}</b></button></strong></p>
+                        
+                      </div>
                      )
                 
                 })

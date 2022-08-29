@@ -2,6 +2,7 @@ import React from "react";
 import NavbarHomepage from "../navbar_homepage";
 import CurrentBooking from "./currentBooking.jpg";
 import PastBooking from "./pastBooking.jpg";
+import Footer from '../Footer';
 
 const MyBookings = () => {
     /*const styleForButtons = {
@@ -77,7 +78,8 @@ const MyBookings = () => {
             </div>
 
             </div>
-
+            <br/><br/><br/>
+<Footer/> 
         </div>
     );
 }

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React,{ Component, useEffect, useState } from "react"; 
 import NavbarHomepage from "../navbar_homepage";
+import Footer from '../Footer';
 import io from 'socket.io-client';
 import { ChatState } from "../../Context/ChatProvider";
 
@@ -167,6 +168,8 @@ const RentRequestNotification = () => {
                     {/*<h1>Rent Request Notifications</h1>*/}
                     <br />
                     {showRentRequest()}
+                    <br/><br/><br/>
+<Footer/>  
                 </div>
             )
         

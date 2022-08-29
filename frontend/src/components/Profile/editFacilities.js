@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import NavbarHomepage from "../navbar_homepage";
+import Footer from '../Footer';
 import axios from "axios";
 
 const EditFacilities = () => {
@@ -108,6 +109,10 @@ const EditFacilities = () => {
                 <br />
 
             </div>
+            <br/><br/><br/>
+<br/><br/><br/>
+<br/><br/><br/>
+<Footer/>  
         </div>
     )
 }

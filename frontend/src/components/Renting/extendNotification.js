@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import NavbarHomepage from "../navbar_homepage";
+import Footer from '../Footer';
 import io from 'socket.io-client';
 import { ChatState } from "../../Context/ChatProvider";
 
@@ -178,7 +179,14 @@ const ExtendNotification = () => {
                         )}
                     </div>
                 </div>
-
+                <br/><br/><br/>
+                <br/><br/><br/>
+                <br/><br/><br/>
+<br/><br/><br/>
+<br/><br/><br/>
+<br/><br/><br/>
+<br/><br/><br/>
+<Footer/>  
               </div>    
     )
     

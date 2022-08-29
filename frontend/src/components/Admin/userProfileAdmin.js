@@ -154,7 +154,7 @@ const UserProfileAdmin = () => {
             </div>
 
 <br/><br/><br/>
-                  <p class="fs-4" style={{textAlign:"left"}}><b>Complaints:</b></p>
+                  <p class="fs-4" style={{textAlign:"left"}}><b>Complaints</b></p>
                   <br/>
                       <div className="card mb-5 box-shadow" style={{width:"1300px", height:"60px",backgroundColor:"white"}}>
                   <br/>

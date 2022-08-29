@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import NavbarHomepage from '../navbar_homepage';
+import Footer from '../Footer';
 // const blog_id=Request.QueryString["data"];
 import "./styles.css";
 
@@ -306,6 +307,9 @@ export default class ShowClickedBlog extends Component {
                 
                 
                 <br />
+             
+<br/><br/><br/>
+<Footer/>  
 
                 </div>
 

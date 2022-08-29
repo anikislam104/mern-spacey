@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import NavbarHomepage from "../navbar_homepage";
+import Footer from '../Footer';
 import { useEffect } from "react";
 import "./viewProfile.css";
 import { ChatState } from "../../Context/ChatProvider";
@@ -91,7 +92,7 @@ const UserProfile = () => {
 
             <div class="row align-items-center">
                 <div class="col-lg-2"></div>
-                <div class="col-lg-3">
+                <div class="col-lg-2">
                     <p style={{ textAlign: "right" }}>
                         <button
                             className="btn btn-primary"
@@ -104,10 +105,10 @@ const UserProfile = () => {
                         </button></p>
                 </div>
 
-                <div class="col-lg-2"></div>
+                <div class="col-lg-1"></div>
 
                 <br />
-                <div class="col-lg-3">
+                <div class="col-lg-2">
                     <p style={{ textAlign: "right" }}>
                         <button
                             className="btn btn-primary"
@@ -116,24 +117,27 @@ const UserProfile = () => {
                                 navigate("/showClickedBlogs");
                             }}
                         >
-                            Show Properties
+                            Show Blogs
                         </button></p>
-                    <br />
+                    
+                    </div>
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-2">
                     <p style={{ textAlign: "right" }}>
                         <button
                             className="btn btn-primary"
-
+                            style={{ backgroundColor: "#ee5a6f" }}
                             onClick={() => {
                                 navigate("/showClickedProperties");
                             }}
                         >
                             Show Properties
                         </button></p>
-
+                        </div>
                 </div>
 
                 <br /><br /><br />
-                <p class="fs-4" style={{ textAlign: "left" }}><b>Complaints:</b></p>
+                <p class="fs-4" style={{ textAlign: "left" }}><b>Complaints</b></p>
                 <br />
                 <div className="card mb-5 box-shadow" style={{ width: "1300px", height: "60px", backgroundColor: "white" }}>
                     <br />
@@ -150,9 +154,9 @@ const UserProfile = () => {
                         )
                     })}
                 </div>
+                <br/><br/><br/>
+<Footer/>  
             </div>
-
-        </div>
 
     )
 

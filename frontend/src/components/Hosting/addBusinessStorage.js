@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import NavbarHomepage from '../navbar_homepage';
+import Footer from '../Footer';
 
 // import { useHistory } from 'react-router-dom'
 // import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
@@ -377,6 +378,8 @@ export default class AddBusinessStorage extends Component {
             </div>
           </div>
         </div>
+        <br/><br/><br/>
+<Footer/> 
       </div>
 
     )

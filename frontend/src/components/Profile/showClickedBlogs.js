@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import NavbarHomepage from '../navbar_homepage';
+import Footer from '../Footer';
 // import AdminNavbar from './adminNavbar';
 
 const arr=[];
@@ -169,6 +170,14 @@ export default class ShowClickedBlogs extends Component {
                 <br/ >
                 {this.getMyBlogs()}
                 {this.getArrayElements()}
+                <br/><br/><br/>
+<br/><br/><br/>
+<br/><br/><br/>
+<br/><br/><br/>
+<br/><br/><br/>
+<br/><br/><br/>
+<br/><br/><br/>
+<Footer/>  
             </div>
         )
     }

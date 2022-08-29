@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios';
-import Navbar from "./navbar"
+import Navbar from "./navbar";
+import Footer from '../Footer';
 
 // import { useHistory } from 'react-router-dom'
 // import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
@@ -266,6 +267,8 @@ export default class CreateUser extends Component {
         </div>
     </div>
 </div>
+<br/><br/><br/>
+<Footer/>  
 </div>
           
         )

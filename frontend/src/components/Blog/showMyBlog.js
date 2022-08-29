@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import NavbarHomepage from '../navbar_homepage';
+import Footer from '../Footer';
 import "./styles.css";
 // const blog_id=Request.QueryString["data"];
 
@@ -109,8 +110,8 @@ export default class ShowMyBlog extends Component {
                 textAlign:"center",
             },
             experienceSection:{
-                width: "375px",
-                height: "150px",
+                width: "500px",
+                height: "200px",
              },
              buttonSection: {
                 align:"center",
@@ -153,8 +154,9 @@ export default class ShowMyBlog extends Component {
             
             <div class="row align-items-center">    
                 {/* button for upvote */}
+                <div class="col-lg-3"></div>
                 <div class="col-lg-4">
-                <button  type='submit' id="like" data-toggle="button" aria-pressed="false" autocomplete="off" onClick={
+                <button className="btn btn-primary" style={{backgroundColor:"whitesmoke",width:"110px",height:"50px"}} type='submit' id="like" data-toggle="button" aria-pressed="false" autocomplete="off" onClick={
                     (e) => {
                         const upvote = {
                             blog_id: blog._id,
@@ -195,7 +197,7 @@ export default class ShowMyBlog extends Component {
                 } >Upvote</button>&emsp;<b>{this.state.like}</b> upvotes
                 </div>
                 <div class="col-lg-4">
-                <button type='submit' id="dislike" data-toggle="button" aria-pressed="false" autocomplete="off" onClick={
+                <button className="btn btn-primary" style={{backgroundColor:"whitesmoke",width:"110px",height:"50px"}} type='submit' id="dislike" data-toggle="button" aria-pressed="false" autocomplete="off" onClick={
                     (e) => {
                         const downvote = {
                             blog_id: blog._id,
@@ -237,12 +239,18 @@ export default class ShowMyBlog extends Component {
                     }
                 } >Downvote</button>&emsp;<b>{this.state.dislike}</b> downvotes
                 </div>
+                </div>
 {/* // comments */}
 
-                <div class="col-lg-4">
-                <br/><br/><br/><br/><br/><br/><br/>
+<div class="row align-items-center">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-5">
+                <br/><br/><br/><br/>
                 <textarea id="inputComment" type="text" placeholder="write comment" required="" value={this.state.Comment} onChange={this.comment} class="form-control  border-0 shadow-sm px-4 text-primary" style={myStyle.experienceSection} />
-                <br/>
+                </div>
+                {/* <br/> */}
+                <div class="col-lg-4">
+                    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
                 <Link to='../blog/showBlog'><button type='submit' className="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" onClick={
                     (e) => {
                         const comment = {
@@ -281,18 +289,25 @@ export default class ShowMyBlog extends Component {
                 <br/>
                 {this.state.comments.map((comment) => {
                      return(
-                          <div class="row align-items-center">
-                            <div class="col-lg-4">
+                        <div className="card mb-5 box-shadow align-items-center" style={{width:"1300px", height:"90px",backgroundColor:"white"}}>
+                            {/* <div class="col-lg-4">
                                  <p class="fs-4"><strong><button onClick={
                                     () => {
                                        localStorage.setItem('clicked_user_id', comment.user_id); 
                                         window.location.href = '/user_profile';
                                     }
                                  }>{comment.user_name}</button></strong></p>
-                            </div>
-                            <div class="col-lg-8">
-                                 <p class="fs-4">{comment.comment}</p>
-                            </div>
+                            </div> */}
+                            
+                            <p class="fs-4"><i>"{comment.comment}"</i></p>
+                            
+                                 <p class="fs-4"><strong><button onClick={
+                                    () => {
+                                       localStorage.setItem('clicked_user_id', comment.user_id); 
+                                        window.location.href = '/user_profile';
+                                    }
+                                 }>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;---<b>{comment.user_name}</b></button></strong></p>
+                            
                           </div>
                      )
                 
@@ -345,7 +360,8 @@ export default class ShowMyBlog extends Component {
             </div>
             <br/><br/><br/>
             <br/>
-
+            <br/><br/><br/><br/><br/><br/>
+<Footer/> 
             </div>
 
                 

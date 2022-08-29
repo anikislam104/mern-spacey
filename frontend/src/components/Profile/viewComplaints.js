@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
 import NavbarHomepage from "../navbar_homepage";
+import Footer from '../Footer';
 
 const name = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
@@ -110,6 +111,14 @@ const ViewComplaints = () => {
             </div>
         </div>
         </div>
+        <br/><br/><br/>
+        <br/><br/><br/>
+        <br/><br/><br/>
+        <br/><br/><br/>
+        <br/><br/><br/>
+        <br/><br/><br/>
+        <br/><br/><br/>
+<Footer/>  
         </div>
     );
     }

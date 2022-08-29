@@ -3,6 +3,7 @@ import { Toast } from "bootstrap";
 import React, { useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import NavbarHomepage from "../navbar_homepage";
+import Footer from '../Footer';
 // import { ChatState } from "../../Context/ChatProvider";
 // import AdminNavbar from "./adminNavbar";
 
@@ -284,6 +285,8 @@ const SelectedPropertyClicked = () => {
 
 
             </div>
+            <br/><br/><br/>
+<Footer/>  
         </div>
     )
 
