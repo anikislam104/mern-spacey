@@ -78,7 +78,7 @@ const RentRequestNotification = () => {
             .then(res => {
                 console.log(res.data);
             })
-        window.location.reload();
+        // window.location.reload();
         alert("Request Accepted");
     }
 
@@ -90,7 +90,7 @@ const RentRequestNotification = () => {
             .then(res => {
                 console.log(res.data);
             })
-        window.location.reload();
+        // window.location.reload();
         alert("Request Rejected");
     }
 
