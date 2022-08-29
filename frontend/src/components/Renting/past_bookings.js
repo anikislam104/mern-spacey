@@ -2,6 +2,8 @@ import React from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import NavbarHomepage from "../navbar_homepage";
+import Footer from '../Footer';
+
 import "./starRate.css";
 
 
@@ -345,6 +347,10 @@ const PastBookings = () => {
                     )}
                 </div>
             </div>
+            <br/><br/><br/><br/><br/>
+            <br/><br/><br/><br/><br/>
+            <br/><br/><br/><br/><br/>
+<Footer/>  
         </div>
     )
 }

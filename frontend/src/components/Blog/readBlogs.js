@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NavbarHomepage from '../navbar_homepage';
+import Footer from '../Footer';
 import MyBlog from "./my_blog.svg";
 import OtherBlog from "./other_blog.svg";
 
@@ -106,7 +107,8 @@ export default class ReadBlogs extends Component {
 
           </div>
           <br/>
-
+          <br/><br/><br/>
+<Footer/> 
             </div>
         )
     }

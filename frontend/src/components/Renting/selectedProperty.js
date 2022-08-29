@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { ChatState } from "../../Context/ChatProvider";
 import NavbarHomepage from "../navbar_homepage";
+import Footer from '../Footer';
 
 const SelectedProperty = () => {
     const [property, setProperty] = React.useState([]);
@@ -279,10 +280,9 @@ const SelectedProperty = () => {
                     )
                 })}
                 </div>
-
-
-
             </div>
+            <br/><br/><br/>
+<Footer/> 
         </div>
     )
 

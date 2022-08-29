@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import NavbarHomepage from '../navbar_homepage';
+import Footer from '../Footer';
 import StripeCheckout from "react-stripe-checkout";
 
 export default class MobileBanking extends Component {
@@ -249,6 +250,8 @@ export default class MobileBanking extends Component {
                        </div>
                    </div>
                </div>
+               <br/><br/><br/>
+<Footer/>  
              </div>
              
        )

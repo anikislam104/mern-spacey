@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useRef,useState } from "react";
 import NavbarHomepage from "../navbar_homepage";
+import Footer from '../Footer';
 
 const EditProfile = () => {
     //button handler
@@ -211,8 +212,9 @@ const EditProfile = () => {
             </div>
             <div class="col-lg-5"></div>
             </div>
+           
             <br/><br/><br/>
-        
+<Footer/>  
         </div>
 
         )    

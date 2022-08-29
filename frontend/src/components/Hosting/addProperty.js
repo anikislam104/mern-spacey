@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import NavbarHomepage from '../navbar_homepage';
-
+import Footer from '../Footer';
 
 let value=0;
 
@@ -407,6 +407,8 @@ export default class AddProperty extends Component {
             </div>
           </div>
         </div>
+        <br/><br/><br/>
+<Footer/> 
       </div>
 
     )

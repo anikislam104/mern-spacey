@@ -2,6 +2,7 @@ import React from "react";
 import NavbarHomepage from "../navbar_homepage";
 import CurrentHosting from "./currentHostings.jpg";
 import PastHosting from "./pastHostings.webp";
+import Footer from '../Footer';
 
 /*const styleForButtons = {
     //simple styled buttons
@@ -77,7 +78,8 @@ const MyHostings = () => {
             </div>
 
 </div>
-
+<br/><br/><br/>
+<Footer/>  
 </div>
         )
 }

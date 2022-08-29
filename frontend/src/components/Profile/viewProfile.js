@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import NavbarHomepage from "../navbar_homepage";
+import Footer from '../Footer';
 import  "./viewProfile.css";
 
 const ViewProfile = () => {
@@ -181,7 +182,8 @@ const ViewProfile = () => {
           </button>
           </div>
           </div>
-          <br/><br/>
+          <br/><br/><br/>
+<Footer/> 
         </div>
       
     

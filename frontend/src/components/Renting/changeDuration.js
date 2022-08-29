@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import NavbarHomepage from "../navbar_homepage";
+import Footer from '../Footer';
 import { differenceInCalendarDays } from "date-fns";
 import "react-calendar/dist/Calendar.css";
 import Calendar from "react-calendar";
@@ -180,6 +181,8 @@ const ChangeDuration = () => {
             </div>
             
             </div>
+            <br/><br/><br/>
+<Footer/>
         </div>
     )
 }

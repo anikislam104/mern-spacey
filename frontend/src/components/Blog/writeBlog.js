@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import NavbarHomepage from '../navbar_homepage';
+import Footer from '../Footer';
 // import FileBase64 from 'react-file-base64';
 
 
@@ -164,9 +165,11 @@ export default class WriteBlog extends Component {
                </div>
                <br/>
 
-               
+               <br/><br/>
+<Footer/> 
              </div>
              
        )
         }
+        
     }

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import NavbarHomepage from '../navbar_homepage';
+import Footer from '../Footer';
 
 const arr=[];
 
@@ -176,7 +177,8 @@ export default class MyBlogs extends Component {
                 <br/>
 <br/>
 <br/>
-
+<br/><br/><br/><br/><br/><br/><br/>
+<Footer/>  
             </div>
         )
     }

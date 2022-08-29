@@ -1,6 +1,8 @@
 import axios from "axios";
 import React,{ Component } from "react";
 import NavbarHomepage from "../navbar_homepage";
+import Footer from '../Footer';
+
 var property_id= '';
 var host_id= '';
 var location='';
@@ -203,6 +205,8 @@ export default class RentingHome extends Component {
                 {this.showProperties()}
                 {this.getArrayElements()}
                 {this.clearArrayElements()}
+                <br/><br/><br/><br/><br/>
+<Footer/>  
             </div>
         )
     }

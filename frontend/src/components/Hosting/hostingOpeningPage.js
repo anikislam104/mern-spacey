@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import spacey from "../Authentication/spacey.svg";
 import { Link } from 'react-router-dom';
 import NavbarHomepage from '../navbar_homepage';
+import Footer from '../Footer';
 import PersonalRoom from "./personal_room.svg";
 import BusinessStorage from "./business_storage.svg";
 
@@ -119,7 +120,8 @@ export default class HostingOpeningPage extends Component {
           </div>
 
         </div>
-
+        <br/><br/><br/><br/><br/>
+<Footer/>  
       </div>
 
     )

@@ -4,6 +4,7 @@ import Calendar from 'react-calendar';
 import { differenceInCalendarDays } from 'date-fns';
 import 'react-calendar/dist/Calendar.css';
 import NavbarHomepage from "../navbar_homepage";
+import Footer from '../Footer';
 import io from 'socket.io-client';
 import { ChatState } from "../../Context/ChatProvider";
 
@@ -237,6 +238,8 @@ const ChooseStayDuration=()=>{
                 <button className="btn btn-primary" style={{width:"120px",height:"40px"}} onClick={handleSubmit}>Submit</button>
                 </div>
             </form>
+            <br/><br/><br/>
+<Footer/> 
         </div>
         
     )

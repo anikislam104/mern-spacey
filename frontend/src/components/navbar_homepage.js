@@ -35,7 +35,7 @@ const NavbarHomepage = () => {
         backgroundColor: "#C2C6CC",
         color: "white",
         width:"1300px",
-        height:"53px",
+        height:"55px",
        },
 
        navSection2:{
@@ -49,7 +49,7 @@ const NavbarHomepage = () => {
         backgroundColor: "#C2C6CC",
         color: "white",
         width:"1300px",
-        height:"60px",
+        height:"50px",
        },
 
     }
@@ -69,9 +69,9 @@ const NavbarHomepage = () => {
         
          <ul className="navbar-nav mr-auto">
 
-         <div class="col-lg-3" style={{textAlign:"center"}}></div>
+         <div class="col-lg-7" style={{textAlign:"center"}}></div>
           
-          <div class="col-lg-7" style={{textAlign:"center"}}>
+          <div class="col-lg-10" style={{textAlign:"center"}}>
             
           <li className="navbar-item">
             
@@ -82,7 +82,7 @@ const NavbarHomepage = () => {
 
           &nbsp;  
 
-          <div class="col-lg-7" style={{textAlign:"center"}}>
+          <div class="col-lg-8" style={{textAlign:"center"}}>
           <li className="navbar-item">
           &nbsp; &nbsp;
           <Link to={'/hosting'} className="nav-link rounded-pill" style={myStyle.textSection}><h6>Become A Host</h6></Link>
@@ -90,7 +90,7 @@ const NavbarHomepage = () => {
           </div>
                    
 
-          <div class="col-lg-5" style={{textAlign:"center"}}>
+          <div class="col-lg-8" style={{textAlign:"center"}}>
           <li className="navbar-item">
           &nbsp;
           <Link to={'/renting'} className="nav-link rounded-pill" style={myStyle.textSection}><h6>Rent Storage</h6></Link>
@@ -100,10 +100,11 @@ const NavbarHomepage = () => {
           &nbsp; &nbsp; 
 
           <div class="col-lg-4" style={{textAlign:"center"}}>
-          <li className="navbar-item">
+          &nbsp;&nbsp;&emsp;&emsp;&emsp;
+          {/* <li className="navbar-item">
           &nbsp;
-          <Link to={'/payment/payment_notifications'} className="nav-link"><h5><b>Payment Notifications &nbsp;</b></h5></Link>
-          </li>
+          <Link to={'/'} className="nav-link"><h5><b>Payment Notifications &nbsp;</b></h5></Link>
+          </li> */}
           </div>
 
          </ul>
@@ -117,7 +118,7 @@ const NavbarHomepage = () => {
       <nav className="navbar navbar navbar-expand-lg" style={myStyle.navSection2}>
         
             
-        &nbsp;&nbsp;<img src={spacey} class="img-responsive" alt=" " />
+        &nbsp;&nbsp;&emsp;<img src={spacey} class="img-responsive" alt=" " />
               
             <Link to={"/homepage"} className="navbar-brand"  ><font style={myStyle.optionSection}><b> &nbsp;Spacey &nbsp;</b></font></Link>
             </nav>
@@ -129,9 +130,9 @@ const NavbarHomepage = () => {
            <ul className="navbar-nav mr-auto">
           
 
-           <div class="col-lg-4" style={{textAlign:"center"}}></div>
+           <div class="col-lg-7" style={{textAlign:"center"}}></div>
 
-           <div class="col-lg-4" style={{textAlign:"center"}}>
+           <div class="col-lg-5" style={{textAlign:"center"}}>
             <li className="navbar-item">
               &nbsp;
             <Link to={'/rent_request_notifications'} className="nav-link"><h5><b>&emsp;&emsp;Rent Requests </b></h5></Link>
@@ -139,16 +140,16 @@ const NavbarHomepage = () => {
             </div>
             
   
-            <div class="col-lg-6" style={{textAlign:"center"}}>
+            {/* <div class="col-lg-6" style={{textAlign:"center"}}>
             <li className="navbar-item">
             &nbsp;
             <Link to={'/notification'} className="nav-link"><h5><b>Notification </b></h5></Link>
             </li>
-            </div>
+            </div> */}
   
             &nbsp; 
   
-            <div class="col-lg-7" style={{textAlign:"center"}}>
+            <div class="col-lg-8" style={{textAlign:"center"}}>
             <li className="navbar-item">
             &nbsp;
             <Link to={'/extend_notification'} className="nav-link"><h5><b>Extend Booking Requests</b></h5></Link>
@@ -163,7 +164,7 @@ const NavbarHomepage = () => {
                 <Navbar.Collapse id="basic-navbar-nav">
                   
                   <Nav className="me-auto">
-                    <br/><br/><br/><br/>
+                    <br/><br/><br/><br/><br/>
                   
                     <NavDropdown title={user_name} style={{fontWeight:"bold"}} id="basic-nav-dropdown" className="nav-brand">
                       
@@ -181,6 +182,16 @@ const NavbarHomepage = () => {
                       <NavDropdown.Item href={'/my_hostings'}>
                       My Hostings
                       </NavDropdown.Item> */}
+                      <NavDropdown.Item href={'/payment/payment_notifications'}>
+                        Payment Notifications
+                      </NavDropdown.Item>
+
+
+                      <NavDropdown.Item href={'/notification'}>
+                        Notifications
+                      </NavDropdown.Item>
+
+
                       <NavDropdown.Item href={'/chat'}>
                       Chat
                       </NavDropdown.Item>

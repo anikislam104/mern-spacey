@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import NavbarHomepage from '../navbar_homepage';
 import BlogHome1 from "./blog_home_1.svg";
 import BlogHome2 from "./blog_home_2.svg";
-
+import Footer from '../Footer';
 
 
 export default class BlogHome extends Component {
@@ -122,6 +122,8 @@ export default class BlogHome extends Component {
 <br/><br/>
 <br/>
           </div>
+          <br/><br/><br/>
+<Footer/>  
             </div>
             
         )

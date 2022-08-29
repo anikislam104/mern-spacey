@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import NavbarHomepage from '../navbar_homepage';
-
+import Footer from '../Footer';
 export default class CashPayment extends Component {
   constructor(props) {
     super(props);
@@ -246,6 +246,8 @@ async onSubmit (e){
                        </div>
                    </div>
                </div>
+               <br/><br/><br/>
+<Footer/>  
              </div>
              
        )

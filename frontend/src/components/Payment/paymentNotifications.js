@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { Component } from 'react';
 import NavbarHomepage from '../navbar_homepage';
+import Footer from '../Footer';
 
 export default class Notifications extends Component{
 
@@ -149,7 +150,12 @@ export default class Notifications extends Component{
                 <NavbarHomepage />
                 <br />
                 {this.getMyNotifications()}
-
+                <br/><br/><br/>
+                <br/><br/><br/>
+                <br/><br/><br/>
+                <br/><br/><br/>
+                <br/><br/><br/>
+<Footer/> 
             </div>
         )
     }

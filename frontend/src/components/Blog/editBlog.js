@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import NavbarHomepage from '../navbar_homepage';
+import Footer from '../Footer';
 
 const EditBlog = () => {
     const [title, setTitle] = useState("");
@@ -76,6 +77,8 @@ const EditBlog = () => {
                     <input type="submit" value="Update Blog" className="btn btn-primary"/>
                 </div>
             </form>
+            <br/><br/><br/><br/><br/>
+<Footer/>  
         </div>
     );
         

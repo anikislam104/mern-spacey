@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NavbarHomepage from '../navbar_homepage';
+import Footer from '../Footer';
 import PaymentHome1 from "./paymentHome1.jpg";
 import PaymentHome2 from "./paymentHome2.jpg";
 
@@ -119,6 +120,8 @@ export default class PaymentHome extends Component{
     </div>
 
           </div>
+          <br/><br/><br/>
+<Footer/>  
             </div>
         )
     }
