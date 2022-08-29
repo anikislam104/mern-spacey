@@ -108,10 +108,21 @@ const UserProfile = () => {
               className="btn btn-primary"
               
               onClick={() => {
-                navigate("/show_clicked_blogs");
+                navigate("/showClickedBlogs");
               }}
             >
               Show blogs
+            </button></p>
+            <br />
+            <p style={{textAlign:"right"}}>
+            <button
+              className="btn btn-primary"
+              
+              onClick={() => {
+                navigate("/showClickedProperties");
+              }}
+            >
+              Show Properties
             </button></p>
 
             </div>

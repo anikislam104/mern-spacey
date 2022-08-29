@@ -127,6 +127,7 @@ export default class CreateUser extends Component {
                 window.location = '/invalidAuth';
               }
               else{
+                localStorage.setItem("userInfo", JSON.stringify(res.data));
                 localStorage.setItem('su_token', res.data.token);
                 localStorage.setItem('su_user_id', res.data.user_id);
                 localStorage.setItem('su_email', res.data.email);
