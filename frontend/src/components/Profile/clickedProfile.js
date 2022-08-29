@@ -90,28 +90,33 @@ const UserProfile = () => {
                   </div>
            
                   <div class="row align-items-center">
-          <div class="col-lg-7"></div>
-          <div class="col-lg-4">
+          <div class="col-lg-2"></div>
+          <div class="col-lg-3">
 <p style={{textAlign:"right"}}>
             <button
               className="btn btn-primary"
-              
+              style={{backgroundColor:"#ee5a6f"}}
               onClick={() => {
                 navigate("/chat");
               }}
             >
               Chat with {name}
             </button></p>
+            </div>
+
+            <div class="col-lg-2"></div>
+
             <br />
+            <div class="col-lg-3">
             <p style={{textAlign:"right"}}>
             <button
               className="btn btn-primary"
-              
+              style={{backgroundColor:"#ee5a6f"}}
               onClick={() => {
                 navigate("/showClickedBlogs");
               }}
             >
-              Show blogs
+              Show Properties
             </button></p>
             <br />
             <p style={{textAlign:"right"}}>
@@ -125,7 +130,6 @@ const UserProfile = () => {
               Show Properties
             </button></p>
 
-            </div>
             </div>
 
 <br/><br/><br/>

@@ -12,9 +12,10 @@ const UserSearch = () => {
     }, []);
 
     return (
-        <div>
+        <div class="lg-light">
             <AdminNavbar />    
-            <h1>User Search</h1>
+            {/* <h1>User Search</h1> */}
+            <br/>
             <nav className="navbar navbar-expand-lg navbar-light bg-light border-top p-3">
         <form className="container-fluid">
           <div class="input-group">

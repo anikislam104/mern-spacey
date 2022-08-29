@@ -89,12 +89,12 @@ const UserProfileAdmin = () => {
                   </div>
            
                   <div class="row align-items-center">
-          <div class="col-lg-2"></div>
-          <div class="col-lg-3">
+          <div class="col-lg-1"></div>
+          <div class="col-lg-2">
           <p style={{textAlign:"left"}}>
             <button
               className="btn btn-primary"
-              
+              style={{backgroundColor:"#ee5a6f"}}
               onClick={() => {
                 navigate("/show_property_admin");
               }}
@@ -103,12 +103,14 @@ const UserProfileAdmin = () => {
             </button></p>
             </div>
 
+            <div class="col-lg-1"></div>
+
             <div class="col-lg-2">
 
 <p style={{textAlign:"right"}}>
             <button
               className="btn btn-primary"
-              
+              style={{backgroundColor:"#ee5a6f"}}
               onClick={() => {
                 navigate("/chat");
               }}
@@ -116,32 +118,39 @@ const UserProfileAdmin = () => {
               Chat with {name}
             </button></p></div>
 
-            <div class="col-lg-2"></div>
+            <div class="col-lg-1"></div>
+
+            {/* <div class="col-lg-2"></div> */}
 
             <div class="col-lg-2">
             <p style={{textAlign:"left"}}>
             <button
               className="btn btn-primary"
-              
+              style={{backgroundColor:"#ee5a6f"}}
               onClick={() => {
                 navigate("/payment_history_user");
               }}
             >
               Payment History
             </button></p>
+            </div>
+
+            {/* <div class="col-lg-1"></div> */}
+
+            <div class="col-lg-2">
             <p style={{textAlign:"right"}}>
             <button
               className="btn btn-primary"
-              
+              style={{backgroundColor:"#ee5a6f"}}
               onClick={() => {
                 navigate("/show_blogs_admin");
               }}
             >
               Show Blog
             </button></p>
-
             </div>
-            <div class="col-lg-3"></div>
+
+            {/* <div class="col-lg-3"></div> */}
             </div>
 
 <br/><br/><br/>
